@@ -13,7 +13,7 @@ React Redux Starter Kit
 > ### Want Semicolons?
 > After installing npm dependencies, open `.eslintrc`, change the `semi` rule from `never` to `always`, and then run `npm run lint:fix` -- Easy as that! Alternatively, use the same npm script after installing and extending your preferred ESLint configuration; it's easy to customize the project's code style to suit your team's needs. See, we can coexist peacefully.
 
-This starter kit is designed to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, unit testing, code coverage reports, bundle splitting, and a whole lot more.
+This starter kit is designed to get you up and running with a bunch of awesome new front-end technologies, all on top of a configurable, feature-rich webpack build system that's already setup to provide hot reloading, CSS modules with Sass support, code coverage reports, bundle splitting, and a whole lot more.
 
 The primary goal of this project is to remain as **unopinionated** as possible. Its purpose is not to dictate your project structure or to demonstrate a complete sample application, but to provide a set of tools intended to make front-end development robust, easy, and, most importantly, fun. Check out the full feature list below!
 
@@ -27,7 +27,6 @@ Table of Contents
 1. [Webpack](#webpack)
 1. [Server](#server)
 1. [Styles](#styles)
-1. [Testing](#testing)
 1. [Deployment](#deployment)
 1. [Troubleshooting](#troubleshooting)
 
@@ -40,7 +39,6 @@ Features
 --------
 
 * [React](https://github.com/facebook/react) (`^0.14.0`)
-  * Includes react-addons-test-utils (`^0.14.0`)
 * [Redux](https://github.com/gaearon/redux) (`^3.0.0`)
   * react-redux (`^4.0.0`)
   * redux-devtools
@@ -58,17 +56,12 @@ Features
 * [Express](https://github.com/strongloop/express)
   * webpack-dev-middleware
   * webpack-hot-middleware
-* [Karma](https://github.com/karma-runner/karma)
-  * Mocha w/ chai, sinon-chai, and chai-as-promised
-  * PhantomJS
-  * Code coverage reports
 * [Babel](https://github.com/babel/babel) (`^6.3.0`)
   * react-transform-hmr for hot reloading
   * `react-transform-catch-errors` with `redbox-react` for more visible error reporting
   * Uses babel runtime rather than inline transformations
 * [ESLint](http://eslint.org)
   * Uses [Standard Style](https://github.com/feross/standard) by default, but you're welcome to change this!
-  * Includes separate test-specific `.eslintrc` to work with Mocha and Chai
 
 Getting Started
 ---------------
@@ -99,9 +92,6 @@ Great, now that introductions have been made here's everything in full detail:
 * `npm run compile` - Compiles the application to disk (`~/dist` by default).
 * `npm run dev:nw` - Same as `npm start`, but opens the redux devtools in a new window.
 * `npm run dev:no-debug` - Same as `npm start` but disables redux devtools.
-* `npm run test` - Runs unit tests with Karma and generates a coverage report.
-* `npm run test:dev` - Runs Karma and watches for changes to re-run tests; does not generate coverage reports.
-* `npm run deploy`- Runs linter, tests, and then, on success, compiles your application to disk.
 * `npm run lint`- Lint all `.js` files.
 * `npm run lint:fix` - Lint and fix all `.js` files. [Read more on this](http://eslint.org/docs/user-guide/command-line-interface.html#fix).
 
@@ -146,7 +136,6 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 │   ├── styles               # Application-wide styles (generally settings)
 │   ├── views                # Components that live at a route
 │   └── app.js               # Application bootstrap and rendering
-└── tests                    # Unit tests
 ```
 
 ### Components vs. Views vs. Layouts
@@ -229,13 +218,6 @@ Here's an example:
 // can now be this:
 @import 'base';
 ```
-
-Testing
--------
-
-To add a unit test, simply create a `.spec.js` file anywhere in `~/tests`. Karma will pick up on these files automatically, and Mocha and Chai will be available within your test without the need to import them.
-
-Coverage reports will be compiled to `~/coverage` by default. If you wish to change what reporters are used and where reports are compiled, you can do so by modifying `coverage_reporters` in `~/config/_base.js`.
 
 Deployment
 ----------
