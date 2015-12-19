@@ -13,8 +13,7 @@ const config = {
   path_base  : path.resolve(__dirname, '../'),
   dir_client : 'client',
   dir_dist   : 'dist',
-  dir_server : 'server',
-  dir_test   : 'tests',
+  dir_server : 'server'
 
   // ----------------------------------
   // Server Configuration
@@ -45,15 +44,6 @@ const config = {
     'redux',
     'redux-actions',
     'redux-simple-router'
-  ],
-
-  // ----------------------------------
-  // Test Configuration
-  // ----------------------------------
-  coverage_enabled   : !argv.watch,
-  coverage_reporters : [
-    { type : 'text-summary' },
-    { type : 'html', dir : 'coverage' }
   ]
 }
 
