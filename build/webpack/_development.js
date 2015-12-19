@@ -28,9 +28,9 @@ export default (webpackConfig) => {
 
     webpackConfig.eslint.emitWarning = true
 
-    // We need to apply the react-transform HMR plugin to the Babel configuration,
-    // but _only_ when HMR is enabled. Putting this in the default development
-    // configuration will break other tasks such as test:unit because Webpack
+    // We need to apply the react-transform HMR plugin to the Babel
+    // configuration, but _only_ when HMR is enabled. Putting this in the
+    // default development configuration will break other tasks because Webpack
     // HMR is not enabled there, and these transforms require it.
     webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
       if (/babel/.test(loader.loader)) {
