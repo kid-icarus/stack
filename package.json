@@ -20,6 +20,7 @@
   "author": "Contra <yo@contra.io> (http://contra.io)",
   "license": "MIT",
   "dependencies": {
+    "app-config-chain": "^1.0.3",
     "cssnano": "^3.3.2",
     "debug": "^2.2.0",
     "dotenv": "^1.2.0",
