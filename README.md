@@ -99,7 +99,7 @@ Great, now that introductions have been made here's everything in full detail:
 
 ### Configuration
 
-Basic project configuration can be found in `~/config/_base.js`. Here you'll be able to redefine your `src` and `dist` directories, adjust compilation settings, tweak your vendor dependencies, and more. For the most part, you should be able to make changes in here **without ever having to touch the webpack build configuration**. If you need environment-specific overrides, create a file with the name of target `NODE_ENV` prefixed by an `_` in `~/config` (see `~/config/_production.js` for an example).
+Basic project configuration can be found in `~/config/_base.js`. Here you'll be able to redefine your `client` and `dist` directories, adjust compilation settings, tweak your vendor dependencies, and more. For the most part, you should be able to make changes in here **without ever having to touch the webpack build configuration**. If you need environment-specific overrides, create a file with the name of target `NODE_ENV` prefixed by an `_` in `~/config` (see `~/config/_production.js` for an example).
 
 Common configuration options:
 
@@ -124,7 +124,7 @@ The folder structure provided is only meant to serve as a guide, it is by no mea
 ├── config                   # Project configuration settings
 ├── server                   # Express application (uses webpack middleware)
 │   └── app.js               # Server application entry point
-├── src                      # Application source code
+├── client                   # Application source code
 │   ├── assets               # Static assets (not imported anywhere in source code)
 │   ├── components           # Generic React Components (generally Dumb components)
 │   ├── containers           # Components that provide context (e.g. Redux Provider)
@@ -169,10 +169,10 @@ You can redefine which packages to bundle separately by modifying `compiler_vend
 ```
 
 ### Webpack Root Resolve
-Webpack is configured to make use of [resolve.root](http://webpack.github.io/docs/configuration.html#resolve-root), which lets you import local packages as if you were traversing from the root of your `~/src` directory. Here's an example:
+Webpack is configured to make use of [resolve.root](http://webpack.github.io/docs/configuration.html#resolve-root), which lets you import local packages as if you were traversing from the root of your `~/client` directory. Here's an example:
 
 ```js
-// current file: ~/src/views/some/nested/View.js
+// current file: ~/client/views/some/nested/View.js
 
 // What used to be this:
 import SomeComponent from '../../../components/SomeComponent'
@@ -202,8 +202,8 @@ Both `.scss` and `.css` file extensions are supported out of the box and are con
 **NOTE:** If you're importing styles from a base styles directory (useful for generic, app-wide styles), you can make use of the `styles` alias, e.g.:
 
 ```js
-// current file: ~/src/components/some/nested/component/index.jsx
-import 'styles/core.scss' // this imports ~/src/styles/core.scss
+// current file: ~/client/components/some/nested/component/index.jsx
+import 'styles/core.scss' // this imports ~/client/styles/core.scss
 ```
 
 Furthermore, this `styles` directory is aliased for sass imports, which further eliminates manual directory traversing; this is especially useful for importing variables/mixins.
@@ -211,8 +211,8 @@ Furthermore, this `styles` directory is aliased for sass imports, which further 
 Here's an example:
 
 ```scss
-// current file: ~/src/styles/some/nested/style.scss
-// what used to be this (where base is ~/src/styles/_base.scss):
+// current file: ~/client/styles/some/nested/style.scss
+// what used to be this (where base is ~/client/styles/_base.scss):
 @import '../../base';
 
 // can now be this:
