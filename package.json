@@ -10,7 +10,6 @@
     "lint:fix": "npm run lint -- --fix",
     "start": "npm run dev",
     "dev": "node -r dotenv/config bin/server --hot",
-    "dev:nw": "npm run dev -- --nw",
     "dev:no-debug": "npm run dev -- --no_debug"
   },
   "repository": {
@@ -69,9 +68,6 @@
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",
     "redbox-react": "^1.0.4",
-    "redux-devtools": "^3.0.0",
-    "redux-devtools-dock-monitor": "^1.0.1",
-    "redux-devtools-log-monitor": "^1.0.1",
     "sass-loader": "^3.0.0",
     "style-loader": "^0.13.0",
     "url-loader": "^0.5.6",
