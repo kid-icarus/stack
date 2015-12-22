@@ -16,17 +16,6 @@ export default class Root extends React.Component {
     store: React.PropTypes.object.isRequired
   }
 
-  getDevTools () {
-    if (__DEBUG__) {
-      if (__DEBUG_NEW_WINDOW__) {
-        require('../redux/utils/createDevToolsWindow')(this.props.store)
-      } else {
-        const DevTools = require('containers/DevTools')
-        return <DevTools />
-      }
-    }
-  }
-
   render () {
     return (
       <Provider store={this.props.store}>
@@ -35,7 +24,6 @@ export default class Root extends React.Component {
           <Router history={this.props.history}>
             {this.props.routes}
           </Router>
-          {this.getDevTools()}
         </View>
       </Provider>
     )
