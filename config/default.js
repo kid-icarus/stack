@@ -1,42 +1,42 @@
-/* eslint key-spacing:0 spaced-comment:0 */
+/* eslint spaced-comment:0 */
 import _debug from 'debug'
 import path from 'path'
 import { argv } from 'yargs'
 
 const debug = _debug('app:config:_base')
 const config = {
-  env : process.env.NODE_ENV,
+  env: process.env.NODE_ENV,
 
   // ----------------------------------
   // Project Structure
   // ----------------------------------
-  path_base  : path.resolve(__dirname, '../'),
-  dir_client : 'client',
-  dir_dist   : 'dist',
-  dir_server : 'server'
+  path_base: path.resolve(__dirname, '../'),
+  dir_client: 'client',
+  dir_dist: 'dist',
+  dir_server: 'server',
 
   // ----------------------------------
   // Server Configuration
   // ----------------------------------
-  server_host : 'localhost',
-  server_port : process.env.PORT || 3000,
+  server_host: 'localhost',
+  server_port: process.env.PORT || 3000,
 
   // ----------------------------------
   // Compiler Configuration
   // ----------------------------------
-  compiler_css_modules     : true,
-  compiler_enable_hmr      : false,
-  compiler_source_maps     : true,
-  compiler_hash_type       : 'hash',
-  compiler_fail_on_warning : false,
-  compiler_quiet           : false,
-  compiler_public_path     : '/',
-  compiler_stats           : {
-    chunks : false,
-    chunkModules : false,
-    colors : true
+  compiler_css_modules: true,
+  compiler_enable_hmr: false,
+  compiler_source_maps: true,
+  compiler_hash_type: 'hash',
+  compiler_fail_on_warning: false,
+  compiler_quiet: false,
+  compiler_public_path: '/',
+  compiler_stats: {
+    chunks: false,
+    chunkModules: false,
+    colors: true
   },
-  compiler_vendor : [
+  compiler_vendor: [
     'history',
     'react',
     'react-redux',
@@ -60,14 +60,14 @@ Edit at Your Own Risk
 // Environment
 // ------------------------------------
 config.globals = {
-  'process.env'  : {
-    'NODE_ENV' : JSON.stringify(config.env)
+  'process.env': {
+    'NODE_ENV': JSON.stringify(config.env)
   },
-  'NODE_ENV'     : config.env,
-  '__DEV__'      : config.env === 'development',
-  '__PROD__'     : config.env === 'production',
-  '__DEBUG__'    : config.env === 'development' && !argv.no_debug,
-  '__DEBUG_NEW_WINDOW__' : !!argv.nw
+  'NODE_ENV': config.env,
+  '__DEV__': config.env === 'development',
+  '__PROD__': config.env === 'production',
+  '__DEBUG__': config.env === 'development' && !argv.no_debug,
+  '__DEBUG_NEW_WINDOW__': !!argv.nw
 }
 
 // ------------------------------------
@@ -96,9 +96,9 @@ config.utils_paths = (() => {
     resolve.apply(resolve, [config.path_base, ...args])
 
   return {
-    base   : base,
-    client : base.bind(null, config.dir_client),
-    dist   : base.bind(null, config.dir_dist)
+    base: base,
+    client: base.bind(null, config.dir_client),
+    dist: base.bind(null, config.dir_dist)
   }
 })()
 

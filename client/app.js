@@ -1,10 +1,10 @@
-import React from 'react'
 import ReactDOM from 'react-dom'
 import createBrowserHistory from 'history/lib/createBrowserHistory'
 import { syncReduxAndRouter } from 'redux-simple-router'
 import routes from './routes'
 import Root from './containers/Root'
 import configureStore from './redux/configureStore'
+import React from 'react-native-web'
 
 const history = createBrowserHistory()
 const store = configureStore(window.__INITIAL_STATE__)
