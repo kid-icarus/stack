@@ -1,6 +1,13 @@
-import React from 'react'
 import { Provider } from 'react-redux'
 import { Router } from 'react-router'
+import React, { View, StyleSheet } from 'react-native-web'
+
+const styles = StyleSheet.create({
+  root: {
+    height: '100%',
+    width: '100%'
+  }
+})
 
 export default class Root extends React.Component {
   static propTypes = {
@@ -9,15 +16,7 @@ export default class Root extends React.Component {
     store: React.PropTypes.object.isRequired
   }
 
-  get content () {
-    return (
-      <Router history={this.props.history}>
-        {this.props.routes}
-      </Router>
-    )
-  }
-
-  get devTools () {
+  getDevTools () {
     if (__DEBUG__) {
       if (__DEBUG_NEW_WINDOW__) {
         require('../redux/utils/createDevToolsWindow')(this.props.store)
@@ -31,10 +30,13 @@ export default class Root extends React.Component {
   render () {
     return (
       <Provider store={this.props.store}>
-        <div style={{ height: '100%' }}>
-          {this.content}
-          {this.devTools}
-        </div>
+        <View style={styles.root}>
+          <style children={StyleSheet.renderToString()}/>
+          <Router history={this.props.history}>
+            {this.props.routes}
+          </Router>
+          {this.getDevTools()}
+        </View>
       </Provider>
     )
   }

@@ -1,6 +1,6 @@
 import express from 'express'
 import historyApiFallback from 'connect-history-api-fallback'
-import config from '../config'
+import config from 'app-config-chain'
 
 const app = express()
 const debug = require('debug')('app:server')

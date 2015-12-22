@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react-native-web'
 import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import DevTools from 'containers/DevToolsWindow'

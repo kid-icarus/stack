@@ -1,14 +1,10 @@
-React Redux Starter Kit
+FactoryX Stack
 =======================
 
-[![Join the chat at https://gitter.im/davezuko/react-redux-starter-kit](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/davezuko/react-redux-starter-kit?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
-[![Build Status](https://travis-ci.org/davezuko/react-redux-starter-kit.svg?branch=master)](https://travis-ci.org/davezuko/react-redux-starter-kit?branch=master)
-[![dependencies](https://david-dm.org/davezuko/react-redux-starter-kit.svg)](https://david-dm.org/davezuko/react-redux-starter-kit)
-[![devDependency Status](https://david-dm.org/davezuko/react-redux-starter-kit/dev-status.svg)](https://david-dm.org/davezuko/react-redux-starter-kit#info=devDependencies)
+[![Build Status](https://travis-ci.org/factoryx/stack.svg?branch=master)](https://travis-ci.org/factoryx/stack?branch=master)
+[![dependencies](https://david-dm.org/factoryx/stack.svg)](https://david-dm.org/factoryx/stack)
+[![devDependency Status](https://david-dm.org/factoryx/stack/dev-status.svg)](https://david-dm.org/factoryx/stack#info=devDependencies)
 [![js-standard-style](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
-
-> ### This Project Recently Upgraded to Babel 6!
-> Woohoo! If you'd like to try it out, you're welcome to build directly from the master branch. However, if troubleshooting issues with Babel isn't quite your thing, just pull the [stable v0.18.0 release](https://github.com/davezuko/react-redux-starter-kit/tree/v0.18.0) and continue on your way with Babel 5.
 
 > ### Want Semicolons?
 > After installing npm dependencies, open `.eslintrc`, change the `semi` rule from `never` to `always`, and then run `npm run lint:fix` -- Easy as that! Alternatively, use the same npm script after installing and extending your preferred ESLint configuration; it's easy to customize the project's code style to suit your team's needs. See, we can coexist peacefully.
@@ -69,7 +65,7 @@ Getting Started
 Just clone the repo and install the necessary node modules:
 
 ```shell
-$ git clone https://github.com/davezuko/react-redux-starter-kit.git
+$ git clone https://github.com/factoryx/stack.git
 $ cd react-redux-starter-kit
 $ npm install                   # Install Node modules listed in ./package.json (may take a while the first time)
 $ npm start                     # Compile and launch
@@ -235,4 +231,4 @@ Troubleshooting
 
 This is most likely because the new window has been blocked by your popup blocker, so make sure it's disabled before trying again.
 
-Reference: [issue 110](https://github.com/davezuko/react-redux-starter-kit/issues/110)
+Reference: [issue 110](https://github.com/factoryx/stack/issues/110)
