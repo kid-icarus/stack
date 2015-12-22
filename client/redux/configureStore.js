@@ -11,10 +11,10 @@ export default function configureStore (initialState) {
 
   const middleware = applyMiddleware(thunk)
 
-  if (__DEBUG__) {
+  if (window.devToolsExtension && __DEBUG__) {
     createStoreWithMiddleware = compose(
       middleware,
-      require('containers/DevTools').instrument()
+      window.devToolsExtension()
     )
   } else {
     createStoreWithMiddleware = compose(middleware)

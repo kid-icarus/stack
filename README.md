@@ -35,10 +35,10 @@ Features
 --------
 
 * [React](https://github.com/facebook/react) (`^0.14.0`)
-* [Redux](https://github.com/gaearon/redux) (`^3.0.0`)
+* [Redux](https://github.com/gaearon/redux) (`^4.0.0`)
   * react-redux (`^4.0.0`)
   * redux-devtools
-    * use `npm run dev:nw` to display them in a separate window.
+    * to use, [install the chrome extension](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
   * redux-thunk middleware
 * [react-router](https://github.com/rackt/react-router) (`^1.0.0`)
 * [redux-simple-router](https://github.com/jlongster/redux-simple-router) (`^1.0.0`)
@@ -227,8 +227,3 @@ Have more questions? Feel free to submit an issue or join the Gitter chat!
 Troubleshooting
 ---------------
 
-### `npm run dev:nw` produces `cannot read location of undefined.`
-
-This is most likely because the new window has been blocked by your popup blocker, so make sure it's disabled before trying again.
-
-Reference: [issue 110](https://github.com/factoryx/stack/issues/110)
