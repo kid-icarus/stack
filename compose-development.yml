@@ -1,0 +1,18 @@
+app:
+  image: factoryx/nodejs:5.1.0 # https://hub.docker.com/r/factoryx/nodejs/tags/
+  restart: always
+  command: 'node /www/server/'
+  environment:
+    NODE_ENV: 'development'
+    SERVER_MODE: 'api'
+  volumes:
+    - .:/www/
+  ports:
+    - '1337'
+lb:
+  image: jwilder/nginx-proxy
+  restart: always
+  ports:
+    - '0.0.0.0:80:8080'
+  volumes_from:
+    - app

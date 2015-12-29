@@ -65,6 +65,7 @@
     "json-loader": "^0.5.4",
     "node-sass": "^3.3.3",
     "postcss-loader": "^0.8.0",
+    "radiate": "^0.1.1",
     "react-transform-catch-errors": "^1.0.0",
     "react-transform-hmr": "^1.0.0",
     "redbox-react": "^1.0.4",
