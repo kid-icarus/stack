@@ -8,15 +8,6 @@ const paths = config.utils_paths
 const debug = _debug('app:webpack:_base')
 debug('Create configuration.')
 
-const CSS_LOADER = !config.compiler_css_modules
-  ? 'css?sourceMap'
-  : [
-    'css?modules',
-    'sourceMap',
-    'importLoaders=1',
-    'localIdentName=[name]__[local]___[hash:base64:5]'
-  ].join('&')
-
 const webpackConfig = {
   name: 'client',
   target: 'web',
@@ -87,19 +78,9 @@ const webpackConfig = {
         loader: 'json'
       },
       {
-        test: /\.scss$/,
-        loaders: [
-          'style',
-          CSS_LOADER,
-          'postcss',
-          'sass'
-        ]
-      },
-      {
         test: /\.css$/,
         loaders: [
           'style',
-          CSS_LOADER,
           'postcss'
         ]
       },
@@ -112,9 +93,6 @@ const webpackConfig = {
       { test: /\.(png|jpg)$/,    loader: 'url?limit=8192' }
       /* eslint-enable */
     ]
-  },
-  sassLoader: {
-    includePaths: paths.client('styles')
   },
   postcss: [
     cssnano({
