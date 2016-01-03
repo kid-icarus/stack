@@ -9,7 +9,7 @@
     "lint": "eslint . ./",
     "lint:fix": "npm run lint -- --fix",
     "start": "npm run dev",
-    "dev": "node -r dotenv/config bin/server --hot",
+    "dev": "nodemon --watch ./build --exec 'node -r dotenv/config bin/server --hot'",
     "dev:no-debug": "npm run dev -- --no_debug"
   },
   "repository": {
@@ -65,6 +65,7 @@
     "isparta-loader": "^2.0.0",
     "json-loader": "^0.5.4",
     "node-sass": "^3.3.3",
+    "nodemon": "^1.8.1",
     "postcss-loader": "^0.8.0",
     "radiate": "^0.1.1",
     "react-icon": "^1.0.0",
