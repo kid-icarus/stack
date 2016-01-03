@@ -1,7 +1,7 @@
 import React, {View, Text, StyleSheet} from 'react-native-web'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
-import { actions as counterActions } from '../redux/modules/counter'
+import * as counterActions from 'actions/counter'
 import Title from '../components/Title'
 
 const styles = StyleSheet.create({
