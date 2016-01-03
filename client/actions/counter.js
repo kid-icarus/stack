@@ -3,7 +3,7 @@ import { createAction } from 'redux-actions'
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const increment = createAction('increment counter', (value = 1) => value)
+export const increment = createAction('increment counter')
 
 // This is a thunk, meaning it is a function that immediately
 // returns a function for lazy evaluation. It is incredibly useful for
