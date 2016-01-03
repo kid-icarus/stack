@@ -16,7 +16,7 @@ export default function configureStore (initialState) {
   const middleware = applyMiddleware(thunk, createLogger())
   const batching = batchedSubscribe(batchedUpdates)
 
-  if (window.devToolsExtension && __DEBUG__) {
+  if (window.devToolsExtension) {
     createStoreWithMiddleware = compose(
       middleware,
       batching,
