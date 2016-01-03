@@ -1,10 +1,9 @@
 import { createAction } from 'redux-actions'
-import { COUNTER_INCREMENT } from '../constants'
 
 // ------------------------------------
 // Actions
 // ------------------------------------
-export const increment = createAction(COUNTER_INCREMENT, (value = 1) => value)
+export const increment = createAction('increment counter', (value = 1) => value)
 
 // This is a thunk, meaning it is a function that immediately
 // returns a function for lazy evaluation. It is incredibly useful for
