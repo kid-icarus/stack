@@ -1,9 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
+import Icon from 'react-icon'
+import shield from 'lib/shield'
 import * as counterActions from 'actions/counter'
 import Title from 'components/Title'
-import Icon from 'react-icon'
 import style from './style.scss'
 
 const mapStateToProps = (state) => ({
@@ -28,16 +29,16 @@ export class HomeView extends React.Component {
           <Title className={style.counter}>{this.props.counter}</Title>
         </div>
         <div className={style.buttons}>
-          <button onClick={() => this.props.increment(1)} className={style.actionButton}>
+          <button onClick={shield(this.props.increment)} className={style.actionButton}>
             Increment
           </button>
-          <button onClick={() => this.props.decrement(1)} className={style.actionButton}>
+          <button onClick={shield(this.props.decrement)} className={style.actionButton}>
             Decrement
           </button>
-          <button onClick={this.props.double} className={style.actionButton}>
+          <button onClick={shield(this.props.double)} className={style.actionButton}>
             Double
           </button>
-          <button onClick={this.props.zero} className={style.actionButton}>
+          <button onClick={shield(this.props.zero)} className={style.actionButton}>
             Zero (Hose)
           </button>
         </div>
