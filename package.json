@@ -66,6 +66,7 @@
     "json-loader": "^0.5.4",
     "node-sass": "^3.3.3",
     "nodemon": "^1.8.1",
+    "normalizr": "^1.4.1",
     "postcss-loader": "^0.8.0",
     "radiate": "^0.1.1",
     "react-icon": "^1.0.0",
