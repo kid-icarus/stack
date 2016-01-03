@@ -3,7 +3,7 @@ import createBrowserHistory from 'history/lib/createBrowserHistory'
 import { syncReduxAndRouter } from 'redux-simple-router'
 import routes from './routes'
 import Root from './containers/Root'
-import configureStore from './redux/configureStore'
+import configureStore from './store'
 import React from 'react-native-web'
 
 const history = createBrowserHistory()
