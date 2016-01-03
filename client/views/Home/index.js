@@ -1,18 +1,9 @@
-import React, {View, Text, StyleSheet} from 'react-native-web'
+import React from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import * as counterActions from 'actions/counter'
-import Title from '../components/Title'
-
-const styles = StyleSheet.create({
-  home: {
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  counterNumber: {
-    color: 'green'
-  }
-})
+import Title from 'components/Title'
+import styles from './style.scss'
 
 // We define mapStateToProps where we'd normally use
 // the @connect decorator so the data requirements are clear upfront, but then
@@ -31,20 +22,20 @@ export class HomeView extends React.Component {
 
   render () {
     return (
-      <View style={styles.home}>
+      <div className={styles.home}>
         <Title>Welcome to the React Redux Starter Kit</Title>
-        <Text>
+        <div>
           Sample Counter:&nbsp;
-          <Title style={styles.counterNumber}>{this.props.counter}</Title>
-        </Text>
-        <View accessibilityRole='button' onClick={() => this.props.increment(1)}>
+          <Title className={styles.counter}>{this.props.counter}</Title>
+        </div>
+        <button onClick={() => this.props.increment(1)}>
           Increment
-        </View>
-        <View accessibilityRole='button' onClick={this.props.doubleAsync}>
+        </button>
+        <button onClick={this.props.doubleAsync}>
           Double (Async)
-        </View>
+        </button>
         <Link to='/about'>Go To About View</Link>
-      </View>
+      </div>
     )
   }
 }
