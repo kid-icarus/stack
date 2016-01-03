@@ -17,8 +17,9 @@ const mapStateToProps = (state) => ({
 export class HomeView extends React.Component {
   static propTypes = {
     counter: React.PropTypes.number.isRequired,
-    doubleAsync: React.PropTypes.func.isRequired,
-    increment: React.PropTypes.func.isRequired
+    double: React.PropTypes.func.isRequired,
+    increment: React.PropTypes.func.isRequired,
+    decrement: React.PropTypes.func.isRequired
   }
 
   render () {
@@ -33,8 +34,11 @@ export class HomeView extends React.Component {
         <button onClick={() => this.props.increment(1)}>
           Increment
         </button>
-        <button onClick={this.props.doubleAsync}>
-          Double (Async)
+        <button onClick={() => this.props.decrement(1)}>
+          Decrement
+        </button>
+        <button onClick={this.props.double}>
+          Double
         </button>
         <Link to='/about'>Go To About View</Link>
       </div>
