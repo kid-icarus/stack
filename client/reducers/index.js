@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 import { routeReducer } from 'redux-simple-router'
-import counter from './counter'
+import counter from 'reducers/counter'
 
 export default combineReducers({
   counter,
