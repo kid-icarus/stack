@@ -13,8 +13,8 @@ export const double = () => {
 
 export const zero = () => {
   return (dispatch, getState) => {
-    var init = getState()
-    for (var i = 0; i < init.counter; i++) {
+    let init = getState().counter
+    for (var i = 0; i < init; i++) {
       dispatch(decrement())
     }
   }
