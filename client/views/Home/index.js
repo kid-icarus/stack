@@ -4,13 +4,8 @@ import { Link } from 'react-router'
 import * as counterActions from 'actions/counter'
 import Title from 'components/Title'
 import Icon from 'react-icon'
-import styles from './style.scss'
+import style from './style.scss'
 
-// We define mapStateToProps where we'd normally use
-// the @connect decorator so the data requirements are clear upfront, but then
-// export the decorated component after the main class definition so
-// the component can be tested w/ and w/o being connected.
-// See: http://rackt.github.io/redux/docs/recipes/WritingTests.html
 const mapStateToProps = (state) => ({
   counter: state.counter
 })
@@ -19,27 +14,33 @@ export class HomeView extends React.Component {
     counter: React.PropTypes.number.isRequired,
     double: React.PropTypes.func.isRequired,
     increment: React.PropTypes.func.isRequired,
-    decrement: React.PropTypes.func.isRequired
+    decrement: React.PropTypes.func.isRequired,
+    zero: React.PropTypes.func.isRequired
   }
 
   render () {
     return (
-      <div className={styles.home}>
+      <div className={style.home}>
         <Icon glyph='star'/>
         <Title>Welcome to the React Redux Starter Kit</Title>
         <div>
           Sample Counter:
-          <Title className={styles.counter}>{this.props.counter}</Title>
+          <Title className={style.counter}>{this.props.counter}</Title>
         </div>
-        <button onClick={() => this.props.increment(1)}>
-          Increment
-        </button>
-        <button onClick={() => this.props.decrement(1)}>
-          Decrement
-        </button>
-        <button onClick={this.props.double}>
-          Double
-        </button>
+        <div className={style.buttons}>
+          <button onClick={() => this.props.increment(1)} className={style.actionButton}>
+            Increment
+          </button>
+          <button onClick={() => this.props.decrement(1)} className={style.actionButton}>
+            Decrement
+          </button>
+          <button onClick={this.props.double} className={style.actionButton}>
+            Double
+          </button>
+          <button onClick={this.props.zero} className={style.actionButton}>
+            Zero (Hose)
+          </button>
+        </div>
         <Link to='/about'>Go To About View</Link>
       </div>
     )
