@@ -1,7 +1,7 @@
-import React from 'react-native-web'
+import React from 'react'
 import { Route, IndexRoute } from 'react-router'
-import HomeView from 'views/HomeView'
-import AboutView from 'views/AboutView'
+import HomeView from 'views/Home'
+import AboutView from 'views/About'
 
 export default (
   <Route path='/'>

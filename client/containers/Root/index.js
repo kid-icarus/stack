@@ -1,13 +1,7 @@
 import { Provider } from 'react-redux'
 import { Router } from 'react-router'
-import React, { View, StyleSheet } from 'react-native-web'
-
-const styles = StyleSheet.create({
-  root: {
-    height: '100%',
-    width: '100%'
-  }
-})
+import React from 'react'
+import styles from './style.scss'
 
 export default class Root extends React.Component {
   static propTypes = {
@@ -19,12 +13,11 @@ export default class Root extends React.Component {
   render () {
     return (
       <Provider store={this.props.store}>
-        <View style={styles.root}>
-          <style children={StyleSheet.renderToString()}/>
+        <div className={styles.root}>
           <Router history={this.props.history}>
             {this.props.routes}
           </Router>
-        </View>
+        </div>
       </Provider>
     )
   }

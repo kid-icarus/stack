@@ -1,5 +1,6 @@
 import webpack from 'webpack'
 import cssnano from 'cssnano'
+import rucksack from 'rucksack-css'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import config from 'app-config-chain'
 import _debug from 'debug'
@@ -117,6 +118,9 @@ const webpackConfig = {
     includePaths: paths.client('styles')
   },
   postcss: [
+    rucksack({
+      autoprefixer: true
+    }),
     cssnano({
       sourcemap: true,
       autoprefixer: {
