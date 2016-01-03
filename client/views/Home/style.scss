@@ -9,3 +9,14 @@
   text-align: center;
   color: rgb(25,200,25);
 }
+
+.buttons {
+  flex-flow: row wrap;
+  padding: 20px;
+}
+
+.actionButton {
+  display: inline-block;
+  font-size: responsive 1rem 1.2rem;
+  padding: 10px;
+}
