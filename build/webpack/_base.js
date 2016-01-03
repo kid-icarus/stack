@@ -25,7 +25,6 @@ const webpackConfig = {
     app: [
       paths.base(config.dir_client) + '/index.js'
     ],
-    vendor: config.compiler_vendor
   },
   output: {
     filename: `[name].[${config.compiler_hash_type}].js`,
@@ -139,15 +138,5 @@ const webpackConfig = {
     configFile: paths.base('.eslintrc')
   }
 }
-
-// NOTE: this is a temporary workaround. I don't know how to get Karma
-// to include the vendor bundle that webpack creates, so to get around that
-// we remove the bundle splitting when webpack is used with Karma.
-const commonChunkPlugin = new webpack.optimize.CommonsChunkPlugin({
-  names: ['vendor']
-})
-commonChunkPlugin.__KARMA_IGNORE__ = true
-
-webpackConfig.plugins.push(commonChunkPlugin)
 
 export default webpackConfig
