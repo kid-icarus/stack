@@ -27,7 +27,7 @@ export class HomeView extends React.Component {
         <Icon glyph='star'/>
         <Title>Welcome to the React Redux Starter Kit</Title>
         <div>
-          Sample Counter:&nbsp;
+          Sample Counter:
           <Title className={styles.counter}>{this.props.counter}</Title>
         </div>
         <button onClick={() => this.props.increment(1)}>

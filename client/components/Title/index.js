@@ -1,7 +1,13 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
+import classNames from 'classnames'
 import styles from './style.scss'
+import PureComponent from 'react-pure-render/component'
 
-const Title = (props) =>
-  <div className={styles.title} {...props} />
-
-export default Title
+export default class Title extends PureComponent {
+  PropTypes = {
+    className: PropTypes.string
+  }
+  render () {
+    return <div {...this.props} className={classNames(styles.title, this.props.className)} />
+  }
+}
