@@ -1,8 +1,11 @@
 import { handleActions } from 'redux-actions'
 
-// ------------------------------------
-// Reducer
-// ------------------------------------
+const initialState = 1
+
+const incrementCounter = (state, { payload }) => state + payload
+const decrementCounter = (state, { payload }) => state - payload
+
 export default handleActions({
-  ['increment counter']: (state, { payload }) => state + payload
-}, 1)
+  incrementCounter,
+  decrementCounter
+}, initialState)
