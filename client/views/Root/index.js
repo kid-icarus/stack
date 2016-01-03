@@ -2,6 +2,7 @@ import { Provider } from 'react-redux'
 import { Router } from 'react-router'
 import React from 'react'
 import styles from './style.scss'
+import 'font-awesome/scss/font-awesome.scss'
 
 export default class Root extends React.Component {
   static propTypes = {

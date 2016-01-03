@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router'
 import * as counterActions from 'actions/counter'
 import Title from 'components/Title'
+import Icon from 'react-icon'
 import styles from './style.scss'
 
 // We define mapStateToProps where we'd normally use
@@ -23,6 +24,7 @@ export class HomeView extends React.Component {
   render () {
     return (
       <div className={styles.home}>
+        <Icon glyph='star'/>
         <Title>Welcome to the React Redux Starter Kit</Title>
         <div>
           Sample Counter:&nbsp;
