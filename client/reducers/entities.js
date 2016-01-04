@@ -1,12 +1,12 @@
 import { handleActions } from 'redux-actions'
+import merge from 'lodash.merge'
 
-const initialState = {
-  organizations: []
+const initialState = {}
+
+const SUCCESS = (state, { meta, payload }) => {
+  return merge({}, state, payload.entities)
 }
 
-const SUCCESS = (state, { payload }) =>
-  console.log(state, payload)
-  // state[payload.dest] =
 const FAILURE = (state, { payload }) => state - payload
 
 export default handleActions({

@@ -1,9 +1,10 @@
 import { Link } from 'react-router'
+import Component from 'lib/component'
 import React from 'react'
 import Title from 'components/Title'
 import style from './style.scss'
 
-export class AboutView extends React.Component {
+export class AboutView extends Component {
   render () {
     return (
       <div className={style.about}>

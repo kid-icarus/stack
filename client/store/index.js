@@ -1,24 +1,14 @@
-import thunk from 'redux-thunk'
-import createLogger from 'redux-logger'
-import { apiMiddleware } from 'redux-api-middleware'
+import middleware from 'middleware'
 import { batchedSubscribe } from 'redux-batched-subscribe'
 import { unstable_batchedUpdates as batchedUpdates } from 'react-dom'
-
 import rootReducer from 'reducers'
 import {
-  applyMiddleware,
   compose,
   createStore
 } from 'redux'
 
 export default function configureStore (initialState) {
   let createStoreWithMiddleware
-
-  const middleware = applyMiddleware(
-    thunk,
-    apiMiddleware,
-    createLogger()
-  )
   const batching = batchedSubscribe(batchedUpdates)
 
   if (window.devToolsExtension) {
