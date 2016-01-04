@@ -13,7 +13,7 @@ const mapDispatchToProps = (dispatch) => ({
 const OurComponent = class Component extends PureComponent {
   static propTypes = {
     _store: PropTypes.shape({
-      entities: PropTypes.object,
+      entities: PropTypes.object.isRequired,
       counter: PropTypes.number.isRequired
     }),
     _actions: PropTypes.shape({
@@ -25,12 +25,12 @@ const OurComponent = class Component extends PureComponent {
     })
   }
 
-  entities (name) {
-    var entities = this.store().entities[name] || {}
+  entities (type) {
+    var entities = this.store().entities[type] || {}
     return Object.keys(entities)
   }
-  entity (name, id) {
-    var entities = this.store().entities[name] || {}
+  entity (type, id) {
+    var entities = this.store().entities[type] || {}
     return entities[id]
   }
 
