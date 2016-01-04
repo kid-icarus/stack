@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import Component from 'lib/component'
+import Component from 'lib/Component'
 import React from 'react'
 import Title from 'components/Title'
 import style from './style.scss'
