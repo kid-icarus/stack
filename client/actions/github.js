@@ -1,12 +1,13 @@
 // import { createAction } from 'redux-actions'
 import { CALL_API } from 'redux-api-middleware'
 import { normalize, Schema, arrayOf } from 'normalizr'
-const org = new Schema('org')
+const organization = new Schema('organization')
 
+// TODO: break this out into a lib util
+// TODO: check entities cache in store and dont fetch if we have it already
 export const getOrgs = function () {
   let meta = {
-    src: 'getOrgs',
-    dest: 'organizations'
+    src: 'getOrgs'
   }
 
   let action = {
@@ -26,7 +27,7 @@ export const getOrgs = function () {
             const contentType = res.headers.get('Content-Type')
             if (contentType && ~contentType.indexOf('json')) {
               return res.json().then((json) =>
-                normalize(json, arrayOf(org))
+                normalize(json, arrayOf(organization))
               )
             }
           }

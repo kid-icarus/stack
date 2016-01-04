@@ -1,9 +1,9 @@
 import React, {PropTypes} from 'react'
 import classNames from 'classnames'
 import style from './style.scss'
-import PureComponent from 'react-pure-render/component'
+import Component from 'lib/Component'
 
-export default class Title extends PureComponent {
+export default class Title extends Component {
   static propTypes = {
     className: PropTypes.string
   }
