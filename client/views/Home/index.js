@@ -10,9 +10,9 @@ import actions from 'actions'
 export class HomeView extends Component {
   getData (name) {
     var opt = { user: name }
-    this.actions.getOrganizations({options: opt, dest: 'orgs'})
-    this.actions.getRepositories({options: opt, dest: 'repos'})
-    this.actions.getUser({options: opt, dest: name})
+    this.actions.getOrganizations({options: opt, requestId: 'orgs'})
+    this.actions.getRepositories({options: opt, requestId: 'repos'})
+    this.actions.getUser({options: opt, requestId: name})
   }
 
   render () {

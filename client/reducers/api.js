@@ -12,16 +12,16 @@ const ESUCCESS = (state, { meta, payload }) => {
 
 // request state
 const RSUCCESS = (state, { meta, payload }) => {
-  if (meta.dest) {
-    return merge({}, state, {[meta.dest]: payload.raw})
+  if (meta.requestId) {
+    return merge({}, state, {[meta.requestId]: payload.raw})
   }
   return state
 }
 
 const RFAILURE = (state, { meta, payload }) => {
   // TODO: verify this
-  if (meta.dest) {
-    return merge({}, state, {[meta.dest]: payload})
+  if (meta.requestId) {
+    return merge({}, state, {[meta.requestId]: payload})
   }
   return state
 }
