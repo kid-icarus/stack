@@ -88,12 +88,12 @@ const webpackConfig = {
         loader: 'json'
       },
       {
-        test: /\.scss$/,
+        test: /\.sass$/,
         loaders: [
           'style',
           CSS_LOADER,
           'postcss',
-          'sass'
+          'sass?indentedSyntax'
         ]
       },
       {
