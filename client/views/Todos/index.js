@@ -18,7 +18,7 @@ export class TodosView extends Component {
   }
 
   render () {
-    let todos = this.store.todos
+    let todos = this.storeState.todos
 
     return (
       <div className={style.todoapp}>
