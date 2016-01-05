@@ -21,11 +21,17 @@
   padding: 10px;
 }
 
-.repoList {
+.list {
   padding: 20px;
 }
 
-.repo {
+.listItem {
   padding: 5px;
   font-size: reponsive 0.8rem 1rem;
+}
+
+.userImage {
+  height: 100px;
+  width: 100px;
+  border-radius: 100%;
 }
