@@ -10,17 +10,17 @@ import actions from 'actions'
 export class HomeView extends Component {
   getData (name) {
     var opt = { user: name }
-    this.actions.getOrganizations({options: opt, dest: 'organizations'})
-    this.actions.getRepositories({options: opt, dest: 'repositories'})
-    this.actions.getUser({options: opt, dest: 'user'})
+    this.actions.getOrganizations({options: opt, dest: 'orgs'})
+    this.actions.getRepositories({options: opt, dest: 'repos'})
+    this.actions.getUser({options: opt, dest: name})
   }
 
   render () {
     var name = 'funkytek'
-    var orgs = this.getCollection('organization')
-    var repos = this.getCollection('repository')
-    var user = this.getCollection('user').filter(({login}) => login === name)[0]
-    var fetching = !orgs.length || !repos.length || !user
+    var orgs = this.store.requests.orgs
+    var repos = this.store.requests.repos
+    var user = this.store.requests[name]
+    var fetching = !orgs || !repos || !user
 
     return (
       <div className={style.home}>
