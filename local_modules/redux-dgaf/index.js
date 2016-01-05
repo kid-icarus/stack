@@ -17,15 +17,15 @@ class DGAFComponent extends PureComponent {
     _actions: PropTypes.object.isRequired
   }
 
-  getEntities (type) {
-    return this.getEntityIds(type).map((id) => this.getEntityById(type, id))
+  getCollection (type) {
+    return this.getCollectionIds(type).map((id) => this.getEntity(type, id))
   }
 
-  getEntityIds (type) {
+  getCollectionIds (type) {
     var entities = this.getStore().entities[type] || {}
     return Object.keys(entities)
   }
-  getEntityById (type, id) {
+  getEntity (type, id) {
     var entities = this.getStore().entities[type] || {}
     return entities[id]
   }
