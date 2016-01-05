@@ -11,7 +11,7 @@ export class HomeView extends Component {
   render () {
     let store = this.getStore()
     let actions = this.getActions()
-    let orgs = this.entity('organization').toArray()
+    let orgs = this.getEntities('organization')
 
     return (
       <div className={style.home}>
