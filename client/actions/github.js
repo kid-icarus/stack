@@ -1,4 +1,4 @@
-import createAPIAction from 'lib/createAPIAction'
+import createAPIAction from 'redux-api-actions'
 import { Schema } from 'normalizr'
 
 const org = new Schema('organization')

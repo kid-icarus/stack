@@ -1,10 +1,11 @@
 import React from 'react'
 import { Link } from 'react-router'
 import Icon from 'react-icon'
-import shield from 'lib/shield'
-import Component from 'lib/Component'
+import shield from 'function-shield'
+import Component from 'redux-dgaf'
 import Title from 'components/Title'
 import style from './style.scss'
+import actions from 'actions'
 
 export class HomeView extends Component {
   render () {
@@ -49,4 +50,4 @@ export class HomeView extends Component {
   }
 }
 
-export default Component.connect(HomeView)
+export default Component.connect(actions, HomeView)

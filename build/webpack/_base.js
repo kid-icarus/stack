@@ -24,7 +24,7 @@ const webpackConfig = {
   entry: {
     app: [
       paths.base(config.dir_client) + '/index.js'
-    ],
+    ]
   },
   output: {
     filename: `[name].[${config.compiler_hash_type}].js`,
@@ -47,6 +47,7 @@ const webpackConfig = {
     })
   ],
   resolve: {
+    modulesDirectories: ['local_modules', 'web_modules', 'node_modules'],
     root: paths.base(config.dir_client),
     extensions: ['', '.js', '.jsx']
   },
@@ -104,14 +105,14 @@ const webpackConfig = {
         ]
       },
       /* font-awesome loader */
-      { test: /\.(ttf|eot|svg)$/, loader: "file-loader" },
+      { test: /\.(ttf|eot|svg)$/, loader: 'file-loader' },
       /* eslint-disable */
-      { test: /\.woff(\?.*)?$/,  loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
+      { test: /\.woff(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
       { test: /\.woff2(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
-      { test: /\.ttf(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
-      { test: /\.eot(\?.*)?$/,   loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
-      { test: /\.svg(\?.*)?$/,   loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
-      { test: /\.(png|jpg)$/,    loader: 'url?limit=8192' }
+      { test: /\.ttf(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
+      { test: /\.eot(\?.*)?$/, loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
+      { test: /\.svg(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
+      { test: /\.(png|jpg)$/, loader: 'url?limit=8192' }
       /* eslint-enable */
     ]
   },
