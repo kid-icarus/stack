@@ -10,16 +10,16 @@ import actions from 'actions'
 export class HomeView extends Component {
   getData (name) {
     var opt = { user: name }
-    this.actions.getOrganizations({options: opt, dest: 'orgs'})
-    this.actions.getRepositories({options: opt, dest: 'repos'})
-    this.actions.getUser({options: opt, dest: name})
+    this.actions.getOrganizations({options: opt, requestId: 'orgs'})
+    this.actions.getRepositories({options: opt, requestId: 'repos'})
+    this.actions.getUser({options: opt, requestId: name})
   }
 
   render () {
     var name = 'funkytek'
-    var orgs = this.store.requests.orgs
-    var repos = this.store.requests.repos
-    var user = this.store.requests[name]
+    var orgs = this.storeState.requests.orgs
+    var repos = this.storeState.requests.repos
+    var user = this.storeState.requests[name]
     var fetching = !orgs || !repos || !user
 
     return (
@@ -28,7 +28,7 @@ export class HomeView extends Component {
         <Title>FactoryX Stack Test Page</Title>
         <div>
           Sample Counter:
-          <Title className={style.counter}>{this.store.counter}</Title>
+          <Title className={style.counter}>{this.storeState.counter}</Title>
         </div>
         <div className={style.buttons}>
           <button onClick={shield(this.actions.incrementCounter)} className={style.actionButton}>
@@ -37,7 +37,7 @@ export class HomeView extends Component {
           <button onClick={shield(this.actions.decrementCounter)} className={style.actionButton}>
             Decrement
           </button>
-          <button onClick={this.getData.bind(this, name)} className={style.actionButton}>
+          <button onClick={this.getData.bind(null, name)} className={style.actionButton}>
             Get GH Data
           </button>
         </div>
@@ -61,7 +61,7 @@ export class HomeView extends Component {
                 <ul className={style.list}>
                   <Title>{repos.length} repositories</Title>
                   {
-                    repos.map((repo) =>
+                    repos.map(repo =>
                       <li className={style.listItem} key={repo.id}>{repo.full_name} - Issues: {repo.open_issues}</li>
                     )
                   }
