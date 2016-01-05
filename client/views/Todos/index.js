@@ -1,13 +1,24 @@
 import React from 'react'
+// import { Link } from 'react-router'
+// import Icon from 'react-icon'
+// import shield from 'function-shield'
 import Component from 'redux-dgaf'
 import style from './style.sass'
 import actions from 'actions'
+import Todo from './Todo'
 
 export class TodosView extends Component {
 
+  addTodo (e) {
+    if (e.keyCode === 13) {
+      this.actions.addTodo(this.refs.todoInput.value.trim())
+      this.refs.todoInput.value = ''
+      this.refs.todoInput.focus()
+    }
+  }
+
   render () {
-    let store = this.getStore()
-    let todos = store.todos
+    let todos = this.storeState.todos
 
     return (
       <div className={style.todoapp}>
@@ -25,15 +36,8 @@ export class TodosView extends Component {
         <section className={style.main}>
             <ul className={style['todo-list']}>
               {
-                todos.map((todo, idx) =>
-                  <li key={idx}>
-                    <div>
-                      <label className={style.view}>{todo}</label>
-                    </div>
-                  </li>
-                )
+                todos.map((todo) => <Todo todo={todo} key={todo.id} />)
               }
-
             </ul>
         </section>
 
@@ -41,15 +45,6 @@ export class TodosView extends Component {
 
       </div>
     )
-  }
-
-  addTodo (e) {
-    if (e.keyCode === 13) {
-      let actions = this.getActions()
-      actions.addTodo(this.refs.todoInput.value.trim())
-      this.refs.todoInput.value = ''
-      this.refs.todoInput.focus()
-    }
   }
 
 }
