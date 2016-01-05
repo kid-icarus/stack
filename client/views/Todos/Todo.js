@@ -3,26 +3,26 @@ import React from 'react'
 // import Icon from 'react-icon'
 // import shield from 'function-shield'
 import Component from 'redux-dgaf'
-import style from './style.scss'
+import style from './style.sass'
 import actions from 'actions'
 
 export class Todo extends Component {
 
   static propTypes = {
-    todo: React.PropTypes.object.isRequired,
-    index: React.PropTypes.number.isRequired
+    todo: React.PropTypes.object.isRequired
   }
 
-  hover () {
-    console.log('hover')
+  destroy () {
+    this.actions.deleteTodo(this.props.todo)
   }
 
   render () {
     return (
 
-      <li key={this.props.index} onMouseEnter={this.hover}>
-        <div>
-          <label className={style.view}>{this.props.todo}</label>
+      <li>
+        <div className={style.view}>
+          <label>{this.props.todo.text}</label>
+          <button onClick={this.destroy.bind(this)} className={style.destroy} />
         </div>
       </li>
 
