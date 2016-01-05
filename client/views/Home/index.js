@@ -33,17 +33,11 @@ export class HomeView extends Component {
           <Title className={style.counter}>{store.counter}</Title>
         </div>
         <div className={style.buttons}>
-          <button onClick={shield(actions.increment)} className={style.actionButton}>
+          <button onClick={shield(actions.incrementCounter)} className={style.actionButton}>
             Increment
           </button>
-          <button onClick={shield(actions.decrement)} className={style.actionButton}>
+          <button onClick={shield(actions.decrementCounter)} className={style.actionButton}>
             Decrement
-          </button>
-          <button onClick={shield(actions.double)} className={style.actionButton}>
-            Double
-          </button>
-          <button onClick={shield(actions.zero)} className={style.actionButton}>
-            Zero (Hose)
           </button>
           <button onClick={this.getData.bind(this, name)} className={style.actionButton}>
             Get GH Data
