@@ -3,7 +3,7 @@ import Component from 'redux-dgaf'
 import React from 'react'
 import actions from 'actions'
 import Title from 'components/Title'
-import style from './style.scss'
+import style from './style.sass'
 
 export class AboutView extends Component {
   render () {
