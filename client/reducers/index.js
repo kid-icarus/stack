@@ -1,12 +1,14 @@
 import { combineReducers } from 'redux'
 import { routeReducer } from 'redux-simple-router'
+import { requests, collections } from 'reducers/api'
 import counter from 'reducers/counter'
-import entities from 'reducers/entities'
 import todos from 'reducers/todos'
 
 export default combineReducers({
+  requests,
+  collections,
+
   counter,
-  entities,
   todos,
   router: routeReducer
 })

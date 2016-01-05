@@ -3,7 +3,7 @@ import React from 'react'
 // import Icon from 'react-icon'
 // import shield from 'function-shield'
 import Component from 'redux-dgaf'
-import style from './style.scss'
+import style from './style.sass'
 import actions from 'actions'
 import Todo from './Todo'
 
