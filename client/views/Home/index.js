@@ -11,6 +11,7 @@ export class HomeView extends Component {
   render () {
     let store = this.getStore()
     let actions = this.getActions()
+    let orgs = this.entity('organization').toArray()
 
     return (
       <div className={style.home}>
@@ -38,9 +39,10 @@ export class HomeView extends Component {
           </button>
         </div>
         <ul className={style.repoList}>
+          <div>{orgs.length} repositories</div>
           {
-            this.getEntityIds('organization').map((id) =>
-              <li className={style.repo} key={id}>{this.getEntityById('organization', id).login}</li>
+            orgs.map((org) =>
+              <li className={style.repo} key={org.id}>{org.login}</li>
             )
           }
         </ul>
