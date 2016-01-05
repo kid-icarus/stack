@@ -8,7 +8,7 @@ const result = (fn, arg) => typeof fn === 'function' ? fn(arg) : fn
 const createAPIAction = (name, opt = {}) => (ropt = {}) => {
   var meta = {
     src: name,
-    dest: result(ropt.dest || opt.dest, ropt.options)
+    requestId: result(ropt.requestId || opt.requestId, ropt.options)
   }
 
   return {
