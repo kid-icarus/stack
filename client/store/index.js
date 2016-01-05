@@ -2,10 +2,7 @@ import middleware from 'middleware'
 import { batchedSubscribe } from 'redux-batched-subscribe'
 import { unstable_batchedUpdates as batchedUpdates } from 'react-dom'
 import rootReducer from 'reducers'
-import {
-  compose,
-  createStore
-} from 'redux'
+import { compose, createStore } from 'redux'
 
 export default function configureStore (initialState) {
   let createStoreWithMiddleware
@@ -31,8 +28,8 @@ export default function configureStore (initialState) {
 
   if (module.hot) {
     module.hot.accept('reducers', () => {
-      const nextRootReducer = require('reducers')
-      store.replaceReducer(nextRootReducer)
+      const nextRoot = require('reducers')
+      store.replaceReducer(nextRoot)
     })
   }
 
