@@ -1,7 +1,6 @@
-import React, {PropTypes} from 'react'
+import React, {PropTypes, Component} from 'react'
 import classNames from 'classnames'
 import style from './style.scss'
-import Component from 'lib/Component'
 
 export default class Title extends Component {
   static propTypes = {

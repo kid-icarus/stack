@@ -2,15 +2,14 @@ import {PropTypes} from 'react'
 import PureComponent from 'react-pure-render/component'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
-import actions from 'actions'
 
 const mapStateToProps = (state) => ({ _store: state })
 
-const mapDispatchToProps = (dispatch) => ({
+const mapDispatchToProps = (actions) => (dispatch) => ({
   _actions: bindActionCreators(actions, dispatch)
 })
 
-const OurComponent = class Component extends PureComponent {
+class DGAFComponent extends PureComponent {
   static propTypes = {
     _store: PropTypes.shape({
       entities: PropTypes.object.isRequired,
@@ -42,6 +41,6 @@ const OurComponent = class Component extends PureComponent {
     return this.props._store
   }
 }
-OurComponent.connect = connect(mapStateToProps, mapDispatchToProps)
+DGAFComponent.connect = (actions, view) => connect(mapStateToProps, mapDispatchToProps(actions))(view)
 
-export default OurComponent
+export default DGAFComponent
