@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux'
 import { Router } from 'react-router'
 import React from 'react'
-import styles from './style.scss'
+import styles from './style.sass'
 import 'font-awesome-sass-loader'
 
 export default class Root extends React.Component {
