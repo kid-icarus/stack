@@ -2,22 +2,25 @@ import { CALL_API } from 'redux-api-middleware'
 import { normalize, arrayOf } from 'normalizr'
 
 // TODO: check entities cache in store and dont fetch if we have it already
-const createAPIAction = (name, opt = {}) => (body, headers) => {
+
+const result = (fn, arg) => typeof fn === 'function' ? fn(arg) : fn
+
+const createAPIAction = (name, opt = {}) => (ropt = {}) => {
   var meta = {
     src: name
   }
 
   return {
     [CALL_API]: {
-      endpoint: opt.endpoint,
-      method: opt.method,
-      body: body || opt.body,
-      headers: headers || opt.headers,
+      endpoint: result(ropt.endpoint || opt.endpoint, ropt.options),
+      method: result(ropt.method || opt.method, ropt.options),
+      body: result(ropt.body || opt.body, ropt.options),
+      headers: result(ropt.headers || opt.headers, ropt.options),
       types: [
         {
           type: 'REQUEST',
           meta: meta,
-          payload: (action, state) => ({ endpoint: action.endpoint })
+          payload: (action) => { action.endpoint }
         },
         {
           type: 'SUCCESS',
@@ -25,9 +28,9 @@ const createAPIAction = (name, opt = {}) => (body, headers) => {
           payload: (action, state, res) => {
             const contentType = res.headers.get('Content-Type')
             if (contentType && ~contentType.indexOf('json')) {
-              return res.json().then((json) => {
-                return normalize(json, opt.collection ? arrayOf(opt.model) : opt.model)
-              })
+              return res.json().then((json) =>
+                normalize(json, opt.collection ? arrayOf(opt.model) : opt.model)
+              )
             }
           }
         },
