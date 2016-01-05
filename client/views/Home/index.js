@@ -15,7 +15,7 @@ export class HomeView extends Component {
     return (
       <div className={style.home}>
         <Icon glyph='star'/>
-        <Title>Welcome to the React Redux Starter Kit</Title>
+        <Title>FactoryX Stack Test Page</Title>
         <div>
           Sample Counter:
           <Title className={style.counter}>{store.counter}</Title>
