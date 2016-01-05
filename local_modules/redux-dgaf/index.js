@@ -17,17 +17,8 @@ class DGAFComponent extends PureComponent {
     _actions: PropTypes.object.isRequired
   }
 
-  entity (type) {
-    var getIds = this.getEntityIds.bind(this, type)
-    var getById = this.getEntityById.bind(this, type)
-    return {
-      getIds: getIds,
-      getById: getById,
-
-      // functional helpers
-      length: () => getIds().length,
-      toArray: () => getIds().map((id, ...rest) => getById(id))
-    }
+  getEntities (type) {
+    return this.getEntityIds(type).map((id) => this.getEntityById(type, id))
   }
 
   getEntityIds (type) {
