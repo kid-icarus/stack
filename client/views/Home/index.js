@@ -10,15 +10,13 @@ import actions from 'actions'
 export class HomeView extends Component {
   getData (name) {
     var opt = { user: name }
-    this.getActions().getOrganizations({options: opt})
-    this.getActions().getRepositories({options: opt})
-    this.getActions().getUser({options: opt})
+    this.actions.getOrganizations({options: opt, dest: 'organizations'})
+    this.actions.getRepositories({options: opt, dest: 'repositories'})
+    this.actions.getUser({options: opt, dest: 'user'})
   }
 
   render () {
     var name = 'funkytek'
-    var store = this.getStore()
-    var actions = this.getActions()
     var orgs = this.getCollection('organization')
     var repos = this.getCollection('repository')
     var user = this.getCollection('user').filter(({login}) => login === name)[0]
@@ -30,13 +28,13 @@ export class HomeView extends Component {
         <Title>FactoryX Stack Test Page</Title>
         <div>
           Sample Counter:
-          <Title className={style.counter}>{store.counter}</Title>
+          <Title className={style.counter}>{this.store.counter}</Title>
         </div>
         <div className={style.buttons}>
-          <button onClick={shield(actions.incrementCounter)} className={style.actionButton}>
+          <button onClick={shield(this.actions.incrementCounter)} className={style.actionButton}>
             Increment
           </button>
-          <button onClick={shield(actions.decrementCounter)} className={style.actionButton}>
+          <button onClick={shield(this.actions.decrementCounter)} className={style.actionButton}>
             Decrement
           </button>
           <button onClick={this.getData.bind(this, name)} className={style.actionButton}>

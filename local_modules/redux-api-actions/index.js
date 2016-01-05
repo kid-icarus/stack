@@ -7,7 +7,8 @@ const result = (fn, arg) => typeof fn === 'function' ? fn(arg) : fn
 
 const createAPIAction = (name, opt = {}) => (ropt = {}) => {
   var meta = {
-    src: name
+    src: name,
+    dest: result(ropt.dest || opt.dest, ropt.options)
   }
 
   return {
@@ -28,9 +29,13 @@ const createAPIAction = (name, opt = {}) => (ropt = {}) => {
           payload: (action, state, res) => {
             const contentType = res.headers.get('Content-Type')
             if (contentType && ~contentType.indexOf('json')) {
-              return res.json().then((json) =>
-                normalize(json, opt.collection ? arrayOf(opt.model) : opt.model)
-              )
+              return res.json().then((json) => {
+                var casting = opt.collection ? arrayOf(opt.model) : opt.model
+                return {
+                  raw: json,
+                  normalized: normalize(json, casting)
+                }
+              })
             }
           }
         },
