@@ -22,19 +22,19 @@ class DGAFComponent extends PureComponent {
   }
 
   getCollectionIds (type) {
-    var entities = this.getStore().entities[type] || {}
+    var entities = this.store.entities[type] || {}
     return Object.keys(entities)
   }
   getEntity (type, id) {
-    var entities = this.getStore().entities[type] || {}
+    var entities = this.store.entities[type] || {}
     return entities[id]
   }
 
-  getActions () {
+  get actions () {
     return this.props._actions
   }
 
-  getStore () {
+  get store () {
     return this.props._store
   }
 }
