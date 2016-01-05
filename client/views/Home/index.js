@@ -9,8 +9,8 @@ import actions from 'actions'
 
 export class HomeView extends Component {
   render () {
-    let store = this.store()
-    let actions = this.actions()
+    let store = this.getStore()
+    let actions = this.getActions()
 
     return (
       <div className={style.home}>
@@ -39,8 +39,8 @@ export class HomeView extends Component {
         </div>
         <ul className={style.repoList}>
           {
-            this.entities('organization').map((id) =>
-              <li className={style.repo} key={id}>{this.entity('organization', id).login}</li>
+            this.getEntityIds('organization').map((id) =>
+              <li className={style.repo} key={id}>{this.getEntityById('organization', id).login}</li>
             )
           }
         </ul>

@@ -5,39 +5,32 @@ import { bindActionCreators } from 'redux'
 
 const mapStateToProps = (state) => ({ _store: state })
 
-const mapDispatchToProps = (actions) => (dispatch) => ({
-  _actions: bindActionCreators(actions, dispatch)
-})
+const mapDispatchToProps = (actions) => (dispatch) => {
+  return {
+    _actions: actions ? bindActionCreators(actions, dispatch) : {}
+  }
+}
 
 class DGAFComponent extends PureComponent {
   static propTypes = {
-    _store: PropTypes.shape({
-      entities: PropTypes.object.isRequired,
-      counter: PropTypes.number.isRequired
-    }),
-    _actions: PropTypes.shape({
-      double: PropTypes.func.isRequired,
-      increment: PropTypes.func.isRequired,
-      decrement: PropTypes.func.isRequired,
-      zero: PropTypes.func.isRequired,
-      getOrgs: PropTypes.func.isRequired
-    })
+    _store: PropTypes.object.isRequired,
+    _actions: PropTypes.object.isRequired
   }
 
-  entities (type) {
-    var entities = this.store().entities[type] || {}
+  getEntityIds (type) {
+    var entities = this.getStore().entities[type] || {}
     return Object.keys(entities)
   }
-  entity (type, id) {
-    var entities = this.store().entities[type] || {}
+  getEntityById (type, id) {
+    var entities = this.getStore().entities[type] || {}
     return entities[id]
   }
 
-  actions () {
+  getActions () {
     return this.props._actions
   }
 
-  store () {
+  getStore () {
     return this.props._store
   }
 }

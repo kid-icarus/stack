@@ -1,8 +1,0 @@
-{
-  "name": "redux-api-actions",
-  "version": "0.0.1",
-  "dependencies": {
-    "normalizr": "^1.4.1",
-    "redux-api-middleware": "^0.6.2"
-  }
-}
