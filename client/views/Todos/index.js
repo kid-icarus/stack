@@ -3,16 +3,13 @@ import { Link } from 'react-router'
 import Icon from 'react-icon'
 import shield from 'function-shield'
 import Component from 'redux-dgaf'
-import Title from 'components/Title'
 import style from './style.scss'
 import actions from 'actions'
 
 export class TodosView extends Component {
 
-
   render () {
     let store = this.getStore()
-    let actions = this.getActions()
     let todos = store.todos
 
     return (
@@ -50,16 +47,13 @@ export class TodosView extends Component {
   }
 
   addTodo (e) {
-    console.log(e);
-    if (e.keyCode == 13) {
-
+    if (e.keyCode === 13) {
       let actions = this.getActions()
-      actions.addTodo(this.refs.todoInput.value.trim());
+      actions.addTodo(this.refs.todoInput.value.trim())
       this.refs.todoInput.value = ''
       this.refs.todoInput.focus()
     }
   }
-
 
 }
 

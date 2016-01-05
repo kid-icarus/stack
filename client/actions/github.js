@@ -1,19 +1,26 @@
 import createAPIAction from 'redux-api-actions'
 import { Schema } from 'normalizr'
 
-const org = new Schema('organization')
-const repo = new Schema('repository')
+const user = new Schema('user')
+const organization = new Schema('organization')
+const repository = new Schema('repository')
 
-export const getOrgs = createAPIAction('getOrgs', {
-  endpoint: 'https://api.github.com/users/contra/orgs',
+export const getUser = createAPIAction('getUser', {
+  endpoint: ({user}) => `https://api.github.com/users/${user}`,
   method: 'GET',
-  collection: true,
-  model: org
+  model: user
 })
 
-export const getRepos = createAPIAction('getRepos', {
-  endpoint: 'https://api.github.com/users/contra/repos',
+export const getOrganizations = createAPIAction('getOrganizations', {
+  endpoint: ({user}) => `https://api.github.com/users/${user}/orgs`,
   method: 'GET',
   collection: true,
-  model: repo
+  model: organization
+})
+
+export const getRepositories = createAPIAction('getRepositories', {
+  endpoint: ({user}) => `https://api.github.com/users/${user}/repos`,
+  method: 'GET',
+  collection: true,
+  model: repository
 })
