@@ -30,11 +30,11 @@ class DGAFComponent extends PureComponent {
     return this.getCollectionIds(type).map((id) => this.getEntity(type, id))
   }
   getCollectionIds (type) {
-    var entities = this.storeState.entities[type] || {}
+    var entities = this.rootState.entities[type] || {}
     return Object.keys(entities)
   }
   getEntity (type, id) {
-    var entities = this.storeState.entities[type] || {}
+    var entities = this.rootState.entities[type] || {}
     return entities[id]
   }
 
@@ -42,7 +42,7 @@ class DGAFComponent extends PureComponent {
     return this.props.__actions
   }
 
-  get storeState () {
+  get rootState () {
     return this.props.__store
   }
 }
