@@ -11,7 +11,8 @@ export class Todo extends Component {
   constructor (props, context) {
     super(props, context)
     this.state = {
-      editing: false
+      editing: false,
+      text: this.props.todo.text || ''
     }
   }
 
@@ -31,10 +32,35 @@ export class Todo extends Component {
     this.actions.toggleTodo(this.props.todo)
   }
 
+  updateTodo (e) {
+    this.setState({text: e.target.value})
+  }
+
+  saveTodo (e) {
+    const text = e.target.value.trim()
+    if (e.which === 13) {
+      let todo = this.props.todo
+      todo.text = text
+      this.actions.saveTodo(todo)
+      this.editComplete()
+    }
+  }
+
+  editComplete () {
+    this.setState({editing: false})
+  }
+
   render () {
     let el
     if (this.state.editing) {
-      el = (<input className={style.edit} value = {this.props.todo.text} />)
+      el = <input
+        ref='todo'
+        className={style.edit}
+        value={this.state.text}
+        autoFocus='true'
+        onChange={this.updateTodo}
+        onBlur={this.editComplete}
+        onKeyDown={this.saveTodo} />
     } else {
       el = (
         <div className={style.view}>

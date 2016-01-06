@@ -17,8 +17,17 @@ const toggleTodo = (state, {payload}) =>
     return todo
   })
 
+const saveTodo = (state, {payload}) =>
+  state.map(todo => {
+    if (todo.id === payload.id) {
+      todo.text = payload.text
+    }
+    return todo
+  })
+
 export default handleActions({
   addTodo,
   deleteTodo,
-  toggleTodo
+  toggleTodo,
+  saveTodo
 }, initialState)
