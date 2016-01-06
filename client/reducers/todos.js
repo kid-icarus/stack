@@ -9,7 +9,18 @@ const deleteTodo = (state, {payload}) =>
     todo.id !== payload.id
   )
 
+const toggleTodo = (state, {payload}) =>
+  state.map(todo => {
+    if (todo.id === payload.id) {
+      todo.completed = !todo.completed
+    }
+
+    return todo
+
+  })
+
 export default handleActions({
   addTodo,
-  deleteTodo
+  deleteTodo,
+  toggleTodo
 }, initialState)
