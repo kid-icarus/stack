@@ -8,6 +8,14 @@ import actions from 'actions'
 
 export class Todo extends Component {
 
+  constructor (props, context) {
+    super(props, context)
+    this.state = {
+      editing: false,
+      text: this.props.todo.text || ''
+    }
+  }
+
   static propTypes = {
     todo: React.PropTypes.object.isRequired
   }
@@ -16,17 +24,58 @@ export class Todo extends Component {
     this.actions.deleteTodo(this.props.todo)
   }
 
+  handleDoubleClick () {
+    this.setState({ editing: true })
+  }
+
+  toggle () {
+    this.actions.toggleTodo(this.props.todo)
+  }
+
+  updateTodo (e) {
+    this.setState({text: e.target.value})
+  }
+
+  saveTodo (e) {
+    const text = e.target.value.trim()
+    if (e.which === 13) {
+      let todo = this.props.todo
+      todo.text = text
+      this.actions.saveTodo(todo)
+      this.editComplete()
+    }
+  }
+
+  editComplete () {
+    this.setState({editing: false})
+  }
+
   render () {
-    return (
-
-      <li>
+    let el
+    if (this.state.editing) {
+      el = <input
+        ref='todo'
+        className={style.edit}
+        value={this.state.text}
+        autoFocus='true'
+        onChange={this.updateTodo}
+        onBlur={this.editComplete}
+        onKeyDown={this.saveTodo} />
+    } else {
+      el = (
         <div className={style.view}>
-          <label>{this.props.todo.text}</label>
-          <button onClick={this.destroy.bind(this)} className={style.destroy} />
+          <input
+            className={style.toggle}
+            type='checkbox'
+            checked={this.props.todo.completed}
+            onChange={this.toggle} />
+          <label onDoubleClick={this.handleDoubleClick}>{this.props.todo.text}</label>
+          <button onClick={this.destroy} className={style.destroy} />
         </div>
-      </li>
+      )
+    }
 
-    )
+    return (<li className={(this.props.todo.completed) ? style.completed : ''}>{el}</li>)
   }
 }
 
