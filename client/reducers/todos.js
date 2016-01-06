@@ -1,4 +1,5 @@
 import { handleActions } from 'redux-actions'
+import update from 'update-object'
 
 const initialState = []
 
@@ -12,7 +13,11 @@ const deleteTodo = (state, {payload}) =>
 const toggleTodo = (state, {payload}) =>
   state.map(todo => {
     if (todo.id === payload.id) {
-      todo.completed = !todo.completed
+      return update(todo, {
+        completed: {
+          $apply: (v) => !v
+        }
+      })
     }
     return todo
   })
@@ -20,7 +25,11 @@ const toggleTodo = (state, {payload}) =>
 const saveTodo = (state, {payload}) =>
   state.map(todo => {
     if (todo.id === payload.id) {
-      todo.text = payload.text
+      return update(todo, {
+        completed: {
+          $set: payload.text
+        }
+      })
     }
     return todo
   })
