@@ -29,7 +29,7 @@ export class TodosView extends Component {
           <input
             className={style['new-todo']}
             ref='todoInput'
-            onKeyDown={this.addTodo.bind(this)}
+            onKeyDown={this.addTodo}
             type='text' />
 
         </header>

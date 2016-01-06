@@ -8,6 +8,13 @@ import actions from 'actions'
 
 export class Todo extends Component {
 
+  constructor (props, context) {
+    super(props, context)
+    this.state = {
+      editing: false
+    }
+  }
+
   static propTypes = {
     todo: React.PropTypes.object.isRequired
   }
@@ -16,16 +23,27 @@ export class Todo extends Component {
     this.actions.deleteTodo(this.props.todo)
   }
 
+  handleDoubleClick () {
+    this.setState({ editing: true })
+  }
+
   render () {
+    let el
+    if (this.state.editing) {
+      el = (<input className='edit' />)
+    }
+    else {
+      el = (
+        <div className={style.view}>
+          <label onDoubleClick={this.handleDoubleClick}>{this.props.todo.text}</label>
+          <button onClick={this.destroy} className={style.destroy} />
+        </div>
+      )
+    }
+
     return (
 
-      <li>
-        <div className={style.view}>
-          <label>{this.props.todo.text}</label>
-          <button onClick={this.destroy.bind(this)} className={style.destroy} />
-        </div>
-      </li>
-
+      <li>{el}</li>
     )
   }
 }
