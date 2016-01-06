@@ -12,23 +12,23 @@ export class HomeView extends Component {
     var opt = { user: name }
     this.actions.getOrganizations({options: opt, requestId: 'orgs'})
     this.actions.getRepositories({options: opt, requestId: 'repos'})
-    this.actions.getUser({options: opt, requestId: name})
+    this.actions.getUser({options: opt, requestId: 'user'})
   }
 
   render () {
     var name = 'funkytek'
-    var orgs = this.storeState.requests.orgs
-    var repos = this.storeState.requests.repos
-    var user = this.storeState.requests[name]
+    var orgs = this.rootState.requests.orgs
+    var repos = this.rootState.requests.repos
+    var user = this.rootState.requests.user
     var fetching = !orgs || !repos || !user
 
     return (
       <div className={style.home}>
-        <Icon glyph='star'/>
+        <Icon glyph='fort-awesome' className={style.starIcon}/>
         <Title>FactoryX Stack Test Page</Title>
         <div>
           Sample Counter:
-          <Title className={style.counter}>{this.storeState.counter}</Title>
+          <Title className={style.counter}>{this.rootState.counter}</Title>
         </div>
         <div className={style.buttons}>
           <button onClick={shield(this.actions.incrementCounter)} className={style.actionButton}>
