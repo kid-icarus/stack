@@ -1,9 +1,6 @@
 /* eslint spaced-comment:0 */
-import _debug from 'debug'
 import path from 'path'
-import { argv } from 'yargs'
 
-const debug = _debug('app:config:_base')
 const config = {
   env: process.env.NODE_ENV,
 
@@ -35,7 +32,7 @@ const config = {
     chunks: false,
     chunkModules: false,
     colors: true
-  },
+  }
 }
 
 /************************************************
