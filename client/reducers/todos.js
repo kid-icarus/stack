@@ -4,7 +4,15 @@ import update from 'update-object'
 const initialState = []
 
 // TODO: unshift
-const addTodo = (state, {payload}) => ([{id: Date.now(), text: payload, completed: false}]).concat(state)
+const addTodo = (state, {payload}) =>
+  update(state, {
+    $unshift: [{
+      id: Date.now(),
+      text: payload,
+      completed: false
+    }]
+  })
+
 const deleteTodo = (state, {payload}) =>
   state.filter(todo =>
     todo.id !== payload.id
