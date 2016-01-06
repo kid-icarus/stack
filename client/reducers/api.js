@@ -1,11 +1,12 @@
 import { handleActions } from 'redux-actions'
-import merge from 'lodash.merge'
+import update from 'update-object'
+
 const initialState = {}
 
 // shallow entity state
 const ESUCCESS = (state, { meta, payload }) => {
   if (payload.normalized) {
-    return merge({}, state, payload.normalized.entities)
+    return update(state, {$merge: payload.normalized.entities})
   }
   return state
 }
@@ -13,7 +14,7 @@ const ESUCCESS = (state, { meta, payload }) => {
 // request state
 const RSUCCESS = (state, { meta, payload }) => {
   if (meta.requestId) {
-    return merge({}, state, {[meta.requestId]: payload.raw})
+    return update(state, {[meta.requestId]: {$set: payload.raw}})
   }
   return state
 }
@@ -21,7 +22,7 @@ const RSUCCESS = (state, { meta, payload }) => {
 const RFAILURE = (state, { meta, payload }) => {
   // TODO: verify this
   if (meta.requestId) {
-    return merge({}, state, {[meta.requestId]: payload})
+    return update(state, {[meta.requestId]: {$set: payload}})
   }
   return state
 }
