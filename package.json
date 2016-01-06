@@ -80,6 +80,7 @@
     "rucksack-css": "^0.8.5",
     "sass-loader": "^3.0.0",
     "style-loader": "^0.13.0",
+    "update-object": "^1.0.0",
     "url-loader": "^0.5.6",
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
