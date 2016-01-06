@@ -9,7 +9,7 @@
     "lint": "eslint . ./",
     "lint:fix": "npm run lint -- --fix",
     "start": "npm run dev",
-    "prod": "NODE_ENV=production node bin/server",
+    "prod": "NODE_ENV=production PORT=$PORT node bin/server",
     "deploy": "NODE_ENV=production npm run compile && git add dist -A && git commit -m 'deploy' && git push heroku master",
     "dev": "nodemon --watch ./build --exec 'node -r dotenv/config bin/server --hot'",
     "dev:no-debug": "npm run dev -- --no_debug"
