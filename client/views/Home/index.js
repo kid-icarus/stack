@@ -17,9 +17,9 @@ export class HomeView extends Component {
 
   render () {
     var name = 'funkytek'
-    var orgs = this.storeState.requests.orgs
-    var repos = this.storeState.requests.repos
-    var user = this.storeState.requests.user
+    var orgs = this.rootState.requests.orgs
+    var repos = this.rootState.requests.repos
+    var user = this.rootState.requests.user
     var fetching = !orgs || !repos || !user
 
     return (
@@ -28,7 +28,7 @@ export class HomeView extends Component {
         <Title>FactoryX Stack Test Page</Title>
         <div>
           Sample Counter:
-          <Title className={style.counter}>{this.storeState.counter}</Title>
+          <Title className={style.counter}>{this.rootState.counter}</Title>
         </div>
         <div className={style.buttons}>
           <button onClick={shield(this.actions.incrementCounter)} className={style.actionButton}>
