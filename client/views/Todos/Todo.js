@@ -27,24 +27,29 @@ export class Todo extends Component {
     this.setState({ editing: true })
   }
 
+  toggle () {
+    this.actions.toggleTodo(this.props.todo)
+  }
+
   render () {
     let el
     if (this.state.editing) {
-      el = (<input className='edit' />)
-    }
-    else {
+      el = (<input className={style.edit} value = {this.props.todo.text} />)
+    } else {
       el = (
         <div className={style.view}>
+          <input
+            className={style.toggle}
+            type='checkbox'
+            checked={this.props.todo.completed}
+            onChange={this.toggle} />
           <label onDoubleClick={this.handleDoubleClick}>{this.props.todo.text}</label>
           <button onClick={this.destroy} className={style.destroy} />
         </div>
       )
     }
 
-    return (
-
-      <li>{el}</li>
-    )
+    return (<li className={(this.props.todo.completed) ? style.completed : ''}>{el}</li>)
   }
 }
 
