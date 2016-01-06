@@ -50,7 +50,7 @@ export class TodosView extends Component {
             ref='todoInput'
             onKeyDown={this.addTodo}
             onBlur={this.resetErrors}
-            type='text' 
+            type='text'
             placeholder='What needs to be done?' />
 
         </header>
