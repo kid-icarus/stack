@@ -14,9 +14,7 @@ const toggleTodo = (state, {payload}) =>
     if (todo.id === payload.id) {
       todo.completed = !todo.completed
     }
-
     return todo
-
   })
 
 export default handleActions({
