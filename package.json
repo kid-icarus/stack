@@ -87,5 +87,27 @@
     "webpack": "^1.12.9",
     "webpack-dev-middleware": "^1.4.0",
     "webpack-hot-middleware": "^2.6.0"
+  },
+  "babel": {
+    "presets": ["es2015", "react", "stage-0"],
+    "plugins": ["transform-runtime", "add-module-exports"]
+  },
+  "eslintConfig": {
+    "parser"  : "babel-eslint",
+    "extends" : [
+      "standard",
+      "standard-react"
+    ],
+    "env"     : {
+      "browser" : true
+    },
+    "globals" : {
+      "__DEV__"      : false,
+      "__PROD__"     : false
+    },
+    "rules": {
+      "semi" : [2, "never"]
+    }
   }
+
 }

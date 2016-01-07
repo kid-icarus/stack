@@ -135,9 +135,7 @@ const webpackConfig = {
       }
     })
   ],
-  eslint: {
-    configFile: paths.base('.eslintrc')
-  }
+  eslint: {}
 }
 
 export default webpackConfig
