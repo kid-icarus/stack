@@ -4,7 +4,7 @@ import React from 'react'
 // import shield from 'function-shield'
 import Component from 'redux-dgaf'
 import style from './style.sass'
-import actions from 'actions'
+import actionsMeta from 'actions'
 
 export class Todo extends Component {
 
@@ -79,4 +79,4 @@ export class Todo extends Component {
   }
 }
 
-export default Component.connect(actions, Todo)
+export default Component.connect(actionsMeta, Todo)

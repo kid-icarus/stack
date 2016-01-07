@@ -4,7 +4,7 @@ import React from 'react'
 // import shield from 'function-shield'
 import Component from 'redux-dgaf'
 import style from './style.sass'
-import actions from 'actions'
+import actionsMeta from 'actions'
 import Todo from './Todo'
 import classNames from 'classnames'
 
@@ -70,4 +70,4 @@ export class TodosView extends Component {
 
 }
 
-export default Component.connect(actions, TodosView)
+export default Component.connect(actionsMeta, TodosView)
