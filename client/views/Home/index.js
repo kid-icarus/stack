@@ -4,7 +4,7 @@ import Icon from 'react-icon'
 import shield from 'function-shield'
 import Component from 'redux-dgaf'
 import Title from 'components/Title'
-import actions from 'actions'
+import actionsMeta from 'actions'
 import style from './style.sass'
 import GH from './GH'
 
@@ -34,4 +34,4 @@ export class HomeView extends Component {
   }
 }
 
-export default Component.connect(actions, HomeView)
+export default Component.connect(actionsMeta, HomeView)

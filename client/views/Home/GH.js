@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react'
 import Component from 'redux-dgaf'
 import Title from 'components/Title'
 import style from './style.sass'
-import actions from 'actions'
+import actionsMeta from 'actions'
 
 export class HomeView extends Component {
   static propTypes = {
@@ -78,4 +78,4 @@ export class HomeView extends Component {
   }
 }
 
-export default Component.connect(actions, HomeView)
+export default Component.connect(actionsMeta, HomeView)

@@ -1,7 +1,7 @@
 import { Link } from 'react-router'
 import Component from 'redux-dgaf'
 import React from 'react'
-import actions from 'actions'
+import actionsMeta from 'actions'
 import Title from 'components/Title'
 import style from './style.sass'
 
@@ -16,4 +16,4 @@ export class AboutView extends Component {
   }
 }
 
-export default Component.connect(actions, AboutView)
+export default Component.connect(actionsMeta, AboutView)
