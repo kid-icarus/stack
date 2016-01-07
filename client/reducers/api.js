@@ -1,12 +1,12 @@
 import { handleActions } from 'redux-actions'
-import update from 'update-object'
+import u from 'dgaf-updater'
 
 const initialState = {}
 
 // shallow entity state
 const ESUCCESS = (state, { meta, payload }) => {
   if (payload.normalized) {
-    return update(state, {$merge: payload.normalized.entities})
+    return u().merge(payload.normalized.entities).run(state)
   }
   return state
 }
@@ -14,7 +14,7 @@ const ESUCCESS = (state, { meta, payload }) => {
 // request state
 const RSUCCESS = (state, { meta, payload }) => {
   if (meta.requestId) {
-    return update(state, {[meta.requestId]: {$set: payload.raw}})
+    return u().set(meta.requestId, payload.raw).run(state)
   }
   return state
 }
@@ -22,7 +22,7 @@ const RSUCCESS = (state, { meta, payload }) => {
 const RFAILURE = (state, { meta, payload }) => {
   // TODO: verify this
   if (meta.requestId) {
-    return update(state, {[meta.requestId]: {$set: payload}})
+    return u().set(meta.requestId, payload).run(state)
   }
   return state
 }
