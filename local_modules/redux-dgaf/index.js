@@ -30,6 +30,7 @@ class DGAFComponent extends PureComponent {
     }
   }
 
+  // TODO: figure out if we even need these functions
   getCollection (type) {
     return this.getCollectionIds(type).map((id) => this.getEntity(type, id))
   }
