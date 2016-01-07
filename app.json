@@ -1,0 +1,14 @@
+{
+  "name": "stack",
+  "description": "Fx Stack",
+  "scripts": {
+  },
+  "env": {
+    "NODE_ENV": {
+      "required": true
+    }
+  },
+  "addons": [
+    "heroku-redis"
+  ]
+}
