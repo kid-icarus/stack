@@ -20,9 +20,8 @@ const RSUCCESS = (state, { meta, payload }) => {
 }
 
 const RFAILURE = (state, { meta, payload }) => {
-  // TODO: verify this
   if (meta.requestId) {
-    return u().set(meta.requestId, payload).run(state)
+    return u().set(meta.requestId, {error: payload}).run(state)
   }
   return state
 }
