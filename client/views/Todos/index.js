@@ -14,17 +14,18 @@ export class TodosView extends Component {
   }
 
   addTodo (e) {
-    if (e.keyCode === 13) {
-      let val = this.refs.todoInput.value.trim()
+    var el = this.refs.todoInput
 
+    if (e.keyCode === 13) {
+      let val = el.value.trim()
       if (val === '') {
-        this.setState({addError: true})
-      } else {
-        this.actions.addTodo(val)
-        this.refs.todoInput.value = ''
-        this.refs.todoInput.focus()
-        this.setState({addError: false})
+        return this.setState({addError: true})
       }
+
+      this.actions.addTodo(val)
+      el.value = ''
+      el.focus()
+      this.setState({addError: false})
     }
   }
 
@@ -51,11 +52,11 @@ export class TodosView extends Component {
 
         </header>
         <section className={style.main}>
-            <ul className={style['todo-list']}>
-              {
-                todos.map((todo) => <Todo todo={todo} key={todo.id} />)
-              }
-            </ul>
+          <ul className={style['todo-list']}>
+            {
+              todos.map((todo) => <Todo todo={todo} key={todo.id} />)
+            }
+          </ul>
         </section>
 
         <div>{todos.length} todos</div>
