@@ -17,13 +17,17 @@ class DGAFComponent extends PureComponent {
     __actions: PropTypes.object.isRequired
   }
 
-  constructor (props) {
-    super(props)
+  constructor (props, context) {
+    super(props, context)
 
     // autobind all fns like old react
     Object.getOwnPropertyNames(this.constructor.prototype)
       .filter((prop) => typeof this[prop] === 'function')
       .forEach((method) => this[method] = this[method].bind(this))
+
+    if (typeof this.initialState !== 'undefined') {
+      this.state = this.initialState
+    }
   }
 
   getCollection (type) {

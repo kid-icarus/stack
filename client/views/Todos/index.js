@@ -9,12 +9,8 @@ import Todo from './Todo'
 import classNames from 'classnames'
 
 export class TodosView extends Component {
-
-  constructor (props, context) {
-    super(props, context)
-    this.state = {
-      addError: false
-    }
+  static initialState = {
+    addError: false
   }
 
   addTodo (e) {
