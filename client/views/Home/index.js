@@ -10,7 +10,7 @@ import GH from './GH'
 
 export class HomeView extends Component {
   render () {
-    var name = 'contraasdasd'
+    var name = 'funkytek'
     return (
       <div className={style.home}>
         <Icon glyph='fort-awesome' className={style.starIcon}/>
