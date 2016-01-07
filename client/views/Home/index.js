@@ -17,7 +17,7 @@ export class HomeView extends Component {
         <Title>FactoryX Stack Test Page</Title>
         <div>
           Sample Counter:
-          <Title className={style.counter}>{this.rootState.counter}</Title>
+          <Title className={style.counter}>{this.$state.counter}</Title>
         </div>
         <div className={style.buttons}>
           <button onClick={shield(this.actions.incrementCounter)} className={style.actionButton}>

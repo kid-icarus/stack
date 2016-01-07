@@ -21,29 +21,33 @@ export class HomeView extends Component {
   }
 
   getDataView () {
-    var orgs = this.rootState.requests.orgs
-    var repos = this.rootState.requests.repos
-    var user = this.rootState.requests.user
+    var orgs = this.$state.requests.get('orgs')
+    var repos = this.$state.requests.get('repos')
+    var user = this.$state.requests.get('user')
     return (
       <div>
         <div className={style.list}>
           <Title>User Info</Title>
-          <img src={user.avatar_url} className={style.userImage}/>
-          <div className={style.listItem}>{user.name}</div>
+          <img src={user.get('avatar_url')} className={style.userImage}/>
+          <div className={style.listItem}>{user.get('name')}</div>
         </div>
         <ul className={style.list}>
-          <Title>{orgs.length} organizations</Title>
+          <Title>{orgs.size} organizations</Title>
           {
             orgs.map((org) =>
-              <li className={style.listItem} key={org.id}>{org.login}</li>
+              <li className={style.listItem} key={org.get('id')}>
+                {org.get('login')}
+              </li>
             )
           }
         </ul>
         <ul className={style.list}>
-          <Title>{repos.length} repositories</Title>
+          <Title>{repos.size} repositories</Title>
           {
             repos.map(repo =>
-              <li className={style.listItem} key={repo.id}>{repo.full_name} - Issues: {repo.open_issues}</li>
+              <li className={style.listItem} key={repo.get('id')}>
+                {repo.get('full_name')} - Issues: {repo.get('open_issues')}
+              </li>
             )
           }
         </ul>
@@ -52,17 +56,19 @@ export class HomeView extends Component {
   }
 
   isFetching () {
-    var orgs = this.rootState.requests.orgs
-    var repos = this.rootState.requests.repos
-    var user = this.rootState.requests.user
-    return !orgs || !repos || !user
+    return !(
+      this.$state.requests.has('orgs') &&
+      this.$state.requests.has('repos') &&
+      this.$state.requests.has('user')
+    )
   }
 
   isErrored () {
-    var orgs = this.rootState.requests.orgs
-    var repos = this.rootState.requests.repos
-    var user = this.rootState.requests.user
-    return !this.isFetching() && (!!orgs.error || !!repos.error || !!user.error)
+    return !this.isFetching() && (
+      this.$state.requests.hasIn(['orgs', 'error']) ||
+      this.$state.requests.hasIn(['repo', 'error']) ||
+      this.$state.requests.hasIn(['user', 'error'])
+    )
   }
 
   render () {

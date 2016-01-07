@@ -1,12 +1,13 @@
 import { handleActions } from 'redux-actions'
-import u from 'dgaf-updater'
+import Immutable from 'immutable'
 
-const initialState = {}
+const initialCollections = Immutable.Map()
+const initialRequests = Immutable.Map()
 
 // shallow entity state
 const ESUCCESS = (state, { meta, payload }) => {
   if (payload.normalized) {
-    return u().merge(payload.normalized.entities).run(state)
+    return state.mergeDeep(Immutable.fromJS(payload.normalized.entities))
   }
   return state
 }
@@ -14,14 +15,14 @@ const ESUCCESS = (state, { meta, payload }) => {
 // request state
 const RSUCCESS = (state, { meta, payload }) => {
   if (meta.requestId) {
-    return u().set(meta.requestId, payload.raw).run(state)
+    return state.set(meta.requestId, Immutable.fromJS(payload.raw))
   }
   return state
 }
 
 const RFAILURE = (state, { meta, payload }) => {
   if (meta.requestId) {
-    return u().set(meta.requestId, {error: payload}).run(state)
+    return state.set(meta.requestId, Immutable.Map({error: payload}))
   }
   return state
 }
@@ -29,9 +30,9 @@ const RFAILURE = (state, { meta, payload }) => {
 // exported actions
 export const collections = handleActions({
   SUCCESS: ESUCCESS
-}, initialState)
+}, initialCollections)
 
 export const requests = handleActions({
   SUCCESS: RSUCCESS,
   FAILURE: RFAILURE
-}, initialState)
+}, initialRequests)
