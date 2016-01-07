@@ -64,6 +64,7 @@
     "font-awesome": "^4.5.0",
     "font-awesome-sass-loader": "^1.0.0",
     "html-webpack-plugin": "^1.6.1",
+    "immutable": "^3.7.6",
     "isparta-loader": "^2.0.0",
     "json-loader": "^0.5.4",
     "lodash.merge": "^3.3.2",
@@ -89,25 +90,34 @@
     "webpack-hot-middleware": "^2.6.0"
   },
   "babel": {
-    "presets": ["es2015", "react", "stage-0"],
-    "plugins": ["transform-runtime", "add-module-exports"]
+    "presets": [
+      "es2015",
+      "react",
+      "stage-0"
+    ],
+    "plugins": [
+      "transform-runtime",
+      "add-module-exports"
+    ]
   },
   "eslintConfig": {
-    "parser"  : "babel-eslint",
-    "extends" : [
+    "parser": "babel-eslint",
+    "extends": [
       "standard",
       "standard-react"
     ],
-    "env"     : {
-      "browser" : true
+    "env": {
+      "browser": true
     },
-    "globals" : {
-      "__DEV__"      : false,
-      "__PROD__"     : false
+    "globals": {
+      "__DEV__": false,
+      "__PROD__": false
     },
     "rules": {
-      "semi" : [2, "never"]
+      "semi": [
+        2,
+        "never"
+      ]
     }
   }
-
 }

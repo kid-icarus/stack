@@ -20,14 +20,14 @@ class DGAFComponent extends PureComponent {
   constructor (props, context) {
     super(props, context)
 
+    if (this.constructor.initialState) {
+      this.state = this.constructor.initialState
+    }
+
     // autobind all fns like old react
     Object.getOwnPropertyNames(this.constructor.prototype)
       .filter((prop) => typeof this[prop] === 'function')
       .forEach((method) => this[method] = this[method].bind(this))
-
-    if (typeof this.initialState !== 'undefined') {
-      this.state = this.initialState
-    }
   }
 
   // TODO: figure out if we even need these functions
