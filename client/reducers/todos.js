@@ -1,17 +1,13 @@
 import { handleActions } from 'redux-actions'
-import update from 'update-object'
-
+import u from 'dgaf-updater'
 const initialState = []
 
-// TODO: unshift
 const addTodo = (state, {payload}) =>
-  update(state, {
-    $unshift: [{
-      id: Date.now(),
-      text: payload,
-      completed: false
-    }]
-  })
+  u().unshift({
+    id: Date.now(),
+    text: payload,
+    completed: false
+  }).run(state)
 
 const deleteTodo = (state, {payload}) =>
   state.filter(todo =>
@@ -21,11 +17,7 @@ const deleteTodo = (state, {payload}) =>
 const toggleTodo = (state, {payload}) =>
   state.map(todo => {
     if (todo.id === payload.id) {
-      return update(todo, {
-        completed: {
-          $apply: (v) => !v
-        }
-      })
+      return u().apply('completed', (v) => !v).run(todo)
     }
     return todo
   })
@@ -33,11 +25,7 @@ const toggleTodo = (state, {payload}) =>
 const saveTodo = (state, {payload}) =>
   state.map(todo => {
     if (todo.id === payload.id) {
-      return update(todo, {
-        completed: {
-          $set: payload.text
-        }
-      })
+      return u().set('text', payload.text).run(todo)
     }
     return todo
   })
