@@ -1,14 +1,14 @@
 {
   "name": "stack",
   "description": "Fx Stack",
-  "scripts": {
-  },
+  "scripts": {},
   "env": {
     "NODE_ENV": {
       "required": true
     }
   },
   "addons": [
-    "heroku-redis"
+    "heroku-redis",
+    "heroku-postgresql"
   ]
 }
