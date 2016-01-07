@@ -1,23 +1,22 @@
 import { handleActions } from 'redux-actions'
-import u from 'dgaf-updater'
-const initialState = []
+import Immutable from 'immutable'
+
+const initialState = Immutable.List()
 
 export const addTodo = (state, {payload}) =>
-  u().unshift({
+  state.unshift(Immutable.Map({
     id: Date.now(),
     text: payload,
     completed: false
-  }).run(state)
+  }))
 
 export const deleteTodo = (state, {payload}) =>
-  state.filter(todo =>
-    todo.id !== payload.id
-  )
+  state.filter(todo => todo.id !== payload.id)
 
 export const toggleTodo = (state, {payload}) =>
   state.map(todo => {
     if (todo.id === payload.id) {
-      return u().apply('completed', (v) => !v).run(todo)
+      return todo.update('completed', (v) => !v)
     }
     return todo
   })
@@ -25,7 +24,7 @@ export const toggleTodo = (state, {payload}) =>
 export const saveTodo = (state, {payload}) =>
   state.map(todo => {
     if (todo.id === payload.id) {
-      return u().set('text', payload.text).run(todo)
+      return todo.set('text', payload.text)
     }
     return todo
   })

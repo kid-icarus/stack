@@ -7,17 +7,11 @@ import style from './style.sass'
 import actionsMeta from 'actions'
 
 export class Todo extends Component {
-
-  constructor (props, context) {
-    super(props, context)
-    this.state = {
-      editing: false,
-      text: this.props.todo.text || ''
-    }
-  }
-
   static propTypes = {
     todo: React.PropTypes.object.isRequired
+  }
+  static initialState = {
+    editing: false
   }
 
   destroy () {
@@ -25,15 +19,11 @@ export class Todo extends Component {
   }
 
   handleDoubleClick () {
-    this.setState({ editing: true })
+    this.setState({editing: true})
   }
 
   toggle () {
     this.actions.toggleTodo(this.props.todo)
-  }
-
-  updateTodo (e) {
-    this.setState({text: e.target.value})
   }
 
   saveTodo (e) {
@@ -50,32 +40,32 @@ export class Todo extends Component {
     this.setState({editing: false})
   }
 
-  render () {
-    let el
+  getContent () {
     if (this.state.editing) {
-      el = <input
+      return <input
         ref='todo'
         className={style.edit}
-        value={this.state.text}
+        defaultValue={this.props.todo.get('text')}
         autoFocus='true'
-        onChange={this.updateTodo}
         onBlur={this.editComplete}
         onKeyDown={this.saveTodo} />
-    } else {
-      el = (
-        <div className={style.view}>
-          <input
-            className={style.toggle}
-            type='checkbox'
-            checked={this.props.todo.completed}
-            onChange={this.toggle} />
-          <label onDoubleClick={this.handleDoubleClick}>{this.props.todo.text}</label>
-          <button onClick={this.destroy} className={style.destroy} />
-        </div>
-      )
     }
-
-    return (<li className={(this.props.todo.completed) ? style.completed : ''}>{el}</li>)
+    return <div className={style.view}>
+      <input
+        className={style.toggle}
+        type='checkbox'
+        checked={this.props.todo.get('completed')}
+        onChange={this.toggle} />
+      <label onDoubleClick={this.handleDoubleClick}>
+        {this.props.todo.get('text')}
+      </label>
+      <button onClick={this.destroy} className={style.destroy} />
+    </div>
+  }
+  render () {
+    return <li className={{completed: this.props.todo.get('completed')}}>
+      { this.getContent() }
+    </li>
   }
 }
 
