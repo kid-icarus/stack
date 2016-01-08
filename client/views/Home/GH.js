@@ -2,9 +2,8 @@ import React, {PropTypes} from 'react'
 import Component from 'redux-dgaf'
 import Title from 'components/Title'
 import classes from './index.sass'
-import actionsMeta from 'actions'
 
-export class HomeView extends Component {
+export class GHView extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired
   };
@@ -85,4 +84,4 @@ export class HomeView extends Component {
   }
 }
 
-export default Component.connect(actionsMeta, HomeView)
+export default Component.connect(GHView, require('actions'))

@@ -5,6 +5,7 @@ import routes from 'routes'
 import Root from 'views/Root'
 import configureStore from 'store'
 import React from 'react'
+import 'font-awesome-sass-loader'
 
 const store = configureStore(window.__INITIAL_STATE__)
 
