@@ -5,6 +5,7 @@ import Component from 'redux-dgaf'
 import classes from './index.sass'
 
 export class RootView extends React.Component {
+  static displayName = 'RootView';
   static propTypes = {
     history: React.PropTypes.object.isRequired,
     routes: React.PropTypes.element.isRequired,

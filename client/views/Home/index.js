@@ -8,6 +8,7 @@ import classes from './index.sass'
 import GH from './GH'
 
 export class HomeView extends Component {
+  static displayName = 'HomeView';
   static propTypes = {
     counter: React.PropTypes.number
   };

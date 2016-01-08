@@ -5,6 +5,7 @@ import Title from 'components/Title'
 import classes from './index.sass'
 
 export class AboutView extends Component {
+  static displayName = 'AboutView';
   render () {
     return (
       <div className={classes.about}>

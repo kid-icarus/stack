@@ -1,7 +1,5 @@
 import React, {PropTypes} from 'react'
-// import { Link } from 'react-router'
-// import Icon from 'react-icon'
-// import shield from 'function-shield'
+import IPropTypes from 'immutable-props'
 import Component from 'redux-dgaf'
 import classes from './index.sass'
 import Todo from './Todo'
@@ -16,12 +14,14 @@ var filters = {
 }
 
 export class TodosView extends Component {
+  static displayName = 'TodosView';
   static defaultState = {
     addError: false,
     filter: 'All'
   };
   static propTypes = {
-    todos: PropTypes.object
+    todos: IPropTypes.Map.isRequired,
+    toggled: PropTypes.bool.isRequired
   };
   static cursors = {
     todos: 'todomvc.items',
