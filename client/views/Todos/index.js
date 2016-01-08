@@ -7,9 +7,16 @@ import classes from './index.sass'
 import Todo from './Todo'
 import classNames from 'classnames'
 
+var filters = {
+  All: () => true,
+  Active: (i) => !i.get('completed'),
+  Completed: (i) => i.get('completed')
+}
+
 export class TodosView extends Component {
   static defaultState = {
-    addError: false
+    addError: false,
+    filter: 'All'
   };
   static propTypes = {
     todos: PropTypes.object
@@ -38,32 +45,67 @@ export class TodosView extends Component {
     this.setState({addError: false})
   }
 
+  setFilter (k) {
+    this.setState({filter: k})
+  }
+
+  getFooter () {
+    if (this.props.todos.size <= 0) {
+      return null
+    }
+    var itemsLeft = this.props.todos.filter((todo) => !todo.get('completed'))
+    return <footer className={classes.footer}>
+      <span className={classes['todo-count']}>
+        {itemsLeft.size} items left
+      </span>
+      <ul className={classes.filters}>
+      {
+        Object.keys(filters).map((k) =>
+          <li key={k}>
+            <a
+              href='#'
+              onClick={this.setFilter.bind(null, k)}
+              className={
+                classNames({
+                  [classes.selected]: this.state.filter === k
+                })
+              }>{k}</a>
+          </li>
+        )
+      }
+      </ul>
+    </footer>
+  }
+
   render () {
     return (
       <div className={classes.todoapp}>
-
         <header className={classes.header}>
           <h1>todos</h1>
-
           <input
-            className={classNames(classes['new-todo'], {[classes['input-error']]: this.state.addError})}
+            className={
+              classNames(classes['new-todo'], {
+                [classes['input-error']]: this.state.addError
+              })
+            }
             ref='todoInput'
             onKeyDown={this.addTodo}
             onBlur={this.resetErrors}
             type='text'
             placeholder='What needs to be done?' />
-
         </header>
         <section className={classes.main}>
           <ul className={classes['todo-list']}>
             {
-              this.props.todos.map((todo, id) =>
-                <Todo todo={todo} key={id} />
-              ).toArray()
+              this.props.todos
+                .filter(filters[this.state.filter])
+                .map((todo, id) =>
+                  <Todo todo={todo} key={id} />
+                ).toArray()
             }
           </ul>
         </section>
-        <div>{this.props.todos.size} todos</div>
+        { this.getFooter() }
       </div>
     )
   }
