@@ -1,32 +1,25 @@
 import { handleActions } from 'redux-actions'
 import Immutable from 'immutable'
+import uuid from 'uuid'
 
-const initialState = Immutable.List()
+const initialState = Immutable.Map()
 
-export const addTodo = (state, {payload}) =>
-  state.unshift(Immutable.Map({
-    id: Date.now(),
+export const addTodo = (state, {payload}) => {
+  let id = uuid.v1()
+  return state.set(id, Immutable.Map({
+    id: id,
     text: payload,
     completed: false
   }))
+}
 
 export const deleteTodo = (state, {payload}) =>
-  state.filter(todo => todo.id !== payload.id)
+  state.delete(payload.get('id'))
 
 export const toggleTodo = (state, {payload}) =>
-  state.map(todo => {
-    if (todo.id === payload.id) {
-      return todo.update('completed', (v) => !v)
-    }
-    return todo
-  })
+  state.updateIn([payload.get('id'), 'completed'], v => !v)
 
 export const saveTodo = (state, {payload}) =>
-  state.map(todo => {
-    if (todo.id === payload.id) {
-      return todo.set('text', payload.text)
-    }
-    return todo
-  })
+  state.setIn([payload.get('id'), 'text'], payload.get('text'))
 
 export default handleActions(exports, initialState)
