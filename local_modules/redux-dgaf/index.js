@@ -16,8 +16,8 @@ class DGAFComponent extends PureComponent {
   constructor (props, context) {
     super(props, context)
 
-    if (this.constructor.initialState) {
-      this.state = this.constructor.initialState
+    if (this.constructor.defaultState) {
+      this.state = this.constructor.defaultState
     }
 
     // autobind all fns like old react
