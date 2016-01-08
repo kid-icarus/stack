@@ -25,7 +25,6 @@ const mapDispatchToProps = (actions) => (dispatch) =>
 
 class DGAFComponent extends PureComponent {
   static propTypes = {
-    storeState: PropTypes.object.isRequired,
     actions: PropTypes.object
   };
 
