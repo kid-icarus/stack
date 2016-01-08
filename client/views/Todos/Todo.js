@@ -4,6 +4,7 @@ import React from 'react'
 // import shield from 'function-shield'
 import Component from 'redux-dgaf'
 import classes from './index.sass'
+import classNames from 'classnames'
 
 export class Todo extends Component {
   static propTypes = {
@@ -61,8 +62,11 @@ export class Todo extends Component {
     </div>
   }
   render () {
-    return <li className={{completed: this.props.todo.get('completed')}}>
-      { this.getContent() }
+    var className = classNames({
+      [classes.completed]: this.props.todo.get('completed')
+    })
+    return <li className={className}>
+      {this.getContent()}
     </li>
   }
 }
