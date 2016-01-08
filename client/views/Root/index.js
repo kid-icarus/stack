@@ -1,10 +1,10 @@
 import { Provider } from 'react-redux'
 import { Router } from 'react-router'
 import React from 'react'
-import classess from './index.sass'
-import 'font-awesome-sass-loader'
+import Component from 'redux-dgaf'
+import classes from './index.sass'
 
-export default class Root extends React.Component {
+export class RootView extends React.Component {
   static propTypes = {
     history: React.PropTypes.object.isRequired,
     routes: React.PropTypes.element.isRequired,
@@ -14,7 +14,7 @@ export default class Root extends React.Component {
   render () {
     return (
       <Provider store={this.props.store}>
-        <div className={classess.root}>
+        <div className={classes.root}>
           <Router history={this.props.history}>
             {this.props.routes}
           </Router>
@@ -23,3 +23,5 @@ export default class Root extends React.Component {
     )
   }
 }
+
+export default Component.connect(RootView, require('actions'))

@@ -3,14 +3,14 @@ import PureComponent from 'react-pure-render/component'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-const mapStateToProps = (state) => ({__store: state})
+const mapStateToProps = (storeState) => ({storeState})
 const mapDispatchToProps = (actions) => (dispatch) =>
-  ({__actions: actions ? bindActionCreators(actions, dispatch) : {}})
+  ({actions: actions ? bindActionCreators(actions, dispatch) : {}})
 
 class DGAFComponent extends PureComponent {
   static propTypes = {
-    __store: PropTypes.object.isRequired,
-    __actions: PropTypes.object.isRequired
+    storeState: PropTypes.object.isRequired,
+    actions: PropTypes.object
   };
 
   constructor (props, context) {
@@ -28,18 +28,26 @@ class DGAFComponent extends PureComponent {
 
   // global state accessors
   get $actions () {
-    return this.props.__actions
+    return this.props.actions
   }
   get $state () {
-    return this.props.__store
+    return this.props.storeState
   }
   get $entities () {
-    return this.props.__store.get('entities')
+    return this.$state.get('entities')
   }
   get $requests () {
-    return this.props.__store.get('requests')
+    return this.$state.get('requests')
   }
 }
-DGAFComponent.connect = (actions, view) => connect(mapStateToProps, mapDispatchToProps(actions))(view)
+DGAFComponent.connect = (view, actions) => {
+  if (!view) {
+    throw new Error('Missing view argument in connect(view, actions)')
+  }
+  if (!actions) {
+    throw new Error('Missing actions argument in connect(view, actions)')
+  }
+  return connect(mapStateToProps, mapDispatchToProps(actions))(view)
+}
 
 export default DGAFComponent

@@ -4,7 +4,6 @@ import React from 'react'
 // import shield from 'function-shield'
 import Component from 'redux-dgaf'
 import classes from './index.sass'
-import actionsMeta from 'actions'
 
 export class Todo extends Component {
   static propTypes = {
@@ -67,4 +66,4 @@ export class Todo extends Component {
   }
 }
 
-export default Component.connect(actionsMeta, Todo)
+export default Component.connect(Todo, require('actions'))
