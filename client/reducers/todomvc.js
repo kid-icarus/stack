@@ -11,6 +11,7 @@ export const addTodo = (state, {payload}) => {
   return state.setIn(['items', id], Immutable.Map({
     id: id,
     text: payload,
+    created: Date.now(),
     completed: false
   }))
 }

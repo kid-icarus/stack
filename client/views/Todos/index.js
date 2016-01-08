@@ -7,6 +7,8 @@ import classes from './index.sass'
 import Todo from './Todo'
 import classNames from 'classnames'
 
+const ascending = (a, b) => a - b
+
 var filters = {
   All: () => true,
   Active: (i) => !i.get('completed'),
@@ -22,8 +24,8 @@ export class TodosView extends Component {
     todos: PropTypes.object
   };
   static cursors = {
-    todos: 'todos.items',
-    toggled: 'todos.toggle'
+    todos: 'todomvc.items',
+    toggled: 'todomvc.toggle'
   };
 
   toggleAll () {
@@ -104,6 +106,7 @@ export class TodosView extends Component {
             {
               this.props.todos
                 .filter(filters[this.state.filter])
+                .sort(i => i.created, ascending)
                 .map((todo, id) =>
                   <Todo todo={todo} key={id} />
                 ).toArray()
