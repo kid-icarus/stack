@@ -8,8 +8,14 @@ import classes from './index.sass'
 import GH from './GH'
 
 export class HomeView extends Component {
+  static propTypes = {
+    counter: React.PropTypes.number
+  };
   static defaultState = {
     name: 'funkytek'
+  };
+  static cursors = {
+    counter: 'counter'
   };
   render () {
     return (
@@ -18,7 +24,7 @@ export class HomeView extends Component {
         <Title>FactoryX Stack Test Page</Title>
         <div>
           Sample Counter:
-          <Title className={classes.counter}>{this.$state.get('counter')}</Title>
+          <Title className={classes.counter}>{this.props.counter}</Title>
         </div>
         <div className={classes.buttons}>
           <button onClick={shield(this.$actions.incrementCounter)} className={classes.actionButton}>
