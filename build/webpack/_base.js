@@ -93,7 +93,7 @@ const webpackConfig = {
           'style',
           CSS_LOADER,
           'postcss',
-          'sass?indentedSyntax'
+          'sass?indentedSyntax&sourceMap'
         ]
       },
       {
