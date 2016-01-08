@@ -1,4 +1,4 @@
-import localReducers from 'glob-loader!../actions/lookup.pattern'
+import localReducers from 'glob-loader!../actions/.lookup'
 import merge from 'lodash.merge'
 
 export default Object.keys(localReducers).reduce((p, k) => {
