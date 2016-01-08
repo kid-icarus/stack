@@ -2,12 +2,10 @@ import { CALL_API } from 'redux-api-middleware'
 import { normalize, arrayOf } from 'normalizr'
 
 // TODO: check entities cache in store and dont fetch if we have it already
-
 const result = (fn, arg) => typeof fn === 'function' ? fn(arg) : fn
 
-const createAPIAction = (name, opt = {}) => (ropt = {}) => {
+const createAPIAction = (opt = {}) => (ropt = {}) => {
   var meta = {
-    src: name,
     cursor: result(ropt.cursor || opt.cursor, ropt.options)
   }
 
