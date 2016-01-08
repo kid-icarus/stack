@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 // import { Link } from 'react-router'
 // import Icon from 'react-icon'
 // import shield from 'function-shield'
@@ -10,6 +10,12 @@ import classNames from 'classnames'
 export class TodosView extends Component {
   static defaultState = {
     addError: false
+  };
+  static propTypes = {
+    todos: PropTypes.object
+  };
+  static cursors = {
+    todos: 'todos'
   };
 
   addTodo (e) {
@@ -33,7 +39,6 @@ export class TodosView extends Component {
   }
 
   render () {
-    let todos = this.$state.get('todos')
     return (
       <div className={classes.todoapp}>
 
@@ -52,11 +57,13 @@ export class TodosView extends Component {
         <section className={classes.main}>
           <ul className={classes['todo-list']}>
             {
-              todos.map((todo, id) => <Todo todo={todo} key={id} />).toArray()
+              this.props.todos.map((todo, id) =>
+                <Todo todo={todo} key={id} />
+              ).toArray()
             }
           </ul>
         </section>
-        <div>{todos.size} todos</div>
+        <div>{this.props.todos.size} todos</div>
       </div>
     )
   }
