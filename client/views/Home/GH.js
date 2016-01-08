@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import Component from 'redux-dgaf'
 import Title from 'components/Title'
-import style from './style.sass'
+import classes from './index.sass'
 import actionsMeta from 'actions'
 
 export class HomeView extends Component {
@@ -43,26 +43,26 @@ export class HomeView extends Component {
 
     return (
       <div>
-        <div className={style.list}>
+        <div className={classes.list}>
           <Title>User Info</Title>
-          <img src={user.get('avatar_url')} className={style.userImage}/>
-          <div className={style.listItem}>{user.get('name')}</div>
+          <img src={user.get('avatar_url')} className={classes.userImage}/>
+          <div className={classes.listItem}>{user.get('name')}</div>
         </div>
-        <ul className={style.list}>
+        <ul className={classes.list}>
           <Title>{orgs.size} organizations</Title>
           {
             orgs.map((org, id) =>
-              <li className={style.listItem} key={id}>
+              <li className={classes.listItem} key={id}>
                 {org.get('login')}
               </li>
             )
           }
         </ul>
-        <ul className={style.list}>
+        <ul className={classes.list}>
           <Title>{repos.size} repositories</Title>
           {
             repos.map((repo, id) =>
-              <li className={style.listItem} key={id}>
+              <li className={classes.listItem} key={id}>
                 {repo.get('full_name')} - Issues: {repo.get('open_issues')}
               </li>
             )
@@ -76,7 +76,7 @@ export class HomeView extends Component {
     var errorView = <Title>Failed to Load</Title>
     var loadingView = <Title>Loading...</Title>
     return (
-      <div className={style.githubData}>
+      <div className={classes.githubData}>
         {
           this.isFetching() ? loadingView : (this.isErrored() ? errorView : this.getDataView())
         }

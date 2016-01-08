@@ -1,12 +1,6 @@
-import { createAction } from 'redux-actions'
-import * as githubActions from 'actions/github'
-import * as todosActions from 'actions/todos'
+import localReducers from 'glob-loader!./lookup.pattern'
+import merge from 'lodash.merge'
 
-const actions = {
-  incrementCounter: createAction('incrementCounter'),
-  decrementCounter: createAction('decrementCounter'),
-  ...githubActions,
-  ...todosActions
-}
-
-export default actions
+export default Object.keys(localReducers).reduce((p, k) => {
+  return merge(p, localReducers[k])
+}, {})

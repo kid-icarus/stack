@@ -1,14 +1,11 @@
 import { combineReducers } from 'redux-immutablejs'
 import { routeReducer } from 'redux-simple-router'
-import { requests, collections } from 'redux-api-actions/reducers'
-import counter from 'reducers/counter'
-import todos from 'reducers/todos'
+import * as apiReducers from 'redux-api-actions/reducers'
+import toReducers from 'modules-to-reducers'
+import localReducers from 'glob-loader!./lookup.pattern'
 
 export default combineReducers({
-  requests,
-  collections,
-
-  counter,
-  todos,
+  ...apiReducers,
+  ...toReducers(localReducers),
   router: routeReducer
 })

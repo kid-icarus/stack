@@ -3,12 +3,12 @@ import Component from 'redux-dgaf'
 import React from 'react'
 import actionsMeta from 'actions'
 import Title from 'components/Title'
-import style from './style.sass'
+import classes from './index.sass'
 
 export class AboutView extends Component {
   render () {
     return (
-      <div className={style.about}>
+      <div className={classes.about}>
         <Title>This is the about view!</Title>
         <Link to='/'>Back To Home View</Link>
       </div>

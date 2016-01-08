@@ -3,13 +3,9 @@ import PureComponent from 'react-pure-render/component'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-const mapStateToProps = (state) => ({ __store: state })
-
-const mapDispatchToProps = (actions) => (dispatch) => {
-  return {
-    __actions: actions ? bindActionCreators(actions, dispatch) : {}
-  }
-}
+const mapStateToProps = (state) => ({__store: state})
+const mapDispatchToProps = (actions) => (dispatch) =>
+  ({__actions: actions ? bindActionCreators(actions, dispatch) : {}})
 
 class DGAFComponent extends PureComponent {
   static propTypes = {

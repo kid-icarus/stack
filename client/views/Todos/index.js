@@ -3,7 +3,7 @@ import React from 'react'
 // import Icon from 'react-icon'
 // import shield from 'function-shield'
 import Component from 'redux-dgaf'
-import style from './style.sass'
+import classes from './index.sass'
 import actionsMeta from 'actions'
 import Todo from './Todo'
 import classNames from 'classnames'
@@ -36,13 +36,13 @@ export class TodosView extends Component {
   render () {
     let todos = this.$state.get('todos')
     return (
-      <div className={style.todoapp}>
+      <div className={classes.todoapp}>
 
-        <header className={style.header}>
+        <header className={classes.header}>
           <h1>todos</h1>
 
           <input
-            className={classNames(style['new-todo'], {[style['input-error']]: this.state.addError})}
+            className={classNames(classes['new-todo'], {[classes['input-error']]: this.state.addError})}
             ref='todoInput'
             onKeyDown={this.addTodo}
             onBlur={this.resetErrors}
@@ -50,8 +50,8 @@ export class TodosView extends Component {
             placeholder='What needs to be done?' />
 
         </header>
-        <section className={style.main}>
-          <ul className={style['todo-list']}>
+        <section className={classes.main}>
+          <ul className={classes['todo-list']}>
             {
               todos.map((todo, id) => <Todo todo={todo} key={id} />).toArray()
             }

@@ -5,25 +5,25 @@ import shield from 'function-shield'
 import Component from 'redux-dgaf'
 import Title from 'components/Title'
 import actionsMeta from 'actions'
-import style from './style.sass'
+import classes from './index.sass'
 import GH from './GH'
 
 export class HomeView extends Component {
   render () {
     var name = 'funkytek'
     return (
-      <div className={style.home}>
-        <Icon glyph='fort-awesome' className={style.starIcon}/>
+      <div className={classes.home}>
+        <Icon glyph='fort-awesome' className={classes.starIcon}/>
         <Title>FactoryX Stack Test Page</Title>
         <div>
           Sample Counter:
-          <Title className={style.counter}>{this.$state.get('counter')}</Title>
+          <Title className={classes.counter}>{this.$state.get('counter')}</Title>
         </div>
-        <div className={style.buttons}>
-          <button onClick={shield(this.$actions.incrementCounter)} className={style.actionButton}>
+        <div className={classes.buttons}>
+          <button onClick={shield(this.$actions.incrementCounter)} className={classes.actionButton}>
             Increment
           </button>
-          <button onClick={shield(this.$actions.decrementCounter)} className={style.actionButton}>
+          <button onClick={shield(this.$actions.decrementCounter)} className={classes.actionButton}>
             Decrement
           </button>
         </div>

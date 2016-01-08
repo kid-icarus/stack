@@ -1,4 +1,3 @@
-import { handleActions } from 'redux-actions'
 import Immutable from 'immutable'
 import uuid from 'uuid'
 
@@ -22,4 +21,4 @@ export const toggleTodo = (state, {payload}) =>
 export const saveTodo = (state, {payload}) =>
   state.setIn([payload.get('id'), 'text'], payload.get('text'))
 
-export default handleActions(exports, initialState)
+export default initialState
