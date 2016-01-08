@@ -1,8 +1,8 @@
 import { handleActions } from 'redux-actions'
 import Immutable from 'immutable'
 
-const initialCollections = Immutable.Map()
-const initialRequests = Immutable.Map()
+const initialCollections = Immutable.fromJS({})
+const initialRequests = Immutable.fromJS({})
 
 // shallow entity state
 const ESUCCESS = (state, { meta, payload }) => {
