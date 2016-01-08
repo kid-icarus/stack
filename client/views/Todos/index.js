@@ -22,8 +22,13 @@ export class TodosView extends Component {
     todos: PropTypes.object
   };
   static cursors = {
-    todos: 'todos'
+    todos: 'todos.items',
+    toggled: 'todos.toggle'
   };
+
+  toggleAll () {
+    this.$actions.toggleAllTodos()
+  }
 
   addTodo (e) {
     var el = this.refs.todoInput
@@ -53,7 +58,7 @@ export class TodosView extends Component {
     if (this.props.todos.size <= 0) {
       return null
     }
-    var itemsLeft = this.props.todos.filter((todo) => !todo.get('completed'))
+    var itemsLeft = this.props.todos.filter(filters.Active)
     return <footer className={classes.footer}>
       <span className={classes['todo-count']}>
         {itemsLeft.size} items left

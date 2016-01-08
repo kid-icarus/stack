@@ -1,11 +1,14 @@
 import Immutable from 'immutable'
 import uuid from 'uuid'
 
-const initialState = Immutable.Map()
+const initialState = Immutable.fromJS({
+  toggle: false,
+  items: {}
+})
 
 export const addTodo = (state, {payload}) => {
   let id = uuid.v1()
-  return state.set(id, Immutable.Map({
+  return state.setIn(['items', id], Immutable.Map({
     id: id,
     text: payload,
     completed: false
@@ -13,12 +16,19 @@ export const addTodo = (state, {payload}) => {
 }
 
 export const deleteTodo = (state, {payload}) =>
-  state.delete(payload.get('id'))
+  state.deleteIn(['items', payload.get('id')])
 
 export const toggleTodo = (state, {payload}) =>
-  state.updateIn([payload.get('id'), 'completed'], v => !v)
+  state.updateIn(['items', payload.get('id'), 'completed'], v => !v)
+
+export const toggleAllTodos = (state, {payload}) =>
+  state.withMutations((s) =>
+    s.update('items', v =>
+      v.map(i => i.set('completed', !s.get('toggle')))
+    ).update('toggle', v => !v)
+  )
 
 export const saveTodo = (state, {payload}) =>
-  state.setIn([payload.get('id'), 'text'], payload.get('text'))
+  state.setIn(['items', payload.get('id'), 'text'], payload.get('text'))
 
 export default initialState
