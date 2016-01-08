@@ -71,4 +71,4 @@ export class Todo extends Component {
   }
 }
 
-export default Component.connect(Todo, require('actions'))
+export default Component.connect(Todo, require('core/actions'))

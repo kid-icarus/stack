@@ -84,4 +84,4 @@ export class GHView extends Component {
   }
 }
 
-export default Component.connect(GHView, require('actions'))
+export default Component.connect(GHView, require('core/actions'))

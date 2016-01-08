@@ -41,4 +41,4 @@ export class HomeView extends Component {
   }
 }
 
-export default Component.connect(HomeView, require('actions'))
+export default Component.connect(HomeView, require('core/actions'))

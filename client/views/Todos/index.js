@@ -120,4 +120,4 @@ export class TodosView extends Component {
 
 }
 
-export default Component.connect(TodosView, require('actions'))
+export default Component.connect(TodosView, require('core/actions'))
