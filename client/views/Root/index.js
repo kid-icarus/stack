@@ -24,4 +24,4 @@ export class RootView extends React.Component {
   }
 }
 
-export default Component.connect(RootView, require('actions'))
+export default Component.connect(RootView, require('core/actions'))

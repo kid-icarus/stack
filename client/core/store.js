@@ -1,11 +1,14 @@
-import middleware from './middleware'
 import { batchedSubscribe } from 'redux-batched-subscribe'
 import { unstable_batchedUpdates as batchedUpdates } from 'react-dom'
-import rootReducer from 'reducers'
+import { syncReduxAndRouter } from 'redux-simple-router'
+import { browserHistory } from 'react-router'
 import Immutable from 'immutable'
 import { compose, createStore } from 'redux'
 
-export default function configureStore (initialState) {
+import rootReducer from './reducers'
+import middleware from './middleware'
+
+export function configureStore (initialState) {
   let createStoreWithMiddleware
   const batching = batchedSubscribe(batchedUpdates)
 
@@ -28,11 +31,16 @@ export default function configureStore (initialState) {
   )
 
   if (module.hot) {
-    module.hot.accept('reducers', () => {
-      const nextRoot = require('reducers')
+    module.hot.accept('./reducers', () => {
+      const nextRoot = require('./reducers')
       store.replaceReducer(nextRoot)
     })
   }
 
   return store
 }
+
+const store = configureStore(window.__INITIAL_STATE__)
+syncReduxAndRouter(browserHistory, store, (state) => state.get('router'))
+
+export default store
