@@ -8,8 +8,10 @@ import classes from './index.sass'
 import GH from './GH'
 
 export class HomeView extends Component {
+  static defaultState = {
+    name: 'funkytek'
+  };
   render () {
-    var name = 'funkytek'
     return (
       <div className={classes.home}>
         <Icon glyph='fort-awesome' className={classes.starIcon}/>
@@ -26,7 +28,7 @@ export class HomeView extends Component {
             Decrement
           </button>
         </div>
-        <GH name={name}/>
+        <GH name={this.state.name}/>
         <Link to='/about'>Go To About View</Link>
       </div>
     )

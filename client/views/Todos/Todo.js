@@ -9,7 +9,8 @@ export class Todo extends Component {
   static propTypes = {
     todo: React.PropTypes.object.isRequired
   };
-  static initialState = {
+
+  static defaultState = {
     editing: false
   };
 

@@ -8,7 +8,7 @@ import Todo from './Todo'
 import classNames from 'classnames'
 
 export class TodosView extends Component {
-  static initialState = {
+  static defaultState = {
     addError: false
   };
 
