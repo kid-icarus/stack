@@ -15,7 +15,7 @@ class DGAFComponent extends PureComponent {
   static propTypes = {
     __store: PropTypes.object.isRequired,
     __actions: PropTypes.object.isRequired
-  }
+  };
 
   constructor (props, context) {
     super(props, context)
