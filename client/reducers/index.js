@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux-immutablejs'
 import { routeReducer } from 'redux-simple-router'
 import { requests, collections } from 'redux-api-actions/reducers'
 import counter from 'reducers/counter'

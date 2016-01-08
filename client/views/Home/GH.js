@@ -11,19 +11,36 @@ export class HomeView extends Component {
 
   getData (name) {
     var opt = { user: name }
-    this.actions.getOrganizations({options: opt, requestId: 'orgs'})
-    this.actions.getRepositories({options: opt, requestId: 'repos'})
-    this.actions.getUser({options: opt, requestId: 'user'})
+    this.$actions.getOrganizations({options: opt, requestId: 'orgs'})
+    this.$actions.getRepositories({options: opt, requestId: 'repos'})
+    this.$actions.getUser({options: opt, requestId: 'user'})
   }
 
   componentWillMount () {
     this.getData(this.props.name)
   }
 
+  isFetching () {
+    return !(
+      this.$requests.has('orgs') &&
+      this.$requests.has('repos') &&
+      this.$requests.has('user')
+    )
+  }
+
+  isErrored () {
+    return !this.isFetching() && (
+      this.$requests.hasIn(['orgs', 'error']) ||
+      this.$requests.hasIn(['repo', 'error']) ||
+      this.$requests.hasIn(['user', 'error'])
+    )
+  }
+
   getDataView () {
-    var orgs = this.$state.requests.get('orgs')
-    var repos = this.$state.requests.get('repos')
-    var user = this.$state.requests.get('user')
+    var orgs = this.$requests.get('orgs')
+    var repos = this.$requests.get('repos')
+    var user = this.$requests.get('user')
+
     return (
       <div>
         <div className={style.list}>
@@ -34,8 +51,8 @@ export class HomeView extends Component {
         <ul className={style.list}>
           <Title>{orgs.size} organizations</Title>
           {
-            orgs.map((org) =>
-              <li className={style.listItem} key={org.get('id')}>
+            orgs.map((org, id) =>
+              <li className={style.listItem} key={id}>
                 {org.get('login')}
               </li>
             )
@@ -44,30 +61,14 @@ export class HomeView extends Component {
         <ul className={style.list}>
           <Title>{repos.size} repositories</Title>
           {
-            repos.map(repo =>
-              <li className={style.listItem} key={repo.get('id')}>
+            repos.map((repo, id) =>
+              <li className={style.listItem} key={id}>
                 {repo.get('full_name')} - Issues: {repo.get('open_issues')}
               </li>
             )
           }
         </ul>
       </div>
-    )
-  }
-
-  isFetching () {
-    return !(
-      this.$state.requests.has('orgs') &&
-      this.$state.requests.has('repos') &&
-      this.$state.requests.has('user')
-    )
-  }
-
-  isErrored () {
-    return !this.isFetching() && (
-      this.$state.requests.hasIn(['orgs', 'error']) ||
-      this.$state.requests.hasIn(['repo', 'error']) ||
-      this.$state.requests.hasIn(['user', 'error'])
     )
   }
 
