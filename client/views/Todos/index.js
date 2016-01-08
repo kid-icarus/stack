@@ -53,13 +53,11 @@ export class TodosView extends Component {
         <section className={style.main}>
           <ul className={style['todo-list']}>
             {
-              todos.map((todo, id) => <Todo todo={todo} key={id} />)
+              todos.map((todo, id) => <Todo todo={todo} key={id} />).toArray()
             }
           </ul>
         </section>
-
         <div>{todos.size} todos</div>
-
       </div>
     )
   }

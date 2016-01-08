@@ -29,9 +29,7 @@ export class Todo extends Component {
   saveTodo (e) {
     const text = e.target.value.trim()
     if (e.which === 13) {
-      let todo = this.props.todo
-      todo.text = text
-      this.$actions.saveTodo(todo)
+      this.$actions.saveTodo(this.props.todo.set('text', text))
       this.editComplete()
     }
   }
