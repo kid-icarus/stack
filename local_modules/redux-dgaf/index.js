@@ -3,7 +3,26 @@ import PureComponent from 'react-pure-render/component'
 import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
-const mapStateToProps = (storeState) => ({storeState})
+const mapStateToProps = (view) => (storeState) => {
+  // really simple immutable cursor impl
+  // path is either an array of a string
+  let cursorData = {}
+  if (view.cursors) {
+    cursorData = Object.keys(view.cursors).reduce((p, k) => {
+      var path = view.cursors[k]
+      if (!Array.isArray(path)) {
+        path = path.split('.')
+      }
+      p[k] = storeState.getIn(path)
+      return p
+    }, cursorData)
+  }
+
+  return {
+    storeState,
+    ...cursorData
+  }
+}
 const mapDispatchToProps = (actions) => (dispatch) =>
   ({actions: actions ? bindActionCreators(actions, dispatch) : {}})
 
@@ -47,7 +66,10 @@ DGAFComponent.connect = (view, actions) => {
   if (!actions) {
     throw new Error('Missing actions argument in connect(view, actions)')
   }
-  return connect(mapStateToProps, mapDispatchToProps(actions))(view)
+  return connect(
+    mapStateToProps(view),
+    mapDispatchToProps(actions)
+  )(view)
 }
 
 export default DGAFComponent
