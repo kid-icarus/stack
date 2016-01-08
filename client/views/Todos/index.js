@@ -11,7 +11,7 @@ import classNames from 'classnames'
 export class TodosView extends Component {
   static initialState = {
     addError: false
-  }
+  };
 
   addTodo (e) {
     var el = this.refs.todoInput
