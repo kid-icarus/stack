@@ -9,10 +9,10 @@ import actionsMeta from 'actions'
 export class Todo extends Component {
   static propTypes = {
     todo: React.PropTypes.object.isRequired
-  }
+  };
   static initialState = {
     editing: false
-  }
+  };
 
   destroy () {
     this.actions.deleteTodo(this.props.todo)

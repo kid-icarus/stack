@@ -7,7 +7,7 @@ import actionsMeta from 'actions'
 export class HomeView extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired
-  }
+  };
 
   getData (name) {
     var opt = { user: name }
