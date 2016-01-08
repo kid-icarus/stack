@@ -28,10 +28,10 @@ export class HomeView extends Component {
           <Title className={classes.counter}>{this.props.counter}</Title>
         </div>
         <div className={classes.buttons}>
-          <button onClick={shield(this.$actions.incrementCounter)} className={classes.actionButton}>
+          <button onClick={shield(this.actions.incrementCounter)} className={classes.actionButton}>
             Increment
           </button>
-          <button onClick={shield(this.$actions.decrementCounter)} className={classes.actionButton}>
+          <button onClick={shield(this.actions.decrementCounter)} className={classes.actionButton}>
             Decrement
           </button>
         </div>
