@@ -15,7 +15,7 @@ export class Todo extends Component {
   };
 
   destroy () {
-    this.actions.deleteTodo(this.props.todo)
+    this.$actions.deleteTodo(this.props.todo)
   }
 
   handleDoubleClick () {
@@ -23,7 +23,7 @@ export class Todo extends Component {
   }
 
   toggle () {
-    this.actions.toggleTodo(this.props.todo)
+    this.$actions.toggleTodo(this.props.todo)
   }
 
   saveTodo (e) {
@@ -31,7 +31,7 @@ export class Todo extends Component {
     if (e.which === 13) {
       let todo = this.props.todo
       todo.text = text
-      this.actions.saveTodo(todo)
+      this.$actions.saveTodo(todo)
       this.editComplete()
     }
   }

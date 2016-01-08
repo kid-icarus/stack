@@ -8,7 +8,7 @@ import React from 'react'
 
 const store = configureStore(window.__INITIAL_STATE__)
 
-syncReduxAndRouter(browserHistory, store, (state) => state.router)
+syncReduxAndRouter(browserHistory, store, (state) => state.get('router'))
 
 // Render the React application to the DOM
 ReactDOM.render(

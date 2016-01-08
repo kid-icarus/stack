@@ -30,25 +30,18 @@ class DGAFComponent extends PureComponent {
       .forEach((method) => this[method] = this[method].bind(this))
   }
 
-  // TODO: figure out if we even need these functions
-  getCollection (type) {
-    return this.getCollectionIds(type).map((id) => this.getEntity(type, id))
-  }
-  getCollectionIds (type) {
-    var entities = this.$state.entities[type] || {}
-    return Object.keys(entities)
-  }
-  getEntity (type, id) {
-    var entities = this.$state.entities[type] || {}
-    return entities[id]
-  }
-
-  get actions () {
+  // global state accessors
+  get $actions () {
     return this.props.__actions
   }
-
   get $state () {
     return this.props.__store
+  }
+  get $entities () {
+    return this.props.__store.get('entities')
+  }
+  get $requests () {
+    return this.props.__store.get('requests')
   }
 }
 DGAFComponent.connect = (actions, view) => connect(mapStateToProps, mapDispatchToProps(actions))(view)

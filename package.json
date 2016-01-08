@@ -79,6 +79,7 @@
     "redbox-react": "^1.0.4",
     "redux-api-middleware": "^1.0.0-beta3",
     "redux-batched-subscribe": "^0.1.4",
+    "redux-immutablejs": "0.0.8",
     "redux-logger": "^2.3.1",
     "rucksack-css": "^0.8.5",
     "sass-loader": "^3.0.0",

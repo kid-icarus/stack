@@ -6,7 +6,9 @@ import { apiMiddleware } from 'redux-api-middleware'
 const middleware = applyMiddleware(
   thunk,
   apiMiddleware,
-  createLogger()
+  createLogger({
+    stateTransformer: (state) => state.toJS()
+  })
 )
 
 export default middleware

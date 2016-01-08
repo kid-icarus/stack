@@ -22,7 +22,7 @@ export class TodosView extends Component {
         return this.setState({addError: true})
       }
 
-      this.actions.addTodo(val)
+      this.$actions.addTodo(val)
       el.value = ''
       el.focus()
       this.setState({addError: false})
@@ -34,8 +34,7 @@ export class TodosView extends Component {
   }
 
   render () {
-    let todos = this.$state.todos
-
+    let todos = this.$state.get('todos')
     return (
       <div className={style.todoapp}>
 
@@ -54,7 +53,7 @@ export class TodosView extends Component {
         <section className={style.main}>
           <ul className={style['todo-list']}>
             {
-              todos.map((todo) => <Todo todo={todo} key={todo.get('id')} />)
+              todos.map((todo, id) => <Todo todo={todo} key={id} />)
             }
           </ul>
         </section>

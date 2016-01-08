@@ -1,7 +1,8 @@
-import middleware from 'middleware'
+import middleware from './middleware'
 import { batchedSubscribe } from 'redux-batched-subscribe'
 import { unstable_batchedUpdates as batchedUpdates } from 'react-dom'
 import rootReducer from 'reducers'
+import Immutable from 'immutable'
 import { compose, createStore } from 'redux'
 
 export default function configureStore (initialState) {
@@ -23,7 +24,7 @@ export default function configureStore (initialState) {
 
   const store = createStoreWithMiddleware(createStore)(
     rootReducer,
-    initialState
+    Immutable.fromJS(initialState || {})
   )
 
   if (module.hot) {

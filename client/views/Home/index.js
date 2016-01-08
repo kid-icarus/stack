@@ -17,13 +17,13 @@ export class HomeView extends Component {
         <Title>FactoryX Stack Test Page</Title>
         <div>
           Sample Counter:
-          <Title className={style.counter}>{this.$state.counter}</Title>
+          <Title className={style.counter}>{this.$state.get('counter')}</Title>
         </div>
         <div className={style.buttons}>
-          <button onClick={shield(this.actions.incrementCounter)} className={style.actionButton}>
+          <button onClick={shield(this.$actions.incrementCounter)} className={style.actionButton}>
             Increment
           </button>
-          <button onClick={shield(this.actions.decrementCounter)} className={style.actionButton}>
+          <button onClick={shield(this.$actions.decrementCounter)} className={style.actionButton}>
             Decrement
           </button>
         </div>
