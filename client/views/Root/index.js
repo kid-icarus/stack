@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux'
 import { Router } from 'react-router'
 import React from 'react'
-import styles from './style.sass'
+import classess from './index.sass'
 import 'font-awesome-sass-loader'
 
 export default class Root extends React.Component {
@@ -14,7 +14,7 @@ export default class Root extends React.Component {
   render () {
     return (
       <Provider store={this.props.store}>
-        <div className={styles.root}>
+        <div className={classess.root}>
           <Router history={this.props.history}>
             {this.props.routes}
           </Router>

@@ -3,7 +3,7 @@ import React from 'react'
 // import Icon from 'react-icon'
 // import shield from 'function-shield'
 import Component from 'redux-dgaf'
-import style from './style.sass'
+import classes from './index.sass'
 import actionsMeta from 'actions'
 
 export class Todo extends Component {
@@ -42,22 +42,22 @@ export class Todo extends Component {
     if (this.state.editing) {
       return <input
         ref='todo'
-        className={style.edit}
+        className={classes.edit}
         defaultValue={this.props.todo.get('text')}
         autoFocus='true'
         onBlur={this.editComplete}
         onKeyDown={this.saveTodo} />
     }
-    return <div className={style.view}>
+    return <div className={classes.view}>
       <input
-        className={style.toggle}
+        className={classes.toggle}
         type='checkbox'
         checked={this.props.todo.get('completed')}
         onChange={this.toggle} />
       <label onDoubleClick={this.handleDoubleClick}>
         {this.props.todo.get('text')}
       </label>
-      <button onClick={this.destroy} className={style.destroy} />
+      <button onClick={this.destroy} className={classes.destroy} />
     </div>
   }
   render () {
