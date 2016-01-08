@@ -1,14 +1,16 @@
 import React, {PropTypes} from 'react'
 import Component from 'redux-dgaf'
+import IPropTypes from 'immutable-props'
 import Title from 'components/Title'
 import classes from './index.sass'
 
 export class GHView extends Component {
+  static displayName = 'GHView';
   static propTypes = {
     name: PropTypes.string.isRequired,
-    orgs: PropTypes.object,
-    repos: PropTypes.object,
-    user: PropTypes.object
+    orgs: IPropTypes.List,
+    repos: IPropTypes.List,
+    user: IPropTypes.Map
   };
   static cursors = {
     orgs: 'requests.orgs',
