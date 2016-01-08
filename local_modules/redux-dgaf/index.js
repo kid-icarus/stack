@@ -18,10 +18,7 @@ const mapStateToProps = (view) => (storeState) => {
     }, cursorData)
   }
 
-  return {
-    storeState,
-    ...cursorData
-  }
+  return cursorData
 }
 const mapDispatchToProps = (actions) => (dispatch) =>
   ({actions: actions ? bindActionCreators(actions, dispatch) : {}})
@@ -45,18 +42,9 @@ class DGAFComponent extends PureComponent {
       .forEach((method) => this[method] = this[method].bind(this))
   }
 
-  // global state accessors
-  get $actions () {
+  // sugar accessors
+  get actions () {
     return this.props.actions
-  }
-  get $state () {
-    return this.props.storeState
-  }
-  get $entities () {
-    return this.$state.get('entities')
-  }
-  get $requests () {
-    return this.$state.get('requests')
   }
 }
 DGAFComponent.connect = (view, actions) => {

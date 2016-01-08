@@ -29,7 +29,7 @@ export class TodosView extends Component {
   };
 
   toggleAll () {
-    this.$actions.toggleAllTodos()
+    this.actions.toggleAllTodos()
   }
 
   addTodo (e) {
@@ -41,7 +41,7 @@ export class TodosView extends Component {
         return this.setState({addError: true})
       }
 
-      this.$actions.addTodo(val)
+      this.actions.addTodo(val)
       el.value = ''
       el.focus()
       this.setState({addError: false})
