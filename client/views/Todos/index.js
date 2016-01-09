@@ -102,6 +102,7 @@ export class TodosView extends Component {
             placeholder='What needs to be done?' />
         </header>
         <section className={classes.main}>
+          <input className={classes['toggle-all']} type='checkbox' onChange={this.toggleAll} />
           <ul className={classes['todo-list']}>
             {
               this.props.todos
