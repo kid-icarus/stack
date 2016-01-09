@@ -6,8 +6,7 @@ import Todo from './Todo'
 import classNames from 'classnames'
 
 const ascending = (a, b) => a - b
-
-var filters = {
+const filters = {
   All: () => true,
   Active: (i) => !i.get('completed'),
   Completed: (i) => i.get('completed')
@@ -16,14 +15,15 @@ var filters = {
 export class TodosView extends Component {
   static displayName = 'TodosView';
   static defaultState = {
-    addError: false,
-    filter: 'All'
+    addError: false
   };
   static propTypes = {
     todos: IPropTypes.Map.isRequired,
-    toggled: PropTypes.bool.isRequired
+    toggled: PropTypes.bool.isRequired,
+    filter: PropTypes.string.isRequired
   };
   static cursors = {
+    filter: 'todomvc.filter',
     todos: 'todomvc.items',
     toggled: 'todomvc.toggle'
   };
@@ -53,7 +53,7 @@ export class TodosView extends Component {
   }
 
   setFilter (k) {
-    this.setState({filter: k})
+    this.actions.setTodoFilter(k)
   }
 
   getFooter () {
@@ -74,7 +74,7 @@ export class TodosView extends Component {
               onClick={this.setFilter.bind(null, k)}
               className={
                 classNames({
-                  [classes.selected]: this.state.filter === k
+                  [classes.selected]: this.props.filter === k
                 })
               }>{k}</a>
           </li>
@@ -102,12 +102,16 @@ export class TodosView extends Component {
             placeholder='What needs to be done?' />
         </header>
         <section className={classes.main}>
-          <input className={classes['toggle-all']} type='checkbox' onChange={this.toggleAll} />
+          {
+            this.props.todos.size
+              ? <input className={classes['toggle-all']} type='checkbox' onChange={this.toggleAll} />
+              : null
+          }
           <ul className={classes['todo-list']}>
             {
               this.props.todos
-                .filter(filters[this.state.filter])
-                .sort(i => i.created, ascending)
+                .filter(filters[this.props.filter])
+                .sort(i => i.get('created'), ascending)
                 .map((todo, id) =>
                   <Todo todo={todo} key={id} />
                 ).toArray()
