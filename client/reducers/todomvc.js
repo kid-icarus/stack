@@ -37,4 +37,9 @@ export const saveTodo = (state, {payload}) =>
 export const setTodoFilter = (state, {payload}) =>
   state.set('filter', payload)
 
+export const clearCompletedTodos = (state, {payload}) =>
+  state.update('items', v =>
+    v.filter(i => !i.get('completed'))
+  )
+
 export default initialState

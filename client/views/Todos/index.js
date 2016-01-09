@@ -3,6 +3,7 @@ import IPropTypes from 'immutable-props'
 import Component from 'redux-dgaf'
 import classes from './index.sass'
 import Todo from './Todo'
+import shield from 'function-shield'
 import classNames from 'classnames'
 
 const ascending = (a, b) => a - b
@@ -28,10 +29,6 @@ export class TodosView extends Component {
     toggled: 'todomvc.toggle'
   };
 
-  toggleAll () {
-    this.actions.toggleAllTodos()
-  }
-
   addTodo (e) {
     var el = this.refs.todoInput
 
@@ -52,10 +49,6 @@ export class TodosView extends Component {
     this.setState({addError: false})
   }
 
-  setFilter (k) {
-    this.actions.setTodoFilter(k)
-  }
-
   getFooter () {
     if (this.props.todos.size <= 0) {
       return null
@@ -71,7 +64,7 @@ export class TodosView extends Component {
           <li key={k}>
             <a
               href='#'
-              onClick={this.setFilter.bind(null, k)}
+              onClick={this.actions.setTodoFilter.bind(null, k)}
               className={
                 classNames({
                   [classes.selected]: this.props.filter === k
@@ -81,6 +74,15 @@ export class TodosView extends Component {
         )
       }
       </ul>
+      {
+        this.props.todos.filter(filters.Completed).size
+          ? <button
+              onClick={shield(this.actions.clearCompletedTodos)}
+              className={classes['clear-completed']}>
+              Clear completed
+            </button>
+          : null
+      }
     </footer>
   }
 
@@ -104,7 +106,10 @@ export class TodosView extends Component {
         <section className={classes.main}>
           {
             this.props.todos.size
-              ? <input className={classes['toggle-all']} type='checkbox' onChange={this.toggleAll} />
+              ? <input
+                className={classes['toggle-all']}
+                type='checkbox'
+                onChange={this.actions.toggleAllTodos} />
               : null
           }
           <ul className={classes['todo-list']}>
