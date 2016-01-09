@@ -30,6 +30,8 @@ export function configureStore (initialState) {
     Immutable.fromJS(initialState || {})
   )
 
+  syncReduxAndRouter(browserHistory, store, (state) => state.get('router'))
+
   if (module.hot) {
     module.hot.accept('./reducers', () => {
       const nextRoot = require('./reducers')
@@ -40,7 +42,4 @@ export function configureStore (initialState) {
   return store
 }
 
-const store = configureStore(window.__INITIAL_STATE__)
-syncReduxAndRouter(browserHistory, store, (state) => state.get('router'))
-
-export default store
+export default configureStore(window.__INITIAL_STATE__)
