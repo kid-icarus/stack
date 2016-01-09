@@ -6,13 +6,18 @@ const initialState = Immutable.fromJS({
   items: {}
 })
 
+const Todo = Immutable.Record({
+  id: uuid.v1(),
+  text: 'New Todo',
+  created: Date.now(),
+  completed: false
+})
+
 export const addTodo = (state, {payload}) => {
   let id = uuid.v1()
-  return state.setIn(['items', id], Immutable.Map({
+  return state.setIn(['items', id], new Todo({
     id: id,
-    text: payload,
-    created: Date.now(),
-    completed: false
+    text: payload
   }))
 }
 
