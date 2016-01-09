@@ -3,7 +3,6 @@ import uuid from 'uuid'
 
 const initialState = Immutable.fromJS({
   toggle: false,
-  filter: 'All',
   items: {}
 })
 
@@ -33,9 +32,6 @@ export const toggleAllTodos = (state, {payload}) =>
 
 export const saveTodo = (state, {payload}) =>
   state.setIn(['items', payload.get('id'), 'text'], payload.get('text'))
-
-export const setTodoFilter = (state, {payload}) =>
-  state.set('filter', payload)
 
 export const clearCompletedTodos = (state, {payload}) =>
   state.update('items', v =>
