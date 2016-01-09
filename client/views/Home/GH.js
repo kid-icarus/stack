@@ -74,12 +74,16 @@ export class GHView extends Component {
   }
 
   render () {
-    var errorView = <Title>Failed to Load</Title>
-    var loadingView = <Title>Loading...</Title>
     return (
       <div className={classes.githubData}>
         {
-          this.isFetching() ? loadingView : (this.isErrored() ? errorView : this.getDataView())
+          this.isFetching()
+            ? <Title>Loading...</Title>
+            : (
+                this.isErrored()
+                ? <Title>Failed to Load</Title>
+                : this.getDataView()
+              )
         }
       </div>
     )
