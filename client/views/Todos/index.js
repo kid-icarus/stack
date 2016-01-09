@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react'
+import {Link} from 'react-router'
 import IPropTypes from 'immutable-props'
 import Component from 'redux-dgaf'
 import classes from './index.sass'
@@ -19,12 +20,11 @@ export class TodosView extends Component {
     addError: false
   };
   static propTypes = {
+    params: PropTypes.object.isRequired,
     todos: IPropTypes.Map.isRequired,
-    toggled: PropTypes.bool.isRequired,
-    filter: PropTypes.string.isRequired
+    toggled: PropTypes.bool.isRequired
   };
   static cursors = {
-    filter: 'todomvc.filter',
     todos: 'todomvc.items',
     toggled: 'todomvc.toggle'
   };
@@ -62,14 +62,13 @@ export class TodosView extends Component {
       {
         Object.keys(filters).map((k) =>
           <li key={k}>
-            <a
-              href='#'
-              onClick={this.actions.setTodoFilter.bind(null, k)}
+            <Link
+              to={`/todos/${k}`}
               className={
                 classNames({
-                  [classes.selected]: this.props.filter === k
+                  [classes.selected]: this.props.params.filter === k
                 })
-              }>{k}</a>
+              }>{k}</Link>
           </li>
         )
       }
@@ -87,6 +86,7 @@ export class TodosView extends Component {
   }
 
   render () {
+    var filterFn = filters[this.props.params.filter || 'All']
     return (
       <div className={classes.todoapp}>
         <header className={classes.header}>
@@ -115,7 +115,7 @@ export class TodosView extends Component {
           <ul className={classes['todo-list']}>
             {
               this.props.todos
-                .filter(filters[this.props.filter])
+                .filter(filterFn)
                 .sort(i => i.get('created'), ascending)
                 .map((todo, id) =>
                   <Todo todo={todo} key={id} />
