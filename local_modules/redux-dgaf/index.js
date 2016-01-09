@@ -1,7 +1,6 @@
 import {PropTypes} from 'react'
 import PureComponent from 'react-pure-render/component'
 import { connect } from 'react-redux'
-import { bindActionCreators } from 'redux'
 
 const mapStateToProps = (view) => (storeState) => {
   // really simple immutable cursor impl
@@ -20,8 +19,8 @@ const mapStateToProps = (view) => (storeState) => {
 
   return cursorData
 }
-const mapDispatchToProps = (actions) => (dispatch) =>
-  ({actions: actions ? bindActionCreators(actions, dispatch) : {}})
+const mapDispatchToProps = (getActions) => (dispatch) =>
+  ({actions: getActions ? getActions(dispatch) : {}})
 
 class DGAFComponent extends PureComponent {
   static propTypes = {
