@@ -2,6 +2,7 @@ import React, {PropTypes} from 'react'
 import {Link} from 'react-router'
 import IPropTypes from 'immutable-props'
 import Component from 'redux-dgaf'
+import jif from 'jif'
 import classes from './index.sass'
 import Todo from './Todo'
 import shield from 'function-shield'
@@ -49,42 +50,6 @@ export class TodosView extends Component {
     this.setState({addError: false})
   }
 
-  getFooter () {
-    if (this.props.todos.size <= 0) {
-      return null
-    }
-    var itemsLeft = this.props.todos.filter(filters.Active)
-    return <footer className={classes.footer}>
-      <span className={classes['todo-count']}>
-        {itemsLeft.size} items left
-      </span>
-      <ul className={classes.filters}>
-      {
-        Object.keys(filters).map((k) =>
-          <li key={k}>
-            <Link
-              to={`/todos/${k}`}
-              className={
-                classNames({
-                  [classes.selected]: this.props.params.filter === k
-                })
-              }>{k}</Link>
-          </li>
-        )
-      }
-      </ul>
-      {
-        this.props.todos.filter(filters.Completed).size
-          ? <button
-              onClick={shield(this.actions.clearCompletedTodos)}
-              className={classes['clear-completed']}>
-              Clear completed
-            </button>
-          : null
-      }
-    </footer>
-  }
-
   render () {
     var filterFn = filters[this.props.params.filter || 'All']
     return (
@@ -105,12 +70,12 @@ export class TodosView extends Component {
         </header>
         <section className={classes.main}>
           {
-            this.props.todos.size
-              ? <input
+            jif(this.props.todos.size, () =>
+              <input
                 className={classes['toggle-all']}
                 type='checkbox'
                 onChange={this.actions.toggleAllTodos} />
-              : null
+            )
           }
           <ul className={classes['todo-list']}>
             {
@@ -123,7 +88,39 @@ export class TodosView extends Component {
             }
           </ul>
         </section>
-        { this.getFooter() }
+        {
+          jif(this.props.todos.size, () =>
+            <footer className={classes.footer}>
+              <span className={classes['todo-count']}>
+                {this.props.todos.filter(filters.Active).size} items left
+              </span>
+              <ul className={classes.filters}>
+              {
+                Object.keys(filters).map((k) =>
+                  <li key={k}>
+                    <Link
+                      to={`/todos/${k}`}
+                      className={
+                        classNames({
+                          [classes.selected]: this.props.params.filter === k
+                        })
+                      }>{k}</Link>
+                  </li>
+                )
+              }
+              </ul>
+              {
+                jif(this.props.todos.filter(filters.Completed).size, () =>
+                  <button
+                    onClick={shield(this.actions.clearCompletedTodos)}
+                    className={classes['clear-completed']}>
+                    Clear completed
+                  </button>
+                )
+              }
+            </footer>
+          )
+        }
       </div>
     )
   }
