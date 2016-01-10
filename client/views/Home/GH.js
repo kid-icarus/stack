@@ -20,9 +20,11 @@ export class GHView extends Component {
 
   getData (name) {
     var opt = { user: name }
-    this.actions.getOrganizations({options: opt, cursor: 'orgs'})
-    this.actions.getRepositories({options: opt, cursor: 'repos'})
-    this.actions.getUser({options: opt, cursor: 'user'})
+    if (this.isFetching() || this.isErrored()) {
+      this.actions.getOrganizations({options: opt, cursor: 'orgs'})
+      this.actions.getRepositories({options: opt, cursor: 'repos'})
+      this.actions.getUser({options: opt, cursor: 'user'})
+    }
   }
 
   componentWillMount () {
