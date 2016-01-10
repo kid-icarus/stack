@@ -1,32 +1,21 @@
-import { batchedSubscribe } from 'redux-batched-subscribe'
-import { unstable_batchedUpdates as batchedUpdates } from 'react-dom'
 import { syncReduxAndRouter } from 'redux-simple-router'
 import { browserHistory } from 'react-router'
 import Immutable from 'immutable'
 import { compose, createStore } from 'redux'
-
+import storage from './storageEngine'
 import rootReducer from './reducers'
 import middleware from './middleware'
 
 export function configureStore (initialState) {
-  let createStoreWithMiddleware
-  const batching = batchedSubscribe(batchedUpdates)
-
-  if (window.devToolsExtension) {
-    createStoreWithMiddleware = compose(
-      middleware,
-      batching,
-      window.devToolsExtension()
-    )
-  } else {
-    createStoreWithMiddleware = compose(
-      middleware,
-      batching
-    )
-  }
+  var createStoreWithMiddleware = compose(
+    middleware,
+    window.devToolsExtension
+      ? window.devToolsExtension()
+      : undefined
+  )
 
   const store = createStoreWithMiddleware(createStore)(
-    rootReducer,
+    storage.reducer(rootReducer),
     Immutable.fromJS(initialState || {})
   )
 
@@ -38,6 +27,8 @@ export function configureStore (initialState) {
       store.replaceReducer(nextRoot)
     })
   }
+
+  storage.load(store)
 
   return store
 }
