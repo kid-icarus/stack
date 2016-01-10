@@ -8,11 +8,11 @@ const mapStateToProps = (view) => (storeState) => {
   let cursorData = {}
   if (view.cursors) {
     cursorData = Object.keys(view.cursors).reduce((p, k) => {
-      var path = view.cursors[k]
-      if (!Array.isArray(path)) {
-        path = path.split('.')
-      }
-      p[k] = storeState.getIn(path)
+      p[k] = storeState.getIn(
+        Array.isArray(view.cursors[k])
+        ? view.cursors[k]
+        : view.cursors[k].split('.')
+      )
       return p
     }, cursorData)
   }
