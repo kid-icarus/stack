@@ -9,5 +9,6 @@ export default (
     <IndexRoute component={HomeView} />
     <Route path='/about' component={AboutView} />
     <Route path='/todos' component={TodosView} />
+    <Route path='/todos/:filter' component={TodosView} />
   </Route>
 )

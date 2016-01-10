@@ -20,9 +20,11 @@ export class GHView extends Component {
 
   getData (name) {
     var opt = { user: name }
-    this.actions.getOrganizations({options: opt, cursor: 'orgs'})
-    this.actions.getRepositories({options: opt, cursor: 'repos'})
-    this.actions.getUser({options: opt, cursor: 'user'})
+    if (this.isFetching() || this.isErrored()) {
+      this.actions.getOrganizations({options: opt, cursor: 'orgs'})
+      this.actions.getRepositories({options: opt, cursor: 'repos'})
+      this.actions.getUser({options: opt, cursor: 'user'})
+    }
   }
 
   componentWillMount () {
@@ -74,12 +76,16 @@ export class GHView extends Component {
   }
 
   render () {
-    var errorView = <Title>Failed to Load</Title>
-    var loadingView = <Title>Loading...</Title>
     return (
       <div className={classes.githubData}>
         {
-          this.isFetching() ? loadingView : (this.isErrored() ? errorView : this.getDataView())
+          this.isFetching()
+            ? <Title>Loading...</Title>
+            : (
+                this.isErrored()
+                ? <Title>Failed to Load</Title>
+                : this.getDataView()
+              )
         }
       </div>
     )
