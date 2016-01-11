@@ -11,7 +11,7 @@
     "start": "npm run dev",
     "prod": "NODE_ENV=production PORT=$PORT node bin/server",
     "deploy": "NODE_ENV=production npm run compile && git add dist -A && git commit -m 'deploy' && git push heroku master",
-    "dev": "nodemon --watch ./build --exec 'node -r dotenv/config bin/server --hot'",
+    "dev": "nodemon --watch ./build --watch ./server --watch ./bin --watch ./config --exec 'node -r dotenv/config bin/server --hot'",
     "dev:no-debug": "npm run dev -- --no_debug"
   },
   "repository": {
