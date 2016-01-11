@@ -1,23 +1,50 @@
 .crm
   display: flex
+  flex-direction: row
   height: 100%
   width: 100%
 
-  .col
+  .messages
+    width: 30%
+    border-right: 1px solid #ccc
+    padding: 15px 20px 20px 20px
+
+  .drop
+    width: 20%
+    padding: 15px 20px 20px 20px
+
+    iframe
+     border: 0 none
+     margin-bottom: 10px
+
+  .people
     display: flex
     flex-direction: column
     height: 100%
-    width: 25%
+    width: 50%
     border-right: 1px solid #ccc
 
-  .nav
-    width: 100%
-    padding: 10px
-    display: flex
-
-    .search
+    .nav
       width: 100%
-      margin-right: 10px
-      .prompt
+      padding: 20px 10px 10px 10px
+      display: flex
+
+      .search
         width: 100%
+        margin-right: 10px
+        .input
+          width: 100%
+        .prompt
+          width: 100%
+          padding-right: 5px
+
+    .list
+      padding: 20px
+
+      .item:hover
+        background-color: #f0f0f0
+        cursor: pointer
+
+      .badges
         padding-right: 5px
+        line-height: 26px
