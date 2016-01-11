@@ -41,7 +41,7 @@ export class CRMView extends Component {
           {/* List */}
           <div className='ui middle aligned divided list'>
             {
-              this.props.people.toArray().map((person) =>
+              this.props.people.map((person) =>
                 <Link to={`/crm/${person.get('id')}`} className='item' key={person.get('id')}>
                   <img className='ui avatar image' src={person.get('img')} />
                   <div className='content'>
