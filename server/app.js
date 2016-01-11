@@ -1,6 +1,6 @@
-import express from 'express'
-import historyApiFallback from 'connect-history-api-fallback'
-import config from 'app-config-chain'
+const express = require('express')
+const historyApiFallback = require('connect-history-api-fallback')
+const config = require('app-config-chain')
 
 const app = express()
 const debug = require('debug')('app:server')
@@ -35,4 +35,4 @@ if (config.compiler_enable_hmr) {
   app.use(express.static(paths.base(config.dir_dist)))
 }
 
-export default app
+module.exports = app
