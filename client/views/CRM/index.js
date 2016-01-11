@@ -3,7 +3,7 @@ import React from 'react'
 // import Icon from 'react-icon'
 // import shield from 'function-shield'
 import Component from 'redux-dgaf'
-import {Button, Search} from 'react-semantify'
+import {Button, Search, Icon, Popup} from 'react-semantify'
 import './index.sass'
 
 export class CRMView extends Component {
@@ -20,12 +20,15 @@ export class CRMView extends Component {
     return (
       <div className='crm'>
         <div className='col'>
-          <div className='nav'>nav</div>
-          <Search>
-            <input className='prompt' type = 'text' />
-            <div className='results' />
-          </Search>
-          <Button>hi</Button>
+          <div className='nav'>
+            <Search>
+              <input placeholder='Search People' className='prompt' type = 'text' />
+              <div className='results' />
+            </Search>
+            <Button className='icon filterUsers'><Icon className='filter' /></Button>
+            <Popup className='filterUsers'>OH HI IM A POPUP</Popup>
+            <Button className='icon'><Icon className='add' /></Button>
+          </div>
         </div>
       </div>
     )
