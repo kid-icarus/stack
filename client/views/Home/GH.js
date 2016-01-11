@@ -1,5 +1,9 @@
 import React, {PropTypes} from 'react'
-import {List, Header, Item, Image, Icon, Card, Content} from 'react-semantify'
+import {
+  List, Header, Item,
+  Image, Icon, Card,
+  Content, Grid, Row
+} from 'react-semantify'
 import Component from 'redux-dgaf'
 import IPropTypes from 'immutable-props'
 import jif from 'jif'
@@ -46,70 +50,74 @@ export class GHView extends Component {
 
   getDataView () {
     return (
-      <div>
-        <Card>
-          <Image src={this.props.user.get('avatar_url')} />
-          <Content>
-            <Header>{this.props.user.get('name')}</Header>
-            <div className='description'>{this.props.user.get('email')}</div>
-            <div className='meta'>
-              <span className='location'>{this.props.user.get('location')}</span>
-            </div>
-          </Content>
-          <Content className='extra'>
-            <Icon className='user'/>
-            {this.props.user.get('followers')} followers
-          </Content>
-        </Card>
-        <List className='relaxed'>
-          <Header>{this.props.orgs.size} organizations</Header>
-          {
-            this.props.orgs.map((org, id) =>
-              <Item key={id}>
-                <Icon className='large github middle aligned'/>
-                <div className='content'>
-                  <Header>{org.get('login')}</Header>
-                  <div className='description'>
-                  {
-                    jif(org.has('description'), () =>
-                      <div className='description'>
-                        {org.get('description')}
-                      </div>
-                    )
-                  }
+      <Grid className='relaxed centered'>
+        <Row>
+          <Card>
+            <Image src={this.props.user.get('avatar_url')} />
+            <Content>
+              <Header>{this.props.user.get('name')}</Header>
+              <div className='description'>{this.props.user.get('email')}</div>
+              <div className='meta'>
+                <span className='location'>{this.props.user.get('location')}</span>
+              </div>
+            </Content>
+            <Content className='extra'>
+              <Icon className='user'/>
+              {this.props.user.get('followers')} followers
+            </Content>
+          </Card>
+        </Row>
+        <Row className='equal width'>
+          <List className='relaxed column'>
+            <Header>{this.props.orgs.size} organizations</Header>
+            {
+              this.props.orgs.map((org, id) =>
+                <Item key={id}>
+                  <Icon className='large github middle aligned'/>
+                  <div className='content'>
+                    <Header>{org.get('login')}</Header>
+                    <div className='description'>
+                    {
+                      jif(org.has('description'), () =>
+                        <div className='description'>
+                          {org.get('description')}
+                        </div>
+                      )
+                    }
+                    </div>
                   </div>
-                </div>
-              </Item>
-            )
-          }
-        </List>
-        <List className='relaxed't>
-          <Header>{this.props.repos.size} repositories</Header>
-          {
-            this.props.repos.map((repo, id) =>
-              <Item key={id}>
-                <Icon className='large github middle aligned'/>
-                <div className='content'>
-                  <Header>{repo.get('full_name')}</Header>
-                  {
-                    jif(repo.has('description'), () =>
-                      <div className='description'>
-                        {repo.get('description')}
-                      </div>
-                    )
-                  }
-                </div>
-              </Item>
-            )
-          }
-        </List>
-      </div>
+                </Item>
+              )
+            }
+          </List>
+          <List className='relaxed column'>
+            <Header>{this.props.repos.size} repositories</Header>
+            {
+              this.props.repos.map((repo, id) =>
+                <Item key={id}>
+                  <Icon className='large github middle aligned'/>
+                  <div className='content'>
+                    <Header>{repo.get('full_name')}</Header>
+                    {
+                      jif(repo.has('description'), () =>
+                        <div className='description'>
+                          {repo.get('description')}
+                        </div>
+                      )
+                    }
+                  </div>
+                </Item>
+              )
+            }
+          </List>
+        </Row>
+      </Grid>
     )
   }
 
   render () {
     return (
-      <div className='github-data'>
+      <div className='github-data ui container'>
         {
           this.isFetching()
             ? <Header>Loading...</Header>

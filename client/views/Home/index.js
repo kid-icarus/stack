@@ -2,7 +2,11 @@ import React from 'react'
 import { Link } from 'react-router'
 import shield from 'function-shield'
 import Component from 'redux-dgaf'
-import {Button, Header, Icon, Label} from 'react-semantify'
+import {
+  Button, Header, Icon,
+  Label, Grid, Row,
+  Column
+} from 'react-semantify'
 import GH from './GH'
 import './index.sass'
 
@@ -19,24 +23,31 @@ export class HomeView extends Component {
   };
   render () {
     return (
-      <div className='home-view'>
-        <Icon className='plane header-icon' />
-        <Header>FactoryX Stack Test Page</Header>
-        <div>
-          <Label>Sample Counter</Label>
-          <Header className='counter'>{this.props.counter}</Header>
-        </div>
-        <div className='buttons'>
-          <Button color='green' onClick={shield(this.actions.incrementCounter)}>
-            Increment
-          </Button>
-          <Button color='red' onClick={shield(this.actions.decrementCounter)}>
-            Decrement
-          </Button>
-        </div>
-        <GH name={this.state.name}/>
-        <Link to='/about'>Go To About View</Link>
-      </div>
+      <Grid className='relaxed home-view centered'>
+        <Row>
+          <Column className='five wide'>
+            <Icon className='plane header-icon' />
+            <Header>FactoryX Stack Test Page</Header>
+            <Label>Sample Counter</Label>
+            <Header className='counter'>{this.props.counter}</Header>
+            <div className='ui buttons'>
+              <Button color='green' className='medium' onClick={shield(this.actions.incrementCounter)}>
+                Increment
+              </Button>
+              <div className='or'/>
+              <Button color='red' className='medium' onClick={shield(this.actions.decrementCounter)}>
+                Decrement
+              </Button>
+            </div>
+          </Column>
+        </Row>
+        <Row>
+          <GH name={this.state.name}/>
+        </Row>
+        <Row>
+          <Link to='/about'>Go To About View</Link>
+        </Row>
+      </Grid>
     )
   }
 }
