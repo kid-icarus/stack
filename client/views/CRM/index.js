@@ -1,10 +1,10 @@
 import React from 'react'
-import { Link } from 'react-router'
-import Icon from 'react-icon'
-import shield from 'function-shield'
+// import { Link } from 'react-router'
+// import Icon from 'react-icon'
+// import shield from 'function-shield'
 import Component from 'redux-dgaf'
 import classes from './index.sass'
-import {Button} from 'react-semantify'
+import {Button, Search} from 'react-semantify'
 
 export class CRMView extends Component {
   static propTypes = {
@@ -20,7 +20,10 @@ export class CRMView extends Component {
     return (
       <div className={classes.crm}>
         <div className={classes.col}>
-          <h1>CRM</h1>
+          <Search>
+            <input className='prompt' type = 'text' />
+            <div className='results' />
+          </Search>
           <Button>hi</Button>
         </div>
       </div>
