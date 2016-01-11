@@ -1,6 +1,6 @@
 import React, {PropTypes, Component} from 'react'
 import classNames from 'classnames'
-import classes from './index.sass'
+import './index.sass'
 
 export default class Title extends Component {
   static propTypes = {
@@ -10,7 +10,7 @@ export default class Title extends Component {
     return <div
       {...this.props}
       className={
-        classNames(classes.title, this.props.className)
+        classNames('title-component', this.props.className)
       } />
   }
 }
