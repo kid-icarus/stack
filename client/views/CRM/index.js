@@ -18,8 +18,9 @@ export class CRMView extends Component {
   };
   render () {
     return (
-      <div className={classes.crm}>
-        <div className={classes.col}>
+      <div className='crm'>
+        <div className='col'>
+          <div className='nav'>nav</div>
           <Search>
             <input className='prompt' type = 'text' />
             <div className='results' />
