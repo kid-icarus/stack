@@ -5,6 +5,7 @@ import React from 'react'
 import Component from 'redux-dgaf'
 import {Button, Search, Icon, Popup} from 'react-semantify'
 import './index.sass'
+// import $ from 'jquery'
 
 export class CRMView extends Component {
   static propTypes = {
@@ -16,6 +17,14 @@ export class CRMView extends Component {
   static cursors = {
     counter: 'counter'
   };
+
+  componentDidMount () {
+    $('.filterUsers.button').popup({
+      popup: $('.filterUsers.popup'),
+      on: 'click'
+    })
+  }
+
   render () {
     return (
       <div className='crm'>
@@ -26,7 +35,10 @@ export class CRMView extends Component {
               <div className='results' />
             </Search>
             <Button className='icon filterUsers'><Icon className='filter' /></Button>
-            <Popup className='filterUsers'>OH HI IM A POPUP</Popup>
+            <Popup
+              className='filterUsers'>
+              OH HI IM A POPUP
+            </Popup>
             <Button className='icon'><Icon className='add' /></Button>
           </div>
         </div>
