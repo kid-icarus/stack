@@ -6,7 +6,6 @@ import './index.sass'
 
 // css bs
 // import 'font-awesome-sass-loader'
-window.$ = require('jquery')
 import 'semantic-ui-css/semantic.css'
 import 'semantic-ui-css/semantic.js'
 
