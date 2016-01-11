@@ -2,7 +2,6 @@ import ReactDOM from 'react-dom'
 import { browserHistory } from 'react-router'
 import Root from 'views/Root'
 import React from 'react'
-import 'font-awesome-sass-loader'
 
 import store from 'core/store'
 import routes from 'routes'

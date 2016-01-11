@@ -1,8 +1,8 @@
 import React, {PropTypes} from 'react'
+import {List, Header} from 'react-semantify'
 import Component from 'redux-dgaf'
 import IPropTypes from 'immutable-props'
-import Title from 'components/Title'
-import classes from './index.sass'
+import './index.sass'
 
 export class GHView extends Component {
   static displayName = 'GHView';
@@ -46,44 +46,44 @@ export class GHView extends Component {
   getDataView () {
     return (
       <div>
-        <div className={classes.list}>
-          <Title>User Info</Title>
-          <img src={this.props.user.get('avatar_url')} className={classes.userImage}/>
-          <div className={classes.listItem}>{this.props.user.get('name')}</div>
+        <div>
+          <Header>User Info</Header>
+          <img src={this.props.user.get('avatar_url')} className='user-image'/>
+          <div className='list-item'>{this.props.user.get('name')}</div>
         </div>
-        <ul className={classes.list}>
-          <Title>{this.props.orgs.size} organizations</Title>
+        <List>
+          <Header>{this.props.orgs.size} organizations</Header>
           {
             this.props.orgs.map((org, id) =>
-              <li className={classes.listItem} key={id}>
+              <li className='list-item' key={id}>
                 {org.get('login')}
               </li>
             )
           }
-        </ul>
-        <ul className={classes.list}>
-          <Title>{this.props.repos.size} repositories</Title>
+        </List>
+        <List>
+          <Header>{this.props.repos.size} repositories</Header>
           {
             this.props.repos.map((repo, id) =>
-              <li className={classes.listItem} key={id}>
+              <li className='list-item' key={id}>
                 {repo.get('full_name')} - Issues: {repo.get('open_issues')}
               </li>
             )
           }
-        </ul>
+        </List>
       </div>
     )
   }
 
   render () {
     return (
-      <div className={classes.githubData}>
+      <div className='github-data'>
         {
           this.isFetching()
-            ? <Title>Loading...</Title>
+            ? <Header>Loading...</Header>
             : (
                 this.isErrored()
-                ? <Title>Failed to Load</Title>
+                ? <Header>Failed to Load</Header>
                 : this.getDataView()
               )
         }
