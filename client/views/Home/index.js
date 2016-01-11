@@ -4,8 +4,7 @@ import shield from 'function-shield'
 import Component from 'redux-dgaf'
 import {
   Button, Header, Icon,
-  Label, Grid, Row,
-  Column
+  Grid, Row, Column
 } from 'react-semantify'
 import GH from './GH'
 import './index.sass'
@@ -23,12 +22,11 @@ export class HomeView extends Component {
   };
   render () {
     return (
-      <Grid className='relaxed home-view centered'>
+      <Grid className='relaxed home-view centered divided'>
         <Row>
-          <Column className='five wide'>
-            <Icon className='plane header-icon' />
-            <Header>FactoryX Stack Test Page</Header>
-            <Label>Sample Counter</Label>
+          <Column className='five wide center aligned'>
+            <Icon className='trophy huge' />
+            <Header>Stack Test Page</Header>
             <Header className='counter'>{this.props.counter}</Header>
             <div className='ui buttons'>
               <Button color='green' className='medium' onClick={shield(this.actions.incrementCounter)}>
