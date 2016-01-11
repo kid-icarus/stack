@@ -8,12 +8,13 @@ const initialState = Immutable.fromJS({
 
 export const addTodo = (state, {payload}) => {
   let id = uuid.v1()
-  return state.setIn(['items', id], Immutable.Map({
+  let todo = Immutable.Map({
     id: id,
     text: payload,
     created: Date.now(),
     completed: false
-  }))
+  })
+  return state.setIn(['items', id], todo)
 }
 
 export const deleteTodo = (state, {payload}) =>
@@ -31,5 +32,10 @@ export const toggleAllTodos = (state, {payload}) =>
 
 export const saveTodo = (state, {payload}) =>
   state.setIn(['items', payload.get('id'), 'text'], payload.get('text'))
+
+export const clearCompletedTodos = (state, {payload}) =>
+  state.update('items', v =>
+    v.filter(i => !i.get('completed'))
+  )
 
 export default initialState
