@@ -2,7 +2,11 @@ import { Provider } from 'react-redux'
 import { Router } from 'react-router'
 import React from 'react'
 import Component from 'redux-dgaf'
-import classes from './index.sass'
+import './index.sass'
+
+// css bs
+import 'font-awesome-sass-loader'
+import 'semantic-ui-css/semantic.css'
 
 export class RootView extends React.Component {
   static displayName = 'RootView';
@@ -15,7 +19,7 @@ export class RootView extends React.Component {
   render () {
     return (
       <Provider store={this.props.store}>
-        <div className={classes.root}>
+        <div className='root-view'>
           <Router history={this.props.history}>
             {this.props.routes}
           </Router>
