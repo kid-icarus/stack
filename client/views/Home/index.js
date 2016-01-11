@@ -3,9 +3,9 @@ import { Link } from 'react-router'
 import Icon from 'react-icon'
 import shield from 'function-shield'
 import Component from 'redux-dgaf'
-import Title from 'components/Title'
-import classes from './index.sass'
+import {Button, Header} from 'react-semantify'
 import GH from './GH'
+import './index.sass'
 
 export class HomeView extends Component {
   static displayName = 'HomeView';
@@ -20,20 +20,20 @@ export class HomeView extends Component {
   };
   render () {
     return (
-      <div className={classes.home}>
-        <Icon glyph='fort-awesome' className={classes.starIcon}/>
-        <Title>FactoryX Stack Test Page</Title>
+      <div className='home-view'>
+        <Icon glyph='fort-awesome' className='star-icon'/>
+        <Header>FactoryX Stack Test Page</Header>
         <div>
           Sample Counter:
-          <Title className={classes.counter}>{this.props.counter}</Title>
+          <Header className='counter'>{this.props.counter}</Header>
         </div>
-        <div className={classes.buttons}>
-          <button onClick={shield(this.actions.incrementCounter)} className={classes.actionButton}>
+        <div className='buttons'>
+          <Button onClick={shield(this.actions.incrementCounter)} className='action-button'>
             Increment
-          </button>
-          <button onClick={shield(this.actions.decrementCounter)} className={classes.actionButton}>
+          </Button>
+          <Button onClick={shield(this.actions.decrementCounter)} className='action-button'>
             Decrement
-          </button>
+          </Button>
         </div>
         <GH name={this.state.name}/>
         <Link to='/about'>Go To About View</Link>

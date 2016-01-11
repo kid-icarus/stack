@@ -1,15 +1,15 @@
 import { Link } from 'react-router'
+import {Header} from 'react-semantify'
 import Component from 'redux-dgaf'
 import React from 'react'
-import Title from 'components/Title'
-import classes from './index.sass'
+import './index.sass'
 
 export class AboutView extends Component {
   static displayName = 'AboutView';
   render () {
     return (
-      <div className={classes.about}>
-        <Title>This is the about view!</Title>
+      <div className='about-view'>
+        <Header>This is the about view!</Header>
         <Link to='/'>Back To Home View</Link>
       </div>
     )

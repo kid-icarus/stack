@@ -3,10 +3,10 @@ import {Link} from 'react-router'
 import IPropTypes from 'immutable-props'
 import Component from 'redux-dgaf'
 import jif from 'jif'
-import classes from './index.sass'
 import Todo from './Todo'
 import shield from 'function-shield'
 import classNames from 'classnames'
+import './index.sass'
 
 const ascending = (a, b) => a - b
 const filters = {
@@ -53,13 +53,13 @@ export class TodosView extends Component {
   render () {
     var filterFn = filters[this.props.params.filter || 'All']
     return (
-      <div className={classes.todoapp}>
-        <header className={classes.header}>
+      <div className='todoapp'>
+        <header className='header'>
           <h1>todos</h1>
           <input
             className={
-              classNames(classes['new-todo'], {
-                [classes['input-error']]: this.state.addError
+              classNames('new-todo', {
+                'input-error': this.state.addError
               })
             }
             ref='todoInput'
@@ -68,16 +68,16 @@ export class TodosView extends Component {
             type='text'
             placeholder='What needs to be done?' />
         </header>
-        <section className={classes.main}>
+        <section className='main'>
           {
             jif(this.props.todos.size, () =>
               <input
-                className={classes['toggle-all']}
+                className='toggle-all'
                 type='checkbox'
                 onChange={this.actions.toggleAllTodos} />
             )
           }
-          <ul className={classes['todo-list']}>
+          <ul className='todo-list'>
             {
               this.props.todos
                 .filter(filterFn)
@@ -90,11 +90,11 @@ export class TodosView extends Component {
         </section>
         {
           jif(this.props.todos.size, () =>
-            <footer className={classes.footer}>
-              <span className={classes['todo-count']}>
+            <footer className='footer'>
+              <span className='todo-count'>
                 {this.props.todos.filter(filters.Active).size} items left
               </span>
-              <ul className={classes.filters}>
+              <ul className='filters'>
               {
                 Object.keys(filters).map((k) =>
                   <li key={k}>
@@ -102,7 +102,7 @@ export class TodosView extends Component {
                       to={`/todos/${k}`}
                       className={
                         classNames({
-                          [classes.selected]: this.props.params.filter === k
+                          selected: this.props.params.filter === k
                         })
                       }>{k}</Link>
                   </li>
@@ -113,7 +113,7 @@ export class TodosView extends Component {
                 jif(this.props.todos.filter(filters.Completed).size, () =>
                   <button
                     onClick={shield(this.actions.clearCompletedTodos)}
-                    className={classes['clear-completed']}>
+                    className='clear-completed'>
                     Clear completed
                   </button>
                 )
