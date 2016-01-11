@@ -5,7 +5,7 @@ import Component from 'redux-dgaf'
 import './index.sass'
 
 // css bs
-import 'font-awesome-sass-loader'
+// import 'font-awesome-sass-loader'
 import 'semantic-ui-css/semantic.css'
 
 export class RootView extends React.Component {
