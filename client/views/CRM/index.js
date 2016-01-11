@@ -4,6 +4,7 @@ import React from 'react'
 // import shield from 'function-shield'
 import Component from 'redux-dgaf'
 import {Button, Search} from 'react-semantify'
+import './index.sass'
 
 export class CRMView extends Component {
   static propTypes = {
