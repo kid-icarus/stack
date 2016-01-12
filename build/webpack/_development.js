@@ -13,45 +13,39 @@ export default (webpackConfig) => {
   // ------------------------------------
   // Enable HMR if Configured
   // ------------------------------------
-  if (config.compiler_enable_hmr) {
-    debug('Enable Hot Module Replacement (HMR).')
+  debug('Enable Hot Module Replacement (HMR).')
 
-    webpackConfig.entry.app.push(
-      'webpack-hot-middleware/client?path=/__webpack_hmr'
-    )
+  webpackConfig.entry.app.push(
+    'webpack-hot-middleware/client?path=/__webpack_hmr'
+  )
 
-    webpackConfig.plugins.push(
-      new webpack.HotModuleReplacementPlugin(),
-      new webpack.NoErrorsPlugin()
-    )
+  webpackConfig.plugins.push(
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin()
+  )
 
-    webpackConfig.eslint.emitWarning = true
+  webpackConfig.eslint.emitWarning = true
 
-    // We need to apply the react-transform HMR plugin to the Babel
-    // configuration, but _only_ when HMR is enabled. Putting this in the
-    // default development configuration will break other tasks because Webpack
-    // HMR is not enabled there, and these transforms require it.
-    webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
-      if (/babel/.test(loader.loader)) {
-        debug('Apply react-transform-hmr to babel development transforms')
+  webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
+    if (/babel/.test(loader.loader)) {
+      debug('Apply react-transform-hmr to babel development transforms')
 
-        if (loader.query.env.development.plugins[0][0] !== 'react-transform') {
-          debug('ERROR: react-transform must be the first plugin')
-          return loader
-        }
-
-        const reactTransformHmr = {
-          transform: 'react-transform-hmr',
-          imports: ['react'],
-          locals: ['module']
-        }
-        loader.query.env.development.plugins[0][1].transforms
-          .push(reactTransformHmr)
+      if (loader.query.env.development.plugins[0][0] !== 'react-transform') {
+        debug('ERROR: react-transform must be the first plugin')
+        return loader
       }
 
-      return loader
-    })
-  }
+      const reactTransformHmr = {
+        transform: 'react-transform-hmr',
+        imports: ['react'],
+        locals: ['module']
+      }
+      loader.query.env.development.plugins[0][1].transforms
+        .push(reactTransformHmr)
+    }
+
+    return loader
+  })
 
   return webpackConfig
 }

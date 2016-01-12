@@ -11,7 +11,7 @@ app.use(require('./middleware/formatting'))
 
 // final piece - serve static content
 app.use(require('./middleware/spa'))
-if (config.compiler_enable_hmr) {
+if (config.env === 'development') {
   app.use(require('./middleware/webpack'))
 } else {
   app.use(express.static(paths.base(config.dir_dist)))
