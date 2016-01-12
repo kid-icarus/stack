@@ -1,15 +1,16 @@
 const express = require('express')
-const historyApiFallback = require('connect-history-api-fallback')
 const config = require('app-config-chain')
-
-const app = express()
 const paths = config.utils_paths
 
-app.use(historyApiFallback({
-  verbose: false
-}))
+const app = express()
+app.disable('x-powered-by')
 
-// Serve app with Webpack if HMR is enabled
+// middleware stack
+app.use(require('./middleware/errors'))
+app.use(require('./middleware/formatting'))
+
+// final piece - serve static content
+app.use(require('./middleware/spa'))
 if (config.compiler_enable_hmr) {
   app.use(require('./middleware/webpack'))
 } else {

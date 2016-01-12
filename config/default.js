@@ -3,6 +3,10 @@ import path from 'path'
 
 const config = {
   env: process.env.NODE_ENV,
+  cookie: {
+    name: 'x',
+    secret: 'stack-cookie-secret-1337'
+  },
 
   // ----------------------------------
   // Project Structure

@@ -9,6 +9,10 @@ import './index.sass'
 import 'semantic-ui-css/semantic.css'
 import 'semantic-ui-css/semantic.js'
 
+// js globals for semantic
+import * as jq from 'jquery'
+window.$ = window.jQuery = jq
+
 export class RootView extends React.Component {
   static displayName = 'RootView';
   static propTypes = {

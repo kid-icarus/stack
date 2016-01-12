@@ -15,10 +15,16 @@ const webpackConfig = {
   entry: {
     app: [
       paths.base(config.dir_client) + '/index.js'
+    ],
+    vendor: [
+      'react',
+      'jquery',
+      'semantic-ui-css/semantic.js'
     ]
   },
   output: {
     filename: `[name].[${config.compiler_hash_type}].js`,
+    chunkFilename: `[id].[${config.compiler_hash_type}].js`,
     path: paths.base(config.dir_dist),
     publicPath: config.compiler_public_path
   },
@@ -35,7 +41,8 @@ const webpackConfig = {
       minify: {
         collapseWhitespace: true
       }
-    })
+    }),
+    new webpack.optimize.CommonsChunkPlugin('vendor')
   ],
   resolve: {
     modulesDirectories: ['local_modules', 'web_modules', 'node_modules'],
@@ -96,15 +103,7 @@ const webpackConfig = {
         ]
       },
       /* font-awesome loader */
-      { test: /\.(ttf|eot|svg)$/, loader: 'file-loader' },
-      /* eslint-disable */
-      { test: /\.woff(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
-      { test: /\.woff2(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
-      { test: /\.ttf(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
-      { test: /\.eot(\?.*)?$/, loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
-      { test: /\.svg(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
-      { test: /\.(png|jpg)$/, loader: 'url?limit=8192' }
-      /* eslint-enable */
+      { test: /\.(ttf|eot|svg)$/, loader: 'file-loader' }
     ]
   },
   sassLoader: {

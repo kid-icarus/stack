@@ -8,8 +8,7 @@ const debug = _debug('app:webpack:development')
 export default (webpackConfig) => {
   debug('Create configuration.')
 
-  debug('Override devtool with cheap-module-eval-source-map.')
-  webpackConfig.devtool = 'cheap-module-eval-source-map'
+  webpackConfig.devtool = 'source-map'
 
   // ------------------------------------
   // Enable HMR if Configured
