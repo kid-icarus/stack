@@ -1,8 +1,8 @@
-const {compose} = require('compose-middleware')
-const errorHandler = require('errorhandler')
-const pmx = require('pmx')
+import {compose} from 'compose-middleware'
+import errorHandler from 'errorhandler'
+import pmx from 'pmx'
 
-module.exports = compose([
+export default compose([
   errorHandler(),
   pmx.expressErrorHandler(),
   (err, req, res, next) => {

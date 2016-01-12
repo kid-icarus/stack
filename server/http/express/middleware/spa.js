@@ -1,5 +1,5 @@
-const historyApiFallback = require('connect-history-api-fallback')
+import historyApiFallback from 'connect-history-api-fallback'
 
-module.exports = historyApiFallback({
+export default historyApiFallback({
   verbose: false
 })

@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf dist",
-    "compile": "NODE_ENV=production node --harmony bin/compile",
+    "compile": "DEBUG=app:* NODE_ENV=production node --harmony bin/compile",
     "lint": "eslint . ./",
     "lint:fix": "npm run lint -- --fix",
     "start": "npm run dev",
     "prod": "NODE_ENV=production PORT=$PORT node bin/server",
     "deploy": "rm -rf dist && NODE_ENV=production npm run compile && git add dist -A && git commit -m 'deploy' && git push heroku master",
-    "dev": "DEBUG=app:* NODE_ENV=development nodemon --watch ./build --watch ./server --watch ./bin --watch ./config --exec 'node bin/server'",
+    "dev": "DEBUG=app:* NODE_ENV=development nodemon --watch ./build --watch ./server --watch ./bin --watch ./config --exec 'node bin/server/index.js'",
     "dev:no-debug": "DEBUG=app:* NODE_ENV=development npm run dev -- --no_debug"
   },
   "repository": {

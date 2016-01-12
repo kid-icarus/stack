@@ -1,4 +1,5 @@
-require('pmx').init()
+import pmx from 'pmx'
+import server from './http'
+pmx.init()
 
-const server = require('./http')
-module.exports = server
+export default server

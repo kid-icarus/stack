@@ -1,13 +1,13 @@
-const webpack = require('webpack')
-const {compose} = require('compose-middleware')
-const WebpackDevMiddleware = require('webpack-dev-middleware')
-const WebpackHotMiddleware = require('webpack-hot-middleware')
-const config = require('app-config-chain')
+import webpack from 'webpack'
+import {compose} from 'compose-middleware'
+import WebpackDevMiddleware from 'webpack-dev-middleware'
+import WebpackHotMiddleware from 'webpack-hot-middleware'
+import config from 'app-config-chain'
 
-const webpackConfig = require('../../../../webpack')
+import webpackConfig from '../../../../webpack'
 const compiler = webpack(webpackConfig)
 
-module.exports = compose([
+export default compose([
   WebpackDevMiddleware(compiler, {
     publicPath: config.paths.public,
     contentBase: config.paths.client,
