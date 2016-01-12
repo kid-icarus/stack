@@ -1,12 +1,9 @@
 require('babel-register')
 
-const config = require('app-config-chain')
+const config = require('app-config-chain').http
 const server = require('../server')
 const debug = require('debug')('app:bin:server')
 
-const host = config.server_host
-const port = config.server_port
-
-server.listen(port, host, function () {
-  debug('Server is now running at ' + host + ':' + port + '.')
+server.listen(config.port, config.host, function () {
+  debug('Server is now running at', `${config.host}:${config.port}`)
 })

@@ -1,6 +1,7 @@
 /* eslint spaced-comment:0 */
 import path from 'path'
 
+const basePath = path.resolve(__dirname, '../')
 const config = {
   env: process.env.NODE_ENV,
   cookie: {
@@ -8,71 +9,18 @@ const config = {
     secret: 'stack-cookie-secret-1337'
   },
 
-  // ----------------------------------
-  // Project Structure
-  // ----------------------------------
-  path_base: path.resolve(__dirname, '../'),
-  dir_client: 'client',
-  dir_dist: 'dist',
-  dir_server: 'server',
-
-  // ----------------------------------
-  // Server Configuration
-  // ----------------------------------
-  server_host: '0.0.0.0',
-  server_port: process.env.PORT || 3000,
-
-  // ----------------------------------
-  // Compiler Configuration
-  // ----------------------------------
-  compiler_css_modules: true,
-  compiler_source_maps: true,
-  compiler_hash_type: 'hash',
-  compiler_fail_on_warning: false,
-  compiler_quiet: false,
-  compiler_public_path: '/',
-  compiler_stats: {
-    chunks: false,
-    chunkModules: false,
-    colors: true
-  }
-}
-
-/************************************************
--------------------------------------------------
-
-All Internal Configuration Below
-Edit at Your Own Risk
-
--------------------------------------------------
-************************************************/
-
-// ------------------------------------
-// Environment
-// ------------------------------------
-config.globals = {
-  'process.env': {
-    'NODE_ENV': JSON.stringify(config.env)
+  paths: {
+    base: basePath,
+    public: '/',
+    client: path.join(basePath, 'client'),
+    dist: path.join(basePath, 'dist'),
+    server: path.join(basePath, 'server')
   },
-  'NODE_ENV': config.env,
-  '__DEV__': config.env === 'development',
-  '__PROD__': config.env === 'production'
-}
 
-// ------------------------------------
-// Utilities
-// ------------------------------------
-config.utils_paths = (() => {
-  const resolve = path.resolve
-
-  const base = (...args) =>
-    resolve.apply(resolve, [config.path_base, ...args])
-
-  return {
-    base: base,
-    client: base.bind(null, config.dir_client),
-    dist: base.bind(null, config.dir_dist)
+  http: {
+    host: '0.0.0.0',
+    port: process.env.PORT || 3000
   }
-})()
+}
 
 export default config

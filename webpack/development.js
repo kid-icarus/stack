@@ -1,6 +1,5 @@
 /* eslint key-spacing:0 */
 import webpack from 'webpack'
-import config from 'app-config-chain'
 import _debug from 'debug'
 
 const debug = _debug('app:webpack:development')

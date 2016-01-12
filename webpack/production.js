@@ -1,20 +1,11 @@
 import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
-import config from 'app-config-chain'
 import _debug from 'debug'
 
 const debug = _debug('app:webpack:production')
 
 export default (webpackConfig) => {
   debug('Create configuration.')
-
-  if (config.compiler_source_maps) {
-    debug('Source maps enabled for production.')
-    webpackConfig.devtool = 'source-map'
-  } else {
-    debug('Source maps are disabled in production.')
-  }
-
   debug('Apply ExtractTextPlugin to CSS loaders.')
   webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
     if (!loader.loaders ||

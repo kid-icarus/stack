@@ -4,17 +4,25 @@ import rucksack from 'rucksack-css'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import config from 'app-config-chain'
 import _debug from 'debug'
-
-const paths = config.utils_paths
-const debug = _debug('app:webpack:_base')
+import path from 'path'
+const debug = _debug('app:webpack:default')
 debug('Create configuration.')
+
+const globals = {
+  'process.env': {
+    'NODE_ENV': JSON.stringify(config.env)
+  },
+  'NODE_ENV': config.env,
+  '__DEV__': config.env === 'development',
+  '__PROD__': config.env === 'production'
+}
 
 const webpackConfig = {
   name: 'client',
   target: 'web',
   entry: {
     app: [
-      paths.base(config.dir_client) + '/index.js'
+      path.join(config.paths.client, './index.js')
     ],
     vendor: [
       'react',
@@ -27,30 +35,30 @@ const webpackConfig = {
     ]
   },
   output: {
-    filename: `[name].[${config.compiler_hash_type}].js`,
-    chunkFilename: `[id].[${config.compiler_hash_type}].js`,
-    path: paths.base(config.dir_dist),
-    publicPath: config.compiler_public_path
+    filename: '[name].[hash].js',
+    chunkFilename: '[id].[hash].js',
+    path: config.paths.dist,
+    publicPath: config.paths.public
   },
   plugins: [
-    new webpack.DefinePlugin(config.globals),
+    new webpack.DefinePlugin(globals),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
     new HtmlWebpackPlugin({
-      template: paths.client('index.html'),
+      template: path.join(config.paths.client, 'index.html'),
       hash: false,
-      favicon: paths.client('assets/favicon.ico'),
+      favicon: path.join(config.paths.client, 'assets/favicon.ico'),
       filename: 'index.html',
       inject: 'body',
       minify: {
         collapseWhitespace: true
       }
     }),
-    new webpack.optimize.CommonsChunkPlugin('vendor', `vendor.[${config.compiler_hash_type}].js`)
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[hash].js')
   ],
   resolve: {
     modulesDirectories: ['local_modules', 'web_modules', 'node_modules'],
-    root: paths.base(config.dir_client),
+    root: config.paths.client,
     extensions: ['', '.js', '.jsx']
   },
   module: {
@@ -117,7 +125,7 @@ const webpackConfig = {
     ]
   },
   sassLoader: {
-    includePaths: paths.client('styles')
+    includePaths: path.join(config.paths.client, 'styles')
   },
   postcss: [
     rucksack({

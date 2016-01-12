@@ -4,19 +4,15 @@ const WebpackDevMiddleware = require('webpack-dev-middleware')
 const WebpackHotMiddleware = require('webpack-hot-middleware')
 const config = require('app-config-chain')
 
-const webpackConfig = require('../../../../build/webpack')
+const webpackConfig = require('../../../../webpack')
 const compiler = webpack(webpackConfig)
-const paths = config.utils_paths
 
 module.exports = compose([
   WebpackDevMiddleware(compiler, {
-    publicPath: webpackConfig.output.publicPath,
-    contentBase: paths.base(config.dir_client),
+    publicPath: config.paths.public,
+    contentBase: config.paths.client,
     hot: true,
-    quiet: config.compiler_quiet,
-    noInfo: config.compiler_quiet,
-    lazy: false,
-    stats: config.compiler_stats
+    lazy: false
   }),
   WebpackHotMiddleware(compiler)
 ])
