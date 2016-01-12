@@ -12,7 +12,8 @@ module.exports = compose([
     publicPath: config.paths.public,
     contentBase: config.paths.client,
     hot: true,
-    lazy: false
+    lazy: false,
+    quiet: true
   }),
   WebpackHotMiddleware(compiler)
 ])
