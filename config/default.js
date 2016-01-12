@@ -20,6 +20,12 @@ const config = {
   http: {
     host: '0.0.0.0',
     port: process.env.PORT || 3000
+  },
+
+  redis: {
+    host: 'localhost',
+    pass: '',
+    index: 2
   }
 }
 

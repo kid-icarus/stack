@@ -8,9 +8,11 @@ app.disable('x-powered-by')
 // middleware stack
 app.use(require('./middleware/errors'))
 app.use(require('./middleware/formatting'))
+app.use(require('./middleware/session'))
 
 // final piece - serve static content
 app.use(require('./middleware/spa'))
+
 if (config.env === 'development') {
   app.use(require('./middleware/webpack'))
 } else {
