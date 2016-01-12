@@ -5,14 +5,14 @@
   "main": "index.js",
   "scripts": {
     "clean": "rm -rf dist",
-    "compile": "node -r dotenv/config --harmony bin/compile",
+    "compile": "NODE_ENV=production node --harmony bin/compile",
     "lint": "eslint . ./",
     "lint:fix": "npm run lint -- --fix",
     "start": "npm run dev",
     "prod": "NODE_ENV=production PORT=$PORT node bin/server",
     "deploy": "rm -rf dist && NODE_ENV=production npm run compile && git add dist -A && git commit -m 'deploy' && git push heroku master",
-    "dev": "nodemon --watch ./build --watch ./server --watch ./bin --watch ./config --exec 'node -r dotenv/config bin/server --hot'",
-    "dev:no-debug": "npm run dev -- --no_debug"
+    "dev": "DEBUG=app:* NODE_ENV=development nodemon --watch ./build --watch ./server --watch ./bin --watch ./config --exec 'node bin/server'",
+    "dev:no-debug": "DEBUG=app:* NODE_ENV=development npm run dev -- --no_debug"
   },
   "repository": {
     "type": "git",
@@ -41,7 +41,6 @@
     "cookie-parser": "^1.4.1",
     "cssnano": "^3.3.2",
     "debug": "^2.2.0",
-    "dotenv": "^1.2.0",
     "errorhandler": "^1.4.2",
     "express": "^4.13.3",
     "express-session": "^1.13.0",
