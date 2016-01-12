@@ -15,13 +15,15 @@ const actionBlacklist = [
 const engine = createEngine('x')
 
 const storageEngine =
-  storage.decorators.filter(
-    storage.decorators.immutablejs(
-      engine,
+  storage.decorators.debounce(
+    storage.decorators.filter(
+      storage.decorators.immutablejs(
+        engine,
+        whitelist
+      ),
       whitelist
-    ),
-    whitelist
-  )
+    )
+  , 100)
 
 export default {
   engine: storageEngine,
