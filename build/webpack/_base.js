@@ -18,8 +18,12 @@ const webpackConfig = {
     ],
     vendor: [
       'react',
+      'react-dom',
+      'react-router',
+      'redux',
       'jquery',
-      'semantic-ui-css/semantic.js'
+      'semantic-ui-css/semantic.js',
+      'immutable'
     ]
   },
   output: {
@@ -42,7 +46,7 @@ const webpackConfig = {
         collapseWhitespace: true
       }
     }),
-    new webpack.optimize.CommonsChunkPlugin('vendor')
+    new webpack.optimize.CommonsChunkPlugin('vendor', `vendor.[${config.compiler_hash_type}].js`)
   ],
   resolve: {
     modulesDirectories: ['local_modules', 'web_modules', 'node_modules'],

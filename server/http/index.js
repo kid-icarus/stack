@@ -1,6 +1,6 @@
 const http = require('http')
-const app = require('./express')
+const expressApp = require('./express')
 
-const httpServer = http.createServer(app)
+const httpServer = http.createServer(expressApp)
 
 module.exports = httpServer
