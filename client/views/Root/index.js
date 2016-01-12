@@ -7,6 +7,7 @@ import './index.sass'
 // css bs
 // import 'font-awesome-sass-loader'
 import 'semantic-ui-css/semantic.css'
+import 'semantic-ui-css/semantic.js'
 
 export class RootView extends React.Component {
   static displayName = 'RootView';
