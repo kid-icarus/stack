@@ -1,11 +1,11 @@
-const config = require('app-config-chain')
-const compress = require('compression')
-const methodOverride = require('method-override')
-const cookieParser = require('cookie-parser')
-const bodyParser = require('body-parser')
-const {compose} = require('compose-middleware')
+import config from 'app-config-chain'
+import compress from 'compression'
+import methodOverride from 'method-override'
+import cookieParser from 'cookie-parser'
+import bodyParser from 'body-parser'
+import {compose} from 'compose-middleware'
 
-module.exports = compose([
+export default compose([
   compress(),
   methodOverride(),
   bodyParser.json({
