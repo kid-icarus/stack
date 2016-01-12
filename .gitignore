@@ -1,6 +1,9 @@
 node_modules
 coverage
 
+## Vim
+.swp
+
 ## Node.js
 lib-cov
 *.seed
