@@ -1,13 +1,18 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
 import { Link } from 'react-router'
 import IPropTypes from 'immutable-props'
 import Component from 'redux-dgaf'
 import {Button, Icon} from 'react-semantify'
+import jif from 'jif'
 import './index.sass'
+import PeopleList from './PeopleList'
+import PersonProfile from './PersonProfile'
+
 
 export class CRMView extends Component {
   static propTypes = {
-    people: IPropTypes.Map.isRequired
+    people: IPropTypes.Map.isRequired,
+    params: PropTypes.object
   };
   static defaultState = {
     name: 'funkytek'
@@ -16,46 +21,21 @@ export class CRMView extends Component {
     people: 'people'
   };
 
+  filterPeople (e) {
+    this.actions.filterPeople(e.target.value)
+  }
+
   render () {
+    let uid = this.props.params.person
     return (
       <div className='crm'>
 
         {/* People */}
         <div className='people'>
-
-          {/* Nav */}
-          <div className='nav'>
-
-            <div className='ui search'>
-              <div className='ui icon input'>
-                <input placeholder='Search People' className='prompt' type = 'text' />
-                <i className='search icon' />
-              </div>
-              <div className='results'></div>
-            </div>
-
-            <Button className='icon filterUsers'><Icon className='filter' /></Button>
-            <Button className='icon'><Icon className='add' /></Button>
-          </div>
-
-          {/* List */}
-          <div className='ui middle aligned divided list'>
-            {
-              this.props.people.map((person) =>
-                <Link to={`/crm/${person.get('id')}`} className='item' key={person.get('id')}>
-                  <img className='ui avatar image' src={person.get('img')} />
-                  <div className='content'>
-                    <div className='header'>{person.get('name')}</div>
-                  </div>
-                  <div className='right floated badges middle aligned'>
-                    $$
-                  </div>
-                </Link>
-              )
-            }
-          </div>
+          {
+            (uid) ? <PersonProfile person={this.props.people.get(uid)} /> : <PeopleList />
+          }
         </div>
-
         {/* Messages */}
         <div className='messages'>
           <h2>Group</h2>

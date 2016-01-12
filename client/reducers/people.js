@@ -46,6 +46,17 @@ const initialState = Immutable.fromJS({
   }
 })
 
+export const filterPeople = (state, {payload}) => {
+  if (payload === '') {
+    return initialState
+  } else {
+    return state.filter((person) => {
+      var re = new RegExp(payload.toLowerCase(), 'g')
+      return (person.get('name').toLowerCase().match(re))
+    })
+  }
+}
+
 export const addPerson = (state, {payload}) => {
   let id = uuid.v1()
   let person = Immutable.Map({
