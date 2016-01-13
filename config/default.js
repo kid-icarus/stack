@@ -3,11 +3,8 @@ import path from 'path'
 
 const basePath = path.resolve(__dirname, '../')
 const config = {
+  // core stuff
   env: process.env.NODE_ENV,
-  cookie: {
-    name: 'x',
-    secret: 'stack-cookie-secret-1337'
-  },
 
   paths: {
     base: basePath,
@@ -17,15 +14,22 @@ const config = {
     server: path.join(basePath, 'server')
   },
 
+  // http stuff
   http: {
     host: '0.0.0.0',
     port: process.env.PORT || 3000
+  },
+
+  cookie: {
+    name: 'x',
+    secret: 'stack-cookie-secret-1337'
   },
 
   api: {
     path: '/v1'
   },
 
+  // databases
   redis: {
     host: 'localhost',
     pass: '',
@@ -34,6 +38,12 @@ const config = {
 
   rethink: {
     db: 'stack'
+  },
+
+  // auth stuff
+  facebook: {
+    id: '946814205398323',
+    secret: '568fa31830811386f09b195091cbb699'
   }
 }
 

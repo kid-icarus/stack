@@ -14,10 +14,21 @@ const User = rethink.createModel('User', {
     lastLogin: type.date().default(r.now())
   },
 
+  // auth info
+  facebook: {
+    id: type.string(),
+    accessToken: type.string()
+  },
+
   // user info
   name: type.string().required(),
   email: type.string().email(),
   location: type.string()
+})
+
+User.pre('save', (next) => {
+  this.times.lastModified = Date.now()
+  next()
 })
 
 export default User

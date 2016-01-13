@@ -7,6 +7,7 @@ import spa from './middleware/spa'
 import webpack from './middleware/webpack'
 import session from './middleware/session'
 import api from './middleware/api'
+import auth from './middleware/auth'
 
 const app = express()
 app.disable('x-powered-by')
@@ -15,6 +16,7 @@ app.disable('x-powered-by')
 app.use(errors)
 app.use(formatting)
 app.use(session)
+app.use(auth)
 app.use(api)
 
 // final piece - serve static content
