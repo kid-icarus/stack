@@ -4,6 +4,7 @@ import path from 'path'
 import config from 'app-config-chain'
 import loadResources from './loadResources'
 import wrapHandler from './wrapHandler'
+import displayResources from './displayResources'
 import _debug from 'debug'
 const debug = _debug('app:api:loader')
 
@@ -15,6 +16,10 @@ const resources = loadResources({
 
 // construct the router
 const router = Router({mergeParams: true})
+router.get(`${config.api.path}/_resources`, (req, res) => {
+  res.json(displayResources(resources))
+})
+
 Object.keys(resources).forEach((resourceName) => {
   var endpoints = resources[resourceName]
   debug(`Loaded ${endpoints.length} endpoints for "${resourceName}"`)
