@@ -1,4 +1,5 @@
 import User from './model'
+import decl from 'rethink-decl'
 
 export default (opt, cb) => {
   if (!opt.user) {
@@ -8,5 +9,5 @@ export default (opt, cb) => {
     })
   }
 
-  User.filter(opt.options).run(cb)
+  decl(User, opt.options).run(cb)
 }
