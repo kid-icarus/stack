@@ -1,0 +1,15 @@
+{
+  "restartable": "rs",
+  "verbose": true,
+  "watch": [
+    "./webpack",
+    "./server",
+    "./bin",
+    "./config",
+    "package.json"
+  ],
+  "env": {
+    "NODE_ENV": "development",
+    "DEBUG": "app:*"
+  }
+}
