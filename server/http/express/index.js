@@ -22,7 +22,7 @@ app.use(spa)
 if (config.env === 'development') {
   app.use(webpack)
 } else {
-  app.use(express.static(paths.base(config.dir_dist)))
+  app.use(express.static(config.paths.dist))
 }
 
 export default app
