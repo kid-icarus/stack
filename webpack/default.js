@@ -9,6 +9,8 @@ import path from 'path'
 const debug = _debug('app:webpack:default')
 debug('Create configuration.')
 
+import moduleLoaders from './loaders'
+
 const globals = {
   'process.env': {
     'NODE_ENV': JSON.stringify(config.env)
@@ -74,65 +76,7 @@ const webpackConfig = {
         exclude: /node_modules/
       }
     ],
-    loaders: [
-      {
-        test: /\.(js|jsx)$/,
-        exclude: /node_modules/,
-        loader: 'babel',
-        query: {
-          cacheDirectory: true,
-          plugins: ['transform-runtime', 'add-module-exports'],
-          presets: ['es2015', 'react', 'stage-0'],
-          env: {
-            development: {
-              plugins: [
-                ['react-transform', {
-                  // omit HMR plugin by default and _only_ load in hot mode
-                  transforms: [{
-                    transform: 'react-transform-catch-errors',
-                    imports: ['react', 'redbox-react']
-                  }]
-                }]
-              ]
-            }
-          }
-        }
-      },
-      {
-        test: /\.json$/,
-        loader: 'json'
-      },
-      {
-        test: /\.sass$/,
-        loaders: [
-          'style',
-          'css?sourceMap',
-          'postcss',
-          'sass?indentedSyntax&sourceMap'
-        ]
-      },
-      {
-        test: /\.css$/,
-        loaders: [
-          'style',
-          'css?sourceMap'
-        ]
-      },
-      {
-        test: /\.lookup$/,
-        loaders: [
-          'glob'
-        ]
-      },
-      /* eslint-disable */
-      { test: /\.woff(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff' },
-      { test: /\.woff2(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/font-woff2' },
-      { test: /\.ttf(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=application/octet-stream' },
-      { test: /\.eot(\?.*)?$/, loader: 'file?prefix=fonts/&name=[path][name].[ext]' },
-      { test: /\.svg(\?.*)?$/, loader: 'url?prefix=fonts/&name=[path][name].[ext]&limit=10000&mimetype=image/svg+xml' },
-      { test: /\.(png|jpg)$/, loader: 'url?limit=8192' }
-      /* eslint-enable */
-    ]
+    loaders: moduleLoaders
   },
   sassLoader: {
     includePaths: path.join(config.paths.client, 'styles')
