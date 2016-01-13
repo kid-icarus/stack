@@ -3,7 +3,7 @@ const {type, r} = rethink
 
 const User = rethink.createModel('User', {
   // core fields
-  id: type.string().required(),
+  id: type.string(),
   role: type.string().enum([
     'pleb',
     'admin'
@@ -21,7 +21,7 @@ const User = rethink.createModel('User', {
   },
 
   // user info
-  name: type.string().required(),
+  name: type.string(),
   email: type.string().email(),
   location: type.string()
 })

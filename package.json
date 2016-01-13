@@ -50,6 +50,7 @@
     "method-override": "^2.3.5",
     "pluralize": "^1.2.1",
     "pmx": "^0.5.8",
+    "promise-to-callback": "^1.0.0",
     "react": "^0.14.0",
     "react-dom": "^0.14.0",
     "react-redux": "^4.0.0",

@@ -3,7 +3,7 @@ coverage
 rethinkdb_data
 
 ## Vim
-.swp
+*.swp
 
 ## Node.js
 lib-cov
