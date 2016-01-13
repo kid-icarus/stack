@@ -2,6 +2,7 @@ import webpack from 'webpack'
 import cssnano from 'cssnano'
 import rucksack from 'rucksack-css'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
+import NpmCheckPlugin from 'npm-check-webpack-plugin'
 import config from 'app-config-chain'
 import _debug from 'debug'
 import path from 'path'
@@ -41,6 +42,9 @@ const webpackConfig = {
     publicPath: config.paths.public
   },
   plugins: [
+    new NpmCheckPlugin({
+      autoInstall: false
+    }),
     new webpack.DefinePlugin(globals),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
