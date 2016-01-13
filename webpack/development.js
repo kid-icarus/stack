@@ -7,8 +7,6 @@ const debug = _debug('app:webpack:development')
 export default (webpackConfig) => {
   debug('Create configuration.')
 
-  webpackConfig.devtool = 'source-map'
-
   // ------------------------------------
   // Enable HMR if Configured
   // ------------------------------------

@@ -21,18 +21,10 @@ const globals = {
 const webpackConfig = {
   name: 'client',
   target: 'web',
+  devtool: 'inline-eval-cheap-source-map',
   entry: {
     app: [
       path.join(config.paths.client, './index.js')
-    ],
-    vendor: [
-      'react',
-      'react-dom',
-      'react-router',
-      'redux',
-      'jquery',
-      'semantic-ui-css/semantic.js',
-      'immutable'
     ]
   },
   output: {
@@ -57,8 +49,7 @@ const webpackConfig = {
       minify: {
         collapseWhitespace: true
       }
-    }),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[hash].js')
+    })
   ],
   resolve: {
     modulesDirectories: ['local_modules', 'web_modules', 'node_modules'],
@@ -116,6 +107,12 @@ const webpackConfig = {
           'style',
           'css?sourceMap',
           'postcss'
+        ]
+      },
+      {
+        test: /\.lookup$/,
+        loaders: [
+          'glob'
         ]
       },
       /* eslint-disable */

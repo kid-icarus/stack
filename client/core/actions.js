@@ -1,7 +1,7 @@
 import { bindActionCreators } from 'redux'
 import { pushPath } from 'redux-simple-router'
 import merge from 'lodash.merge'
-import localActions from 'glob-loader!actions/.lookup'
+import localActions from 'actions/.lookup'
 
 const localActionFns = Object.keys(localActions).reduce((p, k) => {
   return merge(p, localActions[k])
