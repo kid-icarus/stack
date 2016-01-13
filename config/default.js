@@ -22,10 +22,18 @@ const config = {
     port: process.env.PORT || 3000
   },
 
+  api: {
+    path: '/v1'
+  },
+
   redis: {
     host: 'localhost',
     pass: '',
     index: 2
+  },
+
+  rethink: {
+    db: 'stack'
   }
 }
 

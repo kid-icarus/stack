@@ -6,8 +6,8 @@ import formatting from './middleware/formatting'
 import spa from './middleware/spa'
 import webpack from './middleware/webpack'
 import session from './middleware/session'
+import api from './middleware/api'
 
-const paths = config.utils_paths
 const app = express()
 app.disable('x-powered-by')
 
@@ -15,6 +15,7 @@ app.disable('x-powered-by')
 app.use(errors)
 app.use(formatting)
 app.use(session)
+app.use(api)
 
 // final piece - serve static content
 app.use(spa)
