@@ -1,4 +1,4 @@
-// TODO
+import User from './model'
 
 export default (opt, cb) => {
   if (!opt.user) {
@@ -8,5 +8,5 @@ export default (opt, cb) => {
     })
   }
 
-  cb(null, {you: opt.user})
+  User.filter(opt.options).run(cb)
 }

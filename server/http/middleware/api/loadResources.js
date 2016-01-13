@@ -30,7 +30,8 @@ export default (opt) => {
           name: methodName,
           method: methods[methodName].method,
           path: getPath(resourceName, methodName),
-          handler: handler
+          handler: handler,
+          model: handlers.model
         }
       })
 

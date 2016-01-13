@@ -1,4 +1,5 @@
 import rethink from 'connections/rethink'
+import lens from 'thinky-lens'
 const {type, r} = rethink
 
 const User = rethink.createModel('User', {
@@ -26,6 +27,18 @@ const User = rethink.createModel('User', {
   location: type.string()
 })
 
+// security
+lens(User, {
+  id: ['public'],
+  role: ['admin', 'self'],
+  times: ['admin', 'self'],
+  facebook: ['admin'],
+  name: ['public'],
+  email: ['admin', 'self'],
+  location: ['public']
+})
+
+// other junk
 User.pre('save', (next) => {
   this.times.lastModified = Date.now()
   next()

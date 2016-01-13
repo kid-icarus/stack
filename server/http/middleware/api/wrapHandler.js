@@ -15,7 +15,7 @@ const getErrorFields = (err) => {
   }, {})
 }
 
-export default (handler) => (req, res, next) => {
+export default (handler, Model) => (req, res, next) => {
   var called = false
   var opt = {
     id: req.params.id,
@@ -39,8 +39,12 @@ export default (handler) => (req, res, next) => {
     }
 
     if (typeof data !== 'undefined') {
-      res.status(data.status || 200)
-      res.json(data.result || data)
+      res.status(200)
+      if (Model && Model.lens) {
+        res.json(Model.lens(opt.user, data))
+      } else {
+        res.json(data)
+      }
       return res.end()
     }
 

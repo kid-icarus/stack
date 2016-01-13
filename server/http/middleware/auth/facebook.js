@@ -2,15 +2,19 @@ import {Router} from 'express'
 import passport from 'passport'
 import {Strategy} from 'passport-facebook'
 import config from 'app-config-chain'
-import p2c from 'promise-to-callback'
+import crypto from 'crypto'
+import {r} from 'connections/rethink'
 import User from 'resources/user/model'
 
+const md5 = (str) =>
+  crypto.createHash('md5').update(str).digest('hex')
+
 const dataToUser = (data) => new User({
-  id: `fb-${data.id}`,
+  id: md5(`fb-${data.id}`),
   name: data.name,
   email: data.email,
   times: {
-    lastLogin: Date.now()
+    lastLogin: r.now()
   },
   facebook: {
     id: data.id,
@@ -73,6 +77,11 @@ router.get('/auth/facebook/callback', callback, (req, res) => {
   if (req.session && req.session.redirectTo) {
     return res.redirect(`/${req.session.redirectTo}`)
   }
+  res.redirect('/')
+})
+
+router.get('/auth/logout', (req, res) => {
+  req.logout()
   res.redirect('/')
 })
 

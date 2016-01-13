@@ -20,7 +20,7 @@ Object.keys(resources).forEach((resourceName) => {
   debug(`Loaded ${endpoints.length} endpoints for "${resourceName}"`)
   endpoints.forEach((endpoint) => {
     debug(`  - ${endpoint.name} (${endpoint.method.toUpperCase()} ${endpoint.path})`)
-    router[endpoint.method](endpoint.path, wrapHandler(endpoint.handler))
+    router[endpoint.method](endpoint.path, wrapHandler(endpoint.handler, endpoint.model))
   })
 })
 

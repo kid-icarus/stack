@@ -48,6 +48,7 @@
     "express-session": "^1.13.0",
     "jade": "^1.11.0",
     "method-override": "^2.3.5",
+    "object-lens": "^1.0.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.0.0",
     "pluralize": "^1.2.1",
