@@ -62,7 +62,7 @@ const webpackConfig = {
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[hash].js')
   ],
   resolve: {
-    modulesDirectories: ['local_modules', 'web_modules', 'node_modules'],
+    modulesDirectories: ['local_modules', 'node_modules'],
     root: config.paths.client,
     extensions: ['', '.js', '.jsx']
   },
