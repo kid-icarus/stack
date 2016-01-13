@@ -3,7 +3,7 @@ import {compose} from 'compose-middleware'
 import WebpackDevMiddleware from 'webpack-dev-middleware'
 import WebpackHotMiddleware from 'webpack-hot-middleware'
 import config from 'app-config-chain'
-import webpackConfig from '../../../../../webpack'
+import webpackConfig from '../../../../webpack'
 const compiler = webpack(webpackConfig)
 
 export default compose([
