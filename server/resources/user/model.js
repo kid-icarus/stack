@@ -28,6 +28,8 @@ const User = rethink.createModel('User', {
 })
 
 // security
+// adds a .lens fn to User
+// which api loader will use to filter outgoing data
 lens(User, {
   id: ['public'],
   role: ['admin', 'self'],
