@@ -4,7 +4,7 @@ const store = require('./store')
 
 module.exports = session({
   store: store,
-  key: config.cookie.name,
+  name: config.cookie.name,
   secret: config.cookie.secret,
   resave: false,
   saveUninitialized: false,

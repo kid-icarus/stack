@@ -1,7 +1,6 @@
 // TODO
 
 export default (opt, cb) => {
-  console.log('api user', opt.user)
   if (!opt.user) {
     return cb({
       status: 403,
@@ -9,5 +8,5 @@ export default (opt, cb) => {
     })
   }
 
-  cb(null, {test: 123})
+  cb(null, {you: opt.user})
 }

@@ -1,5 +1,9 @@
-import everyauth from 'everyauth'
-import config from 'app-config-chain'
+import {compose} from 'compose-middleware'
+import passport from 'passport'
 import fb from './facebook'
 
-export default everyauth.middleware()
+export default compose([
+  passport.initialize(),
+  passport.session(),
+  fb
+])
