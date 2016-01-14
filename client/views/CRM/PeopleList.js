@@ -47,7 +47,7 @@ export class PeopleList extends Component {
           {
             this.props.people.toArray().map((person) =>
               <Link to={`/crm/${person.get('id')}`} className='item' key={person.get('id')}>
-                <img className='ui avatar image' src={person.get('img')} />
+                <img className='ui avatar image' src={person.get('smallImage')} />
                 <div className='content'>
                   <div className='header'>{person.get('name')}</div>
                 </div>

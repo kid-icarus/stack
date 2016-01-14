@@ -6,10 +6,11 @@ let ids = [uuid.v1(), uuid.v1(), uuid.v1(), uuid.v1()]
 const initialState = Immutable.fromJS({
   [ids[0]]: {
     id: ids[0],
-    name: 'Daniel Louise',
-    img: '//semantic-ui.com/images/avatar/small/daniel.jpg',
+    name: 'Aaron M',
+    smallImage: '//semantic-ui.com/images/avatar/small/daniel.jpg',
+    largeImage: '//semantic-ui.com/images/avatar/large/daniel.jpg',
     location: 'Phoenix, AZ',
-    engagementScore: 4.6,
+    litScore: 4,
     monetizationScore: 3,
     social: [{email: 'aaron@wearefractal.com', twitter: 'funkytek', facebook: 'funkytek', instagram: 'funkytek'}],
     created: Date.now()
@@ -17,9 +18,10 @@ const initialState = Immutable.fromJS({
   [ids[1]]: {
     id: ids[1],
     name: 'Stevie Felliciano',
-    img: '//semantic-ui.com/images/avatar/small/stevie.jpg',
+    smallImage: '//semantic-ui.com/images/avatar/small/stevie.jpg',
+    largeImage: '//semantic-ui.com/images/avatar/large/stevie.jpg',
     location: 'Phoenix, AZ',
-    engagementScore: 4.6,
+    litScore: 2,
     monetizationScore: 3,
     social: [{twitter: 'funkytek', facebook: 'aaron.thomas.murray', instagram: 'funkytek'}],
     created: Date.now()
@@ -27,9 +29,10 @@ const initialState = Immutable.fromJS({
   [ids[2]]: {
     id: ids[2],
     name: 'Elliot TS',
-    img: '//semantic-ui.com/images/avatar/small/elliot.jpg',
+    smallImage: '//semantic-ui.com/images/avatar/small/elliot.jpg',
+    largeImage: '//semantic-ui.com/images/avatar/large/elliot.jpg',
     location: 'Phoenix, AZ',
-    engagementScore: 4.6,
+    litScore: 1,
     monetizationScore: 3,
     social: [{twitter: 'funkytek', facebook: 'aaron.thomas.murray', instagram: 'funkytek'}],
     created: Date.now()
@@ -37,9 +40,10 @@ const initialState = Immutable.fromJS({
   [ids[3]]: {
     id: ids[3],
     name: 'Gary Nicegy',
-    img: '//semantic-ui.com/images/avatar/small/stevie.jpg',
+    smallImage: '//semantic-ui.com/images/avatar/small/stevie.jpg',
+    largeImage: '//semantic-ui.com/images/avatar/large/stevie.jpg',
     location: 'Phoenix, AZ',
-    engagementScore: 4.6,
+    litScore: 3,
     monetizationScore: 3,
     social: [{twitter: 'funkytek', facebook: 'aaron.thomas.murray', instagram: 'funkytek'}],
     created: Date.now()

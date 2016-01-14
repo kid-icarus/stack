@@ -8,37 +8,17 @@ import './index.sass'
 
 export class PersonProfile extends Component {
   static propTypes = {
-    params: PropTypes.object,
-    person: IPropTypes.Map.required
+    params: PropTypes.object
   };
 
+  componentDidMount() {
+    console.log('did mount')
+    console.log(this.props.params)
+  }
+
   render () {
-    let person = this.props.person.toJS()
     return (
-      <div className='profile'>
-
-        <div className='ui card'>
-          <div className='image'>
-            <img src={person.img} />
-          </div>
-          <div className='content'>
-            <a className='header'>{person.name}</a>
-            <div className='meta'>
-              <span className='date'>Joined in 2013</span>
-            </div>
-            <div className='description'>
-              Kristy is an art director living in New York.
-            </div>
-          </div>
-          <div className='extra content'>
-            <a>
-              <i className='user icon'></i>
-              22 Friends
-            </a>
-          </div>
-        </div>
-
-      </div>
+      <div>d</div>
     )
   }
 }

@@ -1,5 +1,9 @@
 node_modules
 coverage
+rethinkdb_data
+
+## Vim
+*.swp
 
 ## Node.js
 lib-cov

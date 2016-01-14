@@ -1,5 +1,5 @@
 import { Link } from 'react-router'
-import {Header} from 'react-semantify'
+import {Grid, Header, Row, Column} from 'react-semantify'
 import Component from 'redux-dgaf'
 import React from 'react'
 import './index.sass'
@@ -8,10 +8,14 @@ export class AboutView extends Component {
   static displayName = 'AboutView';
   render () {
     return (
-      <div className='about-view'>
-        <Header>This is the about view!</Header>
-        <Link to='/'>Back To Home View</Link>
-      </div>
+      <Grid className='about-view middle aligned one column centered'>
+        <Row>
+          <Column className='eight wide middle aligned'>
+            <Header className='large'>About View</Header>
+            <Link to='/'>Back To Home</Link>
+          </Column>
+        </Row>
+      </Grid>
     )
   }
 }

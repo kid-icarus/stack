@@ -4,12 +4,11 @@ import React from 'react'
 import Component from 'redux-dgaf'
 import './index.sass'
 
-// css bs
-// import 'font-awesome-sass-loader'
+// css
 import 'semantic-ui-css/semantic.css'
 import 'semantic-ui-css/semantic.js'
 
-export class RootView extends React.Component {
+export class RootView extends Component {
   static displayName = 'RootView';
   static propTypes = {
     history: React.PropTypes.object.isRequired,

@@ -29,35 +29,37 @@ export class CRMView extends Component {
     let uid = this.props.params.person
     return (
       <div className='crm'>
-
-        {/* People */}
-        <div className='people'>
-          {
-            (uid) ? <PersonProfile person={this.props.people.get(uid)} /> : <PeopleList />
-          }
+        <div className='navbar'>
+          <a href='/crm'>lit</a>
         </div>
-        {/* Messages */}
-        <div className='messages'>
-          <h2>Group</h2>
-          <div className='ui form'>
-            <div className='field'>
-              <label>Message</label>
-              <textarea></textarea>
+        <div className='main'>
+          {/* People */}
+          <div className='people'>
+            {
+              (uid) ? <PersonProfile person={this.props.people.get(uid)} /> : <PeopleList />
+            }
+          </div>
+          {/* Messages */}
+          <div className='messages'>
+            <h3>Message</h3>
+            <div className='ui form'>
+              <div className='field'>
+                <textarea></textarea>
+              </div>
+              <Button className='primary'>Send</Button>
             </div>
-            <Button className='primary'>Send</Button>
+          </div>
+
+          {/* Drop */}
+          <div className='drop'>
+            <h3>Content</h3>
+            <div className=''>
+              <iframe width='100%' height='215' src='https://www.youtube.com/embed/AgbpWQCOm6I' frameBorder='0' allowFullScreen></iframe>
+              <iframe width='100%' height='215' src='https://www.youtube.com/embed/2Sut_KgDTHg' frameBorder='0' allowFullScreen></iframe>
+              <iframe width='100%' height='250' scrolling='no' frameBorder='no' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/235150744&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true'></iframe>
+            </div>
           </div>
         </div>
-
-        {/* Drop */}
-        <div className='drop'>
-          <h2>Content</h2>
-          <div className=''>
-            <iframe width='100%' height='215' src='https://www.youtube.com/embed/AgbpWQCOm6I' frameBorder='0' allowFullScreen></iframe>
-            <iframe width='100%' height='215' src='https://www.youtube.com/embed/2Sut_KgDTHg' frameBorder='0' allowFullScreen></iframe>
-            <iframe width='100%' height='250' scrolling='no' frameBorder='no' src='https://w.soundcloud.com/player/?url=https%3A//api.soundcloud.com/tracks/235150744&amp;auto_play=false&amp;hide_related=false&amp;show_comments=true&amp;show_user=true&amp;show_reposts=false&amp;visual=true'></iframe>
-          </div>
-        </div>
-
       </div>
     )
   }

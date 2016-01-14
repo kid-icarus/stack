@@ -16,12 +16,10 @@ const engine = createEngine('x')
 
 const storageEngine =
   storage.decorators.filter(
-    storage.decorators.immutablejs(
-      engine,
-      whitelist
-    ),
-    whitelist
-  )
+    storage.decorators.debounce(
+      storage.decorators.immutablejs(engine, whitelist)
+    , 100)
+  , whitelist)
 
 export default {
   engine: storageEngine,
