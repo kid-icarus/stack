@@ -11,18 +11,10 @@ export default compose([
   WebpackDevMiddleware(compiler, {
     publicPath: config.paths.public,
     contentBase: config.paths.client,
-    noInfo: false,
+    noInfo: true,
     hot: true,
     lazy: false,
-    quiet: false,
-    stats: {
-      colors: true,
-      version: false,
-      hash: false,
-      assets: false,
-      chunks: false,
-      chunkModules: false
-    }
+    quiet: true
   }),
   WebpackHotMiddleware(compiler)
 ])

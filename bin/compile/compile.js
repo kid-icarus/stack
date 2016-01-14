@@ -3,7 +3,7 @@ import webpackCfg from '../../webpack'
 import _debug from 'debug'
 const debug = _debug('app:bin:compile')
 
-debug('Create webpack compiler.')
+debug('Starting webpack compiler.')
 
 const compiler = webpack(webpackCfg)
 

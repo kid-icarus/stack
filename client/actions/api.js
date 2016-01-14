@@ -3,8 +3,8 @@ import {plural} from 'pluralize'
 import cap from 'capitalize'
 import {Schema} from 'normalizr'
 import template from 'template-url'
+import initialState from 'core/initialState'
 
-const resources = (__INITIAL_STATE__).resources
 const nameMap = {
   create: (res) => `create${cap(res)}`,
   find: (res) => `find${cap(plural(res))}`,
@@ -14,8 +14,8 @@ const nameMap = {
   deleteById: (res) => `delete${cap(res)}ById`
 }
 
-const actions = Object.keys(resources).reduce((p, k) => {
-  var resource = resources[k]
+const actions = Object.keys(initialState.resources).reduce((p, k) => {
+  var resource = initialState.resources[k]
   var model = new Schema(k)
 
   resource.endpoints.forEach((res) => {

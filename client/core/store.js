@@ -5,11 +5,7 @@ import { compose, createStore } from 'redux'
 import storage from './storageEngine'
 import rootReducer from './reducers'
 import middleware from './middleware'
-
-const initialState = {
-  ...(window.__INITIAL_STATE__ || {}),
-  ...(__INITIAL_STATE__ || {})
-}
+import initialState from './initialState'
 
 export function configureStore (initialState) {
   var createStoreWithMiddleware = compose(

@@ -7,6 +7,8 @@ const debug = _debug('build:production')
 export default (webpackConfig) => {
   debug('Create configuration.')
   debug('Apply ExtractTextPlugin to CSS loaders.')
+  delete webpackConfig.devtool
+
   webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
     if (!loader.loaders ||
         !loader.loaders.find(name => /css/.test(name.split('?')[0]))) {
