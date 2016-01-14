@@ -6,10 +6,15 @@ import NpmCheckPlugin from 'npm-check-webpack-plugin'
 import config from 'app-config-chain'
 import _debug from 'debug'
 import path from 'path'
+import requireDir from 'require-dir'
 const debug = _debug('app:webpack:default')
 debug('Create configuration.')
 
-import moduleLoaders from './loaders'
+const loaderDir = requireDir('./loaders')
+const moduleLoaders = Object.keys(loaderDir).reduce((p,k) => {
+  loaderDir[k].forEach((loader) => p.push(loader))
+  return p;
+},[])
 
 const globals = {
   'process.env': {
