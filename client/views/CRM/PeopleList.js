@@ -1,9 +1,9 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
 import { Link } from 'react-router'
 import IPropTypes from 'immutable-props'
 import Component from 'redux-dgaf'
 import {Button, Icon} from 'react-semantify'
-import jif from 'jif'
+// import jif from 'jif'
 import './index.sass'
 
 export class PeopleList extends Component {
@@ -45,8 +45,8 @@ export class PeopleList extends Component {
         {/* List */}
         <div className='ui middle aligned divided list'>
           {
-            this.props.people.toArray().map((person) =>
-              <Link to={`/crm/${person.get('id')}`} className='item' key={person.get('id')}>
+            this.props.people.map((person, id) =>
+              <Link to={`/crm/${person.get('id')}`} className='item' key={id}>
                 <img className='ui avatar image' src={person.get('smallImage')} />
                 <div className='content'>
                   <div className='header'>{person.get('name')}</div>
@@ -55,7 +55,7 @@ export class PeopleList extends Component {
                   $$
                 </div>
               </Link>
-            )
+            ).toArray()
           }
         </div>
       </div>

@@ -1,7 +1,7 @@
 import Immutable from 'immutable'
 import uuid from 'uuid'
 
-let ids = [uuid.v1(), uuid.v1(), uuid.v1(), uuid.v1()]
+let ids = [1, 2, 3, 4]
 
 const initialState = Immutable.fromJS({
   [ids[0]]: {

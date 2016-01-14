@@ -13,7 +13,7 @@ export default (
     <Route path='/todos' component={TodosView} />
     <Route path='/todos/:filter' component={TodosView} />
     <Route path='/crm' component={CRMView} />
-    <Route path='/crm/:person' component={CRMView} />
+    <Route path='/crm/:id' component={CRMView} />
     <Route path='*' component={NotFoundView}/>
   </Route>
 )

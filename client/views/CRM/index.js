@@ -1,13 +1,12 @@
 import React, {PropTypes} from 'react'
-import { Link } from 'react-router'
+// import { Link } from 'react-router'
 import IPropTypes from 'immutable-props'
 import Component from 'redux-dgaf'
-import {Button, Icon} from 'react-semantify'
-import jif from 'jif'
+import {Button} from 'react-semantify'
+// import jif from 'jif'
 import './index.sass'
 import PeopleList from './PeopleList'
 import PersonProfile from './PersonProfile'
-
 
 export class CRMView extends Component {
   static propTypes = {
@@ -26,7 +25,7 @@ export class CRMView extends Component {
   }
 
   render () {
-    let uid = this.props.params.person
+    let uid = this.props.params.id
     return (
       <div className='crm'>
         <div className='navbar'>
@@ -36,7 +35,7 @@ export class CRMView extends Component {
           {/* People */}
           <div className='people'>
             {
-              (uid) ? <PersonProfile person={this.props.people.get(uid)} /> : <PeopleList />
+              (uid) ? <PersonProfile params={this.props.params} person={this.props.people.get(uid)} /> : <PeopleList />
             }
           </div>
           {/* Messages */}
