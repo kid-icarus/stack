@@ -1,11 +1,13 @@
 {
   "restartable": "rs",
-  "verbose": true,
+  "verbose": false,
+  "quiet": true,
   "watch": [
     "./webpack",
     "./server",
     "./bin",
     "./config",
+    "./local_modules",
     "package.json"
   ],
   "env": {

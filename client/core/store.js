@@ -26,7 +26,7 @@ export function configureStore (initialState) {
 
   syncReduxAndRouter(browserHistory, store, (state) => state.get('router'))
 
-  if (module.hot) {
+  if (__DEV__ && module.hot) {
     module.hot.accept('./reducers', () => {
       const nextRoot = require('./reducers')
       store.replaceReducer(nextRoot)
