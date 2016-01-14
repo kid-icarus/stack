@@ -2,7 +2,7 @@ import webpack from 'webpack'
 import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import _debug from 'debug'
 
-const debug = _debug('app:webpack:production')
+const debug = _debug('build:production')
 
 export default (webpackConfig) => {
   debug('Create configuration.')

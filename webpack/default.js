@@ -8,7 +8,7 @@ import _debug from 'debug'
 import path from 'path'
 import requireDir from 'require-dir'
 import api from '../server/http/middleware/api'
-const debug = _debug('app:webpack:default')
+const debug = _debug('build:default')
 debug('Create configuration.')
 
 const lFolder = requireDir('./loaders')
@@ -31,7 +31,7 @@ const globals = {
 const webpackConfig = {
   name: 'client',
   target: 'web',
-  devtool: 'source-map',
+  devtool: 'cheap-module-eval-source-map',
   entry: {
     app: [
       path.join(config.paths.client, './index.js')
@@ -53,9 +53,7 @@ const webpackConfig = {
     publicPath: config.paths.public
   },
   plugins: [
-    new NpmCheckPlugin({
-      autoInstall: false
-    }),
+    // new NpmCheckPlugin({autoInstall: false}),
     new webpack.DefinePlugin(globals),
     new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),

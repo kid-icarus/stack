@@ -2,7 +2,7 @@
 import webpack from 'webpack'
 import _debug from 'debug'
 
-const debug = _debug('app:webpack:development')
+const debug = _debug('build:development')
 
 export default (webpackConfig) => {
   debug('Create configuration.')
