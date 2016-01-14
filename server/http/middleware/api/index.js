@@ -13,12 +13,11 @@ const resources = loadResources({
   prefix: config.api.path,
   path: path.join(config.paths.base, './server/resources')
 })
+const meta = displayResources(resources)
 
 // construct the router
 const router = Router({mergeParams: true})
-router.get(`${config.api.path}/_resources`, (req, res) => {
-  res.json(displayResources(resources))
-})
+router.get(`${config.api.path}/_resources`, (req, res) => res.json(meta))
 
 Object.keys(resources).forEach((resourceName) => {
   var endpoints = resources[resourceName]
@@ -28,5 +27,7 @@ Object.keys(resources).forEach((resourceName) => {
     router[endpoint.method](endpoint.path, wrapHandler(endpoint.handler, endpoint.model))
   })
 })
+
+router.meta = meta
 
 export default router

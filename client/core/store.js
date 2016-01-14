@@ -33,4 +33,4 @@ export function configureStore (initialState) {
   return store
 }
 
-export default configureStore(window.__INITIAL_STATE__)
+export default configureStore(__INITIAL_STATE__)

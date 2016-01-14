@@ -7,13 +7,19 @@ import config from 'app-config-chain'
 import _debug from 'debug'
 import path from 'path'
 import requireDir from 'require-dir'
+import api from '../server/http/middleware/api'
 const debug = _debug('app:webpack:default')
 debug('Create configuration.')
 
 const lFolder = requireDir('./loaders')
 const loaders = Object.keys(lFolder).reduce((p, k) => p.concat(lFolder[k]), [])
 
+const initialState = {
+  resources: api.meta
+}
+
 const globals = {
+  '__INITIAL_STATE__': JSON.stringify(initialState),
   'process.env': {
     'NODE_ENV': JSON.stringify(config.env)
   },

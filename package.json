@@ -132,7 +132,8 @@
     },
     "globals": {
       "__DEV__": false,
-      "__PROD__": false
+      "__PROD__": false,
+      "__INITIAL_STATE__": false
     },
     "rules": {
       "semi": [
