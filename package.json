@@ -102,6 +102,7 @@
     "sass-loader": "^3.0.0",
     "semantic-ui-css": "^2.1.8",
     "style-loader": "^0.13.0",
+    "superagent": "^1.6.1",
     "update-object": "^1.0.0",
     "url-loader": "^0.5.6",
     "uuid": "^2.0.1",

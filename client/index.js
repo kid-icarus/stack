@@ -6,6 +6,8 @@ import { browserHistory } from 'react-router'
 import Root from 'views/Root'
 import React from 'react'
 
+import fetchMetadata from 'core/fetchMetadata'
+fetchMetadata()
 import store from 'core/store'
 import routes from 'routes'
 
