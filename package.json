@@ -67,6 +67,7 @@
     "thinky": "^2.2.4"
   },
   "devDependencies": {
+    "capitalize": "^1.0.0",
     "classnames": "^2.2.1",
     "css-loader": "^0.23.0",
     "eslint": "^1.10.3",
@@ -103,6 +104,7 @@
     "semantic-ui-css": "^2.1.8",
     "style-loader": "^0.13.0",
     "superagent": "^1.6.1",
+    "template-url": "^1.0.0",
     "update-object": "^1.0.0",
     "url-loader": "^0.5.6",
     "uuid": "^2.0.1",
@@ -128,12 +130,13 @@
       "standard-react"
     ],
     "env": {
-      "browser": true
+      "browser": true,
+      "node": true
     },
     "globals": {
-      "__DEV__": false,
-      "__PROD__": false,
-      "__INITIAL_STATE__": false
+      "__DEV__": true,
+      "__PROD__": true,
+      "__INITIAL_STATE__": true
     },
     "rules": {
       "semi": [

@@ -15,25 +15,28 @@ export class GHView extends Component {
     name: PropTypes.string.isRequired,
     orgs: IPropTypes.List,
     repos: IPropTypes.List,
+    users: IPropTypes.List,
     user: IPropTypes.Map
   };
   static cursors = {
     orgs: 'requests.orgs',
     repos: 'requests.repos',
-    user: 'requests.user'
+    user: 'requests.user',
+    users: 'requests.users'
   };
 
   getData (name) {
     var opt = { user: name }
     if (this.isFetching() || this.isErrored()) {
-      this.actions.getOrganizations({options: opt, cursor: 'orgs'})
-      this.actions.getRepositories({options: opt, cursor: 'repos'})
-      this.actions.getUser({options: opt, cursor: 'user'})
+      this.actions.getGHOrganizations({options: opt, cursor: 'orgs'})
+      this.actions.getGHRepositories({options: opt, cursor: 'repos'})
+      this.actions.getGHUser({options: opt, cursor: 'user'})
     }
   }
 
   componentWillMount () {
     this.getData(this.props.name)
+    this.actions.findUsers({options: {name: 'Eric Schoffstall'}, cursor: 'users'})
   }
 
   isFetching () {
@@ -116,6 +119,7 @@ export class GHView extends Component {
   }
 
   render () {
+    console.log(this.props.users)
     return (
       <div className='github-data ui container'>
         {

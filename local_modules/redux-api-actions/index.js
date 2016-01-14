@@ -15,6 +15,7 @@ const createAPIAction = (opt = {}) => (ropt = {}) => {
       method: result(ropt.method || opt.method, ropt.options),
       body: result(ropt.body || opt.body, ropt.options),
       headers: result(ropt.headers || opt.headers, ropt.options),
+      credentials: result(ropt.credentials || opt.credentials, ropt.options),
       types: [
         {
           type: 'REQUEST',

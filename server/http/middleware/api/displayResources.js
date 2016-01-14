@@ -7,7 +7,7 @@ export default (resources) =>
       model: exportSchema(endpoints[0].model),
       endpoints: endpoints.map((endpoint) => ({
         name: endpoint.name,
-        method: endpoint.method,
+        method: endpoint.method.toUpperCase(),
         path: endpoint.path
       }))
     }
