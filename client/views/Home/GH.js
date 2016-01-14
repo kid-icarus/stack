@@ -30,23 +30,24 @@ export class GHView extends Component {
     if (this.isFetching() || this.isErrored()) {
       this.actions.getGHOrganizations({options: opt, cursor: 'orgs'})
       this.actions.getGHRepositories({options: opt, cursor: 'repos'})
+      this.actions.findUsers({cursor: 'users'})
       this.actions.getGHUser({options: opt, cursor: 'user'})
     }
   }
 
   componentWillMount () {
     this.getData(this.props.name)
-    this.actions.findUsers({options: {name: 'Eric Schoffstall'}, cursor: 'users'})
   }
 
   isFetching () {
-    return !this.props.orgs || !this.props.repos || !this.props.user
+    return !(this.props.orgs || this.props.repos || this.props.users || this.props.user)
   }
 
   isErrored () {
     return !this.isFetching() && (
       this.props.orgs.has('error') ||
       this.props.repos.has('error') ||
+      this.props.users.has('error') ||
       this.props.user.has('error')
     )
   }
@@ -113,13 +114,25 @@ export class GHView extends Component {
               )
             }
           </List>
+          <List className='relaxed column'>
+            <Header>{this.props.users.size} DB Users</Header>
+            {
+              this.props.users.map((user, id) =>
+                <Item key={id}>
+                  <Icon className='large user middle aligned'/>
+                  <div className='content'>
+                    <Header>{user.get('name')}</Header>
+                  </div>
+                </Item>
+              )
+            }
+          </List>
         </Row>
       </Grid>
     )
   }
 
   render () {
-    console.log(this.props.users)
     return (
       <div className='github-data ui container'>
         {

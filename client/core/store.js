@@ -6,6 +6,11 @@ import storage from './storageEngine'
 import rootReducer from './reducers'
 import middleware from './middleware'
 
+const initialState = {
+  ...(window.__INITIAL_STATE__ || {}),
+  ...(__INITIAL_STATE__ || {})
+}
+
 export function configureStore (initialState) {
   var createStoreWithMiddleware = compose(
     middleware,
@@ -33,4 +38,4 @@ export function configureStore (initialState) {
   return store
 }
 
-export default configureStore(__INITIAL_STATE__)
+export default configureStore(initialState)
