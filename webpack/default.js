@@ -10,11 +10,8 @@ import requireDir from 'require-dir'
 const debug = _debug('app:webpack:default')
 debug('Create configuration.')
 
-const loaderDir = requireDir('./loaders')
-const moduleLoaders = Object.keys(loaderDir).reduce((p,k) => {
-  loaderDir[k].forEach((loader) => p.push(loader))
-  return p;
-},[])
+const loaders = requireDir('./loaders')
+const moduleLoaders = Object.keys(loaders).reduce((p, k) => p.concat(loaders[k]), [])
 
 const globals = {
   'process.env': {
