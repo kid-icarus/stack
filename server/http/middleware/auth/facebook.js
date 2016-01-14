@@ -22,13 +22,13 @@ const dataToUser = (data) => new User({
   }
 })
 
-const findOrCreateUser = (accessToken, refreshToken, profile, done) => {
+const findOrCreateUser = (accessToken, refreshToken, profile, cb) => {
   User.insert(
     dataToUser({...profile._json, accessToken: accessToken})
   ,
     {conflict: 'update', returnChanges: true}
   ).run((err, res) => {
-    done(err, res && new User(res.changes[0].new_val))
+    cb(err, res && new User(res.changes[0].new_val))
   })
 }
 
