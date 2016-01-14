@@ -10,16 +10,16 @@ import requireDir from 'require-dir'
 const debug = _debug('app:webpack:default')
 debug('Create configuration.')
 
-const loaders = requireDir('./loaders')
-const moduleLoaders = Object.keys(loaders).reduce((p, k) => p.concat(loaders[k]), [])
+const lFolder = requireDir('./loaders')
+const loaders = Object.keys(lFolder).reduce((p, k) => p.concat(lFolder[k]), [])
 
 const globals = {
   'process.env': {
     'NODE_ENV': JSON.stringify(config.env)
   },
   'NODE_ENV': config.env,
-  '__DEV__': config.env === 'development',
-  '__PROD__': config.env === 'production'
+  '__DEV__': config.env === 'development', // used in react
+  '__PROD__': config.env === 'production' // used in react
 }
 
 const webpackConfig = {
@@ -78,7 +78,7 @@ const webpackConfig = {
         exclude: /node_modules/
       }
     ],
-    loaders: moduleLoaders
+    loaders: loaders
   },
   sassLoader: {
     includePaths: path.join(config.paths.client, 'styles')
