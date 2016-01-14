@@ -7,6 +7,7 @@ import {Button} from 'react-semantify'
 import './index.sass'
 import PeopleList from './PeopleList'
 import PersonProfile from './PersonProfile'
+import DocumentMeta from 'react-document-meta'
 
 export class CRMView extends Component {
   static propTypes = {
@@ -28,6 +29,7 @@ export class CRMView extends Component {
     let uid = this.props.params.id
     return (
       <div className='crm'>
+        <DocumentMeta title='CRM'/>
         <div className='navbar'>
           <a href='/crm'>lit</a>
         </div>

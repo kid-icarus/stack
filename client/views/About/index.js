@@ -2,6 +2,7 @@ import { Link } from 'react-router'
 import {Grid, Header, Row, Column} from 'react-semantify'
 import Component from 'redux-dgaf'
 import React from 'react'
+import DocumentMeta from 'react-document-meta'
 import './index.sass'
 
 export class AboutView extends Component {
@@ -9,6 +10,7 @@ export class AboutView extends Component {
   render () {
     return (
       <Grid className='about-view middle aligned one column centered'>
+        <DocumentMeta title='About'/>
         <Row>
           <Column className='eight wide middle aligned'>
             <Header className='large'>About View</Header>

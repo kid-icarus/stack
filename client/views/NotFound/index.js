@@ -2,6 +2,7 @@ import {Link} from 'react-router'
 import {Grid, Header, Row, Column} from 'react-semantify'
 import Component from 'redux-dgaf'
 import React from 'react'
+import DocumentMeta from 'react-document-meta'
 import './index.sass'
 
 export class NotFoundView extends Component {
@@ -9,6 +10,7 @@ export class NotFoundView extends Component {
   render () {
     return (
       <Grid className='not-found-view middle aligned one column centered'>
+        <DocumentMeta title='Not Found' />
         <Row>
           <Column className='eight wide middle aligned'>
             <Header className='large'>The page you requested does not exist!</Header>

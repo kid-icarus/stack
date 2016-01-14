@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router'
 import shield from 'function-shield'
 import Component from 'redux-dgaf'
+import DocumentMeta from 'react-document-meta'
 import {
   Button, Header, Icon,
   Grid, Row, Column
@@ -23,6 +24,7 @@ export class HomeView extends Component {
   render () {
     return (
       <Grid className='relaxed home-view centered divided'>
+        <DocumentMeta title='Home' />
         <Row>
           <Column className='five wide center aligned'>
             <Icon className='trophy huge' />

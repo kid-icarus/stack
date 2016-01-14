@@ -6,6 +6,7 @@ import jif from 'jif'
 import Todo from './Todo'
 import shield from 'function-shield'
 import classNames from 'classnames'
+import DocumentMeta from 'react-document-meta'
 import './index.sass'
 
 const ascending = (a, b) => a - b
@@ -54,6 +55,7 @@ export class TodosView extends Component {
     var filterFn = filters[this.props.params.filter || 'All']
     return (
       <div className='todoapp'>
+        <DocumentMeta title='TodoMVC'/>
         <header className='header'>
           <h1>todos</h1>
           <input
