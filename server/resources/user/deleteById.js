@@ -1,17 +1,8 @@
 import User from './model'
 
 export default (opt, cb) => {
-  if (!opt.user) {
-    return cb({
-      status: 403,
-      error: 'Not logged in'
-    })
-  }
-  if (opt.role !== 'admin') {
-    return cb({
-      status: 403,
-      error: 'You must be an admin to delete a user'
-    })
+  if (!User.authorized(opt.user, 'delete')) {
+    return cb({status: 403})
   }
 
   User.delete(opt.id)

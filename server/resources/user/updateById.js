@@ -1,23 +1,11 @@
 import User from './model'
 
 export default (opt, cb) => {
-  if (!opt.user) {
-    return cb({
-      status: 403,
-      error: 'Not logged in'
-    })
+  if (!User.authorized(opt.user, 'update')) {
+    return cb({status: 403})
   }
 
-  if (opt.id !== opt.user.id) {
-    return cb({
-      status: 403,
-      error: 'You can only modify your own profile'
-    })
-  }
-
-  var change = User.lens(opt.user, opt.data)
-  delete change.id
-
+  var change = User.lens(opt.user, 'write', opt.data)
   User.get(opt.id)
     .update(change, {returnChanges: true})
     .run((err, res) => {

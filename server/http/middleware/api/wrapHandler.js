@@ -1,3 +1,5 @@
+import {Errors} from 'connections/rethink'
+
 const getError = (err) => {
   if (err.message) return err.message
   if (err.error) {
@@ -29,7 +31,10 @@ export default (handler, Model) => (req, res, next) => {
   var sendResponse = (err, data) => {
     if (called) return
     called = true
-    if (err) {
+    if (err != null) {
+      if (err instanceof Errors.DocumentNotFound) {
+        return res.status(204).end()
+      }
       res.status(err.status || 500)
       res.json({
         error: getError(err),
@@ -39,9 +44,8 @@ export default (handler, Model) => (req, res, next) => {
     }
 
     if (typeof data !== 'undefined') {
-      res.status(200)
       if (Model && Model.lens) {
-        res.json(Model.lens(opt.user, data))
+        res.json(Model.lens(opt.user, 'read', data))
       } else {
         res.json(data)
       }
@@ -52,5 +56,9 @@ export default (handler, Model) => (req, res, next) => {
     res.end()
   }
 
-  handler(opt, sendResponse)
+  try {
+    handler(opt, sendResponse)
+  } catch (err) {
+    sendResponse(err)
+  }
 }

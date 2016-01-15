@@ -1,5 +1,5 @@
 import rethink from 'connections/rethink'
-import lens from 'thinky-lens'
+import addSecurity from 'thinky-security'
 const {type, r} = rethink
 
 const User = rethink.createModel('User', {
@@ -25,19 +25,40 @@ const User = rethink.createModel('User', {
   name: type.string(),
   email: type.string().email(),
   location: type.string()
+}, {
+  enforce_extra: 'remove'
 })
 
 // security
-// adds a .lens fn to User
-// which api loader will use to filter outgoing data
-lens(User, {
-  id: ['public'],
-  role: ['admin', 'self'],
-  times: ['admin', 'self'],
-  facebook: ['admin'],
-  name: ['public'],
-  email: ['admin', 'self'],
-  location: ['public']
+// adds .lens and .authorized to User
+// which api loader will use for security
+addSecurity(User, {
+  document: {
+    read: ['public'],
+    list: ['loggedIn'],
+    create: ['admin'],
+    update: ['admin', 'self'],
+    replace: ['admin'],
+    delete: ['admin']
+  },
+  read: {
+    id: ['public'],
+    role: ['admin', 'self'],
+    times: ['admin', 'self'],
+    facebook: ['admin'],
+    name: ['public'],
+    email: ['admin', 'self'],
+    location: ['loggedIn']
+  },
+  write: {
+    id: ['admin'],
+    role: ['admin'],
+    times: ['admin'],
+    facebook: ['admin'],
+    name: ['admin', 'self'],
+    email: ['admin', 'self'],
+    location: ['admin', 'self']
+  }
 })
 
 // other junk
