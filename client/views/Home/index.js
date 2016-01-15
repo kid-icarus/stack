@@ -8,7 +8,7 @@ import DocumentMeta from 'react-document-meta'
 import {
   Button, Header, Icon,
   Grid, Row, Column,
-  Menu, Item, Input
+  Menu, Item
 } from 'react-semantify'
 import GH from './GH'
 import './index.sass'
