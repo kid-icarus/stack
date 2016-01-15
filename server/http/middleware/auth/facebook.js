@@ -27,7 +27,7 @@ const findOrCreateUser = (accessToken, refreshToken, profile, cb) => {
     dataToUser({...profile._json, accessToken: accessToken})
   ,
     {conflict: 'update', returnChanges: true}
-  ).run((err, res) => {
+  ).execute((err, res) => {
     cb(err, res && new User(res.changes[0].new_val))
   })
 }
@@ -77,11 +77,6 @@ router.get('/auth/facebook/callback', callback, (req, res) => {
   if (req.session && req.session.redirectTo) {
     return res.redirect(`/${req.session.redirectTo}`)
   }
-  res.redirect('/')
-})
-
-router.get('/auth/logout', (req, res) => {
-  req.logout()
   res.redirect('/')
 })
 

@@ -1,11 +1,14 @@
-import React from 'react'
+import React, {PropTypes} from 'react'
+import IPropTypes from 'immutable-props'
 import { Link } from 'react-router'
 import shield from 'function-shield'
 import Component from 'redux-dgaf'
+import jif from 'jif'
 import DocumentMeta from 'react-document-meta'
 import {
   Button, Header, Icon,
-  Grid, Row, Column
+  Grid, Row, Column,
+  Menu, Item, Input
 } from 'react-semantify'
 import GH from './GH'
 import './index.sass'
@@ -13,20 +16,46 @@ import './index.sass'
 export class HomeView extends Component {
   static displayName = 'HomeView';
   static propTypes = {
-    counter: React.PropTypes.number
+    counter: PropTypes.number,
+    me: IPropTypes.Map
   };
   static defaultState = {
     name: 'tj'
   };
   static cursors = {
-    counter: 'counter'
+    counter: 'counter',
+    me: 'me'
   };
   render () {
     return (
-      <Grid className='relaxed home-view centered divided'>
+      <Grid className='relaxed home-view centered'>
         <DocumentMeta title='Home' />
+        <Menu className='top attached'>
+          <Item className='left aligned category search'>
+            <div className='ui transparent icon input'>
+              <input className='prompt' type='text' placeholder='Search animals...'/>
+              <Icon className='search link'/>
+            </div>
+          </Item>
+          <Item className='right'>
+            {
+              jif(!this.props.me, () =>
+                <a className='ui button primary' href='/auth/facebook/start'>
+                  Sign In
+                </a>
+              )
+            }
+            {
+              jif(this.props.me, () =>
+                <a className='ui button' href='/auth/logout'>
+                  Sign out
+                </a>
+              )
+            }
+          </Item>
+        </Menu>
         <Row>
-          <Column className='five wide center aligned'>
+          <Column className='center aligned'>
             <Icon className='trophy huge' />
             <Header>Stack Test Page</Header>
             <Header className='counter'>{this.props.counter}</Header>
