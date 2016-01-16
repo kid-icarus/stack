@@ -27,23 +27,6 @@ const config = {
 
   api: {
     path: '/v1'
-  },
-
-  // databases
-  redis: {
-    host: 'localhost',
-    pass: '',
-    index: 2
-  },
-
-  rethink: {
-    db: 'stack'
-  },
-
-  // auth stuff
-  facebook: {
-    id: '946814205398323',
-    secret: '568fa31830811386f09b195091cbb699'
   }
 }
 

@@ -25,8 +25,6 @@ const User = rethink.createModel('User', {
   name: type.string(),
   email: type.string().email(),
   location: type.string()
-}, {
-  enforce_extra: 'remove'
 })
 
 // security

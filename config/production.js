@@ -1,4 +1,16 @@
 const config = {
+  // databases
+  redis: process.env.REDIS_URL,
+
+  rethink: {
+    host: 'aws-us-east-1-portal.6.dblayer.com',
+    port: 11244,
+    db: 'stack',
+    authKey: 'OIFhzghBKMA9VWmTSGvnbyapDDy135d8W9qu3Zrarfk',
+    enforce_extra: 'remove'
+  },
+
+  // auth stuff
   facebook: {
     id: '946814122064998',
     secret: 'eb7e35157c197272800fe946ee05dc84'

@@ -1,1 +1,4 @@
-module.exports = require('http/express/middleware/session/store').client
+import redis from 'redis'
+import config from 'app-config-chain'
+
+module.exports = redis.createClient(config.redis)
