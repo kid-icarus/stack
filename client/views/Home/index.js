@@ -5,11 +5,6 @@ import shield from 'function-shield'
 import Component from 'redux-dgaf'
 import jif from 'jif'
 import DocumentMeta from 'react-document-meta'
-import {
-  Button, Header, Icon,
-  Grid, Row, Column,
-  Menu, Item
-} from 'react-semantify'
 import GH from './GH'
 import './index.sass'
 
@@ -28,16 +23,16 @@ export class HomeView extends Component {
   };
   render () {
     return (
-      <Grid className='relaxed home-view centered'>
+      <div className='ui grid relaxed home-view centered'>
         <DocumentMeta title='Home' />
-        <Menu className='top attached'>
-          <Item className='left aligned category search'>
+        <div className='ui menu top attached'>
+          <div className='ui item left aligned category search'>
             <div className='ui transparent icon input'>
               <input className='prompt' type='text' placeholder='Search animals...'/>
-              <Icon className='search link'/>
+              <i className='ui icon search link'/>
             </div>
-          </Item>
-          <Item className='right'>
+          </div>
+          <div className='ui item right'>
             {
               jif(!this.props.me, () =>
                 <a className='ui button primary' href='/auth/facebook/start'>
@@ -52,31 +47,31 @@ export class HomeView extends Component {
                 </a>
               )
             }
-          </Item>
-        </Menu>
-        <Row>
-          <Column className='center aligned'>
-            <Icon className='trophy huge' />
-            <Header>Stack Test Page</Header>
-            <Header className='counter'>{this.props.counter}</Header>
+          </div>
+        </div>
+        <div className='ui row'>
+          <div className='ui column center aligned'>
+            <i className='ui icon trophy huge' />
+            <div className='ui header'>Stack Test Page</div>
+            <div className='ui header counter'>{this.props.counter}</div>
             <div className='ui buttons'>
-              <Button color='green' className='medium' onClick={shield(this.actions.incrementCounter)}>
+              <div className='ui button medium green' onClick={shield(this.actions.incrementCounter)}>
                 Increment
-              </Button>
+              </div>
               <div className='or'/>
-              <Button color='red' className='medium' onClick={shield(this.actions.decrementCounter)}>
+              <div className='ui button medium red' onClick={shield(this.actions.decrementCounter)}>
                 Decrement
-              </Button>
+              </div>
             </div>
-          </Column>
-        </Row>
-        <Row>
+          </div>
+        </div>
+        <div className='ui row'>
           <GH name={this.state.name}/>
-        </Row>
-        <Row>
+        </div>
+        <div className='ui row'>
           <Link to='/about'>Go To About View</Link>
-        </Row>
-      </Grid>
+        </div>
+      </div>
     )
   }
 }

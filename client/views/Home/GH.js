@@ -1,9 +1,4 @@
 import React, {PropTypes} from 'react'
-import {
-  List, Header, Item,
-  Image, Icon, Card,
-  Content, Grid, Row
-} from 'react-semantify'
 import Component from 'redux-dgaf'
 import IPropTypes from 'immutable-props'
 import jif from 'jif'
@@ -16,9 +11,11 @@ export class GHView extends Component {
     orgs: IPropTypes.List,
     repos: IPropTypes.List,
     users: IPropTypes.List,
-    user: IPropTypes.Map
+    user: IPropTypes.Map,
+    me: IPropTypes.Map
   };
   static cursors = {
+    me: 'me',
     orgs: 'requests.orgs',
     repos: 'requests.repos',
     user: 'requests.user',
@@ -40,7 +37,7 @@ export class GHView extends Component {
   }
 
   isFetching () {
-    return !(this.props.orgs || this.props.repos || this.props.users || this.props.user)
+    return !(this.props.orgs || this.props.repos || this.props.users || (!this.props.me || this.props.user))
   }
 
   isErrored () {
@@ -48,38 +45,38 @@ export class GHView extends Component {
       this.props.orgs.has('error') ||
       this.props.repos.has('error') ||
       this.props.users.has('error') ||
-      this.props.user.has('error')
+      (this.props.me && this.props.user.has('error'))
     )
   }
 
   getDataView () {
     return (
-      <Grid className='relaxed centered'>
-        <Row>
-          <Card>
-            <Image src={this.props.user.get('avatar_url')} />
-            <Content>
-              <Header>{this.props.user.get('name')}</Header>
+      <div className='ui grid relaxed centered'>
+        <div className='ui row'>
+          <div className='ui card'>
+            <img className='ui image' src={this.props.user.get('avatar_url')} />
+            <div className='ui content'>
+              <div className='ui header'>{this.props.user.get('name')}</div>
               <div className='description'>{this.props.user.get('email')}</div>
               <div className='meta'>
                 <span className='location'>{this.props.user.get('location')}</span>
               </div>
-            </Content>
-            <Content className='extra'>
-              <Icon className='user'/>
+            </div>
+            <div className='ui extra content'>
+              <i className='ui icon user'/>
               {this.props.user.get('followers')} followers
-            </Content>
-          </Card>
-        </Row>
-        <Row className='equal width'>
-          <List className='relaxed column'>
-            <Header>{this.props.orgs.size} organizations</Header>
+            </div>
+          </div>
+        </div>
+        <div className='ui row equal width'>
+          <div className='ui list relaxed column'>
+            <div className='ui header'>{this.props.orgs.size} organizations</div>
             {
               this.props.orgs.map((org, id) =>
-                <Item key={id}>
-                  <Icon className='large github middle aligned'/>
+                <div className='ui item' key={id}>
+                  <i className='ui icon large github middle aligned'/>
                   <div className='content'>
-                    <Header>{org.get('login')}</Header>
+                    <div className='ui header'>{org.get('login')}</div>
                     <div className='description'>
                     {
                       jif(org.has('description'), () =>
@@ -90,18 +87,18 @@ export class GHView extends Component {
                     }
                     </div>
                   </div>
-                </Item>
+                </div>
               )
             }
-          </List>
-          <List className='relaxed column'>
-            <Header>{this.props.repos.size} repositories</Header>
+          </div>
+          <div className='ui list relaxed column'>
+            <div className='ui header'>{this.props.repos.size} repositories</div>
             {
               this.props.repos.map((repo, id) =>
-                <Item key={id}>
-                  <Icon className='large github middle aligned'/>
+                <div className='ui item' key={id}>
+                  <i className='ui icon large github middle aligned'/>
                   <div className='content'>
-                    <Header>{repo.get('full_name')}</Header>
+                    <div className='ui header'>{repo.get('full_name')}</div>
                     {
                       jif(repo.has('description'), () =>
                         <div className='description'>
@@ -110,25 +107,25 @@ export class GHView extends Component {
                       )
                     }
                   </div>
-                </Item>
+                </div>
               )
             }
-          </List>
-          <List className='relaxed column'>
-            <Header>{this.props.users.size} DB Users</Header>
+          </div>
+          <div className='ui list relaxed column'>
+            <div className='ui header'>{this.props.users.size} DB Users</div>
             {
               this.props.users.map((user, id) =>
-                <Item key={id}>
-                  <Icon className='large user middle aligned'/>
+                <div className='ui item' key={id}>
+                  <i className='ui icon large user middle aligned'/>
                   <div className='content'>
-                    <Header>{user.get('name')}</Header>
+                    <div className='ui header'>{user.get('name')}</div>
                   </div>
-                </Item>
+                </div>
               )
             }
-          </List>
-        </Row>
-      </Grid>
+          </div>
+        </div>
+      </div>
     )
   }
 
@@ -137,10 +134,10 @@ export class GHView extends Component {
       <div className='github-data ui container'>
         {
           this.isFetching()
-            ? <Header>Loading...</Header>
+            ? <div className='ui header'>Loading...</div>
             : (
                 this.isErrored()
-                ? <Header>Failed to Load</Header>
+                ? <div className='ui header'>Failed to Load</div>
                 : this.getDataView()
               )
         }
