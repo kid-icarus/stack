@@ -1,3 +1,8 @@
+import fs from 'fs'
+import path from 'path'
+
+const rethinkCert = fs.readFileSync(path.join(__dirname, './rethinkdb.ca'), 'utf8')
+
 const config = {
   // databases
   redis: process.env.REDIS_URL,
@@ -7,6 +12,9 @@ const config = {
     port: 11244,
     db: 'stack',
     authKey: 'OIFhzghBKMA9VWmTSGvnbyapDDy135d8W9qu3Zrarfk',
+    ssl: {
+      ca: rethinkCert
+    },
     enforce_extra: 'remove'
   },
 
