@@ -54,12 +54,12 @@ export class HomeView extends Component {
             <i className='ui icon trophy huge' />
             <div className='ui header'>Stack Test Page</div>
             <div className='ui header counter'>{this.props.counter}</div>
-            <div className='ui buttons'>
-              <div className='ui button medium green' onClick={shield(this.actions.incrementCounter)}>
+            <div className='ui large buttons'>
+              <div className='ui button medium positive' onClick={shield(this.actions.incrementCounter)}>
                 Increment
               </div>
               <div className='or'/>
-              <div className='ui button medium red' onClick={shield(this.actions.decrementCounter)}>
+              <div className='ui button medium negative' onClick={shield(this.actions.decrementCounter)}>
                 Decrement
               </div>
             </div>

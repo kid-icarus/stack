@@ -1,18 +1,13 @@
 import { bindActionCreators } from 'redux'
-import { pushPath } from 'redux-simple-router'
+import { routeActions } from 'redux-simple-router'
 import merge from 'lodash.merge'
 import localActions from 'actions/.lookup'
 
-const localActionFns = Object.keys(localActions).reduce((p, k) => {
-  return merge(p, localActions[k])
-}, {})
+const localActionFns = Object.keys(localActions).reduce((p, k) =>
+  merge(p, localActions[k])
+, {})
 
-const routeActions = {
-  push: pushPath
-}
-
-export default (dispatch) =>
-  ({
-    ...bindActionCreators(localActionFns, dispatch),
-    router: bindActionCreators(routeActions, dispatch)
-  })
+export default (dispatch) => ({
+  ...bindActionCreators(localActionFns, dispatch),
+  router: bindActionCreators(routeActions, dispatch)
+})

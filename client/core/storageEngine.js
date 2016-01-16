@@ -3,7 +3,7 @@ import createEngine from 'redux-storage/engines/localStorage'
 
 const whitelist = [
   'counter',
-  'entities',
+  'collections',
   'requests',
   'todomvc'
 ]

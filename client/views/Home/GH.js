@@ -37,15 +37,14 @@ export class GHView extends Component {
   }
 
   isFetching () {
-    return !(this.props.orgs || this.props.repos || this.props.users || (!this.props.me || this.props.user))
+    return !(this.props.orgs || this.props.repos || this.props.users || this.props.user)
   }
 
   isErrored () {
     return !this.isFetching() && (
       this.props.orgs.has('error') ||
       this.props.repos.has('error') ||
-      this.props.users.has('error') ||
-      (this.props.me && this.props.user.has('error'))
+      this.props.user.has('error')
     )
   }
 
@@ -111,19 +110,23 @@ export class GHView extends Component {
               )
             }
           </div>
-          <div className='ui list relaxed column'>
-            <div className='ui header'>{this.props.users.size} DB Users</div>
-            {
-              this.props.users.map((user, id) =>
-                <div className='ui item' key={id}>
-                  <i className='ui icon large user middle aligned'/>
-                  <div className='content'>
-                    <div className='ui header'>{user.get('name')}</div>
-                  </div>
-                </div>
-              )
-            }
-          </div>
+          {
+            jif(!this.props.users.has('error'), () =>
+              <div className='ui list relaxed column'>
+                <div className='ui header'>{this.props.users.size} DB Users</div>
+                {
+                  this.props.users.map((user, id) =>
+                    <div className='ui item' key={id}>
+                      <i className='ui icon large user middle aligned'/>
+                      <div className='content'>
+                        <div className='ui header'>{user.get('name')}</div>
+                      </div>
+                    </div>
+                  )
+                }
+              </div>
+            )
+          }
         </div>
       </div>
     )
