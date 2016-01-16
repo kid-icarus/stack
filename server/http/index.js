@@ -2,29 +2,24 @@ import express from 'express'
 import http from 'http'
 import config from 'app-config-chain'
 
-import errors from './middleware/errors'
-import formatting from './middleware/formatting'
-import spa from './middleware/spa'
-import webpack from './middleware/webpack'
-import session from './middleware/session'
-import api from './middleware/api'
-import auth from './middleware/auth'
+// middleware is required instead of imported
+// so we can conditionally load deps
 
 const app = express()
 app.disable('x-powered-by')
 
 // middleware stack
-app.use(errors)
-app.use(formatting)
-app.use(session)
-app.use(auth)
-app.use(api)
+app.use(require('./middleware/errors'))
+app.use(require('./middleware/formatting'))
+app.use(require('./middleware/session'))
+app.use(require('./middleware/auth'))
+app.use(require('./middleware/api'))
 
 // final piece - serve static content
-app.use(spa)
+app.use(require('./middleware/spa'))
 
 if (config.env === 'development') {
-  app.use(webpack)
+  app.use(require('./middleware/webpack'))
 } else {
   app.use(express.static(config.paths.dist))
 }

@@ -8,7 +8,6 @@
     }
   },
   "addons": [
-    "heroku-redis",
-    "heroku-postgresql"
+    "heroku-redis"
   ]
 }
