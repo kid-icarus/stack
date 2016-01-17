@@ -85,6 +85,7 @@
     "glob-loader": "github:contra/glob-loader",
     "html-webpack-plugin": "^1.6.1",
     "immutable": "^3.7.6",
+    "immutable-props": "^1.0.0",
     "isparta-loader": "^2.0.0",
     "json-loader": "^0.5.4",
     "lodash.merge": "^4.0.0",
