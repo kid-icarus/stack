@@ -1,5 +1,6 @@
 import {Errors} from 'connections/rethink'
 import mapValues from 'lodash.mapvalues'
+import map from 'lodash.map'
 
 const getError = (err) => {
   if (err.message) return err.message
@@ -13,6 +14,34 @@ const getError = (err) => {
 const getErrorFields = (err) => {
   if (!err.errors) return
   return mapValues(err.errors, getError)
+}
+
+const sendError = (err, res) => {
+  if (err instanceof Errors.DocumentNotFound) {
+    return res.status(204).end()
+  }
+  res.status(err.status || 500)
+  res.json({
+    error: getError(err),
+    fields: getErrorFields(err)
+  })
+  res.end()
+}
+
+const transformData = (user, data) => {
+  // if the user cant see the doc
+  if (data && data.authorized && !data.authorized(user, 'read')) {
+    return
+  }
+  // single instance w/ lens
+  if (data && data.lens) {
+    return data.lens(user, 'read')
+  }
+  // array of instances w/ lens
+  if (Array.isArray(data)) {
+    return map(data, transformData.bind(null, user))
+  }
+  return data
 }
 
 export default (handler, Model) => (req, res, next) => {
@@ -29,28 +58,14 @@ export default (handler, Model) => (req, res, next) => {
   var sendResponse = (err, data) => {
     if (called) return
     called = true
-    if (err != null) {
-      if (err instanceof Errors.DocumentNotFound) {
-        return res.status(204).end()
-      }
-      res.status(err.status || 500)
-      res.json({
-        error: getError(err),
-        fields: getErrorFields(err)
-      })
-      return res.end()
-    }
+    if (err) return sendError(err, res)
 
     if (typeof data !== 'undefined') {
-      if (Model && Model.lens) {
-        res.json(Model.lens(opt.user, 'read', data))
-      } else {
-        res.json(data)
-      }
-      return res.end()
+      res.status(200)
+      res.json(transformData(opt.user, data))
+    } else {
+      res.status(204)
     }
-
-    res.status(200)
     res.end()
   }
 

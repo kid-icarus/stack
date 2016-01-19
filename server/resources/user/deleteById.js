@@ -6,7 +6,7 @@ export default (opt, cb) => {
   }
 
   User.delete(opt.id)
-    .run((err, res) => {
-      cb(err, res && res.changes[0].old_val)
+    .execute((err, res) => {
+      cb(err, res && new User(res.changes[0].old_val))
     })
 }

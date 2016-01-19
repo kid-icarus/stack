@@ -8,7 +8,7 @@ export default (opt, cb) => {
   var change = User.lens(opt.user, 'write', opt.data)
   User.get(opt.id)
     .replace(change, {returnChanges: true})
-    .run((err, res) => {
-      cb(err, res && res.changes[0].new_val)
+    .execute((err, res) => {
+      cb(err, res && new User(res.changes[0].new_val))
     })
 }

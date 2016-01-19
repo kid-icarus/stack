@@ -47,7 +47,7 @@ export default (opt) => {
         method: methodInfo.method.toLowerCase(),
         path: getPath(resourceName, methodName, methodInfo),
         instance: !!methodInfo.instance,
-        handler: handler,
+        handler: fn,
         model: handlers.model
       }
     })

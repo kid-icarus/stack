@@ -26,7 +26,11 @@ export default (Model, rules) => {
     var roles = getRoles(user, data)
     return lens(rules[type], roles, data)
   })
-  Model.define('authorized', (user, type) => Model.authorized(user, type))
-  Model.define('lens', (user, type) => Model.lens(user, type, this))
+  Model.define('authorized', function (user, type) {
+    return Model.authorized(user, type)
+  })
+  Model.define('lens', function (user, type) {
+    return Model.lens(user, type, this)
+  })
   return Model
 }

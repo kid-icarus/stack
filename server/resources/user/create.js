@@ -6,7 +6,7 @@ export default (opt, cb) => {
   }
 
   var doc = User.lens(opt.user, 'write', opt.data)
-  User.insert(doc, {returnChanges: true}).run((err, res) => {
-    cb(err, res && res.changes[0].new_val)
+  User.insert(doc, {returnChanges: true}).execute((err, res) => {
+    cb(err, res && new User(res.changes[0].new_val))
   })
 }
