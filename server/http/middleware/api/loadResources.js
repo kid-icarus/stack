@@ -1,5 +1,6 @@
 import pluralize from 'pluralize'
 import requireDir from 'require-dir'
+import mapValues from 'lodash.mapValues'
 import methods from './methods'
 
 export default (opt) => {
@@ -36,8 +37,5 @@ export default (opt) => {
         }
       })
 
-  return Object.keys(resources).reduce((p, k) => {
-    p[k] = getEndpoints(k, resources[k])
-    return p
-  }, {})
+  return mapValues(resources, (v, k) => getEndpoints(k, v))
 }

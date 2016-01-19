@@ -1,4 +1,5 @@
 import {Errors} from 'connections/rethink'
+import mapValues from 'lodash.mapvalues'
 
 const getError = (err) => {
   if (err.message) return err.message
@@ -11,10 +12,7 @@ const getError = (err) => {
 
 const getErrorFields = (err) => {
   if (!err.errors) return
-  return Object.keys(err.errors).reduce((p, k) => {
-    p[k] = getError(err.errors[k])
-    return p
-  }, {})
+  return mapValues(err.errors, getError)
 }
 
 export default (handler, Model) => (req, res, next) => {

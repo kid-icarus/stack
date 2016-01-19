@@ -2,12 +2,13 @@ import createAPIAction from 'redux-api-actions'
 import {plural} from 'pluralize'
 import {Schema} from 'normalizr'
 import template from 'template-url'
+import reduce from 'lodash.reduce'
 import _initialState from 'core/store/initialState'
 const initialState = _initialState.toJS()
 
 const resourceToActions = (resourceName, resource) => {
   var model = new Schema(resourceName)
-  return resource.endpoints.reduce((prev, endpoint) => {
+  return reduce(resource.endpoints, (prev, endpoint) => {
     prev[endpoint.name] = createAPIAction({
       endpoint: (opt) => template(endpoint.path, opt),
       method: endpoint.method,
@@ -19,9 +20,8 @@ const resourceToActions = (resourceName, resource) => {
   }, {})
 }
 
-const actions = Object.keys(initialState.resources).reduce((prev, resourceName) => {
-  var resource = initialState.resources[resourceName]
-  prev[plural(resourceName)] = resourceToActions(resourceName, resource)
+const actions = reduce(initialState.resources, (prev, v, k) => {
+  prev[plural(k)] = resourceToActions(k, v)
   return prev
 }, {})
 

@@ -1,6 +1,7 @@
 import {PropTypes} from 'react'
 import PureComponent from 'react-pure-render/component'
 import { connect } from 'react-redux'
+import mapValues from 'lodash.mapvalues'
 
 // supports array of strings, strings with dot, or function
 const lookup = (o, k) =>
@@ -13,15 +14,12 @@ const lookup = (o, k) =>
   )
 
 const mapStateToProps = (view) => (storeState) => {
-  let cursorData = {}
   if (view.cursors) {
-    cursorData = Object.keys(view.cursors).reduce((p, k) => {
-      p[k] = lookup(storeState, view.cursors[k])
-      return p
-    }, cursorData)
+    return mapValues(view.cursors, (v) =>
+      lookup(storeState, v)
+    )
   }
-
-  return cursorData
+  return {}
 }
 const mapDispatchToProps = (getActions) => (dispatch) =>
   ({actions: getActions ? getActions(dispatch) : {}})

@@ -1,4 +1,5 @@
 import { handleActions } from 'redux-actions'
+import mapValues from 'lodash.mapvalues'
 
 export function toReducer (moduleName, module) {
   var copy = Object.keys(module).reduce((p, k) => {
@@ -11,7 +12,4 @@ export function toReducer (moduleName, module) {
 }
 
 export default (o) =>
-  Object.keys(o).reduce((p, k) => {
-    p[k] = toReducer(k, o[k])
-    return p
-  }, {})
+  mapValues(o, (v, k) => toReducer(k, v))

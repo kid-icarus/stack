@@ -4,11 +4,9 @@ import passport from 'passport'
 import User from 'resources/user/model'
 import path from 'path'
 import requireDir from 'require-dir'
+import values from 'lodash.values'
 
-var providers = requireDir(path.join(__dirname, './providers'))
-providers = Object.keys(providers).reduce((prev, k) =>
-  prev.concat([providers[k]])
-, [])
+var providers = values(requireDir(path.join(__dirname, './providers')))
 
 const router = Router({mergeParams: true})
 router.get('/auth/logout', (req, res) => {

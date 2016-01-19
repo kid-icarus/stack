@@ -1,12 +1,12 @@
+import mapValues from 'lodash.mapValues'
+
 const exportSchema = (schema) =>
-  Object.keys(schema).reduce((p, k) => {
-    var v = schema[k]
+  mapValues(schema, (v, k) => {
     if (v._schema) {
-      p[k] = exportSchema(v._schema)
+      return exportSchema(v._schema)
     } else {
-      p[k] = v.constructor.name.replace(/^Type/, '')
+      return v.constructor.name.replace(/^Type/, '')
     }
-    return p
-  }, {})
+  })
 
 export default (model) => exportSchema(model._schema._schema)
