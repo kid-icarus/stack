@@ -2,10 +2,15 @@ import {compose} from 'compose-middleware'
 import {Router} from 'express'
 import passport from 'passport'
 import User from 'resources/user/model'
-import fb from './facebook'
+import path from 'path'
+import requireDir from 'require-dir'
+
+var providers = requireDir(path.join(__dirname, './providers'))
+providers = Object.keys(providers).reduce((prev, k) =>
+  prev.concat([providers[k]])
+, [])
 
 const router = Router({mergeParams: true})
-
 router.get('/auth/logout', (req, res) => {
   req.logout()
   res.redirect('/')
@@ -24,6 +29,6 @@ router.get('/initialState.js', (req, res) => {
 export default compose([
   passport.initialize(),
   passport.session(),
-  fb,
+  ...providers,
   router
 ])

@@ -34,9 +34,21 @@ const findOrCreateUser = (accessToken, refreshToken, profile, cb) => {
 
 const userToString = (user, cb) => cb(null, user.id)
 const stringToUser = (id, cb) => User.get(id).run(cb)
+const storeRedirect = (req, res, next) => {
+  if (req.session) req.session.redirectTo = null
+  if (!req.query.to) return next()
+  if (req.session) req.session.redirectTo = req.query.to
+  next()
+}
+const performRedirect = (req, res) => {
+  if (req.session && req.session.redirectTo) {
+    return res.redirect(`/${req.session.redirectTo}`)
+  }
+  res.redirect('/')
+}
 
 // init the passport junk
-const strategy = new Strategy({
+const strategyConfig = {
   clientID: config.facebook.id,
   clientSecret: config.facebook.secret,
   callbackURL: '/auth/facebook/callback',
@@ -49,35 +61,23 @@ const strategy = new Strategy({
     'user_birthday',
     'user_location'
   ]
-}, findOrCreateUser)
-
+}
+const strategy = new Strategy(strategyConfig, findOrCreateUser)
 passport.use(strategy)
 passport.serializeUser(userToString)
 passport.deserializeUser(stringToUser)
 
+// init the router
 const start = passport.authenticate('facebook', {
-  display: 'touch'
+  display: strategyConfig.display
 })
 
 const callback = passport.authenticate('facebook', {
-  display: 'touch',
+  display: strategyConfig.display,
   failureRedirect: '/login'
 })
-
-// init the router
 const router = Router({mergeParams: true})
-router.get('/auth/facebook/start', (req, res, next) => {
-  if (req.session) req.session.redirectTo = null
-  if (!req.query.to) return next()
-  if (req.session) req.session.redirectTo = req.query.to
-  next()
-}, start)
-
-router.get('/auth/facebook/callback', callback, (req, res) => {
-  if (req.session && req.session.redirectTo) {
-    return res.redirect(`/${req.session.redirectTo}`)
-  }
-  res.redirect('/')
-})
+router.get('/auth/facebook/start', storeRedirect, start)
+router.get('/auth/facebook/callback', callback, performRedirect)
 
 export default router
