@@ -16,7 +16,7 @@ export class Todo extends Component {
   };
 
   destroy () {
-    this.actions.deleteTodo(this.props.todo)
+    this.actions.todomvc.remove(this.props.todo)
   }
 
   handleDoubleClick () {
@@ -24,13 +24,13 @@ export class Todo extends Component {
   }
 
   toggle () {
-    this.actions.toggleTodo(this.props.todo)
+    this.actions.todomvc.toggle(this.props.todo)
   }
 
   saveTodo (e) {
     const text = e.target.value.trim()
     if (e.which === 13) {
-      this.actions.saveTodo(this.props.todo.set('text', text))
+      this.actions.todomvc.save(this.props.todo.set('text', text))
       this.editComplete()
     }
   }

@@ -4,6 +4,11 @@ import { normalize, arrayOf } from 'normalizr'
 // TODO: check entities cache in store and dont fetch if we have it already
 const result = (fn, arg) => typeof fn === 'function' ? fn(arg) : fn
 
+const getNormalizer = (opt) => (json) => ({
+  raw: json,
+  normalized: normalize(json, opt.collection ? arrayOf(opt.model) : opt.model)
+})
+
 const createAPIAction = (opt = {}) => (ropt = {}) => {
   var meta = {
     cursor: result(ropt.cursor || opt.cursor, ropt.options)
@@ -27,15 +32,9 @@ const createAPIAction = (opt = {}) => (ropt = {}) => {
           meta: meta,
           payload: (action, state, res) => {
             const contentType = res.headers.get('Content-Type')
-            if (contentType && ~contentType.indexOf('json')) {
-              return res.json().then((json) => {
-                var casting = opt.collection ? arrayOf(opt.model) : opt.model
-                return {
-                  raw: json,
-                  normalized: normalize(json, casting)
-                }
-              })
-            }
+            const normalize = getNormalizer(opt)
+            if (!contentType || contentType.indexOf('json') === -1) return
+            return res.json().then(normalize)
           }
         },
         {

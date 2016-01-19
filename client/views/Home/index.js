@@ -22,6 +22,7 @@ export class HomeView extends Component {
     me: 'me'
   };
   render () {
+    console.log(this.actions)
     return (
       <div className='ui grid relaxed home-view centered'>
         <DocumentMeta title='Home' />
@@ -55,11 +56,11 @@ export class HomeView extends Component {
             <div className='ui header'>Stack Test Page</div>
             <div className='ui header counter'>{this.props.counter}</div>
             <div className='ui large buttons'>
-              <div className='ui button medium positive' onClick={shield(this.actions.incrementCounter)}>
+              <div className='ui button medium positive' onClick={shield(this.actions.counter.increment)}>
                 Increment
               </div>
               <div className='or'/>
-              <div className='ui button medium negative' onClick={shield(this.actions.decrementCounter)}>
+              <div className='ui button medium negative' onClick={shield(this.actions.counter.decrement)}>
                 Decrement
               </div>
             </div>

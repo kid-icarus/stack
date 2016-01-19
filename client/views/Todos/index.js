@@ -40,7 +40,7 @@ export class TodosView extends Component {
         return this.setState({addError: true})
       }
 
-      this.actions.addTodo(val)
+      this.actions.todomvc.create(val)
       el.value = ''
       el.focus()
       this.setState({addError: false})
@@ -76,7 +76,7 @@ export class TodosView extends Component {
               <input
                 className='toggle-all'
                 type='checkbox'
-                onChange={this.actions.toggleAllTodos} />
+                onChange={this.actions.todomvc.toggleAll} />
             )
           }
           <ul className='todo-list'>
@@ -114,7 +114,7 @@ export class TodosView extends Component {
               {
                 jif(this.props.todos.filter(filters.Completed).size, () =>
                   <button
-                    onClick={shield(this.actions.clearCompletedTodos)}
+                    onClick={shield(this.actions.todomvc.clearCompleted)}
                     className='clear-completed'>
                     Clear completed
                   </button>

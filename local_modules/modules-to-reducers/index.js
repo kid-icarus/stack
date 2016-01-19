@@ -1,9 +1,9 @@
 import { handleActions } from 'redux-actions'
 
-export function toReducer (module) {
+export function toReducer (moduleName, module) {
   var copy = Object.keys(module).reduce((p, k) => {
     if (k !== 'default') {
-      p[k] = module[k]
+      p[`${moduleName}.${k}`] = module[k]
     }
     return p
   }, {})
@@ -12,6 +12,6 @@ export function toReducer (module) {
 
 export default (o) =>
   Object.keys(o).reduce((p, k) => {
-    p[k] = toReducer(o[k])
+    p[k] = toReducer(k, o[k])
     return p
   }, {})
