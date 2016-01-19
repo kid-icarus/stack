@@ -1,4 +1,4 @@
-import mapValues from 'lodash.mapValues'
+import mapValues from 'lodash.mapvalues'
 
 const exportSchema = (schema) =>
   mapValues(schema, (v, k) => {

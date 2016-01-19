@@ -1,6 +1,6 @@
 import pluralize from 'pluralize'
 import requireDir from 'require-dir'
-import mapValues from 'lodash.mapValues'
+import mapValues from 'lodash.mapvalues'
 import methods from './methods'
 
 export default (opt) => {
@@ -18,7 +18,7 @@ export default (opt) => {
     return path
   }
 
-  const getEndpoints = (resourceName, handlers) =>
+  const getEndpoints = (handlers, resourceName) =>
     Object.keys(handlers)
       .filter((methodName) => !!methods[methodName])
       .map((methodName) => {
@@ -37,5 +37,5 @@ export default (opt) => {
         }
       })
 
-  return mapValues(resources, (v, k) => getEndpoints(k, v))
+  return mapValues(resources, getEndpoints)
 }

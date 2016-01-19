@@ -1,5 +1,6 @@
 import lens from 'object-lens'
 import intersection from 'lodash.intersection'
+import map from 'lodash.map'
 
 const getRoles = (user, data) => {
   var roles = ['public']
@@ -20,7 +21,7 @@ export default (Model, rules) => {
     if (!rules[type]) return data // no schema, default to public
 
     if (Array.isArray(data)) {
-      return data.map(Model.lens.bind(null, user, type))
+      return map(data, Model.lens.bind(null, user, type))
     }
     var roles = getRoles(user, data)
     return lens(rules[type], roles, data)

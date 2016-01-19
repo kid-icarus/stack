@@ -1,7 +1,7 @@
 import { createAction } from 'redux-actions'
 import { routeActions } from 'redux-simple-router'
 import localActions from 'actions/.lookup'
-import mapValues from 'lodash.mapValues'
+import mapValues from 'lodash.mapvalues'
 
 // equiv of redux createAction but recursive
 const createActionsRecursive = (actions) => {

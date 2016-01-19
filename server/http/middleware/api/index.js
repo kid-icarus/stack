@@ -2,6 +2,7 @@
 import {Router} from 'express'
 import path from 'path'
 import config from 'app-config-chain'
+import each from 'lodash.foreach'
 import loadResources from './loadResources'
 import wrapHandler from './wrapHandler'
 import displayResources from './displayResources'
@@ -19,10 +20,9 @@ const meta = displayResources(resources)
 const router = Router({mergeParams: true})
 router.get(`${config.api.path}/_resources`, (req, res) => res.json(meta))
 
-Object.keys(resources).forEach((resourceName) => {
-  var endpoints = resources[resourceName]
+each(resources, (endpoints, resourceName) => {
   debug(`Loaded ${endpoints.length} endpoints for "${resourceName}"`)
-  endpoints.forEach((endpoint) => {
+  each(endpoints, (endpoint) => {
     debug(`  - ${endpoint.name} (${endpoint.method.toUpperCase()} ${endpoint.path})`)
     router[endpoint.method](endpoint.path, wrapHandler(endpoint.handler, endpoint.model))
   })
