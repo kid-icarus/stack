@@ -9,6 +9,7 @@ export default {
   // databases
   redis: 'redis://localhost/2',
   rethink: {
+    silent: true,
     host: 'localhost',
     port: 28015,
     db: 'stack',

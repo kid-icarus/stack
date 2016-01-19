@@ -35,6 +35,7 @@
     "babel-register": "^6.3.13",
     "babel-runtime": "^6.3.19",
     "body-parser": "^1.14.2",
+    "chalk": "^1.1.1",
     "compose-middleware": "^2.0.1",
     "compression": "^1.6.0",
     "connect-history-api-fallback": "^1.1.0",
