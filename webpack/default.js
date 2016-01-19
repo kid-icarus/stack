@@ -3,7 +3,7 @@ import cssnano from 'cssnano'
 import rucksack from 'rucksack-css'
 import chalk from 'chalk'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-import NpmCheckPlugin from 'npm-check-webpack-plugin'
+// import NpmCheckPlugin from 'npm-check-webpack-plugin'
 import ProgressBarPlugin from 'progress-bar-webpack-plugin'
 import config from 'app-config-chain'
 import _debug from 'debug'
@@ -41,8 +41,11 @@ const webpackConfig = {
     vendor: [
       'react',
       'react-dom',
+      'redux-simple-router',
       'react-router',
+      'react-redux',
       'redux',
+      'redux-dgaf',
       'jquery',
       'semantic-ui-css/semantic.js',
       'immutable'
@@ -71,7 +74,7 @@ const webpackConfig = {
     }),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[hash].js'),
     new ProgressBarPlugin({
-      format: 'Build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed s)',
+      format: 'Webpack Build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed s)',
       width: 100,
       clear: true
     })
