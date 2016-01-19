@@ -1,26 +1,26 @@
 export default {
   find: {
     method: 'get',
-    plural: true
+    instance: false
   },
   create: {
     method: 'post',
-    plural: true
+    instance: false
   },
   findById: {
     method: 'get',
-    plural: false
+    instance: true
   },
   replaceById: {
     method: 'put',
-    plural: false
+    instance: true
   },
   updateById: {
     method: 'patch',
-    plural: false
+    instance: true
   },
   deleteById: {
     method: 'delete',
-    plural: false
+    instance: true
   }
 }

@@ -13,7 +13,7 @@ const resourceToActions = (resourceName, resource) => {
       endpoint: (opt) => template(endpoint.path, opt),
       method: endpoint.method,
       model: model,
-      collection: endpoint.plural,
+      collection: !endpoint.instance,
       credentials: 'include'
     })
     return prev

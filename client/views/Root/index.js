@@ -16,6 +16,10 @@ export class RootView extends Component {
     store: React.PropTypes.object.isRequired
   };
 
+  componentDidMount () {
+    console.log('Actions:', this.actions)
+  }
+
   render () {
     return (
       <Provider store={this.props.store}>

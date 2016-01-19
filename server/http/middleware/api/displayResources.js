@@ -9,7 +9,7 @@ export default (resources) =>
       name: endpoint.name,
       method: endpoint.method.toUpperCase(),
       path: endpoint.path,
-      plural: endpoint.plural
+      instance: endpoint.instance
     }))
   })
 )
