@@ -8,7 +8,8 @@ export default (resources) =>
       endpoints: endpoints.map((endpoint) => ({
         name: endpoint.name,
         method: endpoint.method.toUpperCase(),
-        path: endpoint.path
+        path: endpoint.path,
+        plural: endpoint.plural
       }))
     }
     return p

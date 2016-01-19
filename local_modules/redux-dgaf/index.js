@@ -2,17 +2,21 @@ import {PropTypes} from 'react'
 import PureComponent from 'react-pure-render/component'
 import { connect } from 'react-redux'
 
+// supports array of strings, strings with dot, or function
+const lookup = (o, k) =>
+  o.getIn(
+    Array.isArray(k)
+    ? k
+    : (typeof k === 'function'
+      ? k()
+      : k.split('.'))
+  )
+
 const mapStateToProps = (view) => (storeState) => {
-  // really simple immutable cursor impl
-  // path is either an array of a string
   let cursorData = {}
   if (view.cursors) {
     cursorData = Object.keys(view.cursors).reduce((p, k) => {
-      p[k] = storeState.getIn(
-        Array.isArray(view.cursors[k])
-        ? view.cursors[k]
-        : view.cursors[k].split('.')
-      )
+      p[k] = lookup(storeState, view.cursors[k])
       return p
     }, cursorData)
   }
