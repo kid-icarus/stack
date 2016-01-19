@@ -1,6 +1,6 @@
 import {Errors} from 'connections/rethink'
+import {sanitizeData} from 'thinky-security'
 import mapValues from 'lodash.mapvalues'
-import map from 'lodash.map'
 
 const getError = (err) => {
   if (err.message) return err.message
@@ -28,22 +28,6 @@ const sendError = (err, res) => {
   res.end()
 }
 
-const transformData = (user, data) => {
-  // if the user cant see the doc
-  if (data && data.authorized && !data.authorized(user, 'read')) {
-    return
-  }
-  // single instance w/ lens
-  if (data && data.lens) {
-    return data.lens(user, 'read')
-  }
-  // array of instances w/ lens
-  if (Array.isArray(data)) {
-    return map(data, transformData.bind(null, user))
-  }
-  return data
-}
-
 export default (handler, Model) => (req, res, next) => {
   var called = false
   var opt = {
@@ -59,8 +43,8 @@ export default (handler, Model) => (req, res, next) => {
     if (called) return
     called = true
     if (err) return sendError(err, res)
-    var transformedData = transformData(opt.user, data)
 
+    var transformedData = sanitizeData(opt.user, data)
     if (transformedData) {
       res.status(200)
       res.json(transformedData)

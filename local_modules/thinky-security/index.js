@@ -2,6 +2,25 @@ import lens from 'object-lens'
 import intersection from 'lodash.intersection'
 import map from 'lodash.map'
 
+export const sanitizeData = (user, data) => {
+  // check if the user can even see the doc
+  if (data && data.authorized &&
+    !data.authorized(user, 'read')) {
+    return
+  }
+  // single instance w/ lens
+  if (data && data.lens) {
+    return data.lens(user, 'read')
+  }
+
+  // array of instances w/ lens
+  if (Array.isArray(data)) {
+    return map(data, sanitizeData.bind(null, user))
+  }
+
+  return data
+}
+
 const getRoles = (user, data) => {
   var roles = ['public']
   if (user) roles.push('loggedIn')
