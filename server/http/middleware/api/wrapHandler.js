@@ -59,10 +59,11 @@ export default (handler, Model) => (req, res, next) => {
     if (called) return
     called = true
     if (err) return sendError(err, res)
+    var transformedData = transformData(opt.user, data)
 
-    if (typeof data !== 'undefined') {
+    if (transformedData) {
       res.status(200)
-      res.json(transformData(opt.user, data))
+      res.json(transformedData)
     } else {
       res.status(204)
     }
