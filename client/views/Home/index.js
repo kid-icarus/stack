@@ -22,7 +22,6 @@ export class HomeView extends Component {
     me: 'me'
   };
   render () {
-    console.log(this.actions)
     return (
       <div className='ui grid relaxed home-view centered'>
         <DocumentMeta title='Home' />

@@ -1,32 +1,27 @@
 import createAPIAction from 'redux-api-actions'
 import {plural} from 'pluralize'
-import cap from 'capitalize'
 import {Schema} from 'normalizr'
 import template from 'template-url'
-import initialState from 'core/initialState'
+import _initialState from 'core/store/initialState'
+const initialState = _initialState.toJS()
 
-const nameMap = {
-  create: (res) => `create${cap(res)}`,
-  find: (res) => `find${cap(plural(res))}`,
-  findById: (res) => `find${cap(res)}ById`,
-  updateById: (res) => `update${cap(res)}ById`,
-  replaceById: (res) => `replace${cap(res)}ById`,
-  deleteById: (res) => `delete${cap(res)}ById`
-}
-
-const actions = Object.keys(initialState.resources).reduce((p, k) => {
-  var resource = initialState.resources[k]
-  var model = new Schema(k)
-
-  resource.endpoints.forEach((res) => {
-    p[nameMap[res.name](k)] = createAPIAction({
-      endpoint: (opt) => template(res.path, opt),
-      method: res.method,
+const resourceToActions = (resourceName, resource) => {
+  var model = new Schema(resourceName)
+  return resource.endpoints.reduce((prev, endpoint) => {
+    prev[endpoint.name] = createAPIAction({
+      endpoint: (opt) => template(endpoint.path, opt),
+      method: endpoint.method,
       model: model,
       credentials: 'include'
     })
-  })
-  return p
+    return prev
+  }, {})
+}
+
+const actions = Object.keys(initialState.resources).reduce((prev, resourceName) => {
+  var resource = initialState.resources[resourceName]
+  prev[plural(resourceName)] = resourceToActions(resourceName, resource)
+  return prev
 }, {})
 
 export default actions

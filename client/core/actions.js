@@ -1,28 +1,30 @@
-import { bindActionCreators } from 'redux'
 import { createAction } from 'redux-actions'
 import { routeActions } from 'redux-simple-router'
-import merge from 'lodash.merge'
 import localActions from 'actions/.lookup'
 
-// turns string actions into functions
-const transformActions = (actions) => {
+// equiv of redux createAction but recursive
+const createActionsRecursive = (actions) => {
   if (typeof actions === 'string') return createAction(actions)
   if (typeof actions === 'function') return actions
-  return Object.keys(actions).reduce((p, k) => {
-    p[k] = transformActions(actions[k])
-    return p
+  return Object.keys(actions).reduce((prev, k) => {
+    prev[k] = createActionsRecursive(actions[k])
+    return prev
   }, {})
 }
 
-export default (dispatch) => {
-  const localActionFns = Object.keys(localActions).reduce((p, k) => {
-    return merge(p, {
-      [k]: bindActionCreators(transformActions(localActions[k]), dispatch)
-    })
+// equiv of redux bindActionCreators but recursive
+const bindActionCreatorsRecursive = (actions, dispatch) => {
+  if (typeof actions === 'function') return (...args) => dispatch(actions(...args))
+  return Object.keys(actions).reduce((prev, k) => {
+    prev[k] = bindActionCreatorsRecursive(actions[k], dispatch)
+    return prev
   }, {})
-
-  return {
-    ...localActionFns,
-    router: bindActionCreators(routeActions, dispatch)
-  }
 }
+
+const actions = createActionsRecursive({
+  ...localActions,
+  router: routeActions
+})
+
+export default (dispatch) =>
+  bindActionCreatorsRecursive(actions, dispatch)

@@ -1,15 +1,13 @@
 import fixHash from 'remove-fb-hash'
-fixHash()
-
-import ReactDOM from 'react-dom'
+import DOM from 'react-dom'
 import { browserHistory } from 'react-router'
-import Root from 'views/Root'
 import React from 'react'
-import store from 'core/store'
 import routes from 'routes'
+import store from 'core/store'
+import Root from 'views/Root'
 
-// Render the React application to the DOM
-ReactDOM.render(
+fixHash()
+DOM.render(
   <Root
     history={browserHistory}
     routes={routes}

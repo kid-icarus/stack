@@ -28,7 +28,7 @@ export class GHView extends Component {
       this.actions.github.getOrganizations({options: opt, cursor: 'orgs'})
       this.actions.github.getRepositories({options: opt, cursor: 'repos'})
       this.actions.github.getUser({options: opt, cursor: 'user'})
-      this.actions.api.findUsers({cursor: 'users'})
+      this.actions.api.users.find({cursor: 'users'})
     }
   }
 
