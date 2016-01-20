@@ -9,7 +9,7 @@ import config from 'app-config-chain'
 import _debug from 'debug'
 import path from 'path'
 import requireDir from 'require-dir'
-import api from '../server/http/middleware/api'
+import sutro from 'sutro'
 const debug = _debug('build:default')
 debug('Create configuration.')
 
@@ -17,7 +17,10 @@ const lFolder = requireDir('./loaders')
 const loaders = Object.keys(lFolder).reduce((p, k) => p.concat(lFolder[k]), [])
 
 const initialState = {
-  resources: api.meta
+  resources: sutro({
+    prefix: config.api.path,
+    path: config.paths.resources
+  }).meta
 }
 
 const globals = {

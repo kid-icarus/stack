@@ -13,7 +13,7 @@ app.use(require('./middleware/errors'))
 app.use(require('./middleware/formatting'))
 app.use(require('./middleware/session'))
 app.use(require('./middleware/auth'))
-app.use(require('./middleware/api'))
+app.use(config.api.path, require('./middleware/api'))
 
 // final piece - serve static content
 app.use(require('./middleware/spa'))

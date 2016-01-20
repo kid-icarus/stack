@@ -12,9 +12,7 @@ export default (opt) => {
   const resources = requireDir(opt.path, {recurse: true})
 
   const getPath = (resourceName, methodName, methodInfo) => {
-    var plural = pluralize.plural(resourceName)
-
-    var path = `${opt.prefix}/${plural}`
+    var path = `/${pluralize.plural(resourceName)}`
     if (!methods[methodName]) {
       path += `/${methodName}`
     }

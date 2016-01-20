@@ -6,7 +6,8 @@ import * as reducers from './reducers'
 // TODO: check entities cache in store and dont fetch if we have it already
 const result = (fn, arg) => typeof fn === 'function' ? fn(arg) : fn
 
-const getNormalizer = (opt) => (json) => ({
+const normalizeText = (str) => ({ raw: str })
+const getJSONNormalizer = (opt) => (json) => ({
   raw: json,
   normalized: normalize(json, opt.collection ? arrayOf(opt.model) : opt.model)
 })
@@ -15,7 +16,6 @@ const createAction = (opt = {}) => (ropt = {}) => {
   var meta = {
     cursor: result(ropt.cursor || opt.cursor, ropt.options)
   }
-  var normalize = getNormalizer(opt)
 
   return {
     [CALL_API]: {
@@ -28,15 +28,20 @@ const createAction = (opt = {}) => (ropt = {}) => {
         {
           type: 'tahoe.request',
           meta: meta,
-          payload: (action) => { action.endpoint }
+          payload: (action) => ({
+            endpoint: action.endpoint
+          })
         },
         {
           type: 'tahoe.success',
           meta: meta,
           payload: (action, state, res) => {
             const contentType = res.headers.get('Content-Type')
-            if (!contentType || contentType.indexOf('json') === -1) return
-            return res.json().then(normalize)
+            if (contentType && contentType.indexOf('json') !== -1) {
+              return res.json().then(getJSONNormalizer(opt))
+            } else {
+              return res.text().then(normalizeText)
+            }
           }
         },
         {

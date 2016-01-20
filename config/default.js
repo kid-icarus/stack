@@ -9,9 +9,10 @@ const config = {
   paths: {
     base: basePath,
     public: '/',
-    client: path.join(basePath, 'client'),
-    dist: path.join(basePath, 'dist'),
-    server: path.join(basePath, 'server')
+    client: path.join(basePath, './client'),
+    dist: path.join(basePath, './dist'),
+    server: path.join(basePath, './server'),
+    resources: path.join(basePath, './server/resources')
   },
 
   // http stuff
