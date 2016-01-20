@@ -1,2 +1,4 @@
-export default (getActions) => (dispatch) =>
-  ({actions: getActions ? getActions(dispatch) : {}})
+import bindActions from '../lib/bindActions'
+
+export default (creators = {}) => (dispatch) =>
+  ({actions: bindActions(creators, dispatch)})
