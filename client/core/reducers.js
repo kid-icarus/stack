@@ -1,6 +1,6 @@
-import { combineReducers } from 'redux-immutablejs'
+import { combineReducers } from 'shasta'
 import { routeReducer } from 'redux-simple-router'
-import * as apiReducers from 'tahoe/reducers'
+import { reducers as apiReducers } from 'tahoe'
 import toReducers from 'modules-to-reducers'
 import localReducers from 'reducers/.lookup'
 

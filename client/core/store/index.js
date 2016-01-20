@@ -1,16 +1,27 @@
-import { compose, createStore } from 'redux'
+import { compose, createStore } from 'shasta'
 import storage from './storageEngine'
 import rootReducer from '../reducers'
 import middleware from './middleware'
-import routerMiddleware from './middleware/router'
+import { listenForReplays } from 'shasta-router'
 import initialState from './initialState'
+
+const devtools = window.devToolsExtension
+  ? window.devToolsExtension()
+  : undefined
+
+const hotReload = (store) => {
+  if (__DEV__ && module.hot) {
+    module.hot.accept('../reducers', () => {
+      const nextRoot = require('../reducers')
+      store.replaceReducer(nextRoot)
+    })
+  }
+}
 
 export function configureStore (initialState) {
   var createStoreWithMiddleware = compose(
     middleware,
-    window.devToolsExtension
-      ? window.devToolsExtension()
-      : undefined
+    devtools
   )
 
   const store = createStoreWithMiddleware(createStore)(
@@ -18,15 +29,8 @@ export function configureStore (initialState) {
     initialState
   )
   storage.load(store)
-
-  routerMiddleware.listenForReplays(store, (state) => state.get('router'))
-
-  if (__DEV__ && module.hot) {
-    module.hot.accept('../reducers', () => {
-      const nextRoot = require('../reducers')
-      store.replaceReducer(nextRoot)
-    })
-  }
+  listenForReplays(store)
+  hotReload(store)
 
   return store
 }

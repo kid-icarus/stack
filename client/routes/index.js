@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, IndexRoute } from 'react-router'
+import { Route, IndexRoute } from 'shasta-router'
 import HomeView from 'views/Home'
 import AboutView from 'views/About'
 import TodosView from 'views/Todos'

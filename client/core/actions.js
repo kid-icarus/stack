@@ -1,4 +1,4 @@
-import { routeActions } from 'redux-simple-router'
+import { actions as routeActions } from 'shasta-router'
 import { createActions, bindActions } from 'shasta'
 import localActions from 'actions/.lookup'
 

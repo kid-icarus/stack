@@ -1,4 +1,6 @@
 import {PropTypes} from 'react'
+import { combineReducers } from 'redux-immutablejs'
+import { applyMiddleware, compose, createStore } from 'redux'
 import PureComponent from 'react-pure-render/component'
 import connect from './connect'
 import bindMethods from './bindMethods'
@@ -27,5 +29,12 @@ class ShastaComponent extends PureComponent {
 }
 ShastaComponent.connect = connect
 
-export { bindActions, createActions }
+export {
+    combineReducers,
+    bindActions,
+    createActions,
+    applyMiddleware,
+    compose,
+    createStore
+}
 export default ShastaComponent

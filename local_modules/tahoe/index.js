@@ -1,5 +1,7 @@
 import { CALL_API } from 'redux-api-middleware'
 import { normalize, arrayOf } from 'normalizr'
+import { apiMiddleware } from 'redux-api-middleware'
+import * as reducers from './reducers'
 
 // TODO: check entities cache in store and dont fetch if we have it already
 const result = (fn, arg) => typeof fn === 'function' ? fn(arg) : fn
@@ -46,4 +48,8 @@ const createAPIAction = (opt = {}) => (ropt = {}) => {
   }
 }
 
-export default createAPIAction
+export default {
+  createAPIAction,
+  reducers: reducers,
+  middleware: apiMiddleware
+}
