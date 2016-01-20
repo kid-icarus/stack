@@ -19,7 +19,7 @@ const resourceToActions = (resourceName, resource) => {
 }
 
 export default (resources) =>
-  reduce(resources, (prev, v, k) => {
+  reduce((resources.toJS ? resources.toJS() : resources), (prev, v, k) => {
     prev[plural(k)] = resourceToActions(k, v)
     return prev
   }, {})

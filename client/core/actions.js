@@ -4,11 +4,9 @@ import createAPIActions from 'redux-sutro'
 import localActions from 'actions/.lookup'
 import initialState from 'core/store/initialState'
 
-const resources = initialState.get('resources').toJS()
-
 const actions = createActions({
   ...localActions,
-  api: createAPIActions(resources),
+  api: createAPIActions(initialState.get('resources')),
   router: routeActions
 })
 
