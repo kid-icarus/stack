@@ -29,10 +29,10 @@ const RFAILURE = (state, { meta, payload }) => {
 
 // exported actions
 export const collections = handleActions({
-  SUCCESS: ESUCCESS
+  'tahoe.success': ESUCCESS
 }, initialCollections)
 
 export const requests = handleActions({
-  SUCCESS: RSUCCESS,
-  FAILURE: RFAILURE
+  'tahoe.success': RSUCCESS,
+  'tahoe.failure': RFAILURE
 }, initialRequests)

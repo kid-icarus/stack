@@ -3,7 +3,7 @@ import IPropTypes from 'immutable-props'
 import { combineReducers } from 'redux-immutablejs'
 import { applyMiddleware, compose, createStore } from 'redux'
 import PureComponent from 'react-pure-render/component'
-import connect from './lib/connect'
+import connect from './connect'
 import bindMethods from './lib/bindMethods'
 import createActions from './lib/createActions'
 import bindActions from './lib/bindActions'
@@ -12,7 +12,7 @@ class ShastaComponent extends PureComponent {
   static propTypes = {
     actions: RPropTypes.object
   };
-
+  static connect = connect;
   constructor (props, context) {
     super(props, context)
 
@@ -28,7 +28,6 @@ class ShastaComponent extends PureComponent {
     return this.props.actions
   }
 }
-ShastaComponent.connect = connect
 
 export const PropTypes = {
   ...RPropTypes,

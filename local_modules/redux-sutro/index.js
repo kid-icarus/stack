@@ -1,4 +1,4 @@
-import { createAPIAction } from 'tahoe'
+import { createAction } from 'tahoe'
 import {plural} from 'pluralize'
 import {Schema} from 'normalizr'
 import template from 'template-url'
@@ -7,7 +7,7 @@ import reduce from 'lodash.reduce'
 const resourceToActions = (resourceName, resource) => {
   var model = new Schema(resourceName)
   return reduce(resource.endpoints, (prev, endpoint) => {
-    prev[endpoint.name] = createAPIAction({
+    prev[endpoint.name] = createAction({
       endpoint: (opt) => template(endpoint.path, opt),
       method: endpoint.method,
       model: model,

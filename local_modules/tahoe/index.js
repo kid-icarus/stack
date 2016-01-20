@@ -11,10 +11,11 @@ const getNormalizer = (opt) => (json) => ({
   normalized: normalize(json, opt.collection ? arrayOf(opt.model) : opt.model)
 })
 
-const createAPIAction = (opt = {}) => (ropt = {}) => {
+const createAction = (opt = {}) => (ropt = {}) => {
   var meta = {
     cursor: result(ropt.cursor || opt.cursor, ropt.options)
   }
+  var normalize = getNormalizer(opt)
 
   return {
     [CALL_API]: {
@@ -25,22 +26,21 @@ const createAPIAction = (opt = {}) => (ropt = {}) => {
       credentials: result(ropt.credentials || opt.credentials, ropt.options),
       types: [
         {
-          type: 'REQUEST',
+          type: 'tahoe.request',
           meta: meta,
           payload: (action) => { action.endpoint }
         },
         {
-          type: 'SUCCESS',
+          type: 'tahoe.success',
           meta: meta,
           payload: (action, state, res) => {
             const contentType = res.headers.get('Content-Type')
-            const normalize = getNormalizer(opt)
             if (!contentType || contentType.indexOf('json') === -1) return
             return res.json().then(normalize)
           }
         },
         {
-          type: 'FAILURE',
+          type: 'tahoe.failure',
           meta: meta
         }
       ]
@@ -49,7 +49,7 @@ const createAPIAction = (opt = {}) => (ropt = {}) => {
 }
 
 export default {
-  createAPIAction,
+  createAction,
   reducers: reducers,
   middleware: apiMiddleware
 }
