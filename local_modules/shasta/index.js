@@ -3,10 +3,10 @@ import IPropTypes from 'immutable-props'
 import { combineReducers } from 'redux-immutablejs'
 import { applyMiddleware, compose, createStore } from 'redux'
 import PureComponent from 'react-pure-render/component'
-import connect from './connect'
-import bindMethods from './bindMethods'
-import createActions from './createActions'
-import bindActions from './bindActions'
+import connect from './lib/connect'
+import bindMethods from './lib/bindMethods'
+import createActions from './lib/createActions'
+import bindActions from './lib/bindActions'
 
 class ShastaComponent extends PureComponent {
   static propTypes = {
