@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import Component from 'redux-dgaf'
+import Component from 'shasta'
 import IPropTypes from 'immutable-props'
 import jif from 'jif'
 import './index.sass'

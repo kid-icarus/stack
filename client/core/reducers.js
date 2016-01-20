@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux-immutablejs'
 import { routeReducer } from 'redux-simple-router'
-import * as apiReducers from 'redux-api-actions/reducers'
+import * as apiReducers from 'tahoe/reducers'
 import toReducers from 'modules-to-reducers'
 import localReducers from 'reducers/.lookup'
 

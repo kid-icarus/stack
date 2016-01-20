@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 // import { Link } from 'react-router'
 // import IPropTypes from 'immutable-props'
-import Component from 'redux-dgaf'
+import Component from 'shasta'
 // import {Button, Icon} from 'react-semantify'
 // import jif from 'jif'
 import './index.sass'

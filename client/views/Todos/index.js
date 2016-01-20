@@ -1,7 +1,7 @@
 import React, {PropTypes} from 'react'
 import {Link} from 'react-router'
 import IPropTypes from 'immutable-props'
-import Component from 'redux-dgaf'
+import Component from 'shasta'
 import jif from 'jif'
 import Todo from './Todo'
 import shield from 'function-shield'

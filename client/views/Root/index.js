@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux'
 import { Router } from 'react-router'
 import React from 'react'
-import Component from 'redux-dgaf'
+import Component from 'shasta'
 import './index.sass'
 
 // css

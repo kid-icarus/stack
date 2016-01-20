@@ -1,4 +1,4 @@
-import createAPIAction from 'redux-api-actions'
+import createAPIAction from 'tahoe'
 import { Schema } from 'normalizr'
 
 const user = new Schema('gh-user')

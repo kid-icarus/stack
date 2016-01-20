@@ -45,7 +45,7 @@ const webpackConfig = {
       'react-router',
       'react-redux',
       'redux',
-      'redux-dgaf',
+      'shasta',
       'jquery',
       'semantic-ui-css/semantic.js',
       'immutable'

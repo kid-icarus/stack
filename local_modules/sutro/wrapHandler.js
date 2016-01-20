@@ -1,5 +1,4 @@
-import {Errors} from 'connections/rethink'
-import {sanitizeData} from 'thinky-security'
+import {sanitizeData} from 'palisade'
 import mapValues from 'lodash.mapvalues'
 
 const getError = (err) => {
@@ -17,9 +16,6 @@ const getErrorFields = (err) => {
 }
 
 const sendError = (err, res) => {
-  if (err instanceof Errors.DocumentNotFound) {
-    return res.status(204).end()
-  }
   res.status(err.status || 500)
   res.json({
     error: getError(err),

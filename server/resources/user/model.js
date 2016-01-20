@@ -1,5 +1,5 @@
 import rethink from 'connections/rethink'
-import addSecurity from 'thinky-security'
+import addSecurity from 'palisade'
 const {type, r} = rethink
 
 const User = rethink.createModel('User', {

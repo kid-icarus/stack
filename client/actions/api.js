@@ -1,4 +1,4 @@
-import createAPIAction from 'redux-api-actions'
+import createAPIAction from 'tahoe'
 import {plural} from 'pluralize'
 import {Schema} from 'normalizr'
 import template from 'template-url'

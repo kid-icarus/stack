@@ -2,7 +2,7 @@ import React from 'react'
 // import { Link } from 'react-router'
 // import Icon from 'react-icon'
 // import shield from 'function-shield'
-import Component from 'redux-dgaf'
+import Component from 'shasta'
 import classNames from 'classnames'
 import './index.sass'
 
