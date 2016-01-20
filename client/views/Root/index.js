@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux'
 import { Router } from 'shasta-router'
 import React from 'react'
-import Component, {PropTypes} from 'shasta'
+import {Component, PropTypes} from 'shasta'
 import './index.sass'
 
 // css

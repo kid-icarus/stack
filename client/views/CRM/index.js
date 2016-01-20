@@ -1,5 +1,5 @@
 import React from 'react'
-import Component, {PropTypes} from 'shasta'
+import {Component, PropTypes} from 'shasta'
 import {Button} from 'react-semantify'
 // import jif from 'jif'
 import './index.sass'

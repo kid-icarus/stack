@@ -5,14 +5,8 @@ import _debug from 'debug'
 const debug = _debug('app:db:redis')
 
 const client = redis.createClient(config.redis)
-client.on('error', (err) => {
-  debug(chalk.red(err))
-})
-client.on('connect', () => {
-  debug('Redis connected')
-})
-client.on('reconnecting', () => {
-  debug(chalk.yellow('Redis reconnecting'))
-})
+client.on('error', err => debug(chalk.red(err)))
+client.on('connect', () => debug('Redis connected'))
+client.on('reconnecting', () => debug(chalk.yellow('Redis reconnecting')))
 
 export default client

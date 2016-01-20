@@ -1,6 +1,7 @@
 import lens from 'object-lens'
 import intersection from 'lodash.intersection'
 import map from 'lodash.map'
+import mapValues from 'lodash.mapvalues'
 
 export const sanitizeData = (user, data) => {
   // check if the user can even see the doc
@@ -16,6 +17,10 @@ export const sanitizeData = (user, data) => {
   // array of instances w/ lens
   if (Array.isArray(data)) {
     return map(data, sanitizeData.bind(null, user))
+  }
+
+  if (typeof data === 'object') {
+    return mapValues(data, sanitizeData.bind(null, user))
   }
 
   return data

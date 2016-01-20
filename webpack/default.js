@@ -74,11 +74,13 @@ const webpackConfig = {
       }
     }),
     new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[hash].js'),
+    /*
     new ProgressBarPlugin({
       format: 'Webpack Build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed s)',
       width: 100,
       clear: true
     })
+    */
   ],
   resolve: {
     modulesDirectories: ['local_modules', 'node_modules'],

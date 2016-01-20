@@ -61,7 +61,9 @@
     "promise-to-callback": "^1.0.0",
     "redis": "^2.4.2",
     "require-dir": "^0.3.0",
-    "thinky": "^2.2.4"
+    "thinky": "^2.2.4",
+    "through2": "^2.0.0",
+    "through2-map": "^2.0.0"
   },
   "devDependencies": {
     "capitalize": "^1.0.0",

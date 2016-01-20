@@ -1,6 +1,6 @@
 import React from 'react'
 import {Link} from 'shasta-router'
-import Component, {PropTypes} from 'shasta'
+import {Component, PropTypes} from 'shasta'
 import jif from 'jif'
 import Todo from './Todo'
 import shield from 'function-shield'

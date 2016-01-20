@@ -1,6 +1,6 @@
 import {Link} from 'shasta-router'
 import {Grid, Header, Row, Column} from 'react-semantify'
-import Component from 'shasta'
+import {Component} from 'shasta'
 import React from 'react'
 import DocumentMeta from 'react-document-meta'
 import './index.sass'

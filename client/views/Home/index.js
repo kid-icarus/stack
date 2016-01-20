@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'shasta-router'
 import shield from 'function-shield'
-import Component, {PropTypes} from 'shasta'
+import {Component, PropTypes} from 'shasta'
 import jif from 'jif'
 import DocumentMeta from 'react-document-meta'
 import GH from './GH'

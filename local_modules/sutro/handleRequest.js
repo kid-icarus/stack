@@ -1,5 +1,6 @@
 import {sanitizeData} from 'palisade'
 import mapValues from 'lodash.mapvalues'
+import pipeSSE from './pipeSSE'
 
 const getError = (err) => {
   if (err.message) return err.message
@@ -25,7 +26,9 @@ const sendError = (err, res) => {
 }
 
 export default (handler, Model) => (req, res, next) => {
+  var stream
   var called = false
+  var formatter = sanitizeData.bind(null, req.user)
   var opt = {
     id: req.params.id,
     user: req.user,
@@ -35,12 +38,30 @@ export default (handler, Model) => (req, res, next) => {
     _res: res
   }
 
-  var sendResponse = (err, data) => {
+  // if returns a stream, pipe it through SSE
+  // otherwise assume its going to call the cb
+  try {
+    stream = handler(opt, sendResponse)
+  } catch (err) {
+    sendResponse(err)
+  }
+  if (stream && stream.on) {
+    pipeStream(stream)
+  }
+
+  // guts
+  function pipeStream (stream) {
+    if (called) return stream.end()
+    called = true
+    pipeSSE(stream, res, formatter)
+  }
+
+  function sendResponse (err, data) {
     if (called) return
     called = true
     if (err) return sendError(err, res)
 
-    var transformedData = sanitizeData(opt.user, data)
+    var transformedData = formatter(data)
     if (transformedData) {
       res.status(200)
       res.json(transformedData)
@@ -48,11 +69,5 @@ export default (handler, Model) => (req, res, next) => {
       res.status(204)
     }
     res.end()
-  }
-
-  try {
-    handler(opt, sendResponse)
-  } catch (err) {
-    sendResponse(err)
   }
 }

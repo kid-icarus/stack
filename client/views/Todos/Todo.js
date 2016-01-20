@@ -1,5 +1,5 @@
 import React from 'react'
-import Component, {PropTypes} from 'shasta'
+import {Component, PropTypes} from 'shasta'
 import classNames from 'classnames'
 import './index.sass'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'shasta-router'
-import Component, {PropTypes} from 'shasta'
+import {Component, PropTypes} from 'shasta'
 import {Button, Icon} from 'react-semantify'
 // import jif from 'jif'
 import './index.sass'

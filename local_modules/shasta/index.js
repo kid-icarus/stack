@@ -8,7 +8,7 @@ import bindMethods from './lib/bindMethods'
 import createActions from './lib/createActions'
 import bindActions from './lib/bindActions'
 
-class ShastaComponent extends PureComponent {
+class Component extends PureComponent {
   static propTypes = {
     actions: RPropTypes.object
   };
@@ -29,12 +29,16 @@ class ShastaComponent extends PureComponent {
   }
 }
 
-export const PropTypes = {
+const PropTypes = {
   ...RPropTypes,
   ...IPropTypes
 }
 
 export {
+  Component,
+  PropTypes,
+
+  // guts
   combineReducers,
   bindActions,
   createActions,
@@ -42,4 +46,3 @@ export {
   compose,
   createStore
 }
-export default ShastaComponent
