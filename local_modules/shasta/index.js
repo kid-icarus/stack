@@ -30,11 +30,11 @@ class ShastaComponent extends PureComponent {
 ShastaComponent.connect = connect
 
 export {
-    combineReducers,
-    bindActions,
-    createActions,
-    applyMiddleware,
-    compose,
-    createStore
+  combineReducers,
+  bindActions,
+  createActions,
+  applyMiddleware,
+  compose,
+  createStore
 }
 export default ShastaComponent

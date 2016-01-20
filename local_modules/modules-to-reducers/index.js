@@ -8,7 +8,7 @@ export function toReducer (moduleName, module) {
     }
     return p
   }, {})
-  return handleActions(copy, module.default)
+  return handleActions(copy, module.__esModule ? module.default : module)
 }
 
 export default (o) =>
