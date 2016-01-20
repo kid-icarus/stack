@@ -1,14 +1,11 @@
 import React from 'react'
-// import { Link } from 'shasta-router'
-// import Icon from 'react-icon'
-// import shield from 'function-shield'
-import Component from 'shasta'
+import Component, {PropTypes} from 'shasta'
 import classNames from 'classnames'
 import './index.sass'
 
 export class Todo extends Component {
   static propTypes = {
-    todo: React.PropTypes.object.isRequired
+    todo: PropTypes.object.isRequired
   };
 
   static defaultState = {

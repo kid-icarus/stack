@@ -1,5 +1,5 @@
 import { PropTypes as RPropTypes } from 'react'
-import IPropTypes from 'immutable-props'
+import IPropTypes from 'react-immutable-proptypes'
 import { combineReducers } from 'redux-immutablejs'
 import { applyMiddleware, compose, createStore } from 'redux'
 import PureComponent from 'react-pure-render/component'

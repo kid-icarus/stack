@@ -9,7 +9,7 @@ import DocumentMeta from 'react-document-meta'
 
 export class CRMView extends Component {
   static propTypes = {
-    people: PropTypes.Map.isRequired,
+    people: PropTypes.map.isRequired,
     params: PropTypes.object
   };
   static defaultState = {

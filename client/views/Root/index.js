@@ -1,7 +1,7 @@
 import { Provider } from 'react-redux'
 import { Router } from 'shasta-router'
 import React from 'react'
-import Component from 'shasta'
+import Component, {PropTypes} from 'shasta'
 import './index.sass'
 
 // css
@@ -11,9 +11,9 @@ import 'semantic-ui-css/semantic.js'
 export class RootView extends Component {
   static displayName = 'RootView';
   static propTypes = {
-    history: React.PropTypes.object.isRequired,
-    routes: React.PropTypes.element.isRequired,
-    store: React.PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
+    routes: PropTypes.element.isRequired,
+    store: PropTypes.object.isRequired
   };
 
   componentDidMount () {

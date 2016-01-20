@@ -11,7 +11,7 @@ export class HomeView extends Component {
   static displayName = 'HomeView';
   static propTypes = {
     counter: PropTypes.number,
-    me: PropTypes.Map
+    me: PropTypes.map
   };
   static defaultState = {
     name: 'tj'

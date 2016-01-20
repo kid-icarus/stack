@@ -7,7 +7,7 @@ import './index.sass'
 
 export class PeopleList extends Component {
   static propTypes = {
-    people: PropTypes.Map.isRequired
+    people: PropTypes.map.isRequired
   };
   static cursors = {
     people: 'people'

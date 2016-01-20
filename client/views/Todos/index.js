@@ -22,7 +22,7 @@ export class TodosView extends Component {
   };
   static propTypes = {
     params: PropTypes.object.isRequired,
-    todos: PropTypes.Map.isRequired,
+    todos: PropTypes.mapOf(PropTypes.map).isRequired,
     toggled: PropTypes.bool.isRequired
   };
   static cursors = {

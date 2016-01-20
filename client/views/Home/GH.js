@@ -7,11 +7,11 @@ export class GHView extends Component {
   static displayName = 'GHView';
   static propTypes = {
     name: PropTypes.string.isRequired,
-    orgs: PropTypes.List,
-    repos: PropTypes.List,
-    users: PropTypes.List,
-    user: PropTypes.Map,
-    me: PropTypes.Map
+    orgs: PropTypes.listOf(PropTypes.map),
+    repos: PropTypes.listOf(PropTypes.map),
+    users: PropTypes.listOf(PropTypes.map),
+    user: PropTypes.map,
+    me: PropTypes.map
   };
   static cursors = {
     me: 'me',
