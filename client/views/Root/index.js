@@ -1,5 +1,5 @@
 import { Provider } from 'react-redux'
-import { Router } from 'react-router'
+import { Router } from 'shasta-router'
 import React from 'react'
 import Component from 'shasta'
 import './index.sass'

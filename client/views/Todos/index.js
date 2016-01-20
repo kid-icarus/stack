@@ -1,5 +1,5 @@
 import React, {PropTypes} from 'react'
-import {Link} from 'react-router'
+import {Link} from 'shasta-router'
 import IPropTypes from 'immutable-props'
 import Component from 'shasta'
 import jif from 'jif'

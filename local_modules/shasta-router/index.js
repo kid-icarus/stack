@@ -25,6 +25,7 @@ const getRouterState = (state) => state.get('router')
 
 export default {
   ...builtins,
+  history: browserHistory,
   actions: routeActions,
   middleware: middleware,
   listenForReplays: (store) =>

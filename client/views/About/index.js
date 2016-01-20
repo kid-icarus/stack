@@ -1,4 +1,4 @@
-import { Link } from 'react-router'
+import { Link } from 'shasta-router'
 import {Grid, Header, Row, Column} from 'react-semantify'
 import Component from 'shasta'
 import React from 'react'

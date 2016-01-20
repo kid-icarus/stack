@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react'
 import IPropTypes from 'immutable-props'
-import { Link } from 'react-router'
+import { Link } from 'shasta-router'
 import shield from 'function-shield'
 import Component from 'shasta'
 import jif from 'jif'
