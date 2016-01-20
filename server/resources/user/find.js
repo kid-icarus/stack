@@ -3,11 +3,9 @@ import decl from 'rethink-decl'
 import changeStream from 'thinky-change-stream'
 
 export default (opt, cb) => {
-  /*
   if (!User.authorized(opt.user, 'list')) {
     return cb({status: 403})
   }
-  */
 
   var q = decl(User, opt.options)
 

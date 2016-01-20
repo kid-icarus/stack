@@ -33,7 +33,10 @@ const findOrCreateUser = (accessToken, refreshToken, profile, cb) => {
 }
 
 const userToString = (user, cb) => cb(null, user.id)
-const stringToUser = (id, cb) => User.get(id).run(cb)
+const stringToUser = (id, cb) => User.get(id).run((_, res) =>
+  cb(null, res || false)
+)
+
 const storeRedirect = (req, res, next) => {
   if (req.session) req.session.redirectTo = null
   if (!req.query.to) return next()
@@ -51,16 +54,10 @@ const performRedirect = (req, res) => {
 const strategyConfig = {
   clientID: config.facebook.id,
   clientSecret: config.facebook.secret,
+  scope: config.facebook.scope,
   callbackURL: '/auth/facebook/callback',
   enableProof: true,
-  display: 'touch',
-  scope: [
-    'email',
-    'public_profile',
-    'user_about_me',
-    'user_birthday',
-    'user_location'
-  ]
+  display: 'touch'
 }
 const strategy = new Strategy(strategyConfig, findOrCreateUser)
 passport.use(strategy)

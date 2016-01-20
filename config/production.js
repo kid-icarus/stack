@@ -21,7 +21,14 @@ const config = {
   // auth stuff
   facebook: {
     id: '946814122064998',
-    secret: 'eb7e35157c197272800fe946ee05dc84'
+    secret: 'eb7e35157c197272800fe946ee05dc84',
+    scope: [
+      'email',
+      'public_profile',
+      'user_about_me',
+      'user_birthday',
+      'user_location'
+    ]
   }
 }
 

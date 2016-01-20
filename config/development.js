@@ -19,6 +19,13 @@ export default {
   // auth stuff
   facebook: {
     id: '946814205398323',
-    secret: '568fa31830811386f09b195091cbb699'
+    secret: '568fa31830811386f09b195091cbb699',
+    scope: [
+      'email',
+      'public_profile',
+      'user_about_me',
+      'user_birthday',
+      'user_location'
+    ]
   }
 }
