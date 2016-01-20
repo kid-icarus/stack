@@ -1,9 +1,5 @@
-import React, {PropTypes} from 'react'
-// import { Link } from 'shasta-router'
-// import IPropTypes from 'immutable-props'
-import Component from 'shasta'
-// import {Button, Icon} from 'react-semantify'
-// import jif from 'jif'
+import React from 'react'
+import Component, {PropTypes} from 'shasta'
 import './index.sass'
 
 export class PersonProfile extends Component {

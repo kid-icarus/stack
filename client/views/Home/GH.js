@@ -1,6 +1,5 @@
-import React, {PropTypes} from 'react'
-import Component from 'shasta'
-import IPropTypes from 'immutable-props'
+import React from 'react'
+import Component, {PropTypes} from 'shasta'
 import jif from 'jif'
 import './index.sass'
 
@@ -8,11 +7,11 @@ export class GHView extends Component {
   static displayName = 'GHView';
   static propTypes = {
     name: PropTypes.string.isRequired,
-    orgs: IPropTypes.List,
-    repos: IPropTypes.List,
-    users: IPropTypes.List,
-    user: IPropTypes.Map,
-    me: IPropTypes.Map
+    orgs: PropTypes.List,
+    repos: PropTypes.List,
+    users: PropTypes.List,
+    user: PropTypes.Map,
+    me: PropTypes.Map
   };
   static cursors = {
     me: 'me',

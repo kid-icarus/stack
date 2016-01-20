@@ -1,8 +1,8 @@
 import { compose, createStore } from 'shasta'
+import { listenForReplays } from 'shasta-router'
 import storage from './storageEngine'
 import rootReducer from '../reducers'
 import middleware from './middleware'
-import { listenForReplays } from 'shasta-router'
 import initialState from './initialState'
 
 const devtools = window.devToolsExtension

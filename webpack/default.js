@@ -41,11 +41,9 @@ const webpackConfig = {
     vendor: [
       'react',
       'react-dom',
-      'redux-simple-router',
-      'react-router',
-      'react-redux',
-      'redux',
       'shasta',
+      'shasta-router',
+      'redux-sutro',
       'jquery',
       'semantic-ui-css/semantic.js',
       'immutable'

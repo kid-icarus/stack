@@ -1,4 +1,2 @@
-import { createAction } from 'redux-actions'
-
-export const addTodo = createAction('addPerson')
-export const filterPeople = createAction('filterPeople')
+export const add = 'people.add'
+export const filter = 'people.filter'

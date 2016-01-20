@@ -1,4 +1,4 @@
-import { routeActions, syncHistory } from 'redux-simple-router'
+import { routeActions, syncHistory, routeReducer } from 'redux-simple-router'
 import {
   browserHistory,
   Router,
@@ -26,6 +26,7 @@ const getRouterState = (state) => state.get('router')
 export default {
   ...builtins,
   history: browserHistory,
+  reducer: routeReducer,
   actions: routeActions,
   middleware: middleware,
   listenForReplays: (store) =>

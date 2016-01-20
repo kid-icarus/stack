@@ -1,5 +1,5 @@
 import { combineReducers } from 'shasta'
-import { routeReducer } from 'redux-simple-router'
+import { reducer as routeReducer } from 'shasta-router'
 import { reducers as apiReducers } from 'tahoe'
 import toReducers from 'modules-to-reducers'
 import localReducers from 'reducers/.lookup'

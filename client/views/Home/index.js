@@ -1,8 +1,7 @@
-import React, {PropTypes} from 'react'
-import IPropTypes from 'immutable-props'
+import React from 'react'
 import { Link } from 'shasta-router'
 import shield from 'function-shield'
-import Component from 'shasta'
+import Component, {PropTypes} from 'shasta'
 import jif from 'jif'
 import DocumentMeta from 'react-document-meta'
 import GH from './GH'
@@ -12,7 +11,7 @@ export class HomeView extends Component {
   static displayName = 'HomeView';
   static propTypes = {
     counter: PropTypes.number,
-    me: IPropTypes.Map
+    me: PropTypes.Map
   };
   static defaultState = {
     name: 'tj'

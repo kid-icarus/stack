@@ -1,7 +1,6 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
 import {Link} from 'shasta-router'
-import IPropTypes from 'immutable-props'
-import Component from 'shasta'
+import Component, {PropTypes} from 'shasta'
 import jif from 'jif'
 import Todo from './Todo'
 import shield from 'function-shield'
@@ -23,7 +22,7 @@ export class TodosView extends Component {
   };
   static propTypes = {
     params: PropTypes.object.isRequired,
-    todos: IPropTypes.Map.isRequired,
+    todos: PropTypes.Map.isRequired,
     toggled: PropTypes.bool.isRequired
   };
   static cursors = {

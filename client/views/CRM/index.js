@@ -1,7 +1,5 @@
-import React, {PropTypes} from 'react'
-// import { Link } from 'shasta-router'
-import IPropTypes from 'immutable-props'
-import Component from 'shasta'
+import React from 'react'
+import Component, {PropTypes} from 'shasta'
 import {Button} from 'react-semantify'
 // import jif from 'jif'
 import './index.sass'
@@ -11,7 +9,7 @@ import DocumentMeta from 'react-document-meta'
 
 export class CRMView extends Component {
   static propTypes = {
-    people: IPropTypes.Map.isRequired,
+    people: PropTypes.Map.isRequired,
     params: PropTypes.object
   };
   static defaultState = {

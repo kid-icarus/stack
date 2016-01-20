@@ -1,14 +1,14 @@
 import { handleActions } from 'redux-actions'
 import mapValues from 'lodash.mapvalues'
+import mapKeys from 'lodash.mapkeys'
+import omit from 'lodash.omit'
 
-export function toReducer (moduleName, module) {
-  var copy = Object.keys(module).reduce((p, k) => {
-    if (k !== 'default') {
-      p[`${moduleName}.${k}`] = module[k]
-    }
-    return p
-  }, {})
-  return handleActions(copy, module.__esModule ? module.default : module)
+export function toReducer (moduleName, mod) {
+  if (!mod.__esModule) return mod
+  var initialState = mod.default
+  var reducerNames = omit(mod, 'default')
+  var namespaced = mapKeys(reducerNames, (v, k) => `${moduleName}.${k}`)
+  return handleActions(namespaced, initialState)
 }
 
 export default (o) =>
