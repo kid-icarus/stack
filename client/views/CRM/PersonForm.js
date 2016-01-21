@@ -1,5 +1,6 @@
-import React, {Component, PropTypes} from 'react'
-import {reduxForm} from 'redux-form'
+import React from 'react'
+import {Component, PropTypes} from 'shasta'
+import { Form } from 'shasta-forms'
 
 class PersonForm extends Component {
   static propTypes = {
@@ -47,14 +48,13 @@ class PersonForm extends Component {
             <input type='text' placeholder='Instagram' {...instagram} />
           </div>
         </div>
-        <button className='ui button' onClick={handleSubmit}>Sumbit</button>
+        <button className='ui button' onClick={handleSubmit}>Submit</button>
       </form>
     )
   }
 }
 
-export default reduxForm({
+export default Form({
   form: 'simple',
-  fields: ['name', 'smallImage', 'largeImage', 'location', 'email', 'twitter', 'facebook', 'instagram'],
-  getFormState: (state, reduxMountPoint) => state.get(reduxMountPoint).toJS()
+  fields: ['name', 'smallImage', 'largeImage', 'location', 'email', 'twitter', 'facebook', 'instagram']
 })(PersonForm)

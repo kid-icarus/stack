@@ -1,10 +1,8 @@
 import webpack from 'webpack'
 import cssnano from 'cssnano'
 import rucksack from 'rucksack-css'
-import chalk from 'chalk'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 // import NpmCheckPlugin from 'npm-check-webpack-plugin'
-import ProgressBarPlugin from 'progress-bar-webpack-plugin'
 import config from 'app-config-chain'
 import _debug from 'debug'
 import path from 'path'
@@ -73,14 +71,7 @@ const webpackConfig = {
         collapseWhitespace: true
       }
     }),
-    //new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[hash].js'),
-    /*
-    new ProgressBarPlugin({
-      format: 'Webpack Build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed s)',
-      width: 100,
-      clear: true
-    })
-    */
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[hash].js')
   ],
   resolve: {
     modulesDirectories: ['local_modules', 'node_modules'],
