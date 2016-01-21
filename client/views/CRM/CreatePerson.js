@@ -1,10 +1,10 @@
-import React, {PropTypes} from 'react'
+import React from 'react'
 import { Component } from 'shasta'
 import PersonForm from './PersonForm'
 import './index.sass'
 
 export class CreatePerson extends Component {
- static contextTypes = {
+  static contextTypes = {
     router: React.PropTypes.object.isRequired
   };
   handleSubmit (data) {

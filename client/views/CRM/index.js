@@ -3,13 +3,13 @@ import {Component, PropTypes} from 'shasta'
 import {Button} from 'react-semantify'
 // import jif from 'jif'
 import './index.sass'
-import PeopleList from './PeopleList'
 import DocumentMeta from 'react-document-meta'
 
 export class CRMView extends Component {
   static propTypes = {
     people: PropTypes.map.isRequired,
-    params: PropTypes.object
+    params: PropTypes.object,
+    children: PropTypes.function
   };
   static defaultState = {
     name: 'funkytek'
@@ -23,7 +23,6 @@ export class CRMView extends Component {
   }
 
   render () {
-    let uid = this.props.params.id
     return (
       <div className='crm'>
         <DocumentMeta title='CRM'/>

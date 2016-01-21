@@ -1,8 +1,5 @@
 import React, {Component, PropTypes} from 'react'
 import {reduxForm} from 'redux-form'
-import {
-  Form, Button, Fields, Field, Input, Label, Icon
-} from 'react-semantify'
 
 class PersonForm extends Component {
   static propTypes = {
@@ -12,7 +9,7 @@ class PersonForm extends Component {
 
   render () {
     const {
-      fields:{name, smallImage, largeImage, location, social, email, twitter, facebook, instagram},
+      fields: {name, smallImage, largeImage, location, email, twitter, facebook, instagram},
         handleSubmit
       } = this.props
     return (
