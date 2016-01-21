@@ -4,6 +4,9 @@ import HomeView from 'views/Home'
 import AboutView from 'views/About'
 import TodosView from 'views/Todos'
 import CRMView from 'views/CRM'
+import PeopleList from 'views/CRM/PeopleList'
+import PersonProfile from 'views/CRM/PersonProfile'
+import CreatePerson from 'views/CRM/CreatePerson'
 import NotFoundView from 'views/NotFound'
 
 export default (
@@ -12,8 +15,11 @@ export default (
     <Route path='/about' component={AboutView} />
     <Route path='/todos' component={TodosView} />
     <Route path='/todos/:filter' component={TodosView} />
-    <Route path='/crm' component={CRMView} />
-    <Route path='/crm/:id' component={CRMView} />
+    <Route component={CRMView}>
+      <Route path='/crm' component={PeopleList} />
+      <Route path='/crm/person/:id' component={PersonProfile} />
+      <Route path='/crm/create' component={CreatePerson} />
+    </Route>
     <Route path='*' component={NotFoundView}/>
   </Route>
 )

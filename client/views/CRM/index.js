@@ -3,14 +3,13 @@ import {Component, PropTypes} from 'shasta'
 import {Button} from 'react-semantify'
 // import jif from 'jif'
 import './index.sass'
-import PeopleList from './PeopleList'
-import PersonProfile from './PersonProfile'
 import DocumentMeta from 'react-document-meta'
 
 export class CRMView extends Component {
   static propTypes = {
     people: PropTypes.map.isRequired,
-    params: PropTypes.object
+    params: PropTypes.object,
+    children: PropTypes.function
   };
   static defaultState = {
     name: 'funkytek'
@@ -24,7 +23,6 @@ export class CRMView extends Component {
   }
 
   render () {
-    let uid = this.props.params.id
     return (
       <div className='crm'>
         <DocumentMeta title='CRM'/>
@@ -34,9 +32,7 @@ export class CRMView extends Component {
         <div className='main'>
           {/* People */}
           <div className='people'>
-            {
-              (uid) ? <PersonProfile params={this.props.params} person={this.props.people.get(uid)} /> : <PeopleList />
-            }
+            {this.props.children}
           </div>
           {/* Messages */}
           <div className='messages'>
@@ -45,7 +41,7 @@ export class CRMView extends Component {
               <div className='field'>
                 <textarea></textarea>
               </div>
-              <Button className='primary'>Send</Button>
+              <Button>Send</Button>
             </div>
           </div>
 

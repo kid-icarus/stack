@@ -14,7 +14,7 @@ export class PeopleList extends Component {
   };
 
   filterPeople (e) {
-    this.actions.filterPeople(e.target.value)
+    this.actions.people.filter(e.target.value)
   }
 
   render () {
@@ -32,20 +32,21 @@ export class PeopleList extends Component {
                 placeholder='Search People'
                 onKeyDown={this.filterPeople}
                 type = 'text' />
-              <i className='search icon' />
             </div>
             <div className='results'></div>
           </div>
 
           <Button className='icon filterUsers'><Icon className='filter' /></Button>
-          <Button className='icon'><Icon className='add' /></Button>
+          <Link to='/crm/create'>
+            <Button className='icon'><Icon className='add' /></Button>
+          </Link>
         </div>
 
         {/* List */}
         <div className='ui middle aligned divided list'>
           {
             this.props.people.map((person, id) =>
-              <Link to={`/crm/${person.get('id')}`} className='item' key={id}>
+              <Link to={`/crm/person/${person.get('id')}`} className='item' key={id}>
                 <img className='ui avatar image' src={person.get('smallImage')} />
                 <div className='content'>
                   <div className='header'>{person.get('name')}</div>
