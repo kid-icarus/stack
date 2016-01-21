@@ -24,9 +24,9 @@ class GHView extends Component {
   getData (name) {
     var opt = { user: name }
     if (this.isFetching() || this.isErrored()) {
-      this.actions.github.getOrganizations({options: opt, cursor: 'orgs'})
-      this.actions.github.getRepositories({options: opt, cursor: 'repos'})
-      this.actions.github.getUser({options: opt, cursor: 'user'})
+      this.actions.github.getOrganizations({cursor: 'orgs'}, {params: opt})
+      this.actions.github.getRepositories({cursor: 'repos'}, {params: opt})
+      this.actions.github.getUser({cursor: 'user'}, {params: opt})
       this.actions.api.users.find({cursor: 'users'})
     }
   }

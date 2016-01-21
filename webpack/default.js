@@ -38,15 +38,6 @@ const webpackConfig = {
   entry: {
     app: [
       path.join(config.paths.client, './index.js')
-    ],
-    vendor: [
-      'react',
-      'react-dom',
-      'shasta',
-      'shasta-router',
-      'redux-sutro',
-      'semantic-ui-css/semantic.js',
-      'immutable'
     ]
   },
   output: {
@@ -69,8 +60,7 @@ const webpackConfig = {
       minify: {
         collapseWhitespace: true
       }
-    }),
-    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[hash].js')
+    })
   ],
   resolve: {
     modulesDirectories: ['local_modules', 'node_modules'],

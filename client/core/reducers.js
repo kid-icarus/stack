@@ -9,5 +9,5 @@ export default combineReducers({
   ...apiReducers,
   ...toReducers(localReducers),
   router: routeReducer,
-  form: formReducer
+  forms: formReducer
 })
