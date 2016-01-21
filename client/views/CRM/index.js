@@ -5,7 +5,7 @@ import {Button} from 'react-semantify'
 import './index.sass'
 import DocumentMeta from 'react-document-meta'
 
-export class CRMView extends Component {
+class CRMView extends Component {
   static propTypes = {
     people: PropTypes.map.isRequired,
     params: PropTypes.object,

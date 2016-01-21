@@ -3,7 +3,7 @@ import { Component } from 'shasta'
 import PersonForm from './PersonForm'
 import './index.sass'
 
-export class CreatePerson extends Component {
+class CreatePerson extends Component {
   static contextTypes = {
     router: React.PropTypes.object.isRequired
   };

@@ -3,7 +3,7 @@ import {Component, PropTypes} from 'shasta'
 import jif from 'jif'
 import './index.sass'
 
-export class GHView extends Component {
+class GHView extends Component {
   static displayName = 'GHView';
   static propTypes = {
     name: PropTypes.string.isRequired,

@@ -45,7 +45,6 @@ const webpackConfig = {
       'shasta',
       'shasta-router',
       'redux-sutro',
-      'jquery',
       'semantic-ui-css/semantic.js',
       'immutable'
     ]

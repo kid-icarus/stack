@@ -15,7 +15,7 @@ const filters = {
   Completed: (i) => i.get('completed')
 }
 
-export class TodosView extends Component {
+class TodosView extends Component {
   static displayName = 'TodosView';
   static defaultState = {
     addError: false

@@ -12,7 +12,7 @@
   - All components are pure
   - PropTypes include immutable validators
 
-- Easy to understand options object instead of functional composition
+- Easy to understand objects instead of functional composition
   - Replace `compose(applyMiddleware(middleware), devtools)(createStore)(combineReducers(reducers), initialState)` with `createStore({middleware: [], initialState: {}, reducer: fn})`
 
 - Namespaced/nested actions and reducers

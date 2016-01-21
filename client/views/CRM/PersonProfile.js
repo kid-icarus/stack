@@ -2,7 +2,7 @@ import React from 'react'
 import {Component, PropTypes} from 'shasta'
 import './index.sass'
 
-export class PersonProfile extends Component {
+class PersonProfile extends Component {
   static propTypes = {
     params: PropTypes.object
   };

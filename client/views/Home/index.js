@@ -7,7 +7,7 @@ import DocumentMeta from 'react-document-meta'
 import GH from './GH'
 import './index.sass'
 
-export class HomeView extends Component {
+class HomeView extends Component {
   static displayName = 'HomeView';
   static propTypes = {
     counter: PropTypes.number,

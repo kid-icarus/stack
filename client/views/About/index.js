@@ -5,7 +5,7 @@ import React from 'react'
 import DocumentMeta from 'react-document-meta'
 import './index.sass'
 
-export class AboutView extends Component {
+class AboutView extends Component {
   static displayName = 'AboutView';
   render () {
     return (

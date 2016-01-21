@@ -3,7 +3,7 @@ import { normalize, arrayOf } from 'normalizr'
 import { apiMiddleware } from 'redux-api-middleware'
 import * as reducers from './reducers'
 
-// TODO: check entities cache in store and dont fetch if we have it already
+// TODO:0 check entities cache in store and dont fetch if we have it already
 const result = (fn, arg) => typeof fn === 'function' ? fn(arg) : fn
 
 const normalizeText = (str) => ({ raw: str })

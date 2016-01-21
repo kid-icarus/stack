@@ -3,7 +3,7 @@ import {Component, PropTypes} from 'shasta'
 import classNames from 'classnames'
 import './index.sass'
 
-export class Todo extends Component {
+class Todo extends Component {
   static propTypes = {
     todo: PropTypes.object.isRequired
   };

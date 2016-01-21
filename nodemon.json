@@ -7,7 +7,6 @@
     "./server",
     "./bin",
     "./config",
-    "./local_modules",
     "package.json"
   ],
   "env": {

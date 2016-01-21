@@ -5,7 +5,7 @@ import {Button, Icon} from 'react-semantify'
 // import jif from 'jif'
 import './index.sass'
 
-export class PeopleList extends Component {
+class PeopleList extends Component {
   static propTypes = {
     people: PropTypes.map.isRequired
   };

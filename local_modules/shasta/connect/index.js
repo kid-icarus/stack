@@ -2,6 +2,11 @@ import { connect } from 'react-redux'
 import mapStateToProps from './mapStateToProps'
 import mapDispatchToProps from './mapDispatchToProps'
 
+const options = {
+  pure: true,
+  withRef: true
+}
+
 export default (view, actions) => {
   if (!view) {
     throw new Error('Missing view argument in connect(view, actions)')
@@ -11,6 +16,8 @@ export default (view, actions) => {
   }
   return connect(
     mapStateToProps(view),
-    mapDispatchToProps(actions)
+    mapDispatchToProps(actions),
+    null,
+    options
   )(view)
 }

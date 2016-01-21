@@ -5,7 +5,7 @@ import React from 'react'
 import DocumentMeta from 'react-document-meta'
 import './index.sass'
 
-export class NotFoundView extends Component {
+class NotFoundView extends Component {
   static displayName = 'NotFoundView';
   render () {
     return (
