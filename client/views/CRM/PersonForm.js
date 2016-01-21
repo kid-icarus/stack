@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {reduxForm} from 'redux-form'
 import {
-  Form, Fields, Field, Input, Label, Icon
+  Form, Button, Fields, Field, Input, Label, Icon
 } from 'react-semantify'
 
 class PersonForm extends Component {
@@ -11,35 +11,53 @@ class PersonForm extends Component {
   };
 
   render () {
-    const { fields: {firstName, lastName}, handleSubmit } = this.props
+    const {
+      fields:{name, smallImage, largeImage, location, social, email, twitter, facebook, instagram},
+        handleSubmit
+      } = this.props
     return (
-      <Form onSubmit={handleSubmit}>
-        <Fields>
-
-          <Field>
-            <Label>First Name</Label>
-            <Input>
-              <input type='text' placeholder='First Name' {...firstName}/>
-            </Input>
-          </Field>
-
-          <Field>
-            <Label>Last Name</Label>
-            <Input>
-              <input type='text' placeholder='First Name' {...lastName}/>
-            </Input>
-          </Field>
-        </Fields>
-        <div>
-          <button onClick={handleSubmit}>Submit</button>
+      <form className='ui form' onSubmit={handleSubmit}>
+        <h3 className='ui dividing header'>New Person</h3>
+        <div className='field'>
+          <label>Name</label>
+          <div className='field'>
+            <input type='text' placeholder='Name' {...name} />
+          </div>
+          <label>Location</label>
+          <div className='field'>
+            <input type='text' placeholder='Los Angeles, CA' {...location} />
+          </div>
+          <label>Images</label>
+          <div className='field'>
+            <input type='text' placeholder='http://me.com/small.png' {...smallImage} />
+          </div>
+          <div className='field'>
+            <input type='text' placeholder='http://me.com/large.png' {...largeImage} />
+          </div>
         </div>
-      </Form>
+        <div className='field'>
+          <label>Social</label>
+          <div className='six wide field'>
+            <input type='text' placeholder='Email' {...email} />
+          </div>
+          <div className='six wide field'>
+            <input type='text' placeholder='Twitter' {...twitter} />
+          </div>
+          <div className='six wide field'>
+            <input type='text' placeholder='Facebook' {...facebook} />
+          </div>
+          <div className='six wide field'>
+            <input type='text' placeholder='Instagram' {...instagram} />
+          </div>
+        </div>
+        <button className='ui button' onClick={handleSubmit}>Sumbit</button>
+      </form>
     )
   }
 }
 
 export default reduxForm({
   form: 'simple',
-  fields: ['firstName', 'lastName'],
+  fields: ['name', 'smallImage', 'largeImage', 'location', 'email', 'twitter', 'facebook', 'instagram'],
   getFormState: (state, reduxMountPoint) => state.get(reduxMountPoint).toJS()
 })(PersonForm)

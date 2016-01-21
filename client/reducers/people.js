@@ -12,7 +12,10 @@ const initialState = Immutable.fromJS({
     location: 'Phoenix, AZ',
     litScore: 4,
     monetizationScore: 3,
-    social: [{email: 'aaron@wearefractal.com', twitter: 'funkytek', facebook: 'funkytek', instagram: 'funkytek'}],
+    email: 'aaron@wearefractal.com',
+    twitter: 'funkytek',
+    facebook: 'funkytek',
+    instagram: 'funkytek',
     created: Date.now()
   },
   [ids[1]]: {
@@ -23,7 +26,9 @@ const initialState = Immutable.fromJS({
     location: 'Phoenix, AZ',
     litScore: 2,
     monetizationScore: 3,
-    social: [{twitter: 'funkytek', facebook: 'aaron.thomas.murray', instagram: 'funkytek'}],
+    twitter: 'funkytek',
+    facebook: 'aaron.thomas.murray',
+    instagram: 'funkytek',
     created: Date.now()
   },
   [ids[2]]: {
@@ -34,7 +39,9 @@ const initialState = Immutable.fromJS({
     location: 'Phoenix, AZ',
     litScore: 1,
     monetizationScore: 3,
-    social: [{twitter: 'funkytek', facebook: 'aaron.thomas.murray', instagram: 'funkytek'}],
+    twitter: 'funkytek',
+    facebook: 'aaron.thomas.murray',
+    instagram: 'funkytek',
     created: Date.now()
   },
   [ids[3]]: {
@@ -45,12 +52,14 @@ const initialState = Immutable.fromJS({
     location: 'Phoenix, AZ',
     litScore: 3,
     monetizationScore: 3,
-    social: [{twitter: 'funkytek', facebook: 'aaron.thomas.murray', instagram: 'funkytek'}],
+    twitter: 'funkytek',
+    facebook: 'aaron.thomas.murray',
+    instagram: 'funkytek',
     created: Date.now()
   }
 })
 
-export const filterPeople = (state, {payload}) => {
+export const filter = (state, {payload}) => {
   if (payload === '') {
     return initialState
   } else {
@@ -61,14 +70,10 @@ export const filterPeople = (state, {payload}) => {
   }
 }
 
-export const addPerson = (state, {payload}) => {
+export const create = (state, {payload}) => {
   let id = uuid.v1()
-  let person = Immutable.Map({
-    id: id,
-    name: payload.name,
-    img: payload.img,
-    created: Date.now()
-  })
+  let person = Immutable.Map(payload)
+  person = person.merge({id: id, created: Date.now()})
   return state.set(id, person)
 }
 

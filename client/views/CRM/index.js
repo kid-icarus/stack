@@ -42,7 +42,7 @@ export class CRMView extends Component {
               <div className='field'>
                 <textarea></textarea>
               </div>
-              <Button className='primary'>Send</Button>
+              <Button>Send</Button>
             </div>
           </div>
 

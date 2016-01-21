@@ -2,21 +2,20 @@ import React, {PropTypes} from 'react'
 import { Component } from 'shasta'
 import PersonForm from './PersonForm'
 import './index.sass'
-// import PersonForm from './PersonForm'
 
 export class CreatePerson extends Component {
+ static contextTypes = {
+    router: React.PropTypes.object.isRequired
+  };
   handleSubmit (data) {
-    console.log('handle submit')
-    console.log(data)
+    this.actions.people.create(data)
+    this.context.router.replace('/crm')
   }
-
   render () {
     return (
-
       <div>
         <PersonForm onSubmit={this.handleSubmit} />
       </div>
-
     )
   }
 }

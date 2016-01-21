@@ -32,13 +32,14 @@ export class PeopleList extends Component {
                 placeholder='Search People'
                 onKeyDown={this.filterPeople}
                 type = 'text' />
-              <i className='search icon' />
             </div>
             <div className='results'></div>
           </div>
 
           <Button className='icon filterUsers'><Icon className='filter' /></Button>
-          <Button className='icon'><Icon className='add' /></Button>
+          <Link to='/crm/create'>
+            <Button className='icon'><Icon className='add' /></Button>
+          </Link>
         </div>
 
         {/* List */}
