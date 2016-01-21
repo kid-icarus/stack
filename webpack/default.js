@@ -73,7 +73,7 @@ const webpackConfig = {
         collapseWhitespace: true
       }
     }),
-    //new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[hash].js'),
+    new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.[hash].js'),
     /*
     new ProgressBarPlugin({
       format: 'Webpack Build [:bar] ' + chalk.green.bold(':percent') + ' (:elapsed s)',
