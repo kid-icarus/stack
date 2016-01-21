@@ -1,13 +1,9 @@
-import { compose, createStore } from 'shasta'
+import { createStore } from 'shasta'
 import { listenForReplays } from 'shasta-router'
 import storage from './storageEngine'
 import rootReducer from '../reducers'
 import middleware from './middleware'
 import initialState from './initialState'
-
-const devtools = window.devToolsExtension
-  ? window.devToolsExtension()
-  : undefined
 
 const hotReload = (store) => {
   if (__DEV__ && module.hot) {
@@ -19,15 +15,11 @@ const hotReload = (store) => {
 }
 
 export function configureStore (initialState) {
-  var createStoreWithMiddleware = compose(
-    middleware,
-    devtools
-  )
-
-  const store = createStoreWithMiddleware(createStore)(
-    storage.reducer(rootReducer),
-    initialState
-  )
+  const store = createStore({
+    middleware: middleware,
+    reducer: storage.reducer(rootReducer),
+    initialState: initialState
+  })
   storage.load(store)
   listenForReplays(store)
   hotReload(store)
