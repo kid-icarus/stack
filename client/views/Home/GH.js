@@ -1,6 +1,7 @@
 import React from 'react'
 import {Component, PropTypes} from 'shasta'
 import jif from 'jif'
+import UserList from './UserList'
 import './index.sass'
 
 class GHView extends Component {
@@ -9,7 +10,6 @@ class GHView extends Component {
     name: PropTypes.string.isRequired,
     orgs: PropTypes.listOf(PropTypes.map),
     repos: PropTypes.listOf(PropTypes.map),
-    users: PropTypes.listOf(PropTypes.map),
     user: PropTypes.map,
     me: PropTypes.map
   };
@@ -17,17 +17,15 @@ class GHView extends Component {
     me: 'me',
     orgs: 'requests.orgs',
     repos: 'requests.repos',
-    user: 'requests.user',
-    users: 'requests.users'
+    user: 'requests.user'
   };
 
   getData (name) {
     var opt = { user: name }
     if (this.isFetching() || this.isErrored()) {
-      this.actions.github.getOrganizations({cursor: 'orgs'}, {params: opt})
-      this.actions.github.getRepositories({cursor: 'repos'}, {params: opt})
-      this.actions.github.getUser({cursor: 'user'}, {params: opt})
-      this.actions.api.users.find({cursor: 'users'})
+      this.actions.github.getOrganizations({key: 'orgs'}, {params: opt})
+      this.actions.github.getRepositories({key: 'repos'}, {params: opt})
+      this.actions.github.getUser({key: 'user'}, {params: opt})
     }
   }
 
@@ -36,7 +34,7 @@ class GHView extends Component {
   }
 
   isFetching () {
-    return !(this.props.orgs || this.props.repos || this.props.users || this.props.user)
+    return !(this.props.orgs || this.props.repos || this.props.user)
   }
 
   isErrored () {
@@ -109,23 +107,7 @@ class GHView extends Component {
               )
             }
           </div>
-          {
-            jif(!this.props.users.has('error'), () =>
-              <div className='ui list relaxed column'>
-                <div className='ui header'>{this.props.users.size} DB Users</div>
-                {
-                  this.props.users.map((user, id) =>
-                    <div className='ui item' key={id}>
-                      <i className='ui icon large user middle aligned'/>
-                      <div className='content'>
-                        <div className='ui header'>{user.get('name')}</div>
-                      </div>
-                    </div>
-                  )
-                }
-              </div>
-            )
-          }
+          <UserList/>
         </div>
       </div>
     )

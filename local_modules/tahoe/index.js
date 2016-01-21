@@ -28,12 +28,12 @@ const getEndpoint = (endpoint, query) => {
   return url.format(parsed)
 }
 
-const createAction = (defaults = {}) => ({cursor}, ropt = {}) => {
-  if (!cursor) {
-    throw new Error('Missing cursor option!')
+const createAction = (defaults = {}) => ({key}, ropt = {}) => {
+  if (!key) {
+    throw new Error('Missing key option!')
   }
   var options = mapValues(merge({
-    cursor: cursor
+    key: key
   }, defaults, ropt), (v) =>
     result(v, ropt.params)
   )
