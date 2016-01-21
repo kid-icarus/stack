@@ -14,7 +14,7 @@ export class PeopleList extends Component {
   };
 
   filterPeople (e) {
-    this.actions.filterPeople(e.target.value)
+    this.actions.people.filter(e.target.value)
   }
 
   render () {
@@ -45,7 +45,7 @@ export class PeopleList extends Component {
         <div className='ui middle aligned divided list'>
           {
             this.props.people.map((person, id) =>
-              <Link to={`/crm/${person.get('id')}`} className='item' key={id}>
+              <Link to={`/crm/person/${person.get('id')}`} className='item' key={id}>
                 <img className='ui avatar image' src={person.get('smallImage')} />
                 <div className='content'>
                   <div className='header'>{person.get('name')}</div>

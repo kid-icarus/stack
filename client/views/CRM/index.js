@@ -4,7 +4,6 @@ import {Button} from 'react-semantify'
 // import jif from 'jif'
 import './index.sass'
 import PeopleList from './PeopleList'
-import PersonProfile from './PersonProfile'
 import DocumentMeta from 'react-document-meta'
 
 export class CRMView extends Component {
@@ -34,9 +33,7 @@ export class CRMView extends Component {
         <div className='main'>
           {/* People */}
           <div className='people'>
-            {
-              (uid) ? <PersonProfile params={this.props.params} person={this.props.people.get(uid)} /> : <PeopleList />
-            }
+            {this.props.children}
           </div>
           {/* Messages */}
           <div className='messages'>
