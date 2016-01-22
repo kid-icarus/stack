@@ -25,7 +25,7 @@ class TodosView extends Component {
     todos: PropTypes.mapOf(PropTypes.map).isRequired,
     toggled: PropTypes.bool.isRequired
   };
-  static cursors = {
+  static storeProps = {
     todos: 'todomvc.items',
     toggled: 'todomvc.toggle'
   };

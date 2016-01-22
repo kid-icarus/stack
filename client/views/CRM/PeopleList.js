@@ -9,7 +9,7 @@ class PeopleList extends Component {
   static propTypes = {
     people: PropTypes.map.isRequired
   };
-  static cursors = {
+  static storeProps = {
     people: 'people'
   };
 

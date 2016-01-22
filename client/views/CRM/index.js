@@ -14,7 +14,7 @@ class CRMView extends Component {
   static defaultState = {
     name: 'funkytek'
   };
-  static cursors = {
+  static storeProps = {
     people: 'people'
   };
 

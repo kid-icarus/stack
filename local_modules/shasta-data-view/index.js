@@ -9,25 +9,25 @@ export default class DataComponent extends Component {
 
   constructor () {
     super(...arguments)
-    if (!this.constructor.cursors) {
-      throw new Error('DataComponent requires cursors to be defined!')
+    if (!this.constructor.storeProps) {
+      throw new Error('DataComponent requires storeProps to be defined!')
     }
 
     if (this.fetch) this.fetch()
   }
 
   isFetching () {
-    return !this.isErrored() && some(this.constructor.cursors, (cursor, prop) =>
+    return !this.isErrored() && some(this.constructor.storeProps, (cursor, prop) =>
       typeof this.props[prop] === 'undefined'
     )
   }
   isErrored () {
-    return some(this.constructor.cursors, (cursor, prop) =>
+    return some(this.constructor.storeProps, (cursor, prop) =>
       this.props[prop] && this.props[prop].has('error')
     )
   }
   getLoadingFields () {
-    return fromJS(reduce(this.constructor.cursors, (prev, cursor, prop) => {
+    return fromJS(reduce(this.constructor.storeProps, (prev, cursor, prop) => {
       if (typeof this.props[prop] === 'undefined') {
         prev.push(prop)
       }
@@ -35,7 +35,7 @@ export default class DataComponent extends Component {
     }, []))
   }
   getErrors () {
-    return fromJS(reduce(this.constructor.cursors, (prev, cursor, prop) => {
+    return fromJS(reduce(this.constructor.storeProps, (prev, cursor, prop) => {
       if (this.props[prop] && this.props[prop].has('error')) {
         prev[prop] = this.props[prop].get('error')
       }
@@ -43,7 +43,7 @@ export default class DataComponent extends Component {
     }, {}))
   }
   getData () {
-    return pick(this.props, Object.keys(this.constructor.cursors))
+    return pick(this.props, Object.keys(this.constructor.storeProps))
   }
 
   displayLoader (fields) {}

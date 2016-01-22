@@ -6,7 +6,7 @@ class PersonProfile extends Component {
   static propTypes = {
     params: PropTypes.object
   };
-  static cursors = {
+  static storeProps = {
     people: 'people'
   };
 

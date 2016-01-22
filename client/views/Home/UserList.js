@@ -9,7 +9,7 @@ class UserList extends DataComponent {
     users: PropTypes.iterable,
     me: PropTypes.map
   };
-  static cursors = {
+  static storeProps = {
     me: 'me',
     users: 'requests.users'
   };
@@ -37,11 +37,11 @@ class UserList extends DataComponent {
     return <div className='ui header'>Loading...</div>
   }
   displayErrors (errors) {
-    return <div className='ui header'>
+    return <div className='errors'>
       Failed to Load:
       {
         errors.map((err, field) =>
-          <div key={field}>{field} - {err.message}</div>
+          <div key={field}>{field}: {err.message}</div>
         ).toArray()
       }
     </div>

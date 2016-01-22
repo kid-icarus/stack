@@ -16,7 +16,7 @@ class HomeView extends Component {
   static defaultState = {
     name: 'tj'
   };
-  static cursors = {
+  static storeProps = {
     counter: 'counter',
     me: 'me'
   };

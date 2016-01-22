@@ -26,8 +26,7 @@
   - `this.actions` for accessing and dispatching actions
   - Never write mapDispatchToProps or mapStateToProps
     - All actions always provided from connect
-    - Define the data you need on your view via cursors
-  - `this.props` for accessing defined `cursors`
+    - Define the data you need on your view via storeProps
 
 - Ecosystem of plug-and-play modules
   - router

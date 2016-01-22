@@ -13,7 +13,7 @@ class GHView extends Component {
     user: PropTypes.map,
     me: PropTypes.map
   };
-  static cursors = {
+  static storeProps = {
     me: 'me',
     orgs: 'requests.orgs',
     repos: 'requests.repos',
