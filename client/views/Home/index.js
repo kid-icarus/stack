@@ -4,7 +4,10 @@ import shield from 'function-shield'
 import {Component, PropTypes} from 'shasta'
 import jif from 'jif'
 import DocumentMeta from 'react-document-meta'
-import GH from './GH'
+import UserList from './UserList'
+import RepoList from './RepoList'
+import OrgList from './OrgList'
+import User from './User'
 import './index.sass'
 
 class HomeView extends Component {
@@ -65,7 +68,18 @@ class HomeView extends Component {
           </div>
         </div>
         <div className='ui row'>
-          <GH name={this.state.name}/>
+          <div className='github-data ui container'>
+            <div className='ui grid relaxed centered'>
+              <div className='ui row'>
+                <User name={this.state.name}/>
+              </div>
+              <div className='ui row equal width'>
+                <OrgList name={this.state.name}/>
+                <RepoList name={this.state.name}/>
+                <UserList/>
+              </div>
+            </div>
+          </div>
         </div>
         <div className='ui row'>
           <Link to='/about'>Go To About View</Link>
