@@ -14,15 +14,15 @@ const ESUCCESS = (state, { meta, payload }) => {
 
 // request state
 const RSUCCESS = (state, { meta, payload }) => {
-  if (meta.cursor) {
-    return state.set(meta.cursor, Immutable.fromJS(payload.raw))
+  if (meta.key) {
+    return state.set(meta.key, Immutable.fromJS(payload.raw))
   }
   return state
 }
 
 const RFAILURE = (state, { meta, payload }) => {
-  if (meta.cursor) {
-    return state.set(meta.cursor, Immutable.Map({error: payload}))
+  if (meta.key) {
+    return state.set(meta.key, Immutable.Map({error: payload}))
   }
   return state
 }

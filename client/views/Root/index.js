@@ -8,7 +8,7 @@ import './index.sass'
 import 'semantic-ui-css/semantic.css'
 import 'semantic-ui-css/semantic.js'
 
-export class RootView extends Component {
+class RootView extends Component {
   static displayName = 'RootView';
   static propTypes = {
     history: PropTypes.object.isRequired,

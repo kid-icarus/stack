@@ -1,16 +1,14 @@
-import { PropTypes as RPropTypes } from 'react'
-import IPropTypes from 'react-immutable-proptypes'
+import { Component, PropTypes as RPropTypes } from 'react'
 import { combineReducers } from 'redux-immutablejs'
-import { applyMiddleware, compose, createStore } from 'redux'
-import PureComponent from 'react-pure-render/component'
+import IPropTypes from 'react-immutable-proptypes'
+import bindClass from './lib/bindClass'
 import connect from './connect'
-import bindMethods from './lib/bindMethods'
+import createStore from './createStore'
 import createActions from './lib/createActions'
-import bindActions from './lib/bindActions'
 
-class Component extends PureComponent {
+class ShastaComponent extends Component {
   static propTypes = {
-    actions: RPropTypes.object
+    actions: RPropTypes.object.isRequired
   };
   static connect = connect;
   constructor (props, context) {
@@ -20,7 +18,7 @@ class Component extends PureComponent {
       this.state = this.constructor.defaultState
     }
 
-    bindMethods(this)
+    bindClass(this)
   }
 
   // sugar accessors
@@ -35,14 +33,11 @@ const PropTypes = {
 }
 
 export {
-  Component,
+  ShastaComponent as Component,
   PropTypes,
 
   // guts
   combineReducers,
-  bindActions,
   createActions,
-  applyMiddleware,
-  compose,
   createStore
 }

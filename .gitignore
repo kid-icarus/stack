@@ -1,6 +1,8 @@
 node_modules
 coverage
 rethinkdb_data
+dist
+.imdone
 
 ## Vim
 *.swp

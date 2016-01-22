@@ -15,7 +15,7 @@ const filters = {
   Completed: (i) => i.get('completed')
 }
 
-export class TodosView extends Component {
+class TodosView extends Component {
   static displayName = 'TodosView';
   static defaultState = {
     addError: false
@@ -25,7 +25,7 @@ export class TodosView extends Component {
     todos: PropTypes.mapOf(PropTypes.map).isRequired,
     toggled: PropTypes.bool.isRequired
   };
-  static cursors = {
+  static storeProps = {
     todos: 'todomvc.items',
     toggled: 'todomvc.toggle'
   };

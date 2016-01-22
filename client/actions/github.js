@@ -6,20 +6,20 @@ const organization = new Schema('gh-organization')
 const repository = new Schema('gh-repository')
 
 export const getUser = createAction({
-  endpoint: ({user}) => `https://api.github.com/users/${user}`,
+  endpoint: ({name}) => `https://api.github.com/users/${name}`,
   method: 'GET',
   model: user
 })
 
 export const getOrganizations = createAction({
-  endpoint: ({user}) => `https://api.github.com/users/${user}/orgs`,
+  endpoint: ({name}) => `https://api.github.com/users/${name}/orgs`,
   method: 'GET',
   collection: true,
   model: organization
 })
 
 export const getRepositories = createAction({
-  endpoint: ({user}) => `https://api.github.com/users/${user}/repos`,
+  endpoint: ({name}) => `https://api.github.com/users/${name}/repos`,
   method: 'GET',
   collection: true,
   model: repository
