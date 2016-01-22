@@ -1,6 +1,4 @@
-import forOwn from 'lodash.forown'
-
 export default (c) =>
-  forOwn(c.constructor.prototype, (v, k, o) => {
-    if (typeof v === 'function') o[k] = v.bind(o)
-  })
+   Object.getOwnPropertyNames(c.constructor.prototype)
+    .filter((prop) => typeof c[prop] === 'function')
+    .forEach((method) => c[method] = c[method].bind(c))
