@@ -1,11 +1,12 @@
 import React from 'react'
-import {Component, PropTypes} from 'shasta'
+import {PropTypes} from 'shasta'
+import DataComponent from 'shasta-data-view'
 import './index.sass'
 
-class GHView extends Component {
-  static displayName = 'GHView';
+class UserList extends DataComponent {
+  static displayName = 'UserList';
   static propTypes = {
-    users: PropTypes.listOf(PropTypes.map),
+    users: PropTypes.iterable,
     me: PropTypes.map
   };
   static cursors = {
@@ -13,54 +14,38 @@ class GHView extends Component {
     users: 'requests.users'
   };
 
-  // todo: abstract this crap
-  componentWillMount () {
-    if (this.props.me) {
-      this.actions.api.users.find({key: 'users'})
-    }
+  fetch () {
+    this.actions.api.users.find({key: 'users'})
   }
 
-  isFetching () {
-    return !this.props.users
-  }
-
-  isErrored () {
-    return !this.isFetching() && this.props.users.has('error')
-  }
-
-  getError () {
-    return this.props.users && this.props.users.get('error')
-  }
-
-  itemView (user, id) {
-    return <div className='ui item' key={id}>
-      <i className='ui icon large user middle aligned'/>
-      <div className='content'>
-        <div className='ui header'>{user.get('name')}</div>
-      </div>
-    </div>
-  }
-  collectionView () {
+  displayData ({users}) {
     return <div className='ui list relaxed column'>
-      <div className='ui header'>{this.props.users.size} Users</div>
+      <div className='ui header'>{users.size} Users</div>
       {
-        this.props.users.map(this.itemView)
+        users.map((user) =>
+          <div className='ui item' key={user.get('id')}>
+            <i className='ui icon large user middle aligned'/>
+            <div className='content'>
+              <div className='ui header'>{user.get('name')}</div>
+            </div>
+          </div>
+        )
       }
     </div>
   }
-  loaderView () {
+  displayLoader () {
     return <div className='ui header'>Loading...</div>
   }
-  errorView (err) {
-    return <div className='ui header'>Failed to Load: {err}</div>
-  }
-  render () {
-    return this.isFetching()
-      ? this.loaderView()
-      : this.isErrored()
-        ? this.errorView(this.getError())
-        : this.collectionView()
+  displayErrors (errors) {
+    return <div className='ui header'>
+      Failed to Load:
+      {
+        errors.map((err, field) =>
+          <div key={field}>{field} - {err.message}</div>
+        ).toArray()
+      }
+    </div>
   }
 }
 
-export default Component.connect(GHView, require('core/actions'))
+export default DataComponent.connect(UserList, require('core/actions'))
