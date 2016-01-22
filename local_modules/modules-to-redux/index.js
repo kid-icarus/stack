@@ -21,9 +21,7 @@ export const toReducers = (o) =>
 export const toAction = (moduleName, mod) => {
   if (!mod.__esModule) return mod
   var reducerNames = omit(mod, 'default')
-  var namespaced = mapValues(reducerNames, (v, k) => `${moduleName}.${k}`)
-  console.log(namespaced)
-  return namespaced
+  return mapValues(reducerNames, (v, k) => `${moduleName}.${k}`)
 }
 
 export const toActions = (o) =>
