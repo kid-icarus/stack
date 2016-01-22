@@ -47,7 +47,7 @@ class PersonForm extends Component {
             <input type='text' placeholder='Instagram' {...instagram} />
           </div>
         </div>
-        <button className='ui button' onClick={handleSubmit}>Sumbit</button>
+        <button className='ui button' onClick={handleSubmit}>Submit</button>
       </form>
     )
   }

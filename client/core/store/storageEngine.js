@@ -5,7 +5,8 @@ const whitelist = [
   'counter',
   'collections',
   'requests',
-  'todomvc'
+  'todomvc',
+  'people'
 ]
 
 const actionBlacklist = [
