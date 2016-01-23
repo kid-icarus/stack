@@ -1,11 +1,21 @@
 /* eslint key-spacing:0 */
 import webpack from 'webpack'
+import config from 'app-config-chain'
 import _debug from 'debug'
 
 const debug = _debug('build:development')
 
 export default (webpackConfig) => {
   debug('Create configuration.')
+
+  webpackConfig.devServer = {
+    publicPath: config.paths.public,
+    contentBase: config.paths.client,
+    noInfo: true,
+    stats: 'errors-only',
+    hot: true,
+    lazy: false
+  }
 
   // ------------------------------------
   // Enable HMR if Configured

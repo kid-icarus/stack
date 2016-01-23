@@ -56,5 +56,6 @@ class PersonForm extends Component {
 
 export default Form({
   form: 'simple',
-  fields: ['name', 'smallImage', 'largeImage', 'location', 'email', 'twitter', 'facebook', 'instagram']
+  fields: ['name', 'smallImage', 'largeImage', 'location', 'email', 'twitter', 'facebook', 'instagram'],
+  reduxMountPoint: 'forms'
 })(PersonForm)
