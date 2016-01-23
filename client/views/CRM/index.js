@@ -1,15 +1,15 @@
 import React from 'react'
+import {PropTypes as proptypes} from 'react'
 import {Component, PropTypes} from 'shasta'
 import {Button} from 'react-semantify'
 // import jif from 'jif'
 import './index.sass'
 import DocumentMeta from 'react-document-meta'
 
-class CRMView extends Component {
+export class CRMView extends Component {
   static propTypes = {
     people: PropTypes.map.isRequired,
-    params: PropTypes.object,
-    children: PropTypes.function
+    children: proptypes.object
   };
   static defaultState = {
     name: 'funkytek'
