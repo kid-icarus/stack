@@ -1,8 +1,8 @@
 import React from 'react'
 import {PropTypes as proptypes} from 'react'
 import {Component, PropTypes} from 'shasta'
+import { Link } from 'shasta-router'
 import {Button} from 'react-semantify'
-// import jif from 'jif'
 import './index.sass'
 import DocumentMeta from 'react-document-meta'
 
@@ -27,7 +27,7 @@ export class CRMView extends Component {
       <div className='crm'>
         <DocumentMeta title='CRM'/>
         <div className='navbar'>
-          <a href='/crm'>🔥</a>
+          <Link to='/crm'>🔥</Link>
         </div>
         <div className='main'>
           {/* People */}

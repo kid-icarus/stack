@@ -6,53 +6,53 @@ let ids = ['1', '2', '3', '4']
 const initialState = Immutable.fromJS({
   [ids[0]]: {
     id: ids[0],
-    name: 'Aaron M',
-    smallImage: '//semantic-ui.com/images/avatar/small/daniel.jpg',
-    largeImage: '//semantic-ui.com/images/avatar/large/daniel.jpg',
-    location: 'Phoenix, AZ',
+    name: 'Andre Power',
+    smallImage: '//pbs.twimg.com/profile_images/690022955204657152/7W1PQ7OV_400x400.jpg',
+    largeImage: '//pbs.twimg.com/profile_images/690022955204657152/7W1PQ7OV.jpg',
+    location: 'San Francisco, CA',
     litScore: 4,
     monetizationScore: 3,
     email: 'aaron@wearefractal.com',
-    twitter: 'funkytek',
-    facebook: 'funkytek',
-    instagram: 'funkytek',
+    twitter: 'andrepower',
+    facebook: 'andrepower',
+    instagram: 'andrepower',
     created: Date.now()
   },
   [ids[1]]: {
     id: ids[1],
-    name: 'Stevie Felliciano',
-    smallImage: '//semantic-ui.com/images/avatar/small/stevie.jpg',
-    largeImage: '//semantic-ui.com/images/avatar/large/stevie.jpg',
-    location: 'Phoenix, AZ',
+    name: 'Dan Abramov',
+    smallImage: '//pbs.twimg.com/profile_images/553711083064541184/9VsY9i09_400x400.jpeg',
+    largeImage: '//pbs.twimg.com/profile_images/553711083064541184/9VsY9i09.jpeg',
+    location: 'London, UK',
     litScore: 2,
     monetizationScore: 3,
-    twitter: 'funkytek',
+    twitter: 'dan_abramov',
     facebook: 'aaron.thomas.murray',
     instagram: 'funkytek',
     created: Date.now()
   },
   [ids[2]]: {
     id: ids[2],
-    name: 'Elliot TS',
-    smallImage: '//semantic-ui.com/images/avatar/small/elliot.jpg',
-    largeImage: '//semantic-ui.com/images/avatar/large/elliot.jpg',
-    location: 'Phoenix, AZ',
+    name: 'Jenn Schiffer',
+    smallImage: '//pbs.twimg.com/profile_images/686793998992814080/pPNII-Qh_400x400.jpg',
+    largeImage: '//pbs.twimg.com/profile_images/686793998992814080/pPNII-Qh.jpg',
+    location: 'Jersey City, NJ',
     litScore: 1,
     monetizationScore: 3,
-    twitter: 'funkytek',
+    twitter: 'jennschiffer',
     facebook: 'aaron.thomas.murray',
     instagram: 'funkytek',
     created: Date.now()
   },
   [ids[3]]: {
     id: ids[3],
-    name: 'Gary Nicegy',
-    smallImage: '//semantic-ui.com/images/avatar/small/stevie.jpg',
-    largeImage: '//semantic-ui.com/images/avatar/large/stevie.jpg',
-    location: 'Phoenix, AZ',
+    name: 'Eric Schoffstall',
+    smallImage: '//pbs.twimg.com/profile_images/628259794739068928/vKzPVB_a_400x400.jpg',
+    largeImage: '//pbs.twimg.com/profile_images/628259794739068928/vKzPVB_a.jpg',
+    location: 'San Francisco, CA',
     litScore: 3,
     monetizationScore: 3,
-    twitter: 'funkytek',
+    twitter: 'contrahacks',
     facebook: 'aaron.thomas.murray',
     instagram: 'funkytek',
     created: Date.now()
@@ -79,7 +79,9 @@ export const save = (state, {payload}) => {
   return state.set(id, person)
 }
 
-export const remove = (state, {payload}) =>
-  state.delete(payload.id)
+export const remove = (state, {payload}) => {
+  console.log(payload.get('id'))
+  return state.delete(payload.get('id'))
+}
 
 export default initialState
