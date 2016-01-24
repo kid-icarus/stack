@@ -1,61 +1,59 @@
 import React from 'react'
-import {Component, PropTypes} from 'shasta'
-import { Form } from 'shasta-forms'
+import { PropTypes } from 'shasta'
+import { Form, FormComponent } from 'shasta-forms'
+export const fields = ['name', 'location', 'smallImage', 'largeImage', 'email', 'twitter', 'facebook', 'instagram', 'id']
 
-class PersonForm extends Component {
+class PersonForm extends FormComponent {
   static propTypes = {
-    fields: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired
+    title: PropTypes.string.isRequired
   };
-
   render () {
-    const {
-      fields: {name, smallImage, largeImage, location, email, twitter, facebook, instagram},
-        handleSubmit
-      } = this.props
+    const {title, fields, handleSubmit} = this.props
     return (
+      <div>
+      <h3>{title}</h3>
       <form className='ui form' onSubmit={handleSubmit}>
-        <h3 className='ui dividing header'>New Person</h3>
+        <input type='hidden' {...fields.id} />
         <div className='field'>
           <label>Name</label>
           <div className='field'>
-            <input type='text' placeholder='Name' {...name} />
+            <input type='text' placeholder='Name' {...fields.name} />
           </div>
           <label>Location</label>
           <div className='field'>
-            <input type='text' placeholder='Los Angeles, CA' {...location} />
+            <input type='text' placeholder='Los Angeles, CA' {...fields.location} />
           </div>
           <label>Images</label>
           <div className='field'>
-            <input type='text' placeholder='http://me.com/small.png' {...smallImage} />
+            <input type='text' placeholder='http://me.com/small.png' {...fields.smallImage} />
           </div>
           <div className='field'>
-            <input type='text' placeholder='http://me.com/large.png' {...largeImage} />
+            <input type='text' placeholder='http://me.com/large.png' {...fields.largeImage} />
           </div>
         </div>
         <div className='field'>
           <label>Social</label>
           <div className='six wide field'>
-            <input type='text' placeholder='Email' {...email} />
+            <input type='text' placeholder='Email' {...fields.email} />
           </div>
           <div className='six wide field'>
-            <input type='text' placeholder='Twitter' {...twitter} />
+            <input type='text' placeholder='Twitter' {...fields.twitter} />
           </div>
           <div className='six wide field'>
-            <input type='text' placeholder='Facebook' {...facebook} />
+            <input type='text' placeholder='Facebook' {...fields.facebook} />
           </div>
           <div className='six wide field'>
-            <input type='text' placeholder='Instagram' {...instagram} />
+            <input type='text' placeholder='Instagram' {...fields.instagram} />
           </div>
         </div>
         <button className='ui button' onClick={handleSubmit}>Submit</button>
       </form>
+      </div>
     )
   }
 }
 
 export default Form({
-  form: 'simple',
-  fields: ['name', 'smallImage', 'largeImage', 'location', 'email', 'twitter', 'facebook', 'instagram'],
-  reduxMountPoint: 'forms'
+  name: 'person',
+  fields: fields
 })(PersonForm)

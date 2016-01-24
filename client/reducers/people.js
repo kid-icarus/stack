@@ -1,7 +1,7 @@
 import Immutable from 'immutable'
 import uuid from 'uuid'
 
-let ids = [1, 2, 3, 4]
+let ids = ['1', '2', '3', '4']
 
 const initialState = Immutable.fromJS({
   [ids[0]]: {
@@ -70,11 +70,16 @@ export const filter = (state, {payload}) => {
   }
 }
 
-export const create = (state, {payload}) => {
-  let id = uuid.v1()
+export const save = (state, {payload}) => {
   let person = Immutable.Map(payload)
-  person = person.merge({id: id, created: Date.now()})
+  let id = payload.id ? payload.id.toString() : uuid.v1()
+  if (!state.has(id)) {
+    person = person.merge({id: id, created: Date.now()})
+  }
   return state.set(id, person)
 }
+
+export const remove = (state, {payload}) =>
+  state.delete(payload.id)
 
 export default initialState

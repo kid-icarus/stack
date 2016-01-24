@@ -27,7 +27,7 @@ export class CRMView extends Component {
       <div className='crm'>
         <DocumentMeta title='CRM'/>
         <div className='navbar'>
-          <a href='/crm'>lit</a>
+          <a href='/crm'>🔥</a>
         </div>
         <div className='main'>
           {/* People */}
