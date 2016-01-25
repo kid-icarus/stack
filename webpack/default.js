@@ -60,6 +60,10 @@ const webpackConfig = {
       minify: {
         collapseWhitespace: true
       }
+    }),
+    new webpack.ProvidePlugin({
+      $: 'jquery',
+      jQuery: 'jquery'
     })
   ],
   resolve: {

@@ -5,6 +5,7 @@ import {Component, PropTypes} from 'shasta'
 import './index.sass'
 
 // css
+import 'jquery'
 import 'semantic-ui-css/semantic.css'
 import 'semantic-ui-css/semantic.js'
 
