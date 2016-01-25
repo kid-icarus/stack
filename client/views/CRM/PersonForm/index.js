@@ -2,14 +2,12 @@ import React from 'react'
 import { PropTypes, Component } from 'shasta'
 import { Form, Field, shastaForm } from 'shasta-forms'
 
-/*
-   form schema, define form fields
-   using this for now while using redux-form-schema, future options include:
-   - express the same thing in Field jsx
-*/
-
 class PersonForm extends Component {
   static formName = 'person';
+  /*
+    schema - this will probably go away in favor of declaring directly on tags
+    <Field name='name' required='true' validate={{length: {min: 0, max: 40}}} />
+  */
   static schema = {
     name: {
       label: 'Name',

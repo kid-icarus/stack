@@ -1,19 +1,20 @@
 /*
   shasta-forms
-  highly experiemental, api will change [1/24/16]
+  experiemental, api will change [1/24/16]
 
   usage:
-  - create a simple object schema of allowed fields + validations
-  (https://github.com/Lighthouse-io/redux-form-schema)
+  - create a vanilla (shasta) Component
+  - define static formName
+  - define static schema = simple object schema of allowed fields + validations
+    (https://github.com/Lighthouse-io/redux-form-schema)
   - use <Form {...this.props}> to create a form
   - use <Field> to create a managed input
   - decorate with shastaForm
   see /client/views/CRM/PersonForm.js for example
 
   TODO:
+  - replace schema with expressing props on Field elements
   - create custom form element components
-    = support more types than basic inputs
-
 */
 
 import React from 'react'
@@ -41,7 +42,6 @@ export class Form extends Component {
     errors: PropTypes.object
   };
   static contextTypes = {
-    schema: PropTypes.object,
     props: PropTypes.object
   };
   static childContextTypes = {
@@ -65,6 +65,7 @@ export class Form extends Component {
   options are loaded from schema into parent form
 
   * name: name of the field, used for error handling, redux-form integration and auto-label
+  * type: simple input type
   * noLabel: include (set to true) in tag if you want to not have a lable
   * label: set a label explicitly
   TODO:
@@ -80,7 +81,6 @@ export class Field extends Component {
     label: PropTypes.string
   };
   static contextTypes = {
-    schema: PropTypes.object,
     fields: React.PropTypes.object
   };
   static defaultProps = {
@@ -115,7 +115,7 @@ export class Field extends Component {
   (http://erikras.github.io/redux-form/)
 
   * reduxMountPoint: where in the store forms should be mounted- default is 'form', we default to 'forms'
-  * form: opt.name - name is an alias for 'form', simply the name of the form
+  * form: static.formName, simply the form's name
   * getFormState: convert to JS for redux-form to work with immutable.js
 */
 
