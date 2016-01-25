@@ -12,20 +12,21 @@ let schema = {
     required: true,
     validate: { length: {min: 0, max: 5} }
   },
-  location:   {label: 'Location', required: true},
+  location: {label: 'Location', required: true},
   smallImage: {label: '', required: true},
   largeImage: {label: '', required: true},
-  email:      {label: 'Email', required: true, type: 'email'},
-  twitter:    {label: 'Twitter', required: true},
-  facebook:   {label: 'Facebook', required: true},
-  instagram:  {label: 'Instagram', required: true}
+  email: {label: 'Email', required: true, type: 'email'},
+  twitter: {label: 'Twitter', required: true},
+  facebook: {label: 'Facebook', required: true},
+  instagram: {label: 'Instagram', required: true}
 }
 
 const {fields, validate} = buildSchema(schema)
 
 class PersonForm extends Component {
   static propTypes = {
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    handleSubmit: PropTypes.func.isRequired
   };
   render () {
     return (
@@ -52,6 +53,7 @@ class PersonForm extends Component {
   }
 }
 
+// form decorator
 export default shastaForm({
   name: 'person',
   fields: fields,

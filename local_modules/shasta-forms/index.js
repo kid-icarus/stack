@@ -1,3 +1,17 @@
+/*
+  shasta-forms
+  highly experiemental, api will change
+
+  - create a simple object schema of allowed fields + validations
+  - use <Form {...this.props}> to create a form
+  - use <Field> to create a managed input
+  - decorate with shastaForm
+  see /client/views/CRM/PersonForm.js for example
+
+  TODO: create custom form element components
+
+*/
+
 import React from 'react'
 import jif from 'jif'
 import { fromJS } from 'immutable'
@@ -22,7 +36,8 @@ export class Form extends Component {
     resetForm: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
     validate: PropTypes.func.isRequired,
-    children: PropTypes.node
+    children: PropTypes.node,
+    errors: PropTypes.array
   };
   static childContextTypes = {
     fields: React.PropTypes.object
@@ -64,20 +79,16 @@ export class Field extends Component {
   };
   render () {
     let field = this.context.fields[this.props.name]
-    console.log('field')
-    console.log(this.context.fields)
-    console.log(this.props.name)
-    console.log(field)
     let label = this.props.label || startCase(this.props.name)
     return (
       // mixin error class if there's an error */}
-      <div className={classNames('field', {'error': field.error})}>
+      <div className={classNames('field', {'error': (field.error && field.touched)})}>
         {/* noLabel */}
         {(this.props.noLabel) ? null : <label>{label}</label>}
         {/* acutal input */}
         <input type={this.props.type} {...field} />
         {
-          jif(field.error, () =>
+          jif((field.error && field.touched), () =>
             <div
               className='ui basic red pointing prompt label transition visible'>
               {field.error}
