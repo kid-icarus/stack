@@ -6,8 +6,8 @@ export default (stream, res, formatter) => {
   res.set('Cache-control', 'no-cache')
 
   stream
-    .pipe(map.obj((data) =>
-      `data: ${JSON.stringify(formatter ? formatter(data) : data)}\n\n`
+    .pipe(map.obj(({type, data}) =>
+      `${type}: ${JSON.stringify(formatter ? formatter(data) : data)}\n\n`
     ))
     .pipe(res)
 

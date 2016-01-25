@@ -26,13 +26,13 @@ const removeEntities = (state, { meta, payload }) => {
 }
 
 // request state
-const RSUCCESS = (state, { meta, payload }) => {
+const setResponse = (state, { meta, payload }) => {
   if (meta.requestId) {
     return state.set(meta.requestId, fromJS(payload.raw))
   }
   return state
 }
-const RFAILURE = (state, { meta, payload }) => {
+const setResponseError = (state, { meta, payload }) => {
   if (meta.requestId) {
     return state.set(meta.requestId, Map({error: payload}))
   }
@@ -48,8 +48,8 @@ export const collections = handleActions({
 }, initialCollections)
 
 export const requests = handleActions({
-  'tahoe.success': RSUCCESS,
-  'tahoe.failure': RFAILURE
+  'tahoe.success': setResponse,
+  'tahoe.failure': setResponseError
   // 'tahoe.realtime.add': TODO,
   // 'tahoe.realtime.update': TODO,
   // 'tahoe.realtime.remove': TODO

@@ -4,32 +4,38 @@ export default (q) => {
   var stream = through.obj()
 
   q.then(feed => {
+    stream.once('end', () => feed.close())
+
     feed.each((err, doc) => {
       if (err) return stream.emit('error', err)
 
       if (doc.isSaved() === false) {
         return stream.write({
           type: 'delete',
-          previous: doc
+          data: {
+            document: doc
+          }
         })
       }
 
       if (doc.getOldValue() == null) {
         return stream.write({
           type: 'insert',
-          current: doc
+          data: {
+            document: doc
+          }
         })
       }
 
       return stream.write({
         type: 'update',
-        previous: doc.getOldValue(),
-        current: doc
+        data: {
+          document: doc.getOldValue(),
+          change: doc
+        }
       })
     })
   }).error(err => stream.emit('error', err))
-
-  stream.once('end', () => q.then(feed => feed.close()))
 
   return stream
 }
