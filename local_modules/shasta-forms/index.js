@@ -1,8 +1,9 @@
 /*
   shasta-forms
-  highly experiemental, api will change
+  highly experiemental, api will change [1/24/16]
 
   - create a simple object schema of allowed fields + validations
+  (https://github.com/Lighthouse-io/redux-form-schema)
   - use <Form {...this.props}> to create a form
   - use <Field> to create a managed input
   - decorate with shastaForm
@@ -14,19 +15,17 @@
 
 import React from 'react'
 import jif from 'jif'
+import classNames from 'classnames'
+import startCase from 'lodash.startcase'
 import { fromJS } from 'immutable'
 import { reducer as formReducer, reduxForm } from 'redux-form'
 import { Component, PropTypes } from 'shasta'
-import classNames from 'classnames'
-import startCase from 'lodash.startcase'
+import buildSchema from 'redux-form-schema'
 
 /*
   Form component
   redux-form form container that abstracts need for defining required props
-  and provides props to child Field elements
-
-  * noLabel: include (set to true) in tag if you want to not have a lable
-  * label: set a label explicitly
+  and provides fields to child Field elements via context
 */
 
 export class Form extends Component {
@@ -35,9 +34,8 @@ export class Form extends Component {
     handleSubmit: PropTypes.func.isRequired,
     resetForm: PropTypes.func.isRequired,
     submitting: PropTypes.bool.isRequired,
-    validate: PropTypes.func.isRequired,
     children: PropTypes.node,
-    errors: PropTypes.array
+    errors: PropTypes.object
   };
   static childContextTypes = {
     fields: React.PropTypes.object
@@ -55,7 +53,7 @@ export class Form extends Component {
 }
 
 /*
-  # Field component
+  Field component
   wraps label, input and error handling into one component
   options are loaded from schema into parent form
 
@@ -68,7 +66,7 @@ export class Field extends Component {
   static propTypes = {
     name: PropTypes.string.isRequired,
     type: PropTypes.string,
-    noLabel: PropTypes.boolean,
+    noLabel: PropTypes.bool,
     label: PropTypes.string
   };
   static contextTypes = {
@@ -86,7 +84,7 @@ export class Field extends Component {
         {/* noLabel */}
         {(this.props.noLabel) ? null : <label>{label}</label>}
         {/* acutal input */}
-        <input type={this.props.type} {...field} />
+        <input type={this.props.type} {...field} {...this.props} />
         {
           jif((field.error && field.touched), () =>
             <div
@@ -103,19 +101,27 @@ export class Field extends Component {
 /*
   shastaForm decorator
   wraps redux-form decorator and provides some default values
+  (http://erikras.github.io/redux-form/)
 
   * reduxMountPoint: where in the store forms should be mounted- default is 'form', we default to 'forms'
   * form: opt.name - name is an alias for 'form', simply the name of the form
   * getFormState: convert to JS for redux-form to work with immutable.js
 */
 
-export const shastaForm = (opt = {}) =>
-  reduxForm({
+export const shastaForm = (opt = {}) => {
+  console.log(opt.schema)
+  // redux-form-schema decoration
+  const {fields, validate} = buildSchema(opt.schema)
+  console.log(fields, validate)
+  return reduxForm({
     reduxMountPoint: 'forms',
     form: opt.name,
+    fields: fields,
+    validate: validate,
     getFormState: (state, cursor) => state.get(cursor).toJS(),
     ...opt
   })
+}
 
 /*
   reducer

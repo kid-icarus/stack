@@ -1,11 +1,17 @@
 import React from 'react'
 import { PropTypes, Component } from 'shasta'
 import { Form, Field, shastaForm } from 'shasta-forms'
-// import { fields, validate } from './schema'
-// import schema from './schema'
-import buildSchema from 'redux-form-schema'
 
-// Schema - define form fields
+/*
+   form schema - define form fields
+   there's really no way around having something like this in terms of:
+   - whitelisting what fields you support
+   - allowing arbitrary / detailed / custom validation
+   - client-specific meta-data
+   alternatives:
+   - the only way to
+*/
+
 let schema = {
   name: {
     label: 'Name',
@@ -21,8 +27,6 @@ let schema = {
   instagram: {label: 'Instagram', required: true}
 }
 
-const {fields, validate} = buildSchema(schema)
-
 class PersonForm extends Component {
   static propTypes = {
     title: PropTypes.string.isRequired,
@@ -34,11 +38,11 @@ class PersonForm extends Component {
         <h3>{this.props.title}</h3>
         <Form {...this.props}>
           <Field name='name' />
-          <Field name='location' />
+          <Field name='location' placeholder='San Francisco, CA' />
           <div className='field'>
             <label>Images</label>
-            <Field name='smallImage' noLabel />
-            <Field name='largeImage' noLabel />
+            <Field name='smallImage' placeholder='//me.com/smallImage.png' noLabel />
+            <Field name='largeImage' placeholder='//me.com/largeImage.png' noLabel />
           </div>
           <div className='six wide field'>
             <Field name='email' />
@@ -56,6 +60,5 @@ class PersonForm extends Component {
 // form decorator
 export default shastaForm({
   name: 'person',
-  fields: fields,
-  validate: validate
+  schema: schema
 })(PersonForm)
