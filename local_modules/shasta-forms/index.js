@@ -19,6 +19,7 @@ export const getValues = reduxForm.getValues
 export const Form = (opt = {}) =>
   reduxForm({
     reduxMountPoint: 'forms',
+    form: opt.name,
     getFormState: (state, cursor) => state.get(cursor).toJS(),
     ...opt
   })
