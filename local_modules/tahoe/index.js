@@ -28,12 +28,12 @@ const getEndpoint = (endpoint, query) => {
   return url.format(parsed)
 }
 
-const createAction = (defaults = {}) => ({key}, ropt = {}) => {
-  if (!key) {
-    throw new Error('Missing key option!')
+const createAction = (defaults = {}) => ({requestId}, ropt = {}) => {
+  if (!requestId) {
+    throw new Error('Missing requestId option!')
   }
   var options = mapValues(merge({
-    key: key
+    requestId: requestId
   }, defaults, ropt), (v) =>
     result(v, ropt.params)
   )

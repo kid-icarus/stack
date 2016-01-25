@@ -6,9 +6,6 @@ export const reducer = (state, action) =>
   fromJS(formReducer(state ? state.toJS() : {}, action))
 
 export class FormComponent extends Component {
-  constructor () {
-    super(...arguments)
-  }
   static propTypes = {
     fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
@@ -18,10 +15,11 @@ export class FormComponent extends Component {
   };
 }
 
+export const getValues = reduxForm.getValues
+
 export const Form = (opt = {}) =>
   reduxForm({
     reduxMountPoint: 'forms',
-    form: opt.name,
     getFormState: (state, cursor) => state.get(cursor).toJS(),
     ...opt
   })

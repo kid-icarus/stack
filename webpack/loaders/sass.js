@@ -1,11 +1,8 @@
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
+
 export default [
   {
     test: /\.sass$/,
-    loaders: [
-      'style',
-      'css?sourceMap',
-      'postcss',
-      'sass?indentedSyntax&sourceMap'
-    ]
+    loader: ExtractTextPlugin.extract('style', 'css?sourceMap!postcss!sass?indentedSyntax&sourceMap')
   }
 ]

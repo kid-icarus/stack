@@ -15,7 +15,7 @@ class UserList extends DataComponent {
   };
 
   fetch () {
-    this.actions.api.users.find({key: 'users'})
+    this.actions.api.users.find({requestId: 'users'})
   }
 
   displayData ({users}) {

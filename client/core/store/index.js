@@ -6,12 +6,10 @@ import middleware from './middleware'
 import initialState from './initialState'
 
 const hotReload = (store) => {
-  if (__DEV__ && module.hot) {
-    module.hot.accept('../reducers', () => {
-      const nextRoot = require('../reducers')
-      store.replaceReducer(nextRoot)
-    })
-  }
+  if (!module.hot) return
+  module.hot.accept('../reducers', () =>
+    store.replaceReducer(require('../reducers'))
+  )
 }
 
 export function configureStore (initialState) {
