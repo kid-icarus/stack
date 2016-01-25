@@ -1,13 +1,8 @@
 /* eslint key-spacing:0 */
 import webpack from 'webpack'
 import config from 'app-config-chain'
-import _debug from 'debug'
-
-const debug = _debug('build:development')
 
 export default (webpackConfig) => {
-  debug('Create configuration.')
-
   webpackConfig.devServer = {
     publicPath: config.paths.public,
     contentBase: config.paths.client,
@@ -16,11 +11,6 @@ export default (webpackConfig) => {
     hot: true,
     lazy: false
   }
-
-  // ------------------------------------
-  // Enable HMR if Configured
-  // ------------------------------------
-  debug('Enable Hot Module Replacement (HMR).')
 
   webpackConfig.entry.app.push(
     'webpack-hot-middleware/client?path=/__webpack_hmr'
@@ -34,23 +24,20 @@ export default (webpackConfig) => {
   webpackConfig.eslint.emitWarning = true
 
   webpackConfig.module.loaders = webpackConfig.module.loaders.map(loader => {
-    if (/babel/.test(loader.loader)) {
-      debug('Apply react-transform-hmr to babel development transforms')
+    if (!/babel/.test(loader.loader)) return loader
 
-      if (loader.query.env.development.plugins[0][0] !== 'react-transform') {
-        debug('ERROR: react-transform must be the first plugin')
-        return loader
-      }
-
-      const reactTransformHmr = {
-        transform: 'react-transform-hmr',
-        imports: ['react'],
-        locals: ['module']
-      }
-      loader.query.env.development.plugins[0][1].transforms
-        .push(reactTransformHmr)
+    if (loader.query.env.development.plugins[0][0] !== 'react-transform') {
+      console.error('ERROR: react-transform must be the first plugin')
+      return loader
     }
 
+    const reactTransformHmr = {
+      transform: 'react-transform-hmr',
+      imports: ['react'],
+      locals: ['module']
+    }
+    loader.query.env.development.plugins[0][1].transforms
+      .push(reactTransformHmr)
     return loader
   })
 
