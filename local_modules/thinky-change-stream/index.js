@@ -9,6 +9,7 @@ export default (q) => {
     feed.each((err, doc) => {
       if (err) return stream.emit('error', err)
 
+      var old = doc.getOldValue()
       if (doc.isSaved() === false) {
         return stream.write({
           type: 'delete',
@@ -18,7 +19,7 @@ export default (q) => {
         })
       }
 
-      if (doc.getOldValue() == null) {
+      if (old == null) {
         return stream.write({
           type: 'insert',
           data: {
@@ -30,7 +31,7 @@ export default (q) => {
       return stream.write({
         type: 'update',
         data: {
-          document: doc.getOldValue(),
+          document: old,
           change: doc
         }
       })
