@@ -3,31 +3,27 @@ import { PropTypes, Component } from 'shasta'
 import { Form, Field, shastaForm } from 'shasta-forms'
 
 /*
-   form schema - define form fields
-   there's really no way around having something like this in terms of:
-   - whitelisting what fields you support
-   - allowing arbitrary / detailed / custom validation
-   - client-specific meta-data
-   alternatives:
-   - the only way to
+   form schema, define form fields
+   using this for now while using redux-form-schema, future options include:
+   - express the same thing in Field jsx
 */
 
-let schema = {
-  name: {
-    label: 'Name',
-    required: true,
-    validate: { length: {min: 0, max: 5} }
-  },
-  location: {label: 'Location', required: true},
-  smallImage: {label: '', required: true},
-  largeImage: {label: '', required: true},
-  email: {label: 'Email', required: true, type: 'email'},
-  twitter: {label: 'Twitter', required: true},
-  facebook: {label: 'Facebook', required: true},
-  instagram: {label: 'Instagram', required: true}
-}
-
 class PersonForm extends Component {
+  static formName = 'person';
+  static schema = {
+    name: {
+      label: 'Name',
+      required: true,
+      validate: { length: {min: 0, max: 5} }
+    },
+    location: {label: 'Location', required: true},
+    smallImage: {label: '', required: true},
+    largeImage: {label: '', required: true},
+    email: {label: 'Email', required: true, type: 'email'},
+    twitter: {label: 'Twitter', required: true},
+    facebook: {label: 'Facebook', required: true},
+    instagram: {label: 'Instagram', required: true}
+  };
   static propTypes = {
     title: PropTypes.string.isRequired,
     handleSubmit: PropTypes.func.isRequired
@@ -58,7 +54,4 @@ class PersonForm extends Component {
 }
 
 // form decorator
-export default shastaForm({
-  name: 'person',
-  schema: schema
-})(PersonForm)
+export default shastaForm(PersonForm)

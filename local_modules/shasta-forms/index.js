@@ -2,6 +2,7 @@
   shasta-forms
   highly experiemental, api will change [1/24/16]
 
+  usage:
   - create a simple object schema of allowed fields + validations
   (https://github.com/Lighthouse-io/redux-form-schema)
   - use <Form {...this.props}> to create a form
@@ -9,7 +10,9 @@
   - decorate with shastaForm
   see /client/views/CRM/PersonForm.js for example
 
-  TODO: create custom form element components
+  TODO:
+  - create custom form element components
+    = support more types than basic inputs
 
 */
 
@@ -37,6 +40,10 @@ export class Form extends Component {
     children: PropTypes.node,
     errors: PropTypes.object
   };
+  static contextTypes = {
+    schema: PropTypes.object,
+    props: PropTypes.object
+  };
   static childContextTypes = {
     fields: React.PropTypes.object
   };
@@ -60,6 +67,9 @@ export class Form extends Component {
   * name: name of the field, used for error handling, redux-form integration and auto-label
   * noLabel: include (set to true) in tag if you want to not have a lable
   * label: set a label explicitly
+  TODO:
+  - support passing plain old inputs
+  - support input components
 */
 
 export class Field extends Component {
@@ -70,6 +80,7 @@ export class Field extends Component {
     label: PropTypes.string
   };
   static contextTypes = {
+    schema: PropTypes.object,
     fields: React.PropTypes.object
   };
   static defaultProps = {
@@ -108,19 +119,17 @@ export class Field extends Component {
   * getFormState: convert to JS for redux-form to work with immutable.js
 */
 
-export const shastaForm = (opt = {}) => {
-  console.log(opt.schema)
+export const shastaForm = (form, opt = {}) => {
   // redux-form-schema decoration
-  const {fields, validate} = buildSchema(opt.schema)
-  console.log(fields, validate)
+  const {fields, validate} = buildSchema(form.schema)
   return reduxForm({
     reduxMountPoint: 'forms',
-    form: opt.name,
+    form: form.formName,
     fields: fields,
     validate: validate,
     getFormState: (state, cursor) => state.get(cursor).toJS(),
     ...opt
-  })
+  })(form)
 }
 
 /*
