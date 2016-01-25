@@ -1,25 +1,144 @@
+/*
+  shasta-forms
+  experiemental, api will change [1/24/16]
+
+  usage:
+  - create a vanilla (shasta) Component
+  - define static formName
+  - define static schema = simple object schema of allowed fields + validations
+    (https://github.com/Lighthouse-io/redux-form-schema)
+  - use <Form {...this.props}> to create a form
+  - use <Field> to create a managed input
+  - decorate with shastaForm
+  see /client/views/CRM/PersonForm.js for example
+
+  TODO:
+  - replace schema with expressing props on Field elements
+  - create custom form element components
+*/
+
+import React from 'react'
+import jif from 'jif'
+import classNames from 'classnames'
+import startCase from 'lodash.startcase'
 import { fromJS } from 'immutable'
 import { reducer as formReducer, reduxForm } from 'redux-form'
 import { Component, PropTypes } from 'shasta'
+import buildSchema from 'redux-form-schema'
 
-export const reducer = (state, action) =>
-  fromJS(formReducer(state ? state.toJS() : {}, action))
+/*
+  Form component
+  redux-form form container that abstracts need for defining required props
+  and provides fields to child Field elements via context
+*/
 
-export class FormComponent extends Component {
+export class Form extends Component {
   static propTypes = {
     fields: PropTypes.object.isRequired,
     handleSubmit: PropTypes.func.isRequired,
     resetForm: PropTypes.func.isRequired,
-    submitting: PropTypes.bool.isRequired
+    submitting: PropTypes.bool.isRequired,
+    children: PropTypes.node,
+    errors: PropTypes.object
   };
+  static contextTypes = {
+    props: PropTypes.object
+  };
+  static childContextTypes = {
+    fields: React.PropTypes.object
+  };
+  getChildContext () {
+    return {fields: this.props.fields}
+  }
+  render () {
+    return (
+      <form className='ui form' onSubmit={this.props.handleSubmit}>
+        {this.props.children}
+      </form>
+    )
+  }
 }
 
-export const getValues = reduxForm.getValues
+/*
+  Field component
+  wraps label, input and error handling into one component
+  options are loaded from schema into parent form
 
-export const Form = (opt = {}) =>
-  reduxForm({
+  * name: name of the field, used for error handling, redux-form integration and auto-label
+  * type: simple input type
+  * noLabel: include (set to true) in tag if you want to not have a lable
+  * label: set a label explicitly
+  TODO:
+  - support passing plain old inputs
+  - support input components
+*/
+
+export class Field extends Component {
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    noLabel: PropTypes.bool,
+    label: PropTypes.string
+  };
+  static contextTypes = {
+    fields: React.PropTypes.object
+  };
+  static defaultProps = {
+    type: 'text'
+  };
+  render () {
+    let field = this.context.fields[this.props.name]
+    let label = this.props.label || startCase(this.props.name)
+    return (
+      // mixin error class if there's an error */}
+      <div className={classNames('field', {'error': (field.error && field.touched)})}>
+        {/* noLabel */}
+        {(this.props.noLabel) ? null : <label>{label}</label>}
+        {/* acutal input */}
+        <input type={this.props.type} {...field} {...this.props} />
+        {
+          jif((field.error && field.touched), () =>
+            <div
+              className='ui basic red pointing prompt label transition visible'>
+              {field.error}
+            </div>
+          )
+        }
+      </div>
+    )
+  }
+}
+
+/*
+  shastaForm decorator
+  wraps redux-form decorator and provides some default values
+  (http://erikras.github.io/redux-form/)
+
+  * reduxMountPoint: where in the store forms should be mounted- default is 'form', we default to 'forms'
+  * form: static.formName, simply the form's name
+  * getFormState: convert to JS for redux-form to work with immutable.js
+*/
+
+export const shastaForm = (form, opt = {}) => {
+  // redux-form-schema decoration
+  const {fields, validate} = buildSchema(form.schema)
+  return reduxForm({
     reduxMountPoint: 'forms',
-    form: opt.name,
+    form: form.formName,
+    fields: fields,
+    validate: validate,
     getFormState: (state, cursor) => state.get(cursor).toJS(),
     ...opt
-  })
+  })(form)
+}
+
+/*
+  reducer
+  redux-form reducer wrapped to support immutable.js
+*/
+
+export const reducer = (state, action) =>
+  fromJS(formReducer(state ? state.toJS() : {}, action))
+
+// export redux-form's getValues
+export const getValues = reduxForm.getValues
