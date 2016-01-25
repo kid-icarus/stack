@@ -2,14 +2,11 @@ import webpack from 'webpack'
 import cssnano from 'cssnano'
 import rucksack from 'rucksack-css'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
-// import NpmCheckPlugin from 'npm-check-webpack-plugin'
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import config from 'app-config-chain'
-import _debug from 'debug'
 import path from 'path'
 import requireDir from 'require-dir'
 import sutro from 'sutro'
-const debug = _debug('build:default')
-debug('Create configuration.')
 
 const lFolder = requireDir('./loaders')
 const loaders = Object.keys(lFolder).reduce((p, k) => p.concat(lFolder[k]), [])
@@ -64,6 +61,9 @@ const webpackConfig = {
     new webpack.ProvidePlugin({
       $: 'jquery',
       jQuery: 'jquery'
+    }),
+    new ExtractTextPlugin('[name].[contenthash].css', {
+      allChunks: true
     })
   ],
   resolve: {

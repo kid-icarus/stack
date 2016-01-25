@@ -1,9 +1,8 @@
+import ExtractTextPlugin from 'extract-text-webpack-plugin'
+
 export default [
   {
     test: /\.css$/,
-    loaders: [
-      'style',
-      'css?sourceMap'
-    ]
+    loader: ExtractTextPlugin.extract('style', 'css?sourceMap')
   }
 ]
