@@ -18,7 +18,7 @@ class PersonForm extends FormComponent {
       <div>
         <h3>{this.props.title}</h3>
         <Form {...this.props} className='ui form'>
-          // simply define a Field, with options like *required*
+          {/* simply define a Field, with options like *required* */}
           <Field name='name' required />
           <Field name='location' required placeholder='San Francisco, CA' />
           <div className='field'>
