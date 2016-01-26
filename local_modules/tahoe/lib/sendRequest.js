@@ -27,6 +27,32 @@ const requestEventSource = (url, opt, dispatch) => {
       })
     }
   })
+  src.addEventListener('update', ({data}) => {
+    try {
+      let parsed = JSON.parse(data)
+      console.log(parsed)
+      dispatch({
+        type: 'tahoe.tail.update',
+        meta: opt,
+        payload: {
+          normalized: {
+            prev: entify(parsed.document, opt),
+            next: entify(parsed.change, opt)
+          },
+          raw: {
+            prev: parsed.document,
+            next: parsed.change
+          }
+        }
+      })
+    } catch (err) {
+      dispatch({
+        type: 'tahoe.failure',
+        meta: opt,
+        payload: err
+      })
+    }
+  })
 }
 
 export default (opt) => (dispatch) => {
