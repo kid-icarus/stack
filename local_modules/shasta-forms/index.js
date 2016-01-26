@@ -169,7 +169,7 @@ export const connect = (form, opt = {}) => {
   let el = React.createElement(form)
   let container = document.createElement('div')
   container.id = 'formContainer'
-  container.style = 'display: none'
+  // container.style = 'display: none'
   document.body.appendChild(container)
   let schemaNode = render(el, document.getElementById('formContainer'))
   let schema = schemaNode.getSchema()

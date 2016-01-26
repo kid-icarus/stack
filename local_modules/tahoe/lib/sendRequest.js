@@ -30,7 +30,6 @@ const requestEventSource = (url, opt, dispatch) => {
   src.addEventListener('update', ({data}) => {
     try {
       let parsed = JSON.parse(data)
-      console.log(parsed)
       dispatch({
         type: 'tahoe.tail.update',
         meta: opt,
