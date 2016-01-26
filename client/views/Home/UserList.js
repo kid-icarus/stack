@@ -16,11 +16,7 @@ class UserList extends DataComponent {
 
   fetch () {
     this.actions.api.users.find({requestId: 'users'})
-    // this.actions.api.users.find({requestId: 'users'}, {query: {feed: true}})
-    var evtsrc = new EventSource('/v1/users?feed=true', {withCredentials: true})
-    evtsrc.addEventListener('insert', ({data}) => {
-      console.log('insert', JSON.parse(data))
-    })
+    this.actions.api.users.find({requestId: 'users', feed: true})
   }
 
   displayData ({users}) {

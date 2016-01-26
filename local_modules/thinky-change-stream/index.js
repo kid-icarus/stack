@@ -4,6 +4,9 @@ export default (q) => {
   var stream = through.obj()
 
   q.then(feed => {
+    if (!feed.each) {
+      throw new Error('Passed in a query with no change feed')
+    }
     stream.once('end', () => feed.close())
 
     feed.each((err, doc) => {

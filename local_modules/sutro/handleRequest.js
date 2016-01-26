@@ -34,6 +34,7 @@ export default (handler, Model) => (req, res, next) => {
     user: req.user,
     data: req.body,
     options: req.query,
+    tail: req.get('accept') === 'text/event-stream',
     _req: req,
     _res: res
   }
@@ -45,7 +46,7 @@ export default (handler, Model) => (req, res, next) => {
   } catch (err) {
     sendResponse(err)
   }
-  if (stream && stream.on) {
+  if (opt.tail && stream && stream.on) {
     pipeStream(stream)
   }
 
@@ -60,7 +61,7 @@ export default (handler, Model) => (req, res, next) => {
     if (called) return
     called = true
     if (err) return sendError(err, res)
-
+    if (opt.tail) return sendError(new Error('Endpoint not capable of SSE'), res)
     var transformedData = formatter(data)
     if (transformedData) {
       res.status(200)

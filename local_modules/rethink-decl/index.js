@@ -5,22 +5,20 @@ var ourOptions = [
   'offset',
   'page',
   'filter',
-  'feed'
+  'tail'
 ]
 
-export default (Model, opt) => {
-  var filter = omit(opt, ourOptions)
-  var limit = +opt.limit || 100
-  var offset = +opt.offset || 0
-  if (opt.page) offset += opt.page * limit
+export default (Model, {tail, options}) => {
+  var filter = omit(options, ourOptions)
+  var limit = +options.limit || 100
+  var offset = +options.offset || 0
+  if (options.page) offset += options.page * limit
 
   var q = Model.filter(filter)
-  if (!opt.feed) {
-    q = q.slice(offset, offset + limit)
-  }
-
-  if (opt.feed) {
+  if (tail) {
     q = q.changes()
+  } else {
+    q = q.slice(offset, offset + limit)
   }
 
   return q

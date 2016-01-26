@@ -8,8 +8,8 @@ export default (opt, cb) => {
 
   var q = User.get(opt.id)
 
-  if (opt.options.feed) {
-    return changeStream(q)
+  if (opt.tail) {
+    return changeStream(q.changes())
   } else {
     q.run(cb)
   }

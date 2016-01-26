@@ -9,9 +9,12 @@ export default (opt, cb) => {
   }
   */
 
-  var q = decl(User, opt.options)
+  var q = decl(User, {
+    tail: opt.tail,
+    options: opt.options
+  })
 
-  if (opt.options.feed) {
+  if (opt.tail) {
     return changeStream(q)
   } else {
     q.run(cb)

@@ -42,9 +42,9 @@ const setResponseError = (state, { meta, payload }) => {
 // exported actions
 export const collections = handleActions({
   'tahoe.success': addEntities,
-  'tahoe.realtime.add': addEntities,
-  'tahoe.realtime.update': updateEntities,
-  'tahoe.realtime.remove': removeEntities
+  'tahoe.tail.add': addEntities,
+  'tahoe.tail.update': updateEntities,
+  'tahoe.tail.remove': removeEntities
 }, initialCollections)
 
 export const requests = handleActions({
