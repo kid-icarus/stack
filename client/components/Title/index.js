@@ -1,8 +1,9 @@
-import React, {PropTypes, Component} from 'react'
+import React from 'react'
+import {PropTypes, Component} from 'shasta'
 import classNames from 'classnames'
 import './index.sass'
 
-export default class Title extends Component {
+export class Title extends Component {
   static propTypes = {
     className: PropTypes.string
   };
@@ -14,3 +15,5 @@ export default class Title extends Component {
       } />
   }
 }
+
+export default Component.connect(Title, require('core/actions'))

@@ -7,6 +7,11 @@
     "./server",
     "./bin",
     "./config",
+    "local_modules/rethink-decl",
+    "local_modules/thinky-change-stream",
+    "local_modules/sutro",
+    "local_modules/thinky-export-schema",
+    "local_modules/palisade",
     "package.json"
   ],
   "env": {
