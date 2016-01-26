@@ -165,7 +165,7 @@ export class Field extends Component {
   * getFormState: convert to JS for redux-form to work with immutable.js
 */
 
-export const shastaForm = (form, opt = {}) => {
+export const connect = (form, opt = {}) => {
   let el = React.createElement(form)
   let container = document.createElement('div')
   container.id = 'formContainer'
