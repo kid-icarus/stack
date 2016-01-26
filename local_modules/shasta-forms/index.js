@@ -156,7 +156,7 @@ export class Field extends Component {
 }
 
 /*
-  ###shastaForm
+  ###connect
   wraps redux-form decorator and provides some default values
   (http://erikras.github.io/redux-form/)
 
