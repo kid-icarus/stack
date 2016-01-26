@@ -1,5 +1,5 @@
 import { handleActions } from 'redux-actions'
-import { Map, fromJS } from 'immutable'
+import { Map, List, fromJS } from 'immutable'
 
 const initialCollections = Map()
 const initialRequests = Map()
@@ -32,6 +32,19 @@ const setResponse = (state, { meta, payload }) => {
   }
   return state
 }
+const insertToResponse = (state, { meta, payload }) => {
+  if (meta.requestId) {
+    return state.update(meta.requestId, (v) => {
+      var raw = fromJS(payload.raw)
+      if (List.isList(v)) {
+        return v.push(raw)
+      }
+      return raw
+    })
+  }
+  return state
+}
+
 const setResponseError = (state, { meta, payload }) => {
   if (meta.requestId) {
     return state.set(meta.requestId, Map({error: payload}))
@@ -42,15 +55,15 @@ const setResponseError = (state, { meta, payload }) => {
 // exported actions
 export const collections = handleActions({
   'tahoe.success': addEntities,
-  'tahoe.tail.add': addEntities,
+  'tahoe.tail.insert': addEntities,
   'tahoe.tail.update': updateEntities,
-  'tahoe.tail.remove': removeEntities
+  // 'tahoe.tail.remove': removeEntities
 }, initialCollections)
 
 export const requests = handleActions({
   'tahoe.success': setResponse,
-  'tahoe.failure': setResponseError
-  // 'tahoe.realtime.add': TODO,
+  'tahoe.failure': setResponseError,
+  'tahoe.tail.insert': insertToResponse
   // 'tahoe.realtime.update': TODO,
   // 'tahoe.realtime.remove': TODO
 }, initialRequests)

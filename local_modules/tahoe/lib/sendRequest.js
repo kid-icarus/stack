@@ -1,14 +1,23 @@
 import request from 'superagent'
 import { normalize, arrayOf } from 'normalizr'
 
+const entify = (body, opt) =>
+  normalize(body, opt.collection
+    ? arrayOf(opt.model)
+    : opt.model)
+
 const requestEventSource = (url, opt, dispatch) => {
   var src = new EventSource(url, opt)
   src.addEventListener('insert', ({data}) => {
     try {
+      let parsed = JSON.parse(data)
       dispatch({
-        type: 'tahoe.tail.add',
+        type: 'tahoe.tail.insert',
         meta: opt,
-        payload: JSON.parse(data)
+        payload: {
+          normalized: entify(parsed.document, opt),
+          raw: parsed.document
+        }
       })
     } catch (err) {
       dispatch({
@@ -61,9 +70,7 @@ export default (opt) => (dispatch) => {
         meta: opt,
         payload: {
           raw: res.body,
-          normalized: normalize(res.body, opt.collection
-            ? arrayOf(opt.model)
-            : opt.model)
+          normalized: entify(res.body, opt)
         }
       })
     }
