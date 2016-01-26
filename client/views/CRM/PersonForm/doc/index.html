@@ -1,0 +1,33 @@
+<!DOCTYPE html><html lang="en"><head><title>index</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="index"><meta name="groc-project-path" content="index.js"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path">index.js</div></div><div id="document"><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> { PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'shasta'</span>
+<span class="hljs-keyword">import</span> { FormComponent, Form, Field, connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'shasta-forms'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h2 id="personform">PersonForm</h2>
+<h4 id="example-shasta-forms-usage">example shasta-forms usage</h4></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>extend form component</p></div></div><div class="code"><div class="wrapper"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PersonForm</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">FormComponent</span> </span>{</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>name of form (required)</p></div></div><div class="code"><div class="wrapper">  static formName = <span class="hljs-string">'person'</span>;
+  static propTypes = {
+    title: PropTypes.string,
+    handleSubmit: PropTypes.func
+  };
+  render () {
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">div</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">h3</span>&gt;</span>{this.props.title}<span class="hljs-tag">&lt;/<span class="hljs-title">h3</span>&gt;</span>
+        <span class="hljs-tag">&lt;<span class="hljs-title">Form</span> {<span class="hljs-attribute">...this.props</span>} <span class="hljs-attribute">className</span>=<span class="hljs-value">'ui form'</span>&gt;</span>
+          {/* simply define a Field, with options like *required* */}
+          <span class="hljs-tag">&lt;<span class="hljs-title">Field</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">'name'</span> <span class="hljs-attribute">required</span> /&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">Field</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">'location'</span> <span class="hljs-attribute">required</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">'San Francisco, CA'</span> /&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">'field'</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>Images<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">Field</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">'smallImage'</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">'//me.com/smallImage.png'</span> <span class="hljs-attribute">noLabel</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">Field</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">'largeImage'</span> <span class="hljs-attribute">placeholder</span>=<span class="hljs-value">'//me.com/largeImage.png'</span> <span class="hljs-attribute">noLabel</span> /&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">div</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">'six wide field'</span>&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">Field</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">'email'</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">'email'</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">Field</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">'twitter'</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">Field</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">'facebook'</span> /&gt;</span>
+            <span class="hljs-tag">&lt;<span class="hljs-title">Field</span> <span class="hljs-attribute">name</span>=<span class="hljs-value">'instagram'</span> /&gt;</span>
+          <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+          <span class="hljs-tag">&lt;<span class="hljs-title">button</span> <span class="hljs-attribute">className</span>=<span class="hljs-value">'ui button'</span> <span class="hljs-attribute">onClick</span>=<span class="hljs-value">{this.props.handleSubmit}</span>&gt;</span>Submit<span class="hljs-tag">&lt;/<span class="hljs-title">button</span>&gt;</span>
+        <span class="hljs-tag">&lt;/<span class="hljs-title">Form</span>&gt;</span>
+      <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+    )</span>
+  }
+}</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>connect the form</p></div></div><div class="code"><div class="wrapper"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> connect(PersonForm)</div></div></div></div></body></html>

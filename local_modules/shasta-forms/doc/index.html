@@ -1,0 +1,154 @@
+<!DOCTYPE html><html lang="en"><head><title>index</title></head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0"><meta name="groc-relative-root" content=""><meta name="groc-document-path" content="index"><meta name="groc-project-path" content="index.js"><link rel="stylesheet" type="text/css" media="all" href="assets/style.css"><script type="text/javascript" src="assets/behavior.js"></script><body><div id="meta"><div class="file-path">index.js</div></div><div id="document"><div class="segment"><div class="comments "><div class="wrapper"><h1 id="shasta-forms">shasta-forms</h1>
+<p>  experiemental, api will change [1/24/16]</p>
+<p>  see <code>/client/views/CRM/PersonForm.js</code> for example</p>
+<p>  TODO:</p>
+<ul>
+<li>replace schema with expressing props on Field elements</li>
+<li>create custom form element components</li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> jif <span class="hljs-keyword">from</span> <span class="hljs-string">'jif'</span>
+<span class="hljs-keyword">import</span> classNames <span class="hljs-keyword">from</span> <span class="hljs-string">'classnames'</span>
+<span class="hljs-keyword">import</span> startCase <span class="hljs-keyword">from</span> <span class="hljs-string">'lodash.startcase'</span>
+<span class="hljs-keyword">import</span> { fromJS } <span class="hljs-keyword">from</span> <span class="hljs-string">'immutable'</span>
+<span class="hljs-keyword">import</span> { reducer <span class="hljs-keyword">as</span> formReducer, reduxForm } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-form'</span>
+<span class="hljs-keyword">import</span> { Component, PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'shasta'</span>
+<span class="hljs-keyword">import</span> buildSchema <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-form-schema'</span>
+<span class="hljs-keyword">import</span> {render} <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>
+<span class="hljs-keyword">import</span> merge <span class="hljs-keyword">from</span> <span class="hljs-string">'lodash.merge'</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h3 id="formcomponent">FormComponent</h3>
+<p>  Component to extend when using shasta-forms</p></div></div><div class="code"><div class="wrapper"><span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">FormComponent</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  static propTypes = {
+    fields: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    resetForm: PropTypes.func.isRequired,
+    submitting: PropTypes.bool.isRequired,
+    children: PropTypes.node,
+    errors: PropTypes.object,
+    className: PropTypes.string
+  };
+  constructor (props, context) {
+    <span class="hljs-keyword">super</span>(props, context)
+    <span class="hljs-keyword">this</span>.schema = {}
+  }
+  static childContextTypes = {
+    addField: PropTypes.func
+  };</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p><em>getSchema</em>
+returns schema to build validation</p></div></div><div class="code"><div class="wrapper">  getSchema () {
+    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.schema
+  }
+  getChildContext () {
+    <span class="hljs-keyword">return</span> {</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p><em>addField</em>
+builds schema for form</p></div></div><div class="code"><div class="wrapper">      addField: (field) =&gt; {
+        <span class="hljs-keyword">this</span>.schema = merge(<span class="hljs-keyword">this</span>.schema, field)
+      }
+    }
+  }
+}</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h3 id="form">Form</h3>
+<p>  <em>redux-form</em> form container that abstracts need for defining required props
+  and provides fields to child <strong>Field</strong> elements via context</p></div></div><div class="code"><div class="wrapper"><span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Form</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  static propTypes = {
+    fields: PropTypes.object,
+    handleSubmit: PropTypes.func,
+    children: PropTypes.node,
+    className: PropTypes.string
+  };
+  static childContextTypes = {
+    fields: React.PropTypes.object
+  };
+  getChildContext () {
+    <span class="hljs-keyword">return</span> {fields: <span class="hljs-keyword">this</span>.props.fields}
+  }
+  render () {
+    <span class="hljs-keyword">return</span> (
+      <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">form</span> {<span class="hljs-attribute">...this.props</span>} <span class="hljs-attribute">onSubmit</span>=<span class="hljs-value">{this.props.handleSubmit}</span>&gt;</span>
+        {this.props.children}
+      <span class="hljs-tag">&lt;/<span class="hljs-title">form</span>&gt;</span>
+    )</span>
+  }
+}</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h3 id="field">Field</h3>
+<p>  wraps label, input and error handling into one component
+  options are loaded from schema into parent form</p>
+<ul>
+<li><em>name</em>: name of the field, used for error handling, redux-form integration and auto-label</li>
+<li><em>type</em>: simple input type</li>
+<li><em>noLabel</em>: include (set to true) in tag if you want to not have a lable</li>
+<li><p><em>label</em>: set a label explicitly</p>
+<p>TODO:</p>
+</li>
+<li>support passing plain old inputs</li>
+<li>support input components</li>
+</ul></div></div><div class="code"><div class="wrapper"><span class="hljs-keyword">export</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Field</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+  componentWillMount () {
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props) {
+      <span class="hljs-keyword">let</span> label = <span class="hljs-keyword">this</span>.props.label || startCase(<span class="hljs-keyword">this</span>.props.name)
+      <span class="hljs-keyword">let</span> obj = <span class="hljs-built_in">Object</span>.assign({label: label}, <span class="hljs-keyword">this</span>.props)
+      <span class="hljs-keyword">this</span>.context.addField({
+        [<span class="hljs-keyword">this</span>.props.name]: obj
+      })
+    }
+  }
+  static propTypes = {
+    name: PropTypes.string.isRequired,
+    inputType: PropTypes.string,
+    noLabel: PropTypes.bool,
+    label: PropTypes.string
+  };
+  static contextTypes = {
+    fields: PropTypes.object,
+    doRender: PropTypes.bool,
+    addField: PropTypes.func
+  };
+  static defaultProps = {
+    inputType: <span class="hljs-string">'text'</span>
+  };
+  render () {
+    <span class="hljs-keyword">let</span> label, field
+    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.props &amp;&amp; <span class="hljs-keyword">this</span>.context.fields) {
+      label = <span class="hljs-keyword">this</span>.props.label || startCase(<span class="hljs-keyword">this</span>.props.name)
+      field = <span class="hljs-keyword">this</span>.context.fields[<span class="hljs-keyword">this</span>.props.name]
+    } <span class="hljs-keyword">else</span> {
+      label = <span class="hljs-string">''</span>
+      field = {}
+    }
+    <span class="hljs-keyword">let</span> isError = (field.error &amp;&amp; field.touched)
+    <span class="hljs-keyword">return</span> (</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>mixin error class if there&#39;s an error</p></div></div><div class="code"><div class="wrapper">      &lt;div className={classNames(<span class="hljs-string">'field'</span>, {<span class="hljs-string">'error'</span>: isError})}&gt;
+        {<span class="hljs-comment">/* noLabel */</span>}
+        {(<span class="hljs-keyword">this</span>.props.noLabel) ? <span class="hljs-literal">null</span> : <span class="xml"><span class="hljs-tag">&lt;<span class="hljs-title">label</span>&gt;</span>{label}<span class="hljs-tag">&lt;/<span class="hljs-title">label</span>&gt;</span>}
+        {/* acutal input */}
+        <span class="hljs-tag">&lt;<span class="hljs-title">input</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">{this.props.inputType}</span> {<span class="hljs-attribute">...field</span>} {<span class="hljs-attribute">...this.props</span>} /&gt;</span>
+        {
+          jif(isError, () =&gt;
+            <span class="hljs-tag">&lt;<span class="hljs-title">div</span>
+              <span class="hljs-attribute">className</span>=<span class="hljs-value">'ui basic red pointing prompt label transition visible'</span>&gt;</span>
+              {field.error}
+            <span class="hljs-tag">&lt;/<span class="hljs-title">div</span>&gt;</span>
+          )</span>
+        }
+      &lt;<span class="hljs-regexp">/div&gt;
+    )
+  }
+}
+</span></div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h3 id="connect">connect</h3>
+<p>  wraps redux-form decorator and provides some default values
+  (<a href="http://erikras.github.io/redux-form/">http://erikras.github.io/redux-form/</a>)</p>
+<p>reduxMountPoint: where in the store forms should be mounted- default is &#39;form&#39;, we default to &#39;forms&#39;
+form: static.formName, simply the form&#39;s name
+getFormState: convert to JS for redux-form to work with immutable.js</p></div></div><div class="code"><div class="wrapper"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> connect = (form, opt = {}) =&gt; {
+  <span class="hljs-keyword">let</span> el = React.createElement(form)
+  <span class="hljs-keyword">let</span> container = <span class="hljs-built_in">document</span>.createElement(<span class="hljs-string">'div'</span>)
+  container.id = <span class="hljs-string">'formContainer'</span>
+  container.style = <span class="hljs-string">'display: none'</span>
+  <span class="hljs-built_in">document</span>.body.appendChild(container)
+  <span class="hljs-keyword">let</span> schemaNode = render(el, <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'formContainer'</span>))
+  <span class="hljs-keyword">let</span> schema = schemaNode.getSchema()
+  <span class="hljs-built_in">document</span>.body.removeChild(container)</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><p>redux-form-schema decoration</p></div></div><div class="code"><div class="wrapper">  <span class="hljs-keyword">const</span> {fields, validate} = buildSchema(schema)
+  <span class="hljs-keyword">return</span> reduxForm({
+    reduxMountPoint: <span class="hljs-string">'forms'</span>,
+    form: form.formName,
+    fields: fields,
+    validate: validate,
+    getFormState: (state, cursor) =&gt; state.get(cursor).toJS(),
+    ...opt
+  })(form)
+}</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h3 id="reducer">reducer</h3>
+<p>  redux-form reducer wrapped to support immutable.js</p></div></div><div class="code"><div class="wrapper"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> reducer = (state, action) =&gt;
+  fromJS(formReducer(state ? state.toJS() : {}, action))</div></div></div><div class="segment"><div class="comments "><div class="wrapper"><h4 id="export-redux-form39s-getvalues">export redux-form&#39;s getValues</h4></div></div></div><div class="segment"><div class="code"><div class="wrapper"><span class="hljs-keyword">export</span> <span class="hljs-keyword">const</span> getValues = reduxForm.getValues</div></div></div></div></body></html>
