@@ -38,6 +38,16 @@ const updateResponse = (state, { meta, payload }) => {
     return v.set(idx, next)
   })
 }
+const deleteFromResponse = (state, { meta, payload }) => {
+  if (!meta.requestId) return state
+  if (!List.isList(state.get(meta.requestId))) return state.remove(meta.requestId)
+
+  return state.update(meta.requestId, (v) => {
+    var prevId = payload.raw.id
+    var idx = v.findIndex((i) => i.get('id') === prevId)
+    return v.delete(idx)
+  })
+}
 
 const setResponseError = (state, { meta, payload }) => {
   if (meta.requestId) {
@@ -51,13 +61,13 @@ export const collections = handleActions({
   'tahoe.success': addEntities,
   'tahoe.tail.insert': addEntities,
   'tahoe.tail.update': updateEntities
-  // 'tahoe.tail.remove': TODO
+  // 'tahoe.tail.delete': deleteEntities
 }, initialCollections)
 
 export const requests = handleActions({
   'tahoe.success': setResponse,
   'tahoe.failure': setResponseError,
   'tahoe.tail.insert': insertToResponse,
-  'tahoe.tail.update': updateResponse
-  // 'tahoe.realtime.remove': TODO
+  'tahoe.tail.update': updateResponse,
+  'tahoe.tail.delete': deleteFromResponse
 }, initialRequests)

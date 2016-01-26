@@ -1,58 +1,6 @@
 import request from 'superagent'
-import { normalize, arrayOf } from 'normalizr'
-
-const entify = (body, opt) =>
-  normalize(body, opt.collection
-    ? arrayOf(opt.model)
-    : opt.model)
-
-const requestEventSource = (url, opt, dispatch) => {
-  var src = new EventSource(url, opt)
-  src.addEventListener('insert', ({data}) => {
-    try {
-      let parsed = JSON.parse(data)
-      dispatch({
-        type: 'tahoe.tail.insert',
-        meta: opt,
-        payload: {
-          normalized: entify(parsed.document, opt),
-          raw: parsed.document
-        }
-      })
-    } catch (err) {
-      dispatch({
-        type: 'tahoe.failure',
-        meta: opt,
-        payload: err
-      })
-    }
-  })
-  src.addEventListener('update', ({data}) => {
-    try {
-      let parsed = JSON.parse(data)
-      dispatch({
-        type: 'tahoe.tail.update',
-        meta: opt,
-        payload: {
-          normalized: {
-            prev: entify(parsed.document, opt),
-            next: entify(parsed.change, opt)
-          },
-          raw: {
-            prev: parsed.document,
-            next: parsed.change
-          }
-        }
-      })
-    } catch (err) {
-      dispatch({
-        type: 'tahoe.failure',
-        meta: opt,
-        payload: err
-      })
-    }
-  })
-}
+import entify from './entify'
+import createEventSource from './createEventSource'
 
 export default (opt) => (dispatch) => {
   dispatch({
@@ -76,7 +24,7 @@ export default (opt) => (dispatch) => {
   }
 
   if (opt.tail) {
-    return requestEventSource(req.url, opt, dispatch)
+    return createEventSource(req.url, opt, dispatch)
   }
 
   req.end((err, res) => {
