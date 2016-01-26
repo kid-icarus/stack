@@ -1,8 +1,13 @@
 import React from 'react'
 import { PropTypes } from 'shasta'
-import { Form, Field, FormComponent, shastaForm } from 'shasta-forms'
+import { FormComponent, Form, Field, connect } from 'shasta-forms'
 
+// ##PersonForm
+// #### example shasta-forms usage
+
+// extend form component
 class PersonForm extends FormComponent {
+  // name of form (required)
   static formName = 'person';
   static propTypes = {
     title: PropTypes.string,
@@ -13,6 +18,7 @@ class PersonForm extends FormComponent {
       <div>
         <h3>{this.props.title}</h3>
         <Form {...this.props} className='ui form'>
+          // simply define a Field, with options like *required*
           <Field name='name' required />
           <Field name='location' required placeholder='San Francisco, CA' />
           <div className='field'>
@@ -33,5 +39,5 @@ class PersonForm extends FormComponent {
   }
 }
 
-// form decorator
-export default shastaForm(PersonForm)
+// connect the form
+export default connect(PersonForm)
