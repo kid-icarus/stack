@@ -20,7 +20,21 @@ import buildSchema from 'redux-form-schema'
 import {render} from 'react-dom'
 import merge from 'lodash.merge'
 
+/*
+  ###FormComponent
+  Component to extend when using shasta-forms
+*/
+
 export class FormComponent extends Component {
+  static propTypes = {
+    fields: PropTypes.object.isRequired,
+    handleSubmit: PropTypes.func.isRequired,
+    resetForm: PropTypes.func.isRequired,
+    submitting: PropTypes.bool.isRequired,
+    children: PropTypes.node,
+    errors: PropTypes.object,
+    className: PropTypes.string
+  };
   constructor (props, context) {
     super(props, context)
     this.schema = {}
@@ -28,14 +42,16 @@ export class FormComponent extends Component {
   static childContextTypes = {
     addField: PropTypes.func
   };
+  // *getSchema*
+  // returns schema to build validation
   getSchema () {
     return this.schema
   }
   getChildContext () {
     return {
+      // *addField*
+      // builds schema for form
       addField: (field) => {
-        console.log('schema', this.schema)
-        console.log('field', field)
         this.schema = merge(this.schema, field)
       }
     }
@@ -50,12 +66,9 @@ export class FormComponent extends Component {
 
 export class Form extends Component {
   static propTypes = {
-    fields: PropTypes.object.isRequired,
-    handleSubmit: PropTypes.func.isRequired,
-    resetForm: PropTypes.func.isRequired,
-    submitting: PropTypes.bool.isRequired,
+    fields: PropTypes.object,
+    handleSubmit: PropTypes.func,
     children: PropTypes.node,
-    errors: PropTypes.object,
     className: PropTypes.string
   };
   static childContextTypes = {
@@ -100,7 +113,7 @@ export class Field extends Component {
   }
   static propTypes = {
     name: PropTypes.string.isRequired,
-    type: PropTypes.string,
+    inputType: PropTypes.string,
     noLabel: PropTypes.bool,
     label: PropTypes.string
   };
@@ -157,14 +170,12 @@ export const shastaForm = (form, opt = {}) => {
   let container = document.createElement('div')
   container.id = 'formContainer'
   container.style = 'display: none'
-  let node = document.body.appendChild(container)
+  document.body.appendChild(container)
   let schemaNode = render(el, document.getElementById('formContainer'))
   let schema = schemaNode.getSchema()
-  console.log(schema)
   document.body.removeChild(container)
   // redux-form-schema decoration
   const {fields, validate} = buildSchema(schema)
-  console.log(fields)
   return reduxForm({
     reduxMountPoint: 'forms',
     form: form.formName,
