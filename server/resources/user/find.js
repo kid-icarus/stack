@@ -1,6 +1,6 @@
 import User from './model'
 import decl from 'rethink-decl'
-import changeStream from 'thinky-change-stream'
+import changeStream from 'rethinkdb-change-stream'
 
 export default (opt, cb) => {
   /*

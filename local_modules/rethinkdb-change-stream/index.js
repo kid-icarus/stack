@@ -17,7 +17,7 @@ export default (q) => {
         return stream.write({
           type: 'delete',
           data: {
-            document: doc
+            prev: doc
           }
         })
       }
@@ -26,7 +26,7 @@ export default (q) => {
         return stream.write({
           type: 'insert',
           data: {
-            document: doc
+            next: doc
           }
         })
       }
@@ -34,8 +34,8 @@ export default (q) => {
       return stream.write({
         type: 'update',
         data: {
-          document: old,
-          change: doc
+          prev: old,
+          next: doc
         }
       })
     })
