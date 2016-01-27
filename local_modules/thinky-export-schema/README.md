@@ -25,6 +25,46 @@ var User = thinky.createModel('User', {
   }
 })
 
-exportSchema(User)
-=> {id: 'Number', name: 'String', times: { created: 'Date', updated: 'Date' }}
+console.log(exportSchema(User))
+/**
+{
+  id: 'Number',
+  name: 'String',
+  times: {
+    created: 'Date',
+    updated: 'Date'
+  }
+}
+ **/
+```
+
+###ES6
+
+```js
+import { type } from 'thinky'
+import _thinky from 'thinky'
+import exportSchema from './thinky-export-schema'
+
+const thinky = _thinky()
+
+const User = thinky.createModel('User', {
+  id: type.number(),
+  title: type.string(),
+  times: {
+    created: Date,
+    updated: Date
+  }
+})
+
+console.log(exportSchema(User))
+/**
+{
+  id: 'Number',
+  name: 'String',
+  times: {
+    created: 'Date',
+    updated: 'Date'
+  }
+}
+ **/
 ```
