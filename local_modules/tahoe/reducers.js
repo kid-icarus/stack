@@ -13,6 +13,10 @@ const updateEntities = (state, { meta, payload }) => {
   if (!payload.normalized) return state
   return state.mergeDeep(fromJS(payload.normalized.next.entities))
 }
+const deleteEntities = (state, { meta, payload }) => {
+  // TODO
+  return state
+}
 
 // request state
 const setResponse = (state, { meta, payload }) => {
@@ -60,8 +64,8 @@ const setResponseError = (state, { meta, payload }) => {
 export const collections = handleActions({
   'tahoe.success': addEntities,
   'tahoe.tail.insert': addEntities,
-  'tahoe.tail.update': updateEntities
-  // 'tahoe.tail.delete': deleteEntities
+  'tahoe.tail.update': updateEntities,
+  'tahoe.tail.delete': deleteEntities
 }, initialCollections)
 
 export const requests = handleActions({
