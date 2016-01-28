@@ -4,7 +4,7 @@ import changeStream from 'rethinkdb-change-stream'
 
 export default (opt, cb) => {
   /*
-  if (!User.authorized(opt.user, 'list')) {
+  if (!User.authorized('list', opt.user)) {
     return cb({status: 403})
   }
   */

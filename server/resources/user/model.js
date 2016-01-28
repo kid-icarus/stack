@@ -1,5 +1,5 @@
 import rethink from 'connections/rethink'
-import addSecurity from 'palisade'
+import palisade from 'palisade'
 const {type, r} = rethink
 
 const User = rethink.createModel('User', {
@@ -27,10 +27,7 @@ const User = rethink.createModel('User', {
   location: type.string()
 })
 
-// security
-// adds .lens and .authorized to User
-// which api loader will use for security
-addSecurity(User, {
+palisade(User, {
   document: {
     read: ['public'],
     list: ['loggedIn'],

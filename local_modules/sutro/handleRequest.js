@@ -1,4 +1,4 @@
-import {sanitizeData} from 'palisade'
+import {screenDeep} from 'palisade'
 import mapValues from 'lodash.mapvalues'
 import pipeSSE from './pipeSSE'
 
@@ -28,7 +28,7 @@ const sendError = (err, res) => {
 export default (handler, Model) => (req, res, next) => {
   var stream
   var called = false
-  var formatter = sanitizeData.bind(null, req.user)
+  var formatter = screenDeep.bind(null, req.user)
   var opt = {
     id: req.params.id,
     user: req.user,

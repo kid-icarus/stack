@@ -16,7 +16,7 @@ router.get('/auth/logout', (req, res) => {
 
 router.get('/initialState.js', (req, res) => {
   var initialState = {
-    me: req.user ? User.lens(req.user, 'read', req.user) : null
+    me: req.user ? User.screen('read', req.user, req.user) : null
   }
   res.status(200)
   res.type('text/javascript')

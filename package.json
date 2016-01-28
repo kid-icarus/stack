@@ -55,6 +55,7 @@
     "lodash.values": "^4.0.0",
     "method-override": "^2.3.5",
     "object-lens": "^1.0.0",
+    "palisade": "github:shastajs/palisade",
     "passport": "^0.3.2",
     "passport-facebook": "^2.0.0",
     "pluralize": "^1.2.1",
