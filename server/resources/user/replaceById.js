@@ -1,7 +1,7 @@
 import User from './model'
 
 export default (opt, cb) => {
-  if (!User.authorized('replace', opt.user)) {
+  if (!User.authorized('replace', opt.user, {id: opt.id})) {
     return cb({status: 403})
   }
 

@@ -10,8 +10,8 @@ export default (opt, cb) => {
   */
 
   var q = decl(User, {
-    tail: opt.tail,
-    options: opt.options
+    ...opt.options,
+    tail: opt.tail
   })
 
   if (opt.tail) {
