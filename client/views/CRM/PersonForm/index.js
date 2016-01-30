@@ -24,7 +24,7 @@ class PersonForm extends Component {
     }
   }
   handleSubmit (data) {
-    // get user id
+    // get user id from url
     let id = this.id || 'id'
     data.id = this.props.params[id]
     this.actions.people.save(data)
