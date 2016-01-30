@@ -35,7 +35,6 @@ class UserList extends DataComponent {
   }
 
   displayData ({users, test}) {
-    console.log(test)
     return <div className='ui list relaxed column'>
       <div className='ui header'>{users.size} Users</div>
       {
