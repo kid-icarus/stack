@@ -69,7 +69,7 @@ export class Form extends Component {
       render () {
         // noValidate turns off browser validation
         // TODO: turn off our validation if they want it on
-        return (<form className='ui form' onSubmit={this.props.handleSubmit(this.props.onFormSubmit)} noValidate>{form}</form>)
+        return (<form className={this.props.className} onSubmit={this.props.handleSubmit(this.props.onFormSubmit)} noValidate>{form}</form>)
       }
     }
 

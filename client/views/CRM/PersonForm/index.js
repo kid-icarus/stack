@@ -21,7 +21,7 @@ class PersonForm extends Component {
     return (
       <div>
         <h3>{this.props.title}</h3>
-        <Form name='person' onFormSubmit={this.handleSubmit}>
+        <Form name='person' className='ui form' onFormSubmit={this.handleSubmit}>
           {/* simply define a Field, with options like required */}
           <Field
             name='name'
