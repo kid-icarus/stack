@@ -11,15 +11,31 @@ class UserList extends DataComponent {
   };
   static storeProps = {
     me: 'me',
-    users: 'requests.users'
+    users: 'requests.users',
+    test: 'requests.test'
   };
 
   fetch () {
     this.actions.api.users.find({requestId: 'users'})
     this.actions.api.users.find({requestId: 'users', tail: true})
+
+    this.actions.api.users.findById({
+      requestId: 'test',
+      params: {
+        id: '2b1b8a9e-9ead-4e71-9c0f-25981800e0eb'
+      }
+    })
+    this.actions.api.users.findById({
+      requestId: 'test',
+      tail: true,
+      params: {
+        id: '2b1b8a9e-9ead-4e71-9c0f-25981800e0eb'
+      }
+    })
   }
 
-  displayData ({users}) {
+  displayData ({users, test}) {
+    console.log(test)
     return <div className='ui list relaxed column'>
       <div className='ui header'>{users.size} Users</div>
       {

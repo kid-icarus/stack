@@ -6,11 +6,9 @@ export default (opt, cb) => {
     return cb({status: 403})
   }
 
-  var q = User.get(opt.id)
-
   if (opt.tail) {
-    return changeStream(q.changes())
+    return changeStream(User.filter({id: opt.id}).changes())
   } else {
-    q.run(cb)
+    User.get(opt.id).run(cb)
   }
 }

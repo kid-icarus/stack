@@ -28,7 +28,7 @@ const handleUpdate = (data, opt, dispatch) =>
     payload: {
       normalized: {
         prev: entify(data.prev, opt),
-        next: entify(data.cnext, opt)
+        next: entify(data.next, opt)
       },
       raw: {
         prev: data.prev,
