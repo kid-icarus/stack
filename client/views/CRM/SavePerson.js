@@ -17,10 +17,6 @@ class CreatePerson extends Component {
   getModel (cursor, idName = 'id') {
     return this.props[cursor].get(this.props.params[idName])
   }
-  handleSubmit (data) {
-    this.actions.people.save(data)
-    this.context.router.replace('/crm')
-  }
   render () {
     let model = this.getModel('people')
     let title = 'New Person'
@@ -31,7 +27,6 @@ class CreatePerson extends Component {
     }
     return (
       <PersonForm
-        onSubmit={this.handleSubmit}
         title={title}
         {...initialValues} />
     )

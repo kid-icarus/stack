@@ -1,25 +1,31 @@
 import React from 'react'
-import { PropTypes } from 'shasta'
-import { FormComponent, Form, Field, connect } from 'shasta-forms'
+import { PropTypes, Component } from 'shasta'
+import { Form, Field } from 'shasta-forms'
 
-// ##PersonForm
-// #### example shasta-forms usage
+// PersonForm
+// example shasta-forms usage
 
-// extend form component
-class PersonForm extends FormComponent {
-  // name of form (required)
-  static formName = 'person';
+class PersonForm extends Component {
   static propTypes = {
     title: PropTypes.string,
     handleSubmit: PropTypes.func
   };
+  static contextTypes = {
+    router: PropTypes.object.isRequired
+  };
+  handleSubmit (data) {
+    this.actions.people.save(data)
+    this.context.router.replace('/crm')
+  }
   render () {
     return (
       <div>
         <h3>{this.props.title}</h3>
-        <Form {...this.props} className='ui form'>
-          {/* simply define a Field, with options like *required* */}
-          <Field name='name' required />
+        <Form name='person' onFormSubmit={this.handleSubmit}>
+          {/* simply define a Field, with options like required */}
+          <Field
+            name='name'
+            required />
           <Field name='location' required placeholder='San Francisco, CA' />
           <div className='field'>
             <label>Images</label>
@@ -27,17 +33,18 @@ class PersonForm extends FormComponent {
             <Field name='largeImage' placeholder='//me.com/largeImage.png' noLabel />
           </div>
           <div className='six wide field'>
+            {/* type='email' gives you email validation */}
             <Field name='email' type='email' />
             <Field name='twitter' />
             <Field name='facebook' />
             <Field name='instagram' />
           </div>
-          <button className='ui button' onClick={this.props.handleSubmit}>Submit</button>
+          <button type='submit' className='ui button'>Submit</button>
         </Form>
       </div>
     )
   }
 }
 
-// connect the form
-export default connect(PersonForm)
+// connect the Component
+export default Component.connect(PersonForm, require('core/actions'))
