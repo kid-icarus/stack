@@ -19,7 +19,7 @@ class OrgList extends DataComponent {
     var opt = {
       name: this.props.name
     }
-    this.actions.github.getOrganizations({requestId: 'orgs'}, {params: opt})
+    this.actions.github.getOrganizations({requestId: 'orgs', params: opt})
   }
 
   displayData ({orgs}) {

@@ -1,7 +1,7 @@
-import sutro from 'sutro'
+import sutro, { load } from 'sutro'
 import config from 'app-config-chain'
 
 export default sutro({
   prefix: config.api.path,
-  path: config.paths.resources
+  resources: load(config.paths.resources)
 })

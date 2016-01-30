@@ -19,7 +19,7 @@ class RepoList extends DataComponent {
     var opt = {
       name: this.props.name
     }
-    this.actions.github.getRepositories({requestId: 'repos'}, {params: opt})
+    this.actions.github.getRepositories({requestId: 'repos', params: opt})
   }
 
   displayData ({repos}) {

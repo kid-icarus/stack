@@ -54,18 +54,18 @@
     "lodash.omit": "^4.0.1",
     "lodash.values": "^4.0.0",
     "method-override": "^2.3.5",
-    "object-lens": "^1.0.0",
+    "palisade": "^1.0.1",
     "passport": "^0.3.2",
     "passport-facebook": "^2.0.0",
     "pluralize": "^1.2.1",
     "pmx": "^0.5.8",
-    "promise-to-callback": "^1.0.0",
     "redis": "^2.4.2",
     "require-dir": "^0.3.0",
+    "rethink-decl": "^1.0.0",
+    "rethinkdb-change-stream": "^1.0.0",
     "superagent": "^1.7.1",
-    "thinky": "^2.2.4",
-    "through2": "^2.0.0",
-    "through2-map": "^2.0.0"
+    "sutro": "github:shastajs/sutro",
+    "thinky": "^2.2.4"
   },
   "devDependencies": {
     "babel-cli": "^6.4.5",

@@ -6,7 +6,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin'
 import config from 'app-config-chain'
 import path from 'path'
 import requireDir from 'require-dir'
-import sutro from 'sutro'
+import sutro, { load } from 'sutro'
 
 const lFolder = requireDir('./loaders')
 const loaders = Object.keys(lFolder).reduce((p, k) => p.concat(lFolder[k]), [])
@@ -14,7 +14,7 @@ const loaders = Object.keys(lFolder).reduce((p, k) => p.concat(lFolder[k]), [])
 const initialState = {
   resources: sutro({
     prefix: config.api.path,
-    path: config.paths.resources
+    resources: load(config.paths.resources)
   }).meta
 }
 

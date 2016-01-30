@@ -21,8 +21,12 @@
 - Default middleware
   - thunk
 
+
 - Dead simple Component API
-  - defaultState + auto-binding to reduce boilerplate
+  - Use ES6 classes (not using them is deprecated anyways)
+    - If you haven't already migrated, [here's how](http://www.newmediacampaigns.com/blog/refactoring-react-components-to-es6-classes)
+  - defaultState to do what getInitialState used to do, and mimic what defaultProps does currently
+  - auto-bind component function's scope like old react
   - `this.actions` for accessing and dispatching actions
   - Never write mapDispatchToProps or mapStateToProps
     - All actions always provided from connect

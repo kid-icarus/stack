@@ -18,7 +18,7 @@ class User extends DataComponent {
     var opt = {
       name: this.props.name
     }
-    this.actions.github.getUser({requestId: 'user'}, {params: opt})
+    this.actions.github.getUser({requestId: 'user', params: opt})
   }
 
   displayData ({user}) {

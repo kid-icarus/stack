@@ -1,16 +1,14 @@
 import User from './model'
-import changeStream from 'thinky-change-stream'
+import changeStream from 'rethinkdb-change-stream'
 
 export default (opt, cb) => {
-  if (!User.authorized(opt.user, 'read')) {
+  if (!User.authorized('read', opt.user)) {
     return cb({status: 403})
   }
 
-  var q = User.get(opt.id)
-
   if (opt.tail) {
-    return changeStream(q.changes())
+    return changeStream(User.filter({id: opt.id}).changes())
   } else {
-    q.run(cb)
+    User.get(opt.id).run(cb)
   }
 }

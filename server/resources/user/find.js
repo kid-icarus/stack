@@ -1,17 +1,17 @@
 import User from './model'
 import decl from 'rethink-decl'
-import changeStream from 'thinky-change-stream'
+import changeStream from 'rethinkdb-change-stream'
 
 export default (opt, cb) => {
   /*
-  if (!User.authorized(opt.user, 'list')) {
+  if (!User.authorized('list', opt.user)) {
     return cb({status: 403})
   }
   */
 
   var q = decl(User, {
-    tail: opt.tail,
-    options: opt.options
+    ...opt.options,
+    tail: opt.tail
   })
 
   if (opt.tail) {
