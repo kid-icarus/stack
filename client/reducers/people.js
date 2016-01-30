@@ -73,6 +73,8 @@ export const filter = (state, {payload}) => {
 export const save = (state, {payload}) => {
   let person = Immutable.Map(payload)
   let id = payload.id ? payload.id.toString() : uuid.v1()
+  console.log('PERSON', person.toJS())
+  console.log('state has id', state.has(id))
   if (!state.has(id)) {
     person = person.merge({id: id, created: Date.now()})
   }

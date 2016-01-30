@@ -23,6 +23,7 @@ let reduceSchema = (schema, field) => {
   if (Array.isArray(field.props.children)) {
     return field.props.children.reduce(reduceSchema, schema)
   } else if (field.type.displayName === 'Field') {
+    if (field.props.type === 'hidden') { return schema }
     let fieldProps = Object.assign({}, field.props)
     // label is specified or uppercase name
     fieldProps.label = field.props.label || startCase(field.props.name)
@@ -47,15 +48,18 @@ export class Form extends Component {
     submitting: PropTypes.bool,
     children: PropTypes.node,
     errors: PropTypes.object,
-    className: PropTypes.string
+    className: PropTypes.string,
+    initialValues: PropTypes.initialValues
   };
   getSchema (form) {
-    return form.reduce(reduceSchema, {})
+    let schema = form.reduce(reduceSchema, {})
+    return schema
   }
   getForm () {
     // TODO: iterate through children looking for <Form>
     let form = this.props.children
     let schema = this.getSchema(form)
+    let initialValues = this.props.initialValues
     class myForm extends Component {
       static propTypes = {
         actions: PropTypes.object
@@ -69,7 +73,15 @@ export class Form extends Component {
       render () {
         // noValidate turns off browser validation
         // TODO: turn off our validation if they want it on
-        return (<form className={this.props.className} onSubmit={this.props.handleSubmit(this.props.onFormSubmit)} noValidate>{form}</form>)
+        return (
+          <form
+            {...this.props}
+            initialValues={initialValues}
+            onSubmit={this.props.handleSubmit(this.props.onFormSubmit)}
+            noValidate>
+            {form}
+          </form>
+        )
       }
     }
 
@@ -112,6 +124,7 @@ export class Field extends Component {
   render () {
     let label = this.props.label || startCase(this.props.name)
     let field = this.context.fields[this.props.name]
+    if (!field) { return null }
     let isError = (field.error && field.touched)
     return (
       // mixin error class if there's an error

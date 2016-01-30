@@ -8,20 +8,44 @@ import { Form, Field } from 'shasta-forms'
 class PersonForm extends Component {
   static propTypes = {
     title: PropTypes.string,
-    handleSubmit: PropTypes.func
+    handleSubmit: PropTypes.func,
+    params: PropTypes.object,
+    people: PropTypes.map.isRequired
+  };
+  static storeProps = {
+    people: 'people'
   };
   static contextTypes = {
     router: PropTypes.object.isRequired
   };
+  getModel (cursor, idName = 'id') {
+    if (this.props.params) {
+      return this.props[cursor].get(this.props.params[idName])
+    }
+  }
   handleSubmit (data) {
+    // get user id
+    let id = this.id || 'id'
+    data.id = this.props.params[id]
     this.actions.people.save(data)
     this.context.router.replace('/crm')
   }
   render () {
+    let model = this.getModel('people')
+    let title = 'New Person'
+    let initialValues = {}
+    if (model) {
+      initialValues = model.toJS()
+      title = model.get('name')
+    }
     return (
       <div>
-        <h3>{this.props.title}</h3>
-        <Form name='person' className='ui form' onFormSubmit={this.handleSubmit}>
+        <h3>{title}</h3>
+        <Form
+          name='person'
+          className='ui form'
+          onFormSubmit={this.handleSubmit}
+          initialValues={initialValues}>
           {/* simply define a Field, with options like required */}
           <Field
             name='name'
