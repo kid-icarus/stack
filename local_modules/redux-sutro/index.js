@@ -1,11 +1,12 @@
 import { createAction } from 'tahoe'
-import {plural} from 'pluralize'
-import {Schema} from 'normalizr'
+import { plural } from 'pluralize'
+import { Schema } from 'normalizr'
 import template from 'template-url'
 import reduce from 'lodash.reduce'
 
 const resourceToActions = (resourceName, resource) => {
   var model = new Schema(resourceName)
+  // model.define(mapValues(resource.model.relationships, relationshipMap))
   return reduce(resource.endpoints, (prev, endpoint) => {
     prev[endpoint.name] = createAction({
       endpoint: (opt) => template(endpoint.path, opt),
