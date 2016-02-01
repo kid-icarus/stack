@@ -6,7 +6,7 @@ import TodosView from 'views/Todos'
 import CRMView from 'views/CRM'
 import PeopleList from 'views/CRM/PeopleList'
 import PersonProfile from 'views/CRM/PersonProfile'
-import SavePerson from 'views/CRM/SavePerson'
+import PersonForm from 'views/CRM/PersonForm'
 import NotFoundView from 'views/NotFound'
 
 export default (
@@ -18,8 +18,8 @@ export default (
     <Route component={CRMView}>
       <Route path='/crm' component={PeopleList} />
       <Route path='/crm/person/:id' component={PersonProfile} />
-      <Route path='/crm/create' component={SavePerson} />
-      <Route path='/crm/edit/:id' component={SavePerson} />
+      <Route path='/crm/create' component={PersonForm} />
+      <Route path='/crm/edit/:id' component={PersonForm} />
     </Route>
     <Route path='*' component={NotFoundView}/>
   </Route>
