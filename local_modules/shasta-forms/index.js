@@ -22,7 +22,9 @@ let reduceSchema = (schema, field) => {
   // recurse if children is an array (if element has child elements)
   if (Array.isArray(field.props.children)) {
     return field.props.children.reduce(reduceSchema, schema)
-  } else if (field.type.displayName === 'Field') {
+  } else if (field.type.displayName === 'Field' || field.type === 'input') {
+    // TODO: support plain old inputs better
+    // TODO: better hidden support
     if (field.props.type === 'hidden') { return schema }
     let fieldProps = Object.assign({}, field.props)
     // label is specified or uppercase name
@@ -130,11 +132,14 @@ export class Field extends Component {
       // mixin error class if there's an error
       <div ref={this.props.name} className={classNames('field', {'error': isError})}>
         {(this.props.noLabel) ? null : <label>{label}</label>}
-        <input type={this.props.inputType} {...field} {...this.props} style={{WebkitValidationBubbleMessage: {display: 'none'}}} />
+        <input
+          type={this.props.inputType}
+          {...field}
+          {...this.props} />
         {
           jif(isError, () =>
             <div
-              className='ui basic red pointing prompt label transition visible'>
+              className='ui basic red pointing prompt label animating transition scale in'>
               {field.error}
             </div>
           )
