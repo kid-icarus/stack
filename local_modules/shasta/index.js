@@ -11,8 +11,8 @@ class ShastaComponent extends Component {
     actions: RPropTypes.object.isRequired
   };
   static connect = connect;
-  constructor (props, context) {
-    super(props, context)
+  constructor () {
+    super(...arguments)
     this.state = this.constructor.defaultState || {}
     bindClass(this)
   }
