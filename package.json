@@ -129,6 +129,7 @@
     "rucksack-css": "^0.8.5",
     "sass-loader": "^3.0.0",
     "semantic-ui-css": "^2.1.8",
+    "shasta-logger": "^1.0.0",
     "style-loader": "^0.13.0",
     "superagent": "^1.6.1",
     "template-url": "^1.0.0",
