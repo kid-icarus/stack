@@ -1,51 +1,35 @@
+# shasta-forms
+
+shasta-forms provides a wrapper around [redux-form](https://github.com/erikras/redux-form) which provides a few nice features:
+- just write jsx form fields with attributes, no outside metadata
+- validation via [redux-form-schema](https://github.com/Lighthouse-io/redux-form-schema)
+- automatic error reporting
+- works with shasta/immutable.js OOTB
+
+see [redux-form-schema](https://github.com/Lighthouse-io/redux-form-schema) and [validator.js](https://github.com/chriso/validator.js) for validation documentation
+
+#### Usage
+```js
 import React from 'react'
 import { PropTypes, Component } from 'shasta'
 import { Form, Field } from 'shasta-forms'
 
-// PersonForm
-// example shasta-forms usage
-
+// standard Component
 class PersonForm extends Component {
-  static propTypes = {
-    title: PropTypes.string,
-    params: PropTypes.object,
-    people: PropTypes.map.isRequired
-  };
-  static storeProps = {
-    people: 'people'
-  };
-  static contextTypes = {
-    router: PropTypes.object.isRequired
-  };
-  getModel (cursor, idName = 'id') {
-    if (this.props.params) {
-      return this.props[cursor].get(this.props.params[idName])
-    }
-  }
   handleSubmit (data) {
-    // get user id from url
-    let id = this.id || 'id'
-    data.id = this.props.params[id]
+    // an action that saves a person
     this.actions.people.save(data)
-    this.context.router.replace('/crm')
+    // do something after
   }
   render () {
-    let model = this.getModel('people')
-    let title = 'New Person'
-    let initialValues = {}
-    if (model) {
-      initialValues = model.toJS()
-      title = model.get('name')
-    }
     return (
       <div>
         <h3>{title}</h3>
         <Form
           name='person'
           className='ui form'
-          onFormSubmit={this.handleSubmit}
-          initialValues={initialValues}>
-          {/* simply define a Field, with options like required */}
+          onFormSubmit={this.handleSubmit}>
+          {/* simply define a Field, with options like `required` */}
           <Field
             name='name'
             required />
@@ -71,3 +55,8 @@ class PersonForm extends Component {
 
 // connect the Component
 export default Component.connect(PersonForm, require('core/actions'))
+```
+
+#### Coming soon
+- Custom extended `Field` types
+- React Native support

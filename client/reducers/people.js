@@ -80,7 +80,6 @@ export const save = (state, {payload}) => {
 }
 
 export const remove = (state, {payload}) => {
-  console.log(payload.get('id'))
   return state.delete(payload.get('id'))
 }
 
