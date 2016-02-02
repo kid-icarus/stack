@@ -6,7 +6,7 @@ shasta-forms provides a wrapper around [redux-form](https://github.com/erikras/r
 - automatic error reporting
 - works with shasta/immutable.js OOTB
 
-see [redux-form-schema](https://github.com/Lighthouse-io/redux-form-schema) and [validator.js](https://github.com/chriso/validator.js) for validation documentation
+see [redux-form-schema](https://github.com/Lighthouse-io/redux-form-schema) and [validator.js](https://github.com/chriso/validator.js) for validation documentation- simply pass into `Field` jsx
 
 #### Usage
 ```js
