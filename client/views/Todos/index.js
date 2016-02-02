@@ -3,7 +3,6 @@ import {Link} from 'shasta-router'
 import {Component, PropTypes} from 'shasta'
 import jif from 'jif'
 import Todo from './Todo'
-import shield from 'function-shield'
 import classNames from 'classnames'
 import DocumentMeta from 'react-document-meta'
 import './index.sass'
@@ -113,7 +112,7 @@ class TodosView extends Component {
               {
                 jif(this.props.todos.filter(filters.Completed).size, () =>
                   <button
-                    onClick={shield(this.actions.todomvc.clearCompleted)}
+                    onClick={() => this.actions.todomvc.clearCompleted()}
                     className='clear-completed'>
                     Clear completed
                   </button>

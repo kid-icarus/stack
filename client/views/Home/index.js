@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'shasta-router'
-import shield from 'function-shield'
 import {Component, PropTypes} from 'shasta'
 import jif from 'jif'
 import DocumentMeta from 'react-document-meta'
@@ -57,11 +56,11 @@ class HomeView extends Component {
             <div className='ui header'>Stack Test Page</div>
             <div className='ui header counter'>{this.props.counter}</div>
             <div className='ui large buttons'>
-              <div className='ui button medium positive' onClick={shield(this.actions.counter.increment)}>
+              <div className='ui button medium positive' onClick={() => this.actions.counter.increment()}>
                 Increment
               </div>
               <div className='or'/>
-              <div className='ui button medium negative' onClick={shield(this.actions.counter.decrement)}>
+              <div className='ui button medium negative' onClick={() => this.actions.counter.decrement()}>
                 Decrement
               </div>
             </div>

@@ -13,11 +13,7 @@ class ShastaComponent extends Component {
   static connect = connect;
   constructor (props, context) {
     super(props, context)
-
-    if (this.constructor.defaultState) {
-      this.state = this.constructor.defaultState
-    }
-
+    this.state = this.constructor.defaultState || {}
     bindClass(this)
   }
 
