@@ -6,11 +6,9 @@ import './index.sass'
 class User extends DataComponent {
   static displayName = 'User';
   static propTypes = {
-    repos: PropTypes.iterable,
-    me: PropTypes.map
+    repos: PropTypes.iterable
   };
   static storeProps = {
-    me: 'me',
     user: 'requests.user'
   };
 
@@ -21,7 +19,7 @@ class User extends DataComponent {
     this.actions.github.getUser({requestId: 'user', params: opt})
   }
 
-  displayData ({user}) {
+  renderData ({user}) {
     return <div className='ui card'>
       <img className='ui image' src={user.get('avatar_url')} />
       <div className='ui content'>
@@ -37,10 +35,10 @@ class User extends DataComponent {
       </div>
     </div>
   }
-  displayLoader () {
+  renderLoader () {
     return <div className='ui header'>Loading...</div>
   }
-  displayErrors (errors) {
+  renderErrors (errors) {
     return <div className='errors'>
       Failed to Load:
       {

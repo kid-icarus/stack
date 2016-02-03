@@ -7,11 +7,9 @@ import './index.sass'
 class RepoList extends DataComponent {
   static displayName = 'RepoList';
   static propTypes = {
-    repos: PropTypes.iterable,
-    me: PropTypes.map
+    repos: PropTypes.iterable
   };
   static storeProps = {
-    me: 'me',
     repos: 'requests.repos'
   };
 
@@ -22,7 +20,7 @@ class RepoList extends DataComponent {
     this.actions.github.getRepositories({requestId: 'repos', params: opt})
   }
 
-  displayData ({repos}) {
+  renderData ({repos}) {
     return <div className='ui list relaxed column'>
       <div className='ui header'>{repos.size} Repos</div>
       {
@@ -44,10 +42,10 @@ class RepoList extends DataComponent {
       }
     </div>
   }
-  displayLoader () {
+  renderLoader () {
     return <div className='ui header'>Loading...</div>
   }
-  displayErrors (errors) {
+  renderErrors (errors) {
     return <div className='errors'>
       Failed to Load:
       {

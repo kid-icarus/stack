@@ -7,11 +7,9 @@ import './index.sass'
 class OrgList extends DataComponent {
   static displayName = 'OrgList';
   static propTypes = {
-    orgs: PropTypes.iterable,
-    me: PropTypes.map
+    orgs: PropTypes.iterable
   };
   static storeProps = {
-    me: 'me',
     orgs: 'requests.orgs'
   };
 
@@ -22,7 +20,7 @@ class OrgList extends DataComponent {
     this.actions.github.getOrganizations({requestId: 'orgs', params: opt})
   }
 
-  displayData ({orgs}) {
+  renderData ({orgs}) {
     return <div className='ui list relaxed column'>
       <div className='ui header'>{orgs.size} Orgs</div>
       {
@@ -46,10 +44,10 @@ class OrgList extends DataComponent {
       }
     </div>
   }
-  displayLoader () {
+  renderLoader () {
     return <div className='ui header'>Loading...</div>
   }
-  displayErrors (errors) {
+  renderErrors (errors) {
     return <div className='errors'>
       Failed to Load:
       {
